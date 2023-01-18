@@ -5,6 +5,18 @@ body {
   font-family: sans-serif;
 }
 
+
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1rem auto;
+  color: vars.$main-color;
+}
+
+p {
+  line-height: 1.3rem;
+}
 /* 
   // or you can import your own font
   @font-face {
