@@ -1,5 +1,8 @@
 import './navbar.scss';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserTie, faDice } from '@fortawesome/free-solid-svg-icons'
+
 // == Composant
 function Navbar() {
   return (
@@ -7,7 +10,10 @@ function Navbar() {
 
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">BOARD GAME SCORE</a>
+          <a className="navbar-brand" href="#">
+            <FontAwesomeIcon icon={faDice} className="title-icon" />
+            Board Game Scores
+          </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
@@ -22,8 +28,30 @@ function Navbar() {
               <li className="nav-item">
                 <a className="nav-link" href="#">Mes jeux</a>
               </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item">
+                <a className="nav-link" href="#">Mes parties</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Mes joueurs</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Mes jeux</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  <FontAwesomeIcon icon={faUserTie} className="icon" />
+                  {/* <FontAwesomeIcon icon="fa-solid fa-user-tie" /> */}
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Se connecter
+                </a>
+              </li>
+
+              {/* <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Dropdown link
                 </a>
                 <ul className="dropdown-menu">
@@ -31,7 +59,7 @@ function Navbar() {
                   <li><a className="dropdown-item" href="#">Another action</a></li>
                   <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
