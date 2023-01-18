@@ -1,0 +1,18 @@
+@use 'src/styles/vars';
+
+
+.navbar {
+  width: 100%;
+  background-color: vars.$main-color;;
+  color: white;
+
+  & a {
+    color: white;
+  }
+
+  & a.active {
+    color: white !important;
+  }
+}
+
+
