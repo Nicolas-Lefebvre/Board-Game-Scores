@@ -46,7 +46,7 @@
     margin-top: -1.2rem;
     margin-bottom: -1rem;
     font-style: italic;
-    
+
     &:hover {
       color:white;
     }
@@ -71,7 +71,13 @@
   }
 
   .seConnecter {
-    margin-right: 2rem;
+    // margin-right: 2rem;
+    // padding-bottom: .7rem;
+  }
+
+  .connexion-wrapper {
+    display: flex;
+    align-items: center;
   }
 
   .navbar-toggler-icon {

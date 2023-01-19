@@ -20,7 +20,7 @@ function Navbar() {
           <div className="collapse navbar-collapse menu-wrapper" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Accueil</a>
+                <a className="nav-link" aria-current="page" href="#">Accueil</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">Tableau de bord</a>
@@ -40,14 +40,10 @@ function Navbar() {
             </ul>
             <ul className="navbar-avatar">
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link connexion-wrapper" href="#">
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
                   {/* <FontAwesomeIcon icon="fa-solid fa-user-tie" /> */}
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link seConnecter" href="#">
-                  Se connecter
+                  <div className="seConnecter">Se connecter</div>
                 </a>
               </li>
 
