@@ -6,9 +6,9 @@ function Footer() {
     <div className="footer">
 
       <ul>
-        <li>Contact</li>
-        <li>CGU</li>
-        <li>FAQ</li>
+        <li><a>Contact</a></li>
+        <li><a>CGU</a></li>
+        <li><a>FAQ</a></li>
       </ul>
 
     </div>
