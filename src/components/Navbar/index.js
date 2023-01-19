@@ -1,7 +1,7 @@
 import './navbar.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserTie, faDice } from '@fortawesome/free-solid-svg-icons'
+import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons'
 
 // == Composant
 function Navbar() {
@@ -15,7 +15,8 @@ function Navbar() {
             <h1>Board Game Scores</h1>
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon" />
+            {/* <span className="navbar-toggler-icon" /> */}
+            <FontAwesomeIcon icon={faBars} className="burger-menu" color="white" />
           </button>
           <div className="collapse navbar-collapse menu-wrapper" id="navbarNavDropdown">
             <ul className="navbar-nav">

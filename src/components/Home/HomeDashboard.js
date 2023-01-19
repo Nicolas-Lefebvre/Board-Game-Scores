@@ -1,7 +1,7 @@
 // == Composant
-function TableauDeBord() {
+function HomeDashboard() {
   return (
-    <div className="container tableauDeBord">
+    <div className="container HomeDashBoard">
       <h2>Tableau de Bord</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. In, eius! Distinctio at numquam dolores, expedita recusandae, neque aut asperiores inventore autem aperiam officia quos praesentium dolore nobis? Cum, eos recusandae.
@@ -14,4 +14,4 @@ function TableauDeBord() {
 }
 
 // == Export
-export default TableauDeBord;
+export default HomeDashboard;

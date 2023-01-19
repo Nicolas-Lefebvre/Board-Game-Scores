@@ -3,7 +3,7 @@ import './home.scss';
 import Header from './Header';
 import Presentation from './Presentation';
 import Classement from './Classement';
-import TableauDeBord from './TableauDeBord';
+import HomeDashboard from './HomeDashboard';
 
 // == Composant
 function Home() {
@@ -13,7 +13,7 @@ function Home() {
       <Header />
       <Presentation />
       <Classement />
-      <TableauDeBord />
+      <HomeDashboard />
 
       {/* <img src={image} alt="" className="header-image" /> */}
     </div>
