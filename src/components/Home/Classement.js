@@ -1,7 +1,6 @@
-import image from 'src/assets/images/catan-300x300.jpg'
-import image2 from 
-import image3 from
-
+import image from 'src/assets/images/catan-300x300.jpg';
+import image2 from 'src/assets/images/la-bonne-paye.jpg';
+import image3 from 'src/assets/images/13_4527287_6_60_FR.jpg';
 
 // == Composant
 function Classement() {
@@ -30,15 +29,16 @@ function Classement() {
             </div>
           </div>
         </div>
+
         <div className="card mb-3 " style={{ maxWidth: '540px' }}>
           <h3 className="card-title">Jeu le plus joué</h3>
           <div className="row g-0">
             <div className="col-md-4">
-              <img src={image} alt="" className="image" />
+              <img src={image3} alt="" className="image" />
             </div>
             <div className="col-md-8">
               <div className="card-body">
-                <h4>Catan</h4>
+                <h4>Monopoly</h4>
                 <p className="game-category">Jeu de gestion</p>
                 <ul>
                   <li><strong>1244</strong> Parties jouées</li>
@@ -49,15 +49,16 @@ function Classement() {
             </div>
           </div>
         </div>
+
         <div className="card mb-3 " style={{ maxWidth: '540px' }}>
           <h3 className="card-title">Jeu le plus joué</h3>
           <div className="row g-0">
             <div className="col-md-4">
-              <img src={image} alt="" className="image" />
+              <img src={image2} alt="" className="image" />
             </div>
             <div className="col-md-8">
               <div className="card-body">
-                <h4>Catan</h4>
+                <h4>La bonne paye</h4>
                 <p className="game-category">Jeu de gestion</p>
                 <ul>
                   <li><strong>1244</strong> Parties jouées</li>

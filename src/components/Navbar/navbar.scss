@@ -6,32 +6,77 @@
   background-color: vars.$main-color;
   color: white;
 
+  li {
+    display: flex;
+    align-items: center;
+
+    font-weight: bold;
+  }
+
+  .navbar-nav li {
+    margin: auto .8rem;
+  }
+
   & a {
     color: white;
+  }
+
+  a:hover {
+    color: rgb(0, 0, 0);
   }
 
   & a.active {
     color: white !important;
   }
   
+  .menu-wrapper {
+    // display: flex;
+    justify-content: flex-end;
+  }
+
   .title-icon {
     font-size: 2rem;
     margin-right: 1rem;
+    margin-bottom: 0.5rem;
+
+    
   }
 
   .navbar-brand {
-    padding-bottom: 0rem;
+    margin-top: -1.2rem;
+    margin-bottom: -1rem;
+    font-style: italic;
+    
+    &:hover {
+      color:white;
+    }
+  }
+
+  .navbar-nav {
+    // align-items: center;
+    margin: auto;
+  }
+
+  .navbar-avatar {
+    display: flex;
+    // justify-content: flex-end;
   }
 
   .icon {
+    margin-right: 0.5rem;
     padding: .5rem;
     font-size: 1.5rem;
     border: solid 1px;
     border-radius: 20px;
   }
-  
-  
 
+  .seConnecter {
+    margin-right: 2rem;
+  }
+
+  .navbar-toggler-icon {
+    color: white;
+  }
 }
 
 

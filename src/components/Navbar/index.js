@@ -17,7 +17,7 @@ function Navbar() {
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navbarNavDropdown">
+          <div className="collapse navbar-collapse menu-wrapper" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="#">Accueil</a>
@@ -37,6 +37,8 @@ function Navbar() {
               <li className="nav-item">
                 <a className="nav-link" href="#">Mes jeux</a>
               </li>
+            </ul>
+            <ul className="navbar-avatar">
               <li className="nav-item">
                 <a className="nav-link" href="#">
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
@@ -44,7 +46,7 @@ function Navbar() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link seConnecter" href="#">
                   Se connecter
                 </a>
               </li>

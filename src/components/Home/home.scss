@@ -5,6 +5,7 @@
 
   .header-image {
     background-image:url(../../../src/assets/images/game-gc51c3c193_1920.jpg);
+    background-position: top;
     width: 100vw;
     height: 300px;
     background-size:cover;
@@ -22,10 +23,12 @@
       flex-wrap: wrap;
     }
 
+    
     .card {
+      margin: auto;
       width: 32%;
       flex: wrap;
-      // min-width: 415px;
+      min-width: 300px;
     }
 
     .card-body h4 {
@@ -58,7 +61,15 @@
     .card-body li {
       line-height: 2rem;
     }
+
     
+    
+  }
+
+  @media (min-width: 750px) {
+    .classement .card {
+      min-width: 415px;
+    }
   }
 
   // .header-image {
