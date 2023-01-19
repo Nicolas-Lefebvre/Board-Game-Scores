@@ -1,7 +1,7 @@
 import './navbar.scss';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
 
 // == Composant
 function Navbar() {
