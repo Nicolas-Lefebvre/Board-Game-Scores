@@ -1,6 +1,6 @@
 import image from 'src/assets/images/catan-300x300.jpg';
 import image2 from 'src/assets/images/la-bonne-paye.jpg';
-import image3 from 'src/assets/images/13_4527287_6_60_FR.jpg';
+// import image3 from 'src/assets/images/13_4527287_6_60_FR.jpg';
 
 // import PieChart from './PieChart/PieChart';
 import GooglePieChart3D from './GooglePieChart3D/GooglePieChart3D';
