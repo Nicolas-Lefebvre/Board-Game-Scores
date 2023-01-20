@@ -3,6 +3,8 @@ import './navbar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
 
+import { NavLink } from 'react-router-dom';
+
 // == Composant
 function Navbar() {
   return (
@@ -10,10 +12,10 @@ function Navbar() {
 
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <NavLink className="navbar-brand" to="/">
             <FontAwesomeIcon icon={faDice} className="title-icon" />
             <h1>Board Game Scores</h1>
-          </a>
+          </NavLink>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             {/* <span className="navbar-toggler-icon" /> */}
             <FontAwesomeIcon icon={faBars} className="burger-menu" color="white" />
@@ -21,22 +23,19 @@ function Navbar() {
           <div className="collapse navbar-collapse menu-wrapper" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="#">Accueil</a>
+                <NavLink className="nav-link" aria-current="page" to="/">Accueil</NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Tableau de bord</a>
+                <NavLink className="nav-link" to="/dashboard">Tableau de bord</NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Mes jeux</a>
+                <NavLink className="nav-link" to="/collection">Mes jeux</NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Mes parties</a>
+                <NavLink className="nav-link" to="/mes-parties">Mes parties</NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Mes joueurs</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Mes jeux</a>
+                <NavLink className="nav-link" to="/mes-joueurs">Mes joueurs</NavLink>
               </li>
             </ul>
             <ul className="navbar-avatar">
