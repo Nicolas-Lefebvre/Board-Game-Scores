@@ -1,6 +1,9 @@
-import './styles.scss';
 // == Import
+import './styles.scss';
+
 import axios from 'axios';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Routes, Route } from 'react-router-dom';
 
 import Navbar from '../Navbar';
 import Home from '../Home';
@@ -22,7 +25,13 @@ function App() {
     <div className="app">
 
       <Navbar />
-      <Home />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/connexion" element={<Connexion />} /> */}
+
+      </Routes>
+
       <Footer />
 
     </div>
