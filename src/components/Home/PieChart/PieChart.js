@@ -43,11 +43,11 @@ function PieChart() {
             labelsAboveChildren
             // style={{ textAlign: 'center', display: 'flex' }}
           />
-          {/* <div className="pieChart-labels">
-            <div className="dot" />
-            <div className="dot" />
-            <div className="dot" />
-          </div> */}
+          <div className="pieChart-labels">
+            <div className="dot" style={{ backgroundColor: '#2f71af' }} />
+            <div className="dot" style={{ backgroundColor: '#c33254' }} />
+            <div className="dot" style={{ backgroundColor: '#4ca16c' }} />
+          </div>
 
         </div>
 
