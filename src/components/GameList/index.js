@@ -3,151 +3,298 @@ import image from 'src/assets/images/catan-300x300.jpg';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+// import { MenuProps } from 'antd';
+import { Button, Dropdown } from 'antd';
 
 import { NavLink } from 'react-router-dom';
+
+const items = [
+  {
+    key: '1',
+    label: (
+      <NavLink rel="noopener noreferrer" to="#">
+        Voir
+      </NavLink>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <NavLink rel="noopener noreferrer" to="#">
+        Editer
+      </NavLink>
+    ),
+  },
+  {
+    key: '3',
+    label: (
+      <NavLink rel="noopener noreferrer" to="#">
+        Supprimer
+      </NavLink>
+    ),
+  },
+];
 
 // == Composant
 function GameList() {
   return (
     <div className="container gameList">
+
       <h2>Ma liste de jeux</h2>
 
-      <div className="card" style={{ maxWidth: '80%' }}>
-        <div className="collection-card">
-          <div className="img-container">
-            <img src={image} alt="" className="image" />
-          </div>
-          <div className="">
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties jouées : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-          </div>
-          <div className="btn-container">
-            <NavLink>
-              <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-            </NavLink>
-          </div>
-        </div>
-      </div>
+      <div className="main">
 
-      <div className="card" style={{ maxWidth: '80%' }}>
-        <div className="collection-card">
-          <div className="img-container">
-            <img src={image} alt="" className="image" />
-          </div>
-          <div className="">
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
             <div className="text-container">
               <h5 className="card-title">Catan</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties jouées : 15</li>
+                <li>Parties : 15</li>
                 <li>Victoires : 15</li>
               </ul>
             </div>
-          </div>
-          <div className="btn-container">
-            <NavLink>
-              <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-            </NavLink>
-          </div>
-        </div>
-      </div>
+            <div className="btn-container">
+              <Dropdown
+                menu={{
+                  items,
+                }}
+                placement="bottomLeft"
+                // arrow
+              >
+                <Button><FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} /></Button>
+              </Dropdown>
 
-      <div className="card" style={{ maxWidth: '80%' }}>
-        <div className="collection-card">
-          <div className="img-container">
-            <img src={image} alt="" className="image" />
-          </div>
-          <div className="">
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties jouées : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-          </div>
-          <div className="btn-container">
-            <NavLink>
-              <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-            </NavLink>
-          </div>
-        </div>
-      </div>
+              {/* <FontAwesomeIcon icon={faCaretDown} className="title-icon" /> */}
 
-      <div className="card" style={{ maxWidth: '80%' }}>
-        <div className="collection-card">
-          <div className="img-container">
-            <img src={image} alt="" className="image" />
-          </div>
-          <div className="">
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties jouées : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
             </div>
           </div>
-          <div className="btn-container">
-            <NavLink>
-              <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-            </NavLink>
-          </div>
         </div>
-      </div>
 
-      <div className="card" style={{ maxWidth: '80%' }}>
-        <div className="collection-card">
-          <div className="img-container">
-            <img src={image} alt="" className="image" />
-          </div>
-          <div className="">
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
             <div className="text-container">
               <h5 className="card-title">Catan</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties jouées : 15</li>
+                <li>Parties : 15</li>
                 <li>Victoires : 15</li>
               </ul>
             </div>
-          </div>
-          <div className="btn-container">
-            <NavLink>
-              <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-            </NavLink>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
           </div>
         </div>
-      </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="collection-card">
+            <div className="img-container">
+              <img src={image} alt="" className="image" />
+            </div>
+            <div className="text-container">
+              <h5 className="card-title">Catan</h5>
+              {/* <p className="category">Jeu de gestion</p> */}
+              <ul className="">
+                <li>Parties : 15</li>
+                <li>Victoires : 15</li>
+              </ul>
+            </div>
+            <div className="btn-container">
+              <NavLink>
+                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
 
-      <div className="card" style={{ maxWidth: '80%' }}>
-        <div className="collection-card">
-          <div className="img-container">
-            <img src={image} alt="" className="image" />
-          </div>
-          <div className="">
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties jouées : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-          </div>
-          <div className="btn-container">
-            <NavLink>
-              <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-            </NavLink>
-          </div>
-        </div>
       </div>
 
     </div>
