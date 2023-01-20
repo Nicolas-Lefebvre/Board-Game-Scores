@@ -12,6 +12,8 @@
     width: 80%;
     // max-width: 40%;
 
+  
+
     .collection-card {
       display: flex;
     }
@@ -67,8 +69,21 @@
       // padding-right: 2rem;
       font-size: 2rem;
       color: vars.$secondary-color;
+      cursor: pointer;
+
+      & :hover {
+        color:rgb(112, 14, 14);
+      }
+
+      // & :hover {
+      //   zoom: 2;
+      // }
+
 
     }
+  }
+  .card:hover {
+    border: solid 1px vars.$main-color;
   }
 }
 

@@ -4,9 +4,9 @@ import image from 'src/assets/images/catan-300x300.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 // import { MenuProps } from 'antd';
-import { Button, Dropdown } from 'antd';
+import { Dropdown, Space } from 'antd';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const items = [
   {
@@ -44,7 +44,8 @@ function GameList() {
 
       <div className="main">
 
-        <div className="card">
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -62,19 +63,19 @@ function GameList() {
                 menu={{
                   items,
                 }}
-                placement="bottomLeft"
-                // arrow
               >
-                <Button><FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} /></Button>
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
               </Dropdown>
-
-              {/* <FontAwesomeIcon icon={faCaretDown} className="title-icon" /> */}
-
             </div>
           </div>
-        </div>
-
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -88,13 +89,23 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -108,13 +119,23 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -128,13 +149,23 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -148,13 +179,23 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -168,13 +209,23 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -188,13 +239,23 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -208,13 +269,23 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -228,13 +299,23 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -248,13 +329,23 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
+          {/* </div> */}
+        </NavLink>
+        <NavLink className="card" to="#">
+          {/* <div className="card"> */}
           <div className="collection-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
@@ -268,32 +359,21 @@ function GameList() {
               </ul>
             </div>
             <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}> */}
+                <Space>
+                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                </Space>
+                {/* </a> */}
+              </Dropdown>
             </div>
           </div>
-        </div>
-        <div className="card">
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <NavLink>
-                <FontAwesomeIcon icon={faCaretDown} className="title-icon" />
-              </NavLink>
-            </div>
-          </div>
-        </div>
+          {/* </div> */}
+        </NavLink>
 
       </div>
 
