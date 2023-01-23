@@ -1,6 +1,7 @@
 import './dashboard.scss';
 
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
+import ResultatPieChart from './PieCharts/ResultatPieChart';
 
 import { Link } from 'react-router-dom';
 
@@ -27,11 +28,24 @@ function Dashboard() {
         </section>
 
         <section className="scores-container">
+
+          <h4>Résultats</h4>
           <div className="resultats-wrapper">
-            <div className="resultat-pieChart">
-              
+
+            {/* <div className="resultat-pieChart"> */}
+            <ResultatPieChart />
+            {/* </div> */}
+
+            <div className="resultat-text-1">
+              <ul className="resultat-ul">
+                <li><strong>Parties :</strong> 95</li>
+                <li><strong style={{ color: 'green' }}>Victoires :</strong> 49</li>
+                <li><strong style={{ color: 'red' }}>Défaites :</strong> 46</li>
+              </ul>
             </div>
+
           </div>
+
         </section>
 
       </main>

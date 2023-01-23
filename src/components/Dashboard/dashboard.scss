@@ -49,5 +49,29 @@
 
   }
   // ----------------------END PROFIL CONTAINER--------------------------
+  .scores-container {
+
+    .resultats-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+
+      .resultat-pieChart {
+        display: flex;
+        max-width: 50%;
+
+        .pieChart-wrapper {
+          max-width: 100px;
+        }
+      }
+
+      .resultat-text-1 {
+        max-width: 40%;
+        text-align-last: left;
+      }
+    }
+  }
+
 
 }
