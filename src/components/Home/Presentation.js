@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 // == Composant
 function Presentation() {
   return (
@@ -11,6 +12,12 @@ function Presentation() {
         partie en cours. BGS permet de se connecter à d’autres joueurs et de gérer
         sa collection de jeux de société.
       </p>
+
+      <div>
+        <Link className="btn btn-primary" to="/inscription" role="button">Je m'inscris !</Link>
+        {/* <button className="btn btn-primary" type="submit">Je m'inscris !</button> */}
+      </div>
+
     </div>
   );
 }
