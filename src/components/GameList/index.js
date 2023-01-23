@@ -1,5 +1,6 @@
-import './boardgameList.scss';
+import './gameList.scss';
 import image from 'src/assets/images/catan-300x300.jpg';
+import winnerMedal from 'src/assets/images/winner-medal.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -36,26 +37,26 @@ const items = [
 ];
 
 // == Composant
-function BoardgameList() {
+function GameList() {
   return (
     <div className="container gameList">
 
-      <h2>Ma Collection de jeux</h2>
+      <h2>Mes parties</h2>
 
       <div className="main">
 
         <NavLink className="card" to="#">
           {/* <div className="card"> */}
-          <div className="collection-card">
+          <div className="game-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
             </div>
             <div className="text-container">
-              <h5 className="card-title">Catan</h5>
+              <h5 className="card-title">15 Janvier 2023</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
+                <li>Les aventuriers du rail</li>
+                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
               </ul>
             </div>
             <div className="btn-container">
@@ -76,16 +77,16 @@ function BoardgameList() {
         </NavLink>
         <NavLink className="card" to="#">
           {/* <div className="card"> */}
-          <div className="collection-card">
+          <div className="game-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
             </div>
             <div className="text-container">
-              <h5 className="card-title">Catan</h5>
+              <h5 className="card-title">15 Janvier 2023</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
+                <li>Les aventuriers du rail</li>
+                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
               </ul>
             </div>
             <div className="btn-container">
@@ -106,16 +107,16 @@ function BoardgameList() {
         </NavLink>
         <NavLink className="card" to="#">
           {/* <div className="card"> */}
-          <div className="collection-card">
+          <div className="game-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
             </div>
             <div className="text-container">
-              <h5 className="card-title">Catan</h5>
+              <h5 className="card-title">15 Janvier 2023</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
+                <li>Les aventuriers du rail</li>
+                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
               </ul>
             </div>
             <div className="btn-container">
@@ -136,16 +137,16 @@ function BoardgameList() {
         </NavLink>
         <NavLink className="card" to="#">
           {/* <div className="card"> */}
-          <div className="collection-card">
+          <div className="game-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
             </div>
             <div className="text-container">
-              <h5 className="card-title">Catan</h5>
+              <h5 className="card-title">15 Janvier 2023</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
+                <li>Les aventuriers du rail</li>
+                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
               </ul>
             </div>
             <div className="btn-container">
@@ -166,16 +167,16 @@ function BoardgameList() {
         </NavLink>
         <NavLink className="card" to="#">
           {/* <div className="card"> */}
-          <div className="collection-card">
+          <div className="game-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
             </div>
             <div className="text-container">
-              <h5 className="card-title">Catan</h5>
+              <h5 className="card-title">15 Janvier 2023</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
+                <li>Les aventuriers du rail</li>
+                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
               </ul>
             </div>
             <div className="btn-container">
@@ -196,16 +197,16 @@ function BoardgameList() {
         </NavLink>
         <NavLink className="card" to="#">
           {/* <div className="card"> */}
-          <div className="collection-card">
+          <div className="game-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
             </div>
             <div className="text-container">
-              <h5 className="card-title">Catan</h5>
+              <h5 className="card-title">15 Janvier 2023</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
+                <li>Les aventuriers du rail</li>
+                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
               </ul>
             </div>
             <div className="btn-container">
@@ -226,16 +227,16 @@ function BoardgameList() {
         </NavLink>
         <NavLink className="card" to="#">
           {/* <div className="card"> */}
-          <div className="collection-card">
+          <div className="game-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
             </div>
             <div className="text-container">
-              <h5 className="card-title">Catan</h5>
+              <h5 className="card-title">15 Janvier 2023</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
+                <li>Les aventuriers du rail</li>
+                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
               </ul>
             </div>
             <div className="btn-container">
@@ -256,16 +257,16 @@ function BoardgameList() {
         </NavLink>
         <NavLink className="card" to="#">
           {/* <div className="card"> */}
-          <div className="collection-card">
+          <div className="game-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
             </div>
             <div className="text-container">
-              <h5 className="card-title">Catan</h5>
+              <h5 className="card-title">15 Janvier 2023</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
+                <li>Les aventuriers du rail</li>
+                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
               </ul>
             </div>
             <div className="btn-container">
@@ -286,16 +287,16 @@ function BoardgameList() {
         </NavLink>
         <NavLink className="card" to="#">
           {/* <div className="card"> */}
-          <div className="collection-card">
+          <div className="game-card">
             <div className="img-container">
               <img src={image} alt="" className="image" />
             </div>
             <div className="text-container">
-              <h5 className="card-title">Catan</h5>
+              <h5 className="card-title">15 Janvier 2023</h5>
               {/* <p className="category">Jeu de gestion</p> */}
               <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
+                <li>Les aventuriers du rail</li>
+                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
               </ul>
             </div>
             <div className="btn-container">
@@ -311,68 +312,6 @@ function BoardgameList() {
                 {/* </a> */}
               </Dropdown>
             </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <Dropdown
-              menu={{
-                items,
-              }}
-            >
-              {/* <a onClick={(e) => e.preventDefault()}> */}
-              <Space>
-                <div className="btn-wrapper">
-                  <div className="btn-container">
-                    <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                  </div>
-                </div>
-              </Space>
-              {/* </a> */}
-            </Dropdown>
           </div>
           {/* </div> */}
         </NavLink>
@@ -384,4 +323,4 @@ function BoardgameList() {
 }
 
 // == Export
-export default BoardgameList;
+export default GameList;
