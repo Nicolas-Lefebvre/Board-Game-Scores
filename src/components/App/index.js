@@ -6,8 +6,11 @@ import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
 
 import Navbar from '../Navbar';
-import Home from '../Home';
 import Footer from '../Footer';
+
+import Home from '../Home';
+import Inscription from '../Inscription';
+import Connexion from '../Connexion';
 
 // == Composant
 function App() {
@@ -28,7 +31,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/connexion" element={<Connexion />} /> */}
+        <Route path="/inscription" element={<Inscription />} />
+        <Route path="/connexion" element={<Connexion />} />
 
       </Routes>
 
