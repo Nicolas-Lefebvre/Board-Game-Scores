@@ -26,7 +26,7 @@ function Navbar() {
                 <NavLink className="nav-link" aria-current="page" to="/">Accueil</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/dashboard">Tableau de bord</NavLink>
+                <NavLink className="nav-link" to="/tableau-de-bord">Tableau de bord</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/collection">Mes jeux</NavLink>

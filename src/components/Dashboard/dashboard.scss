@@ -1,0 +1,53 @@
+@use 'src/styles/vars';
+
+.dashboard {
+  margin-top: 0;
+
+// --------------------------PROFIL CONTAINRER--------------------
+  .profil-container {
+    display: flex;
+    margin: auto;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.637);
+    padding-bottom: 1rem;
+
+    .avatar-img {
+      width: 30%;
+      margin-left: 1rem;
+      margin-right: 1rem;
+
+      img {
+        width:100%;
+      }
+    }
+
+    .profil-text {
+      // text-align-last: left;
+      width: 70%;
+
+      .pseudo {
+        text-align: left;
+        margin-bottom: .5rem;
+      }
+
+      .email {
+        text-align: left;
+      }
+
+      .profil-edit-btn {
+        text-align: center;
+        color: white;
+        margin-top: .6rem;
+        
+        .profil-edit-link {
+          background-color: vars.$main-color;
+          border: 1px solid;
+          border-radius: 10px;
+          padding: .2rem .5rem;
+        }
+      }
+    }
+
+  }
+  // ----------------------END PROFIL CONTAINER--------------------------
+
+}
