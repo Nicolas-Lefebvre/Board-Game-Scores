@@ -11,6 +11,8 @@ import Footer from '../Footer';
 import Home from '../Home';
 import Inscription from '../Inscription';
 import Connexion from '../Connexion';
+import BoardgameList from '../BoardgameList';
+import GameList from '../GameList';
 
 // == Composant
 function App() {
@@ -33,11 +35,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/connexion" element={<Connexion />} />
+        {/* <Route path="/connexion" element={<Connexion />} /> */}
+        <Route path="/collection" element={<BoardgameList />} />
+        <Route path="/parties/liste" element={<GameList />} />
 
       </Routes>
 
       <Footer />
-
     </div>
   );
 }

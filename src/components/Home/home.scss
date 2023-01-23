@@ -40,11 +40,11 @@
       padding-top: 0;
       text-align: left;;
       font-size: 1.5rem;
-      color: green;
+      color: vars.$secondary-color;
     }
 
     .game-category {
-      color: green;
+      color: vars.$secondary-color;
     }
 
     .card-body p {
@@ -72,6 +72,10 @@
 
     
     
+  }
+
+  .HomeDashBoard {
+    margin-bottom: 10rem;
   }
   
 

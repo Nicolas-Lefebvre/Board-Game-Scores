@@ -14,7 +14,7 @@ import App from 'src/components/App';
 //    => crée une structure d'objets imbriqués (DOM virtuel)
 const rootReactElement = (
   <BrowserRouter>
-    <App />;
+    <App />
   </BrowserRouter>
 );
 

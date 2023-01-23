@@ -3,6 +3,10 @@
 
 body {
   font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
 }
 
 
@@ -32,6 +36,10 @@ p {
 
 .container {
   margin-top: 4rem;
+}
+
+strong {
+  font-weight: bold;
 }
 /* 
   // or you can import your own font
