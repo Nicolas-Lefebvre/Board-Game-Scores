@@ -21,12 +21,17 @@ function Dashboard() {
           <div className="profil-text">
             <h3 className="pseudo">Nicolas66</h3>
             <p className="email">email@gmail.com</p>
+            <p className="email">Né le : 22/12/1987</p>
             <p className="profil-edit-btn"><Link className="profil-edit-link" to="#">modifier</Link></p>
           </div>
         </section>
 
         <section className="scores-container">
-          
+          <div className="resultats-wrapper">
+            <div className="resultat-pieChart">
+              
+            </div>
+          </div>
         </section>
 
       </main>

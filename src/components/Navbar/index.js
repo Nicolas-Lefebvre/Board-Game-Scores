@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // == Composant
 function Navbar() {
@@ -43,7 +44,10 @@ function Navbar() {
                 <a className="nav-link connexion-wrapper" href="#">
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
                   {/* <FontAwesomeIcon icon="fa-solid fa-user-tie" /> */}
-                  <div className="seConnecter">Se connecter</div>
+                  <div className="seConnecter">
+                  <Link className="connexion" to="/connexion" role="button">Se connecter</Link>
+                  </div>
+                  
                 </a>
               </li>
 
