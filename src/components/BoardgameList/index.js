@@ -1,4 +1,4 @@
-import './gameList.scss';
+import './boardgameList.scss';
 import image from 'src/assets/images/catan-300x300.jpg';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,7 +6,7 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 // import { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
 
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const items = [
   {
@@ -358,19 +358,21 @@ function GameList() {
                 <li>Victoires : 15</li>
               </ul>
             </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
+            <Dropdown
+              menu={{
+                items,
+              }}
+            >
+              {/* <a onClick={(e) => e.preventDefault()}> */}
+              <Space>
+                <div className="btn-wrapper">
+                  <div className="btn-container">
+                    <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
+                  </div>
+                </div>
+              </Space>
+              {/* </a> */}
+            </Dropdown>
           </div>
           {/* </div> */}
         </NavLink>

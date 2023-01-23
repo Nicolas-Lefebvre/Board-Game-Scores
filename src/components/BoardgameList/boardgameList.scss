@@ -59,20 +59,32 @@
     }
 
     .btn-container {
-      position: absolute;
-      right: 2rem;
-      top: 25px;
+      // position: absolute;
+      display: flex;
+      margin: auto;
+      // padding-right: 1rem;
+      // right: 2rem;
+      // top: 25px;
       width: 100%;
+      height: 100%;
       display: flex;
       justify-content: flex-end;
       // align-items:center;
       // padding-right: 2rem;
       font-size: 2rem;
       color: vars.$secondary-color;
+      // padding: 0 2rem;
       cursor: pointer;
 
       & :hover {
         color:rgb(112, 14, 14);
+      }
+
+      svg {
+        display: block;
+        width:70px;
+        // height: 100%;
+        margin: auto;
       }
 
       // & :hover {
@@ -86,6 +98,8 @@
     border: solid 1px vars.$main-color;
   }
 }
+
+// -------------------------------- DESKTOP SCREEN-------------------------------------
 
 @media (min-width: 992px) {
   .gameList {
