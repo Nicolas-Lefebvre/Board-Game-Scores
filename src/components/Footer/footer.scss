@@ -2,15 +2,15 @@
 
 
 .footer {
-  // position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
   height: 60px;   /* Height of the footer */
   background: rgb(46, 45, 45);
   color: white;
-  margin-top: vars.$body-y-margins;
+  margin-top: auto;
 
-  & ul {
+  ul {
     height: 100%;
     display: flex;
     justify-content: space-around;
