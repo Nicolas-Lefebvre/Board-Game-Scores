@@ -60,6 +60,8 @@
       .resultat-pieChart {
         display: flex;
         max-width: 50%;
+        height: 400px;
+        width: 400px;
 
         .pieChart-wrapper {
           max-width: 100px;
@@ -69,6 +71,10 @@
       .resultat-text-1 {
         max-width: 40%;
         text-align-last: left;
+
+        li {
+          line-height: 1.1rem;
+        }
       }
     }
   }

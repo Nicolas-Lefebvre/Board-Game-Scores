@@ -1,9 +1,9 @@
 import './dashboard.scss';
+import { Link } from 'react-router-dom';
 
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
-import ResultatPieChart from './PieCharts/ResultatPieChart';
-
-import { Link } from 'react-router-dom';
+// import ResultatPieChart from './PieCharts/ResultatPieChart';
+import MyResponsivePie from './PieCharts/NivoPieChart.js';
 
 // == Composant
 function Dashboard() {
@@ -32,9 +32,9 @@ function Dashboard() {
           <h4>Résultats</h4>
           <div className="resultats-wrapper">
 
-            {/* <div className="resultat-pieChart"> */}
-            <ResultatPieChart />
-            {/* </div> */}
+            <div className="resultat-pieChart">
+              <MyResponsivePie />
+            </div>
 
             <div className="resultat-text-1">
               <ul className="resultat-ul">

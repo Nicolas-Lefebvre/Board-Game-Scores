@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Chart } from 'react-google-charts';
 
@@ -27,7 +28,7 @@ export const options = {
 };
 
 // == Composant
-function ResultatPieChart() {
+const ResultatPieChart = () => {
   return (
 
     <div
@@ -46,7 +47,7 @@ function ResultatPieChart() {
         chartType="PieChart"
         data={data}
         options={options}
-        // width="200px"
+        width="100%"
         // height="200px"
         style={{
           // marginTop: '2rem',
