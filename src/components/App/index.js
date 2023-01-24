@@ -17,7 +17,7 @@ import Dashboard from '../Dashboard';
 
 // == Composant
 function App() {
-  axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames')
+  axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/top5')
 
     .then((response) => {
       console.log(response);

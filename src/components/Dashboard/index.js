@@ -6,7 +6,7 @@ import winnerMedal from 'src/assets/images/winner-medal.png';
 import lauriers from 'src/assets/images/laurier-records-2.png';
 
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
-import MyResponsivePie from './PieCharts/NivoPieChart';
+import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
 import PlayersPieChart from './PieCharts/PlayersPieChart';
 
@@ -48,12 +48,12 @@ function Dashboard() {
           <div className="resultats-wrapper">
 
             <div className="resultat-pieChart">
-              <MyResponsivePie />
+              <ResultPieChart />
             </div>
           </div>
 
           <div className="tables-wrapper">
-            <div className="resultat-table tiny" style={{ maxWidth: '360px' }}>
+            <div className="resultat-table" style={{ maxWidth: '360px' }}>
               <table className="table table-striped">
                 <thead>
                   <tr>

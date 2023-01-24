@@ -148,24 +148,32 @@
   }
   .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
     background-color: vars.$main-color-clear;
- }
+  }  
 
 }
 
 @media (min-width: '791px'){
 
   .dashboard .scores-container .resultat-table {
-    min-width: 500px;
+    min-width: 503px;
   }
   table {
     min-width: 500px;
+  }
+
+  .dashboard .scores-container .resultats-wrapper .resultat-pieChart {
+    height: 300px;
   }
 }
 
 @media (min-width: '992px'){
 
-  .dashboard .scores-container .resultat-table {
+  .resultat-pieChart {
     min-width: 600px;
+  }
+
+  .dashboard .scores-container .resultat-table {
+    min-width: 603px;
     margin: 3rem auto;
   }
   table {
@@ -198,6 +206,8 @@
   .dashboard .scores-container .resultat-table .table tbody tr td.desktop {
     display:table-cell;
   }
+
+  
 }
 
 // @media (min-width: '1500px'){
