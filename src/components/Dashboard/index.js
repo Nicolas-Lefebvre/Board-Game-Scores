@@ -162,40 +162,50 @@ function Dashboard() {
                     <td>23</td>
                     <td>18</td>
                     <td>5</td>
+                    <td className="desktop">Laura</td>
                     <td className="desktop">5</td>
-                    <td className="desktop">5</td>
+                    <td className="desktop">Syham</td>
+                    <td className="desktop">12</td>
                   </tr>
                   <tr>
                     <td>Monopoly</td>
                     <td>122</td>
                     <td>2</td>
                     <td>120</td>
+                    <td className="desktop">Laura</td>
                     <td className="desktop">5</td>
-                    <td className="desktop">5</td>
+                    <td className="desktop">Syham</td>
+                    <td className="desktop">12</td>
                   </tr>
                   <tr>
                     <td>Les aventuriers du rail</td>
                     <td>15</td>
                     <td>12</td>
                     <td>3</td>
+                    <td className="desktop">Laura</td>
                     <td className="desktop">5</td>
-                    <td className="desktop">5</td>
+                    <td className="desktop">Nico</td>
+                    <td className="desktop">12</td>
                   </tr>
                   <tr>
                     <td>Puerto Rico</td>
                     <td>15</td>
                     <td>8</td>
                     <td>7</td>
+                    <td className="desktop">Laura</td>
                     <td className="desktop">5</td>
-                    <td className="desktop">5</td>
+                    <td className="desktop">Amar</td>
+                    <td className="desktop">12</td>
                   </tr>
                   <tr>
                     <td>La Bonne paye</td>
                     <td>15</td>
                     <td>12</td>
                     <td>3</td>
+                    <td className="desktop">Laura</td>
                     <td className="desktop">5</td>
-                    <td className="desktop">5</td>
+                    <td className="desktop">Syham</td>
+                    <td className="desktop">12</td>
                   </tr>
                 </tbody>
               </table>

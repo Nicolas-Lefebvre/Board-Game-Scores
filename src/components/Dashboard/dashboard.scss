@@ -9,6 +9,7 @@
 
   h4 {
     margin-top: 2rem;
+    font-size: 1.8rem;
   }
 
 // --------------------------PROFIL CONTAINER--------------------
@@ -95,18 +96,20 @@
       min-width: 200px;
       max-width: 360px;
       // text-align-last: left;
-      border: 1px solid grey;
+      border: 3px solid vars.$main-color-dark;
       border-radius: 10px;
       
 
       .table {
-        margin-bottom: 0PX;
+        margin-bottom: 0px;
+        line-height: 2rem;
 
         thead {
 
           th {
             text-align: center;
             font-weight: bold;
+            font-size: 1.2rem;
             color: vars.$main-color;
           }
         }
@@ -143,6 +146,9 @@
 
     }
   }
+  .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: vars.$main-color-clear;
+ }
 
 }
 
