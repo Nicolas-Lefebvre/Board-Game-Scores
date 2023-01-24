@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
-import lauriers from 'src/assets/images/laurier-records.png';
+import lauriers from 'src/assets/images/laurier-records-2.png';
 
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
 import MyResponsivePie from './PieCharts/NivoPieChart';
@@ -32,6 +32,8 @@ function Dashboard() {
           </div>
         </section>
 
+        {/* ----------------------------------------RESULTS CONTAINER--------------------------- */}
+
         <section className="scores-container">
 
           <h4>Résultats</h4>
@@ -51,7 +53,7 @@ function Dashboard() {
           </div>
 
           <div className="tables-wrapper">
-            <div className="resultat-table">
+            <div className="resultat-table tiny" style={{ maxWidth: '360px' }}>
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -210,8 +212,8 @@ function Dashboard() {
                 <tbody>
                   <tr>
                     <th>Jeu</th>
-                    <th>Champion<img src={winnerMedal} alt="medaille des titres de champions" /></th>
-                    <th>Victoires<img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                    <th>Champion <img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                    <th>Victoires <img src={winnerMedal} alt="medaille des titres de champions" /></th>
                     {/* <th>Recordman</th>
                     <th>Défaites</th> */}
                     {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
@@ -259,8 +261,8 @@ function Dashboard() {
                 <tbody>
                   <tr>
                     <th>Jeu</th>
-                    <th>Recordman<img src={lauriers} alt="laurier des records" /></th>
-                    <th>Record<img src={lauriers} alt="laurier des records" /></th>
+                    <th>Recordman <img src={lauriers} alt="laurier des records" /></th>
+                    <th>Record <img src={lauriers} alt="laurier des records" /></th>
                     {/* <th>Recordman</th>
                     <th>Défaites</th> */}
                     {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
