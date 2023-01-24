@@ -124,62 +124,95 @@ function Dashboard() {
               <table className="table table-striped">
                 <thead>
                   <tr>
-                    <th colSpan="2">Stats personnelles</th>
+                    <th colSpan="4">Top jeux</th>
                     {/* <th scope="col">245</th> */}
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Parties</td>
-                    <td>245</td>
+                    <th>Jeu</th>
+                    <th>Parties</th>
+                    <th>Victoires</th>
+                    <th>Défaites</th>
                   </tr>
                   <tr>
-                    <td>Victoires</td>
+                    <td>Catan</td>
+                    <td>23</td>
+                    <td>18</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td>Monopoly</td>
                     <td>122</td>
+                    <td>2</td>
+                    <td>120</td>
                   </tr>
                   <tr>
-                    <td>Défaites</td>
-                    <td>123</td>
+                    <td>Les aventuriers du rail</td>
+                    <td>15</td>
+                    <td>12</td>
+                    <td>3</td>
                   </tr>
                   <tr>
-                    <td>jeux joués</td>
-                    <td>28</td>
+                    <td>Puerto Rico</td>
+                    <td>15</td>
+                    <td>8</td>
+                    <td>7</td>
+                  </tr>
+                  <tr>
+                    <td>La Bonne paye</td>
+                    <td>15</td>
+                    <td>12</td>
+                    <td>3</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+
             <div className="resultat-table">
               <table className="table table-striped">
                 <thead>
                   <tr>
-                    <th colSpan="4">Dernières parties</th>
+                    <th colSpan="4">Top catégories</th>
                     {/* <th scope="col">245</th> */}
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th>Date</th>
-                    <th>Jeu</th>
-                    <th>Joueurs</th>
-                    <th>Resultats</th>
+                    <th>Catégorie</th>
+                    <th>Parties</th>
+                    <th>Victoires</th>
+                    <th>Défaites</th>
                   </tr>
                   <tr>
-                    <td>2023/01/25</td>
-                    <td>122</td>
-                    <td>2</td>
-                    <td>Victoire</td>
+                    <td>Jeux de gestion</td>
+                    <td>23</td>
+                    <td>18</td>
+                    <td>5</td>
                   </tr>
                   <tr>
-                    <td>2023/01/25</td>
+                    <td>jeux d'argent</td>
                     <td>122</td>
                     <td>2</td>
-                    <td>Victoire</td>
+                    <td>120</td>
                   </tr>
                   <tr>
-                    <td>2023/01/25</td>
-                    <td>122</td>
-                    <td>2</td>
-                    <td>Victoire</td>
+                    <td>famille</td>
+                    <td>15</td>
+                    <td>12</td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <td>commerce</td>
+                    <td>15</td>
+                    <td>8</td>
+                    <td>7</td>
+                  </tr>
+                  <tr>
+                    <td>jeux de dés</td>
+                    <td>15</td>
+                    <td>12</td>
+                    <td>3</td>
                   </tr>
                 </tbody>
               </table>
