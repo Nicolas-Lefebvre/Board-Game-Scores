@@ -91,7 +91,7 @@
     }
     .resultat-table {
       // width: 70%;
-      margin: 1.5rem auto;
+      margin: 2rem auto;
       min-width: 200px;
       max-width: 360px;
       // text-align-last: left;
@@ -115,7 +115,12 @@
 
           th {
             text-align: center;
+            vertical-align: middle;
             font-weight: bold;
+            // display:table-cell;
+            &.desktop {
+              display: none;
+            }
 
             img {
             vertical-align: middle;
@@ -123,9 +128,16 @@
             }
           }
 
-          td {
-            vertical-align: middle;
+          tr {
+
+            td {
+              vertical-align: middle;
+              &.desktop {
+                display: none;
+              }
+            }
           }
+
         }
       }
 
@@ -134,6 +146,55 @@
 
 }
 
-@media (min-width: '792px'){
-  
+@media (min-width: '791px'){
+
+  .dashboard .scores-container .resultat-table {
+    min-width: 500px;
+  }
+  table {
+    min-width: 500px;
+  }
 }
+
+@media (min-width: '992px'){
+
+  .dashboard .scores-container .resultat-table {
+    min-width: 600px;
+    margin: 3rem auto;
+  }
+  table {
+    min-width: 600px;
+  }
+}
+
+@media (min-width: '1200px'){
+  .tables-wrapper {
+    // display: flex;
+    // justify-content: space-around;
+    &desktop {
+      // flex-direction: column;
+    }
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  .dashboard .scores-container .resultat-table {
+    max-width: 800px;
+  }
+
+  .dashboard .scores-container .resultat-table .table tbody th.desktop {
+    display:table-cell;
+  }
+
+  .dashboard .scores-container .resultat-table .table tbody tr td.desktop {
+    display:table-cell;
+  }
+}
+
+// @media (min-width: '1500px'){
+//   .scores-container{
+//     // display: flex;
+//   }
+// }

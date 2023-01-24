@@ -136,7 +136,7 @@ function Dashboard() {
               <table className="table table-striped">
                 <thead>
                   <tr>
-                    <th colSpan="4">Top jeux</th>
+                    <th colSpan="8">Top jeux</th>
                     {/* <th scope="col">245</th> */}
                   </tr>
                 </thead>
@@ -146,6 +146,10 @@ function Dashboard() {
                     <th>Parties</th>
                     <th>Victoires</th>
                     <th>Défaites</th>
+                    <th className="desktop">Champion</th>
+                    <th className="desktop">Max Victoires</th>
+                    <th className="desktop">Recordman</th>
+                    <th className="desktop">Record</th>
                     {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
                     <th><img src={lauriers} alt="laurier des records" /></th> */}
                     {/* <th>Champion</th>
@@ -156,30 +160,138 @@ function Dashboard() {
                     <td>23</td>
                     <td>18</td>
                     <td>5</td>
+                    <td className="desktop">5</td>
+                    <td className="desktop">5</td>
                   </tr>
                   <tr>
                     <td>Monopoly</td>
                     <td>122</td>
                     <td>2</td>
                     <td>120</td>
+                    <td className="desktop">5</td>
+                    <td className="desktop">5</td>
                   </tr>
                   <tr>
                     <td>Les aventuriers du rail</td>
                     <td>15</td>
                     <td>12</td>
                     <td>3</td>
+                    <td className="desktop">5</td>
+                    <td className="desktop">5</td>
                   </tr>
                   <tr>
                     <td>Puerto Rico</td>
                     <td>15</td>
                     <td>8</td>
                     <td>7</td>
+                    <td className="desktop">5</td>
+                    <td className="desktop">5</td>
                   </tr>
                   <tr>
                     <td>La Bonne paye</td>
                     <td>15</td>
                     <td>12</td>
                     <td>3</td>
+                    <td className="desktop">5</td>
+                    <td className="desktop">5</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="resultat-table mobile">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th colSpan="4">Champion / Jeu</th>
+                    {/* <th scope="col">245</th> */}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Jeu</th>
+                    <th>Champion<img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                    <th>Victoires<img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                    {/* <th>Recordman</th>
+                    <th>Défaites</th> */}
+                    {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                    <th><img src={lauriers} alt="laurier des records" /></th> */}
+                    {/* <th>Champion</th>
+                    <th>Recordman</th> */}
+                  </tr>
+                  <tr>
+                    <td>Catan</td>
+                    <td>Laura</td>
+                    <td>18</td>
+                  </tr>
+                  <tr>
+                    <td>Monopoly</td>
+                    <td>Amar</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>Les aventuriers du rail</td>
+                    <td>Syham</td>
+                    <td>12</td>
+                  </tr>
+                  <tr>
+                    <td>Puerto Rico</td>
+                    <td>Nico</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td>La Bonne paye</td>
+                    <td>Amar</td>
+                    <td>12</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="resultat-table mobile">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th colSpan="4">Recordman / Jeu</th>
+                    {/* <th scope="col">245</th> */}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Jeu</th>
+                    <th>Recordman<img src={lauriers} alt="laurier des records" /></th>
+                    <th>Record<img src={lauriers} alt="laurier des records" /></th>
+                    {/* <th>Recordman</th>
+                    <th>Défaites</th> */}
+                    {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                    <th><img src={lauriers} alt="laurier des records" /></th> */}
+                    {/* <th>Champion</th>
+                    <th>Recordman</th> */}
+                  </tr>
+                  <tr>
+                    <td>Catan</td>
+                    <td>Laura</td>
+                    <td>18</td>
+                  </tr>
+                  <tr>
+                    <td>Monopoly</td>
+                    <td>Amar</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>Les aventuriers du rail</td>
+                    <td>Syham</td>
+                    <td>12</td>
+                  </tr>
+                  <tr>
+                    <td>Puerto Rico</td>
+                    <td>Nico</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td>La Bonne paye</td>
+                    <td>Amar</td>
+                    <td>12</td>
                   </tr>
                 </tbody>
               </table>

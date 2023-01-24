@@ -1,7 +1,7 @@
 @use 'reset';
 @use 'vars';
 
-body {
+.app {
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
