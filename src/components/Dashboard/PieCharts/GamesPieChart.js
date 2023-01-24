@@ -5,15 +5,33 @@ import { ResponsivePie } from '@nivo/pie';
 
 const data = [
   {
-    id: 'victoires',
-    label: 'victoires',
-    value: 447,
+    id: 'catan',
+    label: 'catan',
+    value: 23,
     color: 'hsl(15, 70%, 50%)',
   },
   {
-    id: 'défaites',
-    label: 'Défaites',
-    value: 269,
+    id: 'Monopoly',
+    label: 'Monopoly',
+    value: 21,
+    color: 'hsl(30, 70%, 50%)',
+  },
+  {
+    id: 'Les aventuriers du rail',
+    label: 'Les aventuriers du rail',
+    value: 19,
+    color: 'hsl(30, 70%, 50%)',
+  },
+  {
+    id: 'Puerto Rico',
+    label: 'Puerto Rico',
+    value: 15,
+    color: 'hsl(30, 70%, 50%)',
+  },
+  {
+    id: 'La bonne paye',
+    label: 'La bonne paye',
+    value: 13,
     color: 'hsl(30, 70%, 50%)',
   },
 ];
@@ -23,7 +41,7 @@ const data = [
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const MyResponsivePie = () => (
+const GamesPieChart = () => (
   // <div style={{ height: '200px' }}>
   <ResponsivePie
     data={data}
@@ -31,12 +49,12 @@ const MyResponsivePie = () => (
       top: 40,
       right: 40,
       bottom: 40,
-      left: -10,
+      left: -130,
     }}
     valueFormat=" ^-~f"
     activeOuterRadiusOffset={8}
-    colors={['green', 'red']}
-    colorsBy="index"
+    colors={{ scheme: 'set1' }}
+    // colorsBy="index"
     borderWidth={1}
     borderColor={{
       from: 'color',
@@ -59,11 +77,11 @@ const MyResponsivePie = () => (
         anchor: 'right',
         direction: 'column',
         justify: false,
-        translateX: 50,
-        translateY: 10,
+        translateX: -20,
+        translateY: 5,
         itemsSpacing: 0,
         itemWidth: 89,
-        itemHeight: 30,
+        itemHeight: 20,
         itemTextColor: 'black',
         itemDirection: 'left-to-right',
         itemOpacity: 1,
@@ -83,4 +101,4 @@ const MyResponsivePie = () => (
   // </div>
 );
 
-export default MyResponsivePie;
+export default GamesPieChart;

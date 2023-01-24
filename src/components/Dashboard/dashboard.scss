@@ -3,6 +3,10 @@
 .dashboard {
   margin-top: 0;
 
+  h4 {
+    margin-top: 2rem;
+  }
+
 // --------------------------PROFIL CONTAINRER--------------------
   .profil-container {
     display: flex;
@@ -49,7 +53,11 @@
 
   }
   // ----------------------END PROFIL CONTAINER--------------------------
+
+// --------------------------SCORES CONTAINRER--------------------
+
   .scores-container {
+    border-bottom: 1px solid;
 
     .resultats-wrapper {
       display: flex;
@@ -59,6 +67,9 @@
 
       .resultat-pieChart {
         display: flex;
+        min-width: 300px;
+        max-width: 400px;
+        margin: auto;
         // max-width: 80%;
         height: 200px;
         width: 80%;
@@ -68,17 +79,41 @@
         // }
       }
 
-      .resultat-text-1 {
-        width: 50%;
-        max-width: 40%;
-        text-align-last: left;
+    }
+    .resultat-table {
+      // width: 70%;
+      margin: 1.5rem auto;
+      min-width: 200px;
+      max-width: 360px;
+      // text-align-last: left;
+      border: 1px solid grey;
+      border-radius: 10px;
+      
 
-        li {
-          line-height: 1.1rem;
+      .table {
+        margin-bottom: 0PX;
+
+        thead {
+
+          th {
+            text-align: center;
+            font-weight: bold;
+            color: vars.$main-color;
+          }
+        }
+
+        tbody {
+
+          th {
+            text-align: center;
+            font-weight: bold;
+          }
         }
       }
+
     }
   }
 
+// --------------------------TOP GAMES CONTAINER--------------------
 
 }
