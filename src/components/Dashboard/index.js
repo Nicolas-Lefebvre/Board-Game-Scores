@@ -2,9 +2,13 @@ import './dashboard.scss';
 import { Link } from 'react-router-dom';
 
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
+import winnerMedal from 'src/assets/images/winner-medal.png';
+import lauriers from 'src/assets/images/laurier-records.png';
+
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
 import MyResponsivePie from './PieCharts/NivoPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
+import PlayersPieChart from './PieCharts/PlayersPieChart';
 
 // == Composant
 function Dashboard() {
@@ -31,6 +35,14 @@ function Dashboard() {
         <section className="scores-container">
 
           <h4>Résultats</h4>
+
+          <select className="form-select" aria-label="Default select example">
+            <option selected value="1">Laura</option>
+            <option value="2">Amar</option>
+            <option value="3">Syham</option>
+            <option value="3">Nico</option>
+          </select>
+
           <div className="resultats-wrapper">
 
             <div className="resultat-pieChart">
@@ -134,6 +146,10 @@ function Dashboard() {
                     <th>Parties</th>
                     <th>Victoires</th>
                     <th>Défaites</th>
+                    {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                    <th><img src={lauriers} alt="laurier des records" /></th> */}
+                    {/* <th>Champion</th>
+                    <th>Recordman</th> */}
                   </tr>
                   <tr>
                     <td>Catan</td>
@@ -219,6 +235,77 @@ function Dashboard() {
             </div>
           </div>
 
+        </section>
+
+        {/* ------------------------------ TOP PLAYERS CONTAINER-------------------------- */}
+
+        <section className="scores-container">
+
+          <h4>Top joueurs</h4>
+          <div className="resultats-wrapper">
+
+            <div className="resultat-pieChart">
+              <PlayersPieChart />
+            </div>
+          </div>
+
+          <div className="tables-wrapper">
+            <div className="resultat-table">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th colSpan="5">Top joueurs</th>
+                    {/* <th scope="col">245</th> */}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Nom</th>
+                    <th>Victoires</th>
+                    <th>Défaites</th>
+                    <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                    <th><img src={lauriers} alt="laurier des records" /></th>
+                  </tr>
+                  <tr>
+                    <td>Laura</td>
+                    <td>23</td>
+                    <td>18</td>
+                    <td>5</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td>Syham</td>
+                    <td>122</td>
+                    <td>2</td>
+                    <td>120</td>
+                    <td>120</td>
+                  </tr>
+                  <tr>
+                    <td>Amar</td>
+                    <td>15</td>
+                    <td>12</td>
+                    <td>3</td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <td>Nico</td>
+                    <td>15</td>
+                    <td>8</td>
+                    <td>7</td>
+                    <td>7</td>
+                  </tr>
+                  <tr>
+                    <td>Maman</td>
+                    <td>15</td>
+                    <td>12</td>
+                    <td>3</td>
+                    <td>3</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
         </section>
 
       </main>

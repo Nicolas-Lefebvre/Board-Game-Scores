@@ -63,11 +63,16 @@
   .scores-container {
     border-bottom: 1px solid;
 
+    select {
+      max-width: 150px;
+      margin: auto;
+    }
     .resultats-wrapper {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       width: 100%;
+
 
       .resultat-pieChart {
         display: flex;
@@ -111,6 +116,11 @@
           th {
             text-align: center;
             font-weight: bold;
+
+            img {
+            vertical-align: middle;
+            max-height: 1.2rem;
+            }
           }
 
           td {
@@ -122,6 +132,8 @@
     }
   }
 
-// --------------------------TOP GAMES CONTAINER--------------------
+}
 
+@media (min-width: '792px'){
+  
 }

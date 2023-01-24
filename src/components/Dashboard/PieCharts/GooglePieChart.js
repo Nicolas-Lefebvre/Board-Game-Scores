@@ -59,7 +59,7 @@ const ResultatPieChart = () => {
     </div>
 
   );
-}
+};
 
 // == Export
 export default ResultatPieChart;
