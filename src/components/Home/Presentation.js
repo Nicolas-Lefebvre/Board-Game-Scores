@@ -15,7 +15,6 @@ function Presentation() {
 
       <div>
         <Link className="btn btn-primary" to="/inscription" role="button">Je m'inscris !</Link>
-        {/* <button className="btn btn-primary" type="submit">Je m'inscris !</button> */}
       </div>
 
     </div>

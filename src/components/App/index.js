@@ -36,7 +36,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/connexion" element={<Connexion />} />
-        {/* <Route path="/connexion" element={<Connexion />} /> */}
+        {/*<Route path="/forgetpassword" element={<Forgetpassword />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/cgu" element={<Cgu />} />
+        <Route path="/faq" element={<Faq />} />*/}
         <Route path="/collection" element={<BoardgameList />} />
         <Route path="/parties/liste" element={<GameList />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
