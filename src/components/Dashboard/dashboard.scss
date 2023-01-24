@@ -59,16 +59,17 @@
 
       .resultat-pieChart {
         display: flex;
-        max-width: 50%;
-        height: 400px;
-        width: 400px;
+        // max-width: 80%;
+        height: 200px;
+        width: 80%;
 
-        .pieChart-wrapper {
-          max-width: 100px;
-        }
+        // .pieChart-wrapper {
+        //   max-width: 100px;
+        // }
       }
 
       .resultat-text-1 {
+        width: 50%;
         max-width: 40%;
         text-align-last: left;
 

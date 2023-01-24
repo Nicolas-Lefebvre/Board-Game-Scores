@@ -36,13 +36,13 @@ function Dashboard() {
               <MyResponsivePie />
             </div>
 
-            <div className="resultat-text-1">
+            {/* <div className="resultat-text-1">
               <ul className="resultat-ul">
                 <li><strong>Parties :</strong> 95</li>
                 <li><strong style={{ color: 'green' }}>Victoires :</strong> 49</li>
                 <li><strong style={{ color: 'red' }}>Défaites :</strong> 46</li>
               </ul>
-            </div>
+            </div> */}
 
           </div>
 

@@ -6,34 +6,16 @@ import { ResponsivePie } from '@nivo/pie';
 const data =
 [
   {
-    "id": "javascript",
-    "label": "javascript",
-    "value": 63,
-    "color": "hsl(134, 70%, 50%)"
+    'id': 'victoires',
+    'label': 'victoires',
+    'value': 447,
+    'color': 'hsl(15, 70%, 50%)'
   },
   {
-    "id": "python",
-    "label": "python",
-    "value": 292,
-    "color": "hsl(16, 70%, 50%)"
-  },
-  {
-    "id": "java",
-    "label": "java",
-    "value": 447,
-    "color": "hsl(15, 70%, 50%)"
-  },
-  {
-    "id": "css",
-    "label": "css",
-    "value": 303,
-    "color": "hsl(316, 70%, 50%)"
-  },
-  {
-    "id": "erlang",
-    "label": "erlang",
-    "value": 269,
-    "color": "hsl(30, 70%, 50%)"
+    'id': 'défaites',
+    'label': 'Défaites',
+    'value': 269,
+    'color': 'hsl(30, 70%, 50%)'
   },
 ];
 
@@ -46,12 +28,17 @@ const MyResponsivePie = () => (
   // <div style={{ height: '200px' }}>
   <ResponsivePie
     data={data}
-    margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-    padAngle={0.7}
-    cornerRadius={3}
+    margin={{
+      top: 40,
+      right: 40,
+      bottom: 40,
+      left: -10,
+    }}
+    valueFormat=" ^-~f"
     activeOuterRadiusOffset={8}
-    colors={{ scheme: 'category10' }}
-    borderWidth={3}
+    colors={['green', 'red']}
+    colorsBy="index"
+    borderWidth={1}
     borderColor={{
       from: 'color',
       modifiers: [
@@ -65,32 +52,23 @@ const MyResponsivePie = () => (
     arcLinkLabelsSkipAngle={10}
     arcLinkLabelsTextColor="#333333"
     arcLinkLabelsThickness={2}
-    arcLinkLabelsColor={{ from: 'color', modifiers: [] }}
-    arcLabelsRadiusOffset={0.55}
-    arcLabelsSkipAngle={11}
-    arcLabelsTextColor={{
-      from: 'color',
-      modifiers: [
-        [
-          'darker',
-          2,
-        ],
-      ],
-    }}
+    arcLinkLabelsColor={{ from: 'color' }}
+    arcLabelsRadiusOffset={0.65}
+    arcLabelsTextColor="#ffffff"
     legends={[
       {
         anchor: 'right',
         direction: 'column',
         justify: false,
-        translateX: -123,
-        translateY: 86,
+        translateX: 50,
+        translateY: 10,
         itemsSpacing: 0,
-        itemWidth: 104,
-        itemHeight: 24,
-        itemTextColor: '#999',
+        itemWidth: 89,
+        itemHeight: 30,
+        itemTextColor: 'black',
         itemDirection: 'left-to-right',
         itemOpacity: 1,
-        symbolSize: 17,
+        symbolSize: 18,
         symbolShape: 'circle',
         effects: [
           {
