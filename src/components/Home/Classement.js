@@ -6,7 +6,10 @@ import image2 from 'src/assets/images/la-bonne-paye.jpg';
 import GooglePieChart3D from './GooglePieChart3D/GooglePieChart3D';
 
 // == Composant
-function Classement() {
+function Classement({ top5Games }) {
+  console.log(top5Games);
+  console.log(top5Games[0]);
+
   return (
     <div className="container classement">
 
@@ -21,11 +24,11 @@ function Classement() {
             </div>
             <div className="col-md-8">
               <div className="card-body">
-                <h4>Catan</h4>
-                <p className="game-category">Jeu de gestion</p>
+                <h4>{top5Games[0].name}</h4>
+                {/* <p className="game-category">Jeu de gestion</p> */}
                 <ul>
-                  <li><strong>1244</strong> Parties jouées</li>
-                  <li><strong>25</strong> Record cette semaine</li>
+                  <li><strong>{top5Games[0].game_number}</strong> Parties jouées</li>
+                  <li><strong>25</strong> Record</li>
                   <li><strong>3544</strong> Joueurs</li>
                 </ul>
               </div>

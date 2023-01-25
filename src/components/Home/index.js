@@ -6,13 +6,13 @@ import Classement from './Classement';
 import HomeDashboard from './HomeDashboard';
 
 // == Composant
-function Home() {
+function Home({ top5Games }) {
   return (
     <div className="home">
 
       <Header />
       <Presentation />
-      <Classement />
+      <Classement top5Games={top5Games} />
       <HomeDashboard />
 
       {/* <img src={image} alt="" className="header-image" /> */}

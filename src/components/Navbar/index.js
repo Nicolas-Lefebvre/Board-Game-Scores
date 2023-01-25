@@ -3,8 +3,7 @@ import './navbar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
 
-import { NavLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 // == Composant
 function Navbar() {
@@ -41,7 +40,7 @@ function Navbar() {
             </ul>
             <ul className="navbar-avatar">
               <li className="nav-item">
-                <Link className="nav-link connexion-wrapper" href="#">
+                <Link className="nav-link connexion-wrapper" to="/connexion">
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
                   {/* <FontAwesomeIcon icon="fa-solid fa-user-tie" /> */}
                   <div className="seConnecter">Se connecter</div>
