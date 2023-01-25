@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-indent */
 import './connexion.scss';
+import { setIsLogged, setNickname, setToken } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -75,7 +76,7 @@ function Connexion() {
           >
             <Input.Password />
           </Form.Item>
-           <a> Mot de passe oublié? </a>
+           <Link className="forgetPassword" to="/inscription" role="button"> Mot de passe oublié? </Link>
           <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
             <Checkbox>Se rappeler de moi</Checkbox>
           </Form.Item>
