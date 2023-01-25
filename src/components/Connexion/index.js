@@ -76,7 +76,7 @@ function Connexion() {
           >
             <Input.Password />
           </Form.Item>
-           <Link className="forgetPassword" to="/inscription" role="button"> Mot de passe oublié? </Link>
+           <Link className="forgetPassword" to="/forgetpassword" role="button"> Mot de passe oublié? </Link>
           <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
             <Checkbox>Se rappeler de moi</Checkbox>
           </Form.Item>
