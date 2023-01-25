@@ -18,6 +18,7 @@ import BoardgameList from '../BoardgameList';
 import GameList from '../GameList';
 import Dashboard from '../Dashboard';
 import Loader from '../Loader';
+import AddGame from '../AddGame';
 
 // == Composant
 function App() {
@@ -80,6 +81,7 @@ function App() {
         <Route path="/faq" element={<Faq />} /> */}
         <Route path="/collection" element={<BoardgameList />} />
         <Route path="/parties/liste" element={<GameList />} />
+        <Route path="/parties/ajouter" element={<AddGame />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
 
       </Routes>
