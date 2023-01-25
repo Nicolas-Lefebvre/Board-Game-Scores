@@ -1,24 +1,25 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import './addGame.scss';
 
 import Link from 'antd/es/typography/Link';
 import { InboxOutlined, UploadOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import {
   Button,
-  Checkbox,
-  Col,
+  // Checkbox,
+  // Col,
   Form,
   InputNumber,
   Radio,
   Rate,
-  Row,
+  // Row,
   Select,
-  Slider,
+  // Slider,
   Switch,
   Upload,
   Space,
   Input,
-  DatePicker,
-  TimePicker,
+  // DatePicker,
+  // TimePicker,
 } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
 
@@ -66,15 +67,15 @@ const normFile = (e) => {
 //     },
 //   ],
 // };
-const config = {
-  rules: [
-    {
-      type: 'object',
-      required: false,
-      message: 'Please select time!',
-    },
-  ],
-};
+// const config = {
+//   rules: [
+//     {
+//       type: 'object',
+//       required: false,
+//       message: 'Please select time!',
+//     },
+//   ],
+// };
 // -------------------------------------------------------
 const onFinish = (values) => {
   console.log('Received values of form: ', values);
@@ -234,6 +235,20 @@ function AddGame() {
             </FormItem>
           </section>
 
+          <section>
+            <h3>Photo souvenir</h3>
+            <Form.Item
+              name="upload"
+              label="Upload"
+              valuePropName="fileList"
+              getValueFromEvent={normFile}
+              extra="Formats acceptés"
+            >
+              <Upload name="logo" action="/upload.do" listType="picture">
+                <Button icon={<UploadOutlined />}>Click to upload</Button>
+              </Upload>
+            </Form.Item>
+          </section>
           {/* <Form.Item
             name="select-multiple"
             label="Select[multiple]"
@@ -326,19 +341,6 @@ function AddGame() {
             <Rate />
           </Form.Item> */}
 
-          <section>
-            <Form.Item
-              name="upload"
-              label="Upload"
-              valuePropName="fileList"
-              getValueFromEvent={normFile}
-              extra="Formats acceptés"
-            >
-              <Upload name="logo" action="/upload.do" listType="picture">
-                <Button icon={<UploadOutlined />}>Click to upload</Button>
-              </Upload>
-            </Form.Item>
-          </section>
 
           {/* <Form.Item label="Dragger">
             <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
