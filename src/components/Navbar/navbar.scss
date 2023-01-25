@@ -6,6 +6,30 @@
   background-color: vars.$main-color;
   color: white;
 
+  .dropdown-menu {
+    background-color: vars.$main-color;
+    color: white;
+    text-decoration: none;
+
+    li {
+      margin: 0 !important;
+    }
+
+    .dropdown-item {
+      background-color: vars.$main-color;
+      color: white;
+      text-decoration: none;
+
+      font-weight: bold;
+      line-height: 1.8rem;
+      width: 100%;
+      &:hover {
+        background-color: white;
+        color: vars.$main-color !important;
+      }
+    }
+  }
+
   li {
     display: flex;
     align-items: center;

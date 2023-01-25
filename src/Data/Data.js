@@ -1,3 +1,6 @@
+/* eslint-disable quote-props */
+/* eslint-disable quotes */
+/* eslint-disable indent */
 export default
 [
   {

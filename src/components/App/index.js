@@ -24,9 +24,12 @@ function App() {
   const [top5Games, setTop5Games] = useState(Data);
   const [loading, setLoading] = useState(true);
 
+  // eslint-disable-next-line no-unused-vars
   const [isLogged, setIsLoading] = useState(false);
-  const [nickname, setnickname] = useState('');
-  const [token, settoken] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [nickname, setNickname] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     axios.get('http://laura-poitou.vpnuser.lan:8000/api/boardgames/top5')
