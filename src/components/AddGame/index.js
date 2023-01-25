@@ -22,8 +22,8 @@ import {
 const { Option } = Select;
 
 const formItemLayout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 14 },
+  labelCol: { span: 3 },
+  wrapperCol: { span: 20 },
 };
 
 const normFile = (e) => {
@@ -115,6 +115,32 @@ function AddGame() {
                     >
                       <Input placeholder="Score" />
                     </Form.Item>
+
+                    {/* ------------------------isWINNER ------------------------ */}
+                    <Form.Item
+                      label="Vainqueur"
+                      valuePropName="checked"
+                      {...restField}
+                      name={[name, 'winner']}
+                    >
+                      <Switch />
+                    </Form.Item>
+
+                    {/* ------------------------NOTE ------------------------ */}
+                    <Form.Item name={[name, 'rate']} label="Note">
+                      <Rate />
+                    </Form.Item>
+
+                    {/* ------------------------EQUIPE ----------------------- */}
+                    <Form.Item label="N° équipe">
+                      <Form.Item name={[name, 'teamNumber']} noStyle>
+                        <InputNumber min={1} max={10} />
+                      </Form.Item>
+                      {/* <span className="ant-form-text" style={{ marginLeft: 8 }}>
+                        n° Equipe
+                      </span> */}
+                    </Form.Item>
+
                     <MinusCircleOutlined onClick={() => remove(name)} />
                   </Space>
                 ))}
@@ -124,7 +150,7 @@ function AddGame() {
                   justifyContent: 'center',
                 }}
                 >
-                  <Button type="dashed" style={{ width: '200px' }} onClick={() => add()} block icon={<PlusOutlined />}>
+                  <Button type="dashed" style={{ width: '200px', height: '40px', fontWeight: 'bold' }} onClick={() => add()} block icon={<PlusOutlined />}>
                     Ajouter un joueur
                   </Button>
                 </Form.Item>
@@ -132,7 +158,7 @@ function AddGame() {
             )}
           </Form.List>
 
-          {/* ------------------------------------SELECTION JEU--------------------------------- */}
+          {/* ------------------------------------FIN SELECTION JOUEUR-------------------------- */}
 
           <Form.Item
             name="select-multiple"
