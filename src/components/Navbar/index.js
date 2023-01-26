@@ -40,7 +40,7 @@ function Navbar() {
                 {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/mes-joueurs">Mes joueurs</NavLink>
+                <NavLink className="nav-link" to="/players">Mes joueurs</NavLink>
               </li>
             </ul>
             <ul className="navbar-avatar">

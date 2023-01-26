@@ -25,6 +25,8 @@ import Contact from '../Contact';
 import Cgu from '../Cgu';
 import Faq from '../Faq';
 import Forgetpassword from '../Forgetpassword';
+import Players from '../Players';
+
 
 // == Composant
 function App() {
@@ -85,6 +87,7 @@ function App() {
         <Route path="/parties/liste" element={isLogged ? <GameList /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
         <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
+        <Route path="/players" element={isLogged ? <Players /> : <GetConnected />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />
