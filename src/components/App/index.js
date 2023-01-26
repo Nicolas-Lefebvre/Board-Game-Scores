@@ -18,6 +18,10 @@ import BoardgameList from '../BoardgameList';
 import GameList from '../GameList';
 import Dashboard from '../Dashboard';
 import Loader from '../Loader';
+import Contact from '../Contact';
+import Cgu from '../Cgu';
+import Faq from '../Faq';
+import Forgetpassword from '../Forgetpassword';
 
 // == Composant
 function App() {
@@ -71,10 +75,10 @@ function App() {
         />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/connexion" element={<Connexion />} />
-        {/* <Route path="/forgetpassword" element={<Forgetpassword />} />
+        <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />
-        <Route path="/faq" element={<Faq />} /> */}
+        <Route path="/faq" element={<Faq />} />
         <Route path="/collection" element={<BoardgameList />} />
         <Route path="/parties/liste" element={<GameList />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
