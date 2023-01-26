@@ -14,7 +14,7 @@ import {
 
 const formItemLayout = {
   labelCol: { span: 0 },
-  wrapperCol: { span: 20 },
+  wrapperCol: { span: 24 },
 };
 // const formItemLayout = {
 //   labelCol: {
@@ -91,34 +91,43 @@ function AddBoardgame() {
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>
 
-      <div>
+      <div className="form-container">
         <Form
           name="validate_other"
-          {...formItemLayout}
+          // {...formItemLayout}
           onFinish={onFinish}
-          initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
-          style={{ maxWidth: 2000 }}
+          // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
+          // style={{ maxWidth: 2000 }}
         >
 
           {/* ------------------------------------SELECTION JEU------------------------------- */}
           <section>
             <h3>Jeu</h3>
-            <Form.Item label="Nom du jeu" name="name">
-              <Input name="name" />
-            </Form.Item>
-            <Form.Item label="Editeur" name="editor">
-              <Input name="editor" />
-            </Form.Item>
-            <Form.Item label="Auteur" name="author">
-              <Input name="author" />
-            </Form.Item>
-            <Form.Item label="Date de parution" name="year">
-              <Input type="date" name="year" />
-            </Form.Item>
-            <Form.Item label="Description" name="description">
-              <TextArea name="description" />
-            </Form.Item>
-
+            <Space>
+              <Form.Item label="Nom du jeu" name="name">
+                <Input name="name" />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item label="Editeur" name="editor">
+                <Input name="editor" />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item label="Auteur" name="author">
+                <Input name="author" />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item label="Date de parution" name="year">
+                <Input type="date" name="year" />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item label="Description" name="description">
+                <TextArea rows={4} cols={50} name="description" />
+              </Form.Item>
+            </Space>
             <Space>
               <Form.Item label="Joueurs Min" name="max_player">
                 <InputNumber name="max_player" min={1} />
@@ -128,14 +137,17 @@ function AddBoardgame() {
               </Form.Item>
             </Space>
 
-            <Form.Item label="Lien vers image" name="picture">
-              <Input name="picture" />
-            </Form.Item>
+            <Space>
+              <Form.Item label="Lien vers image" name="picture">
+                <Input name="picture" />
+              </Form.Item>
+            </Space>
 
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
               <Button type="primary" htmlType="submit">
                 Submit
               </Button>
+
             </Form.Item>
           </section>
         </Form>

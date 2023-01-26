@@ -1,1 +1,17 @@
 
+.addGame-container {
+  .form-container {
+    // display: flex;
+    // justify-content: flex-start;
+  }
+
+  .ant-space {
+    margin: 1rem 2rem !important;
+    overflow-x: hidden !important;
+  }
+}
+
+.ant-form-item {
+  overflow-x: hidden !important;
+
+}
