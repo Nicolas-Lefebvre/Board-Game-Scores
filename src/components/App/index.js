@@ -21,6 +21,10 @@ import Loader from '../Loader';
 import AddGame from '../AddGame';
 import GetConnected from '../GetConnected';
 import Disconnection from '../Disconnection';
+import Contact from '../Contact';
+import Cgu from '../Cgu';
+import Faq from '../Faq';
+import Forgetpassword from '../Forgetpassword';
 
 // == Composant
 function App() {
@@ -77,14 +81,14 @@ function App() {
         />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/connexion" element={isLogged ? <Disconnection setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
-        {/* <Route path="/forgetpassword" element={<Forgetpassword />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/cgu" element={<Cgu />} />
-        <Route path="/faq" element={<Faq />} /> */}
         <Route path="/collection" element={isLogged ? <BoardgameList /> : <GetConnected />} />
         <Route path="/parties/liste" element={isLogged ? <GameList /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
         <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
+        <Route path="/forgetpassword" element={<Forgetpassword />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/cgu" element={<Cgu />} />
+        <Route path="/faq" element={<Faq />} />
 
       </Routes>
 
