@@ -8,7 +8,7 @@ function Disconnection({ setIsLogged, setToken }) {
   };
   const handleClickOnDisconnection = () => {
     console.log('Deconnexion :');
-    setIsLogged(true);
+    setIsLogged(false);
     setToken('');
   };
 

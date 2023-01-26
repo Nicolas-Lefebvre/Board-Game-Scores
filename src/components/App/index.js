@@ -81,9 +81,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />
         <Route path="/faq" element={<Faq />} /> */}
-        <Route path="/collection" element={<BoardgameList />} />
-        <Route path="/parties/liste" element={<GameList />} />
-        <Route path="/parties/ajouter" element={<AddGame />} />
+        <Route path="/collection" element={isLogged ? <BoardgameList /> : <GetConnected />} />
+        <Route path="/parties/liste" element={isLogged ? <GameList /> : <GetConnected />} />
+        <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
         <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
 
       </Routes>
