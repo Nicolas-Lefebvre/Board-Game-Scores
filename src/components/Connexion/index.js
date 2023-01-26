@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-indent */
 import './connexion.scss';
-import { setIsLogged, setNickname, setToken } from 'react';
-import { Link } from 'react-router-dom';
+// import { setToken, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
   Button,
@@ -10,44 +10,49 @@ import {
   Input,
 } from 'antd';
 
-const onFinish = (values) => {
-  console.log('Success:', values);
-  axios.post(
-    // URL
-    'http://laura-poitou.vpnuser.lan:8000/api/login_check',
-    // données
-    {
-      email: values.email,
-      password: values.password,
-    },
-  )
-    .then((response) => {
-      // console.log(response);
-
-      // response.data : {logged: true, pseudo: 'John', token: 'eyJhbG....JIUzI1'}
-
-      // on dispatch une action pour envoyer les infos de la réponse dans le state
-      setNickname(response.data.pseudo);
-      setToken(response.data.token);
-      setIsLogged(response.data.logged);
-      // store.dispatch(actionToDispatch);
-
-      // on est authentifié, on a un JWT dans le state => on peut demander au serveur
-      // les recettes préférées de l'utilisateur connecté
-      // store.dispatch(fetchFavoriteRecipes());
-    })
-
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
-
 // == Composant
-function Connexion() {
+function Connexion({setIsLogged, setToken}) {
+  const onFinish = (values) => {
+    console.log('Success:', values);
+    axios.post(
+      // URL
+      'http://laura-poitou.vpnuser.lan:8000/api/login_check',
+      // données
+      {
+        username: values.username,
+        password: values.password,
+      },
+    )
+      .then((response) => {
+        console.log('LA REQUETE EST UN SUCCES');
+        console.log(response.data);
+
+        // response.data : {logged: true, pseudo: 'John', token: 'eyJhbG....JIUzI1'}
+
+        // on dispatch une action pour envoyer les infos de la réponse dans le state
+        // setNickname(response.data.pseudo);
+        // setToken(response.data.token);
+        setIsLogged(true);
+        setToken(response.data.token);
+        // setIsLogged(response.data.logged);
+        // store.dispatch(actionToDispatch);
+        // const navigate = useNavigate();
+        // navigate('/dashboard', { replace: true });
+
+        // on est authentifié, on a un JWT dans le state => on peut demander au serveur
+        // les recettes préférées de l'utilisateur connecté
+        // store.dispatch(fetchFavoriteRecipes());
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
     <div className="form-container">
       <h2>Connexion</h2>
@@ -63,7 +68,7 @@ function Connexion() {
         >
           <Form.Item
             label="Adresse Email"
-            name="email"
+            name="username"
             rules={[{ required: true, message: 'Email' }]}
           >
             <Input />

@@ -19,6 +19,8 @@ import GameList from '../GameList';
 import Dashboard from '../Dashboard';
 import Loader from '../Loader';
 import AddGame from '../AddGame';
+import GetConnected from '../GetConnected';
+import Disconnection from '../Disconnection';
 
 // == Composant
 function App() {
@@ -26,9 +28,9 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   // eslint-disable-next-line no-unused-vars
-  const [isLogged, setIsLoading] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const [nickname, setNickname] = useState('');
+  // const [nickname, setNickname] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useState('');
 
@@ -74,7 +76,7 @@ function App() {
           )}
         />
         <Route path="/inscription" element={<Inscription />} />
-        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/connexion" element={isLogged ? <Disconnection setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
         {/* <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />
@@ -82,7 +84,7 @@ function App() {
         <Route path="/collection" element={<BoardgameList />} />
         <Route path="/parties/liste" element={<GameList />} />
         <Route path="/parties/ajouter" element={<AddGame />} />
-        <Route path="/tableau-de-bord" element={<Dashboard />} />
+        <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
 
       </Routes>
 
