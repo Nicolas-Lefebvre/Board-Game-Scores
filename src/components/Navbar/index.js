@@ -28,13 +28,18 @@ function Navbar() {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/tableau-de-bord">Tableau de bord</NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/collection">Mes jeux</NavLink>
+              <li className="nav-item dropdown">
+                <NavLink to="/jeux" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes jeux</NavLink>
+                <ul className="dropdown-menu">
+                  <li><NavLink className="dropdown-item" to="jeux">Liste des jeux</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="jeux/ajouter">Ajouter un jeu</NavLink></li>
+                </ul>
+                {/* <NavLink className="nav-link" to="/collection">Mes jeux</NavLink> */}
               </li>
               <li className="nav-item dropdown">
-                <NavLink to="/parties/liste" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes parties</NavLink>
+                <NavLink to="/parties" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes parties</NavLink>
                 <ul className="dropdown-menu">
-                  <li><NavLink className="dropdown-item" to="parties/liste">Liste des parties</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="parties">Liste des parties</NavLink></li>
                   <li><NavLink className="dropdown-item" to="parties/ajouter">Ajouter une partie</NavLink></li>
                 </ul>
                 {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
