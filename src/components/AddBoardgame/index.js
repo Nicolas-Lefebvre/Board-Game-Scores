@@ -12,10 +12,10 @@ import {
   Input,
 } from 'antd';
 
-const formItemLayout = {
-  labelCol: { span: 0 },
-  wrapperCol: { span: 24 },
-};
+// const formItemLayout = {
+//   labelCol: { span: 0 },
+//   wrapperCol: { span: 24 },
+// };
 // const formItemLayout = {
 //   labelCol: {
 //     xs: {
@@ -102,10 +102,10 @@ function AddBoardgame() {
 
           {/* ------------------------------------SELECTION JEU------------------------------- */}
           <section>
-            <h3>Jeu</h3>
+            {/* <h3>Jeu</h3> */}
             <Space>
-              <Form.Item label="Nom du jeu" name="name">
-                <Input name="name" />
+              <Form.Item label="Nom du jeu*" name="name">
+                <Input name="name" required />
               </Form.Item>
             </Space>
             <Space>
@@ -129,11 +129,11 @@ function AddBoardgame() {
               </Form.Item>
             </Space>
             <Space>
-              <Form.Item label="Joueurs Min" name="max_player">
-                <InputNumber name="max_player" min={1} />
+              <Form.Item label="Joueurs Min*" name="max_player">
+                <InputNumber name="max_player" min={1} required />
               </Form.Item>
-              <Form.Item label="Joueurs Max" name="min_player">
-                <InputNumber name="min_player" min={1} />
+              <Form.Item label="Joueurs Max*" name="min_player">
+                <InputNumber name="min_player" min={1} required />
               </Form.Item>
             </Space>
 
@@ -145,7 +145,7 @@ function AddBoardgame() {
 
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
               <Button type="primary" htmlType="submit">
-                Submit
+                Valider
               </Button>
 
             </Form.Item>

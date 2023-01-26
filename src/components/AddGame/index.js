@@ -130,8 +130,8 @@ function AddGame() {
               name="users"
               className="players-wrapper"
               initialValue={[
-                { name: "", score: "" },
-                { name: "", score: "" },
+                { name: '', score: '' },
+                { name: '', score: '' },
               ]}
             >
               {(fields, { add, remove }) => (
@@ -258,7 +258,7 @@ function AddGame() {
 
           <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
             <Button type="primary" htmlType="submit">
-              Submit
+              Valider
             </Button>
           </Form.Item>
         </Form>
