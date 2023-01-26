@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import './addBoardgame.scss';
 
-// import axios from 'axios';
+import axios from 'axios';
 // import Link from 'antd/es/typography/Link';
 
 import {
@@ -60,11 +60,33 @@ const { TextArea } = Input;
 // -------------------------------------------------------
 const onFinish = (values) => {
   console.log('Received values of form: ', values);
+  axios.post(
+    // URL
+    'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
+    // données
+    {
+      name: values.name,
+      editor: values.editor,
+      author: values.author,
+      year: values.year,
+      picture: values.picture,
+      description: values.description,
+      min_player: values.min_player,
+      max_player: values.max_player,
+    },
+  )
+    .then((response) => {
+      console.log('LA REQUETE EST UN SUCCES');
+      console.log(response.data);
+    })
+
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 // ============================================ Composant===========================================
 function AddBoardgame() {
-  
   return (
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>
