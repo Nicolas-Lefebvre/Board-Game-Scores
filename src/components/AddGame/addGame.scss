@@ -1,0 +1,36 @@
+@use 'src/styles/vars';
+
+label span {
+  font-size: 1.2rem !important;
+}
+label p {
+  font-size: 1.2rem !important;
+}
+
+input {
+  font-size: 1.2rem !important;
+
+}
+
+h3 {
+  margin-bottom: 3rem;
+  // margin-top: 1rem;
+}
+
+.players-wrapper {
+  justify-content: center;
+}
+
+.addGame-container {
+
+  section {
+    width:100%;
+    margin: 4rem auto;
+    border: 3px outset vars.$main-color-dark;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px 0px black;;
+    // padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+}

@@ -18,6 +18,9 @@ import BoardgameList from '../BoardgameList';
 import GameList from '../GameList';
 import Dashboard from '../Dashboard';
 import Loader from '../Loader';
+import AddGame from '../AddGame';
+import GetConnected from '../GetConnected';
+import Disconnection from '../Disconnection';
 import Contact from '../Contact';
 import Cgu from '../Cgu';
 import Faq from '../Faq';
@@ -28,9 +31,12 @@ function App() {
   const [top5Games, setTop5Games] = useState(Data);
   const [loading, setLoading] = useState(true);
 
-  const [isLogged, setIsLoading] = useState(false);
-  const [nickname, setnickname] = useState('');
-  const [token, settoken] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [isLogged, setIsLogged] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  // const [nickname, setNickname] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     axios.get('http://laura-poitou.vpnuser.lan:8000/api/boardgames/top5')
@@ -74,14 +80,15 @@ function App() {
           )}
         />
         <Route path="/inscription" element={<Inscription />} />
-        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/connexion" element={isLogged ? <Disconnection setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
+        <Route path="/collection" element={isLogged ? <BoardgameList /> : <GetConnected />} />
+        <Route path="/parties/liste" element={isLogged ? <GameList /> : <GetConnected />} />
+        <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
+        <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />
         <Route path="/faq" element={<Faq />} />
-        <Route path="/collection" element={<BoardgameList />} />
-        <Route path="/parties/liste" element={<GameList />} />
-        <Route path="/tableau-de-bord" element={<Dashboard />} />
 
       </Routes>
 
