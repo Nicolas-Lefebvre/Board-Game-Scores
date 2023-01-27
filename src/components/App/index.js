@@ -6,15 +6,16 @@ import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import Navbar from '../Navbar';
+import Navbar from '../Navbar/vanillaNavBar';
 import Footer from '../Footer';
 
-import Data from '../../Data/Data';
+import Data from '../../Data/Top5Games';
 
 import Home from '../Home';
 import Inscription from '../Inscription';
 import Connexion from '../Connexion';
 import BoardgameList from '../BoardgameList';
+import AddBoardgame from '../AddBoardgame';
 import GameList from '../GameList';
 import Dashboard from '../Dashboard';
 import Loader from '../Loader';
@@ -32,7 +33,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   // eslint-disable-next-line no-unused-vars
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(true);
   // eslint-disable-next-line no-unused-vars
   // const [nickname, setNickname] = useState('');
   // eslint-disable-next-line no-unused-vars
@@ -81,8 +82,9 @@ function App() {
         />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/connexion" element={isLogged ? <Disconnection setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
-        <Route path="/collection" element={isLogged ? <BoardgameList /> : <GetConnected />} />
-        <Route path="/parties/liste" element={isLogged ? <GameList /> : <GetConnected />} />
+        <Route path="/jeux" element={isLogged ? <BoardgameList /> : <GetConnected />} />
+        <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
+        <Route path="/parties" element={isLogged ? <GameList /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
         <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
