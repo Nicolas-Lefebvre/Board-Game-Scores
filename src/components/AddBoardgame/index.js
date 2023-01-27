@@ -10,7 +10,7 @@ import {
   InputNumber,
   Space,
   Input,
-  DatePicker,
+  // DatePicker,
   Radio,
 } from 'antd';
 
@@ -45,41 +45,43 @@ const { TextArea } = Input;
 //   console.log(dateString);
 // };
 
-const navigate = useNavigate();
 
-const onFinish = (values, dateString) => {
-  console.log('Received values of form: ', values, dateString);
-  axios.post(
-    // URL
-    'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
-    // données
-    {
-      name: values.name,
-      editor: values.editor,
-      author: values.author,
-      year: values.year,
-      scoreType: values.scoreType,
-      picture: values.picture,
-      description: values.description,
-      minPlayer: values.min_player,
-      maxPlayer: values.max_player,
-    },
-  )
-    .then(() => {
-      console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
-    })
-
-    .catch((error) => {
-      console.log(error);
-    })
-
-    .finally(() => {
-      navigate('/jeux');
-    });
-};
 
 // ============================================ Composant===========================================
 function AddBoardgame() {
+  const navigate = useNavigate();
+
+  const onFinish = (values, dateString) => {
+    console.log('Received values of form: ', values, dateString);
+    axios.post(
+      // URL
+      'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
+      // données
+      {
+        name: values.name,
+        editor: values.editor,
+        author: values.author,
+        year: values.year,
+        scoreType: values.scoreType,
+        picture: values.picture,
+        description: values.description,
+        minPlayer: values.min_player,
+        maxPlayer: values.max_player,
+      },
+    )
+      .then(() => {
+        console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+
+      .finally(() => {
+        navigate('/jeux');
+      });
+  };
+
   return (
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>

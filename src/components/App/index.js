@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import Navbar from '../Navbar';
+import Navbar from '../Navbar/vanillaNavBar';
 import Footer from '../Footer';
 
 import Data from '../../Data/Top5Games';
