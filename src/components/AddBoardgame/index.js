@@ -14,11 +14,11 @@ import {
   Radio,
 } from 'antd';
 
-import Loader from '../Loader';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import AllGames from '../../Data/AllGames';
+import Loader from '../Loader';
 
 // const formItemLayout = {
 //   labelCol: { span: 0 },
@@ -91,33 +91,35 @@ function AddBoardgame({ loading, setLoading }) {
   };
 
   // --------------------------------ALL GAMES API REQUEST-----------------------------
-  useEffect(() => {
-    setLoading(true);
-    axios.get(
-    // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
-      // données
-      {
-      },
-    )
-      .then((response) => {
-        console.log('Requete demandant tous les jeux OK');
-        suggestions = [...response.data.results];
-        // console.log('liste des jeux :');
-        // console.log(suggestions);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [suggestions]);
+  console.log(loading);
+  // useEffect(() => {
+  // setLoading(true);
+  axios.get(
+  // URL
+    'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
+    // données
+    {
+    },
+  )
+    .then((response) => {
+      console.log('Requete demandant tous les jeux OK');
+      suggestions = [...response.data.results];
+      // console.log('liste des jeux :');
+      // console.log(suggestions);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+  // }, [suggestions]);
 
   // return loading && <Loader />;
+  if (loading) {
+    return <Loader />;
+  }
   return (
-    // (loading && <Loader />)
-    // (!loading &&
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>
       <div className="form-container">
@@ -227,7 +229,6 @@ function AddBoardgame({ loading, setLoading }) {
           </section>
         </Form>
       </div>
-
 
     </div>
   );
