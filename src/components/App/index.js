@@ -18,7 +18,6 @@ import BoardgameList from '../BoardgameList';
 import AddBoardgame from '../AddBoardgame';
 import GameList from '../GameList';
 import Dashboard from '../Dashboard';
-import Loader from '../Loader';
 import AddGame from '../AddGame';
 import GetConnected from '../GetConnected';
 import Disconnection from '../Disconnection';
