@@ -18,7 +18,6 @@ import BoardgameList from '../BoardgameList';
 import AddBoardgame from '../AddBoardgame';
 import GameList from '../GameList';
 import Dashboard from '../Dashboard';
-import Loader from '../Loader';
 import AddGame from '../AddGame';
 import GetConnected from '../GetConnected';
 import Disconnection from '../Disconnection';
@@ -27,7 +26,6 @@ import Cgu from '../Cgu';
 import Faq from '../Faq';
 import Forgetpassword from '../Forgetpassword';
 import Players from '../Players';
-
 
 // == Composant
 function App() {
@@ -71,26 +69,21 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={(
-            <main>
-              {loading && (
-                <Loader />
-              )}
-              {!loading && (
-                <Home top5Games={top5Games} />
-              )}
-            </main>
-          )}
+          element={(<Home top5Games={top5Games} loading={loading} />)}
         />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/connexion" element={isLogged ? <Disconnection setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
+        <Route path="/forgetpassword" element={<Forgetpassword />} />
+
         <Route path="/jeux" element={isLogged ? <BoardgameList /> : <GetConnected />} />
         <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
         <Route path="/parties" element={isLogged ? <GameList /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
-        <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
         <Route path="/joueurs" element={isLogged ? <Players /> : <GetConnected />} />
         <Route path="/joueurs/ajouter" element={isLogged ? <Players /> : <GetConnected />} />
+
+        <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
+
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />

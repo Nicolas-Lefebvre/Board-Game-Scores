@@ -26,8 +26,8 @@ function CollapsibleExample() {
               <NavDropdown.Item as={Link} to="/parties/ajouter">Ajouter une partie</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Joueurs" id="collasible-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/players">Joueurs</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/players/ajouter">Ajouter un joueur</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/joueurs">Joueurs</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/joueurs/ajouter">Ajouter un joueur</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>

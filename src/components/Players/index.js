@@ -6,7 +6,7 @@ import lauriers from 'src/assets/images/laurier-records-2.png';
 function Players() {
   return (
     
-         <div className="tables-wrapper">
+         <div className="tables-wrapper_players">
 
           <h2>Mes Joueurs</h2>
 
@@ -105,7 +105,7 @@ function Players() {
                     <td>Modifier/Supprimer</td>
                   </tr>
                   <tr>
-                    <td><button>Ajouter un joueur</button></td>
+                    <td colSpan={6}><button>Ajouter un joueur</button></td>
                   </tr>
                 </tbody>
               </table>
