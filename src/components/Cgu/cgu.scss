@@ -1,0 +1,26 @@
+@use 'src/styles/vars';
+
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 2rem auto;
+  color: vars.$main-color;
+}
+
+h3 {
+  margin: 1rem auto;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: vars.$main-color;
+}
+
+h4 {
+  margin-bottom: 2rem;
+}
+
+p {
+  text-align: justify;
+  margin-left: 5rem;
+  margin-right: 5rem;
+}

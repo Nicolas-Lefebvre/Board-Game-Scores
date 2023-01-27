@@ -1,0 +1,71 @@
+@use 'src/styles/vars';
+
+
+
+.tables-wrapper {
+ 
+}
+
+.resultat-table {
+  margin: 5rem;
+  border: 3px solid vars.$main-color-dark;
+  border-radius: 10px;
+ 
+}
+
+.table {
+  margin-bottom: 0px;
+  line-height: 2rem;
+  
+}
+
+tbody {
+  th {
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: underline;
+    // display:table-cell;
+    &.desktop {
+      display: none;
+    }
+
+    img {
+    vertical-align: middle;
+    max-height: 5rem;
+    }
+  }
+
+  tr {
+
+    td {
+      vertical-align: middle;
+      &.desktop {
+        display: none;
+      }
+    }
+  }
+
+}
+
+tr :first-child{
+  font-size: 1.5rem;
+}
+
+tr :last-child {
+  font-size: 0.8rem;
+  font-style: italic;
+  text-decoration: none;
+  text-align: center;
+  
+}
+
+td :last-child {
+  background-color: rgb(17, 151, 247);
+  border-radius: 10px;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+  background-color: vars.$main-color-clear;
+}  
