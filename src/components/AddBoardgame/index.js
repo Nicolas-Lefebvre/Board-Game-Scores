@@ -10,7 +10,11 @@ import {
   InputNumber,
   Space,
   Input,
+  DatePicker,
+  Radio,
 } from 'antd';
+
+import { useNavigate } from 'react-router-dom';
 
 // const formItemLayout = {
 //   labelCol: { span: 0 },
@@ -36,30 +40,15 @@ import {
 // };
 
 const { TextArea } = Input;
+// -----------------YEAR PICKER INFOS--------------------
+// const onChange = (date, dateString) => {
+//   console.log(dateString);
+// };
 
-// --------------------- OPTIONS DATES -----------------
-// const { RangePicker } = DatePicker;
-// const rangeConfig = {
-//   rules: [
-//     {
-//       type: 'array',
-//       required: true,
-//       message: 'Please select time!',
-//     },
-//   ],
-// };
-// const config = {
-//   rules: [
-//     {
-//       type: 'object',
-//       required: false,
-//       message: 'Please select time!',
-//     },
-//   ],
-// };
-// -------------------------------------------------------
-const onFinish = (values) => {
-  console.log('Received values of form: ', values);
+const navigate = useNavigate();
+
+const onFinish = (values, dateString) => {
+  console.log('Received values of form: ', values, dateString);
   axios.post(
     // URL
     'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
@@ -69,19 +58,23 @@ const onFinish = (values) => {
       editor: values.editor,
       author: values.author,
       year: values.year,
+      scoreType: values.scoreType,
       picture: values.picture,
       description: values.description,
-      min_player: values.min_player,
-      max_player: values.max_player,
+      minPlayer: values.min_player,
+      maxPlayer: values.max_player,
     },
   )
-    .then((response) => {
-      console.log('LA REQUETE EST UN SUCCES');
-      console.log(response.data);
+    .then(() => {
+      console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
     })
 
     .catch((error) => {
       console.log(error);
+    })
+
+    .finally(() => {
+      navigate('/jeux');
     });
 };
 
@@ -120,12 +113,26 @@ function AddBoardgame() {
             </Space>
             <Space>
               <Form.Item label="Date de parution" name="year">
-                <Input type="date" name="year" />
+                {/* <DatePicker
+                  onChange={onChange}
+                  picker="year"
+                  name="year"
+                /> */}
+                <Input name="year" />
               </Form.Item>
             </Space>
             <Space>
               <Form.Item label="Description" name="description">
                 <TextArea rows={4} cols={50} name="description" />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item name="scoreType" label="Type de scoring">
+                <Radio.Group>
+                  <Radio value="highestScore">Le plus haut score gagne</Radio>
+                  <Radio value="lowestScore">Le plus petit score gagne</Radio>
+                  <Radio value="noScore">Pas de système de scoring</Radio>
+                </Radio.Group>
               </Form.Item>
             </Space>
             <Space>
