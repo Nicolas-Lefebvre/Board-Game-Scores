@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import Navbar from '../Navbar';
+import Navbar from '../Navbar/vanillaNavBar';
 import Footer from '../Footer';
 
 import Data from '../../Data/Top5Games';
@@ -25,6 +25,7 @@ import Contact from '../Contact';
 import Cgu from '../Cgu';
 import Faq from '../Faq';
 import Forgetpassword from '../Forgetpassword';
+import Players from '../Players';
 
 // == Composant
 function App() {
@@ -78,9 +79,12 @@ function App() {
         <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
         <Route path="/parties" element={isLogged ? <GameList /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
+        <Route path="/joueurs" element={isLogged ? <Players /> : <GetConnected />} />
+        <Route path="/joueurs/ajouter" element={isLogged ? <Players /> : <GetConnected />} />
 
         <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
 
+        <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />
         <Route path="/faq" element={<Faq />} />
