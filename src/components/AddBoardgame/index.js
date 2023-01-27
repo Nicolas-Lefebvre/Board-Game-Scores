@@ -17,7 +17,8 @@ import {
 // import { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import AllGames from '../../Data/AllGames';
+// import AllGames from '../../Data/AllGames';
+import { useState, useEffect } from 'react';
 import Loader from '../Loader';
 
 // const formItemLayout = {
@@ -49,12 +50,34 @@ const { TextArea } = Input;
 //   console.log(dateString);
 // };
 
-// console.log(AllGames[0].results);
-let suggestions = [];
-// console.log(suggestions);
-
 // ============================================ Composant===========================================
-function AddBoardgame({ loading, setLoading }) {
+function AddBoardgame() {
+  const [allGamesLoading, setAllGamesLoading] = useState(true);
+  const [allGames, setAllGames] = useState([]);
+  // console.log(AllGames[0].results);
+
+  // console.log(suggestions);
+  useEffect(() => {
+    axios.get(
+    // URL
+      'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
+      // données
+      {
+      },
+    )
+      .then((response) => {
+        console.log('Recuperation des tous les jeux OK');
+        console.log(response.data);
+        setAllGames(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setAllGamesLoading(false);
+      });
+  }, []);
+
   const navigate = useNavigate();
 
   const onSubmitExisting = () => {
@@ -91,32 +114,12 @@ function AddBoardgame({ loading, setLoading }) {
   };
 
   // --------------------------------ALL GAMES API REQUEST-----------------------------
-  console.log(loading);
   // useEffect(() => {
   // setLoading(true);
-  axios.get(
-  // URL
-    'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
-    // données
-    {
-    },
-  )
-    .then((response) => {
-      console.log('Requete demandant tous les jeux OK');
-      suggestions = [...response.data.results];
-      // console.log('liste des jeux :');
-      // console.log(suggestions);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
   // }, [suggestions]);
 
   // return loading && <Loader />;
-  if (loading) {
+  if (allGamesLoading) {
     return <Loader />;
   }
   return (
@@ -140,8 +143,8 @@ function AddBoardgame({ loading, setLoading }) {
               list="suggestions"
             />
             <datalist id="suggestions">
-              {suggestions.map((suggestion, index) => (
-                <option value={suggestion.name} key={index} />
+              {allGames.map((game, index) => (
+                <option value={game.name} key={index} />
               ))}
             </datalist>
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
