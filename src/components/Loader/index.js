@@ -1,8 +1,21 @@
 // == Composant
+import { Spin, Space } from 'antd';
+
 function Loader() {
   return (
     <div className="loader">
-      <h2>LOADING</h2>
+      <Space
+        direction="vertical"
+        style={{
+          width: '100%',
+        }}
+      >
+        <Space>
+          <Spin tip="Loading" size="large">
+            <div className="content" />
+          </Spin>
+        </Space>
+      </Space>
 
     </div>
   );

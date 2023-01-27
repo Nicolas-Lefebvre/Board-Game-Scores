@@ -14,7 +14,11 @@ import {
   Radio,
 } from 'antd';
 
+import Loader from '../Loader';
+import { useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
+import AllGames from '../../Data/AllGames';
 
 // const formItemLayout = {
 //   labelCol: { span: 0 },
@@ -45,11 +49,17 @@ const { TextArea } = Input;
 //   console.log(dateString);
 // };
 
-
+// console.log(AllGames[0].results);
+let suggestions = [];
+// console.log(suggestions);
 
 // ============================================ Composant===========================================
-function AddBoardgame() {
+function AddBoardgame({ loading, setLoading }) {
   const navigate = useNavigate();
+
+  const onSubmitExisting = () => {
+    console.log('Submit existing game');
+  };
 
   const onFinish = (values, dateString) => {
     console.log('Received values of form: ', values, dateString);
@@ -72,20 +82,76 @@ function AddBoardgame() {
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
       })
-
       .catch((error) => {
         console.log(error);
       })
-
       .finally(() => {
         navigate('/jeux');
       });
   };
 
+  // --------------------------------ALL GAMES API REQUEST-----------------------------
+  useEffect(() => {
+    setLoading(true);
+    axios.get(
+    // URL
+      'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
+      // données
+      {
+      },
+    )
+      .then((response) => {
+        console.log('Requete demandant tous les jeux OK');
+        suggestions = [...response.data.results];
+        // console.log('liste des jeux :');
+        // console.log(suggestions);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [suggestions]);
+
+  // return loading && <Loader />;
   return (
+    // (loading && <Loader />)
+    // (!loading &&
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>
+      <div className="form-container">
+        {/* -----------------------------------SELECTION JEU EXISTANT--------------------------- */}
+        <section>
+          <h3>Choisir un jeu existant</h3>
+          <Form
+            name="validate_existing_game"
+            // {...formItemLayout}
+            onFinish={onSubmitExisting}
+            // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
+            // style={{ maxWidth: 2000 }}
+          >
+            <input
+              className="existing-game-input"
+              // value="jeux"
+              // onChange={e => setValue(e.target.value)}
+              list="suggestions"
+            />
+            <datalist id="suggestions">
+              {suggestions.map((suggestion, index) => (
+                <option value={suggestion.name} key={index} />
+              ))}
+            </datalist>
+            <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+              <Button type="primary" htmlType="submit">
+                Valider
+              </Button>
+            </Form.Item>
+          </Form>
+        </section>
+      </div>
 
+      {/* ------------------------------------CREATION JEU-------------------------------------- */}
       <div className="form-container">
         <Form
           name="validate_other"
@@ -95,8 +161,8 @@ function AddBoardgame() {
           // style={{ maxWidth: 2000 }}
         >
 
-          {/* ------------------------------------SELECTION JEU------------------------------- */}
           <section>
+            <h3>Créer un nouveau jeu</h3>
             {/* <h3>Jeu</h3> */}
             <Space>
               <Form.Item label="Nom du jeu*" name="name">
@@ -161,6 +227,7 @@ function AddBoardgame() {
           </section>
         </Form>
       </div>
+
 
     </div>
   );
