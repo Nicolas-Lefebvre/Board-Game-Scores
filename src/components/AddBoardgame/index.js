@@ -45,8 +45,6 @@ const { TextArea } = Input;
 //   console.log(dateString);
 // };
 
-
-
 // ============================================ Composant===========================================
 function AddBoardgame() {
   const navigate = useNavigate();

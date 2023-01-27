@@ -20,7 +20,7 @@ export const options = {
     fontSize: 24, // 12, 18 whatever you want (don't specify px)
     // {/* bold: <boolean>,    // true or false */}
     // {/* italic: <boolean>   // true of false */}
-},
+  },
   // legendPosition: 'labeled',
 };
 
