@@ -14,7 +14,12 @@ import {
   Radio,
 } from 'antd';
 
+// import { useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
+// import AllGames from '../../Data/AllGames';
+import { useState, useEffect } from 'react';
+import Loader from '../Loader';
 
 // const formItemLayout = {
 //   labelCol: { span: 0 },
@@ -47,7 +52,37 @@ const { TextArea } = Input;
 
 // ============================================ Composant===========================================
 function AddBoardgame() {
+  const [allGamesLoading, setAllGamesLoading] = useState(true);
+  const [allGames, setAllGames] = useState([]);
+  // console.log(AllGames[0].results);
+
+  // console.log(suggestions);
+  useEffect(() => {
+    axios.get(
+    // URL
+      'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
+      // données
+      {
+      },
+    )
+      .then((response) => {
+        console.log('Recuperation des tous les jeux OK');
+        console.log(response.data);
+        setAllGames(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setAllGamesLoading(false);
+      });
+  }, []);
+
   const navigate = useNavigate();
+
+  const onSubmitExisting = () => {
+    console.log('Submit existing game');
+  };
 
   const onFinish = (values, dateString) => {
     console.log('Received values of form: ', values, dateString);
@@ -70,20 +105,58 @@ function AddBoardgame() {
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
       })
-
       .catch((error) => {
         console.log(error);
       })
-
       .finally(() => {
         navigate('/jeux');
       });
   };
 
+  // --------------------------------ALL GAMES API REQUEST-----------------------------
+  // useEffect(() => {
+  // setLoading(true);
+  // }, [suggestions]);
+
+  // return loading && <Loader />;
+  if (allGamesLoading) {
+    return <Loader />;
+  }
   return (
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>
+      <div className="form-container">
+        {/* -----------------------------------SELECTION JEU EXISTANT--------------------------- */}
+        <section>
+          <h3>Choisir un jeu existant</h3>
+          <Form
+            name="validate_existing_game"
+            // {...formItemLayout}
+            onFinish={onSubmitExisting}
+            // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
+            // style={{ maxWidth: 2000 }}
+          >
+            <input
+              className="existing-game-input"
+              // value="jeux"
+              // onChange={e => setValue(e.target.value)}
+              list="suggestions"
+            />
+            <datalist id="suggestions">
+              {allGames.map((game, index) => (
+                <option value={game.name} key={index} />
+              ))}
+            </datalist>
+            <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+              <Button type="primary" htmlType="submit">
+                Valider
+              </Button>
+            </Form.Item>
+          </Form>
+        </section>
+      </div>
 
+      {/* ------------------------------------CREATION JEU-------------------------------------- */}
       <div className="form-container">
         <Form
           name="validate_other"
@@ -93,8 +166,8 @@ function AddBoardgame() {
           // style={{ maxWidth: 2000 }}
         >
 
-          {/* ------------------------------------SELECTION JEU------------------------------- */}
           <section>
+            <h3>Créer un nouveau jeu</h3>
             {/* <h3>Jeu</h3> */}
             <Space>
               <Form.Item label="Nom du jeu*" name="name">

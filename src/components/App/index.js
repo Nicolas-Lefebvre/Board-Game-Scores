@@ -43,8 +43,8 @@ function App() {
     axios.get('http://laura-poitou.vpnuser.lan:8000/api/boardgames/top5')
 
       .then((response) => {
-        console.log(response);
-        console.log(response.data.results);
+        // console.log(response);
+        // console.log(response.data.results);
         setTop5Games(response.data.results);
         // console.log(response.data.results[0].name);
       })
@@ -59,7 +59,7 @@ function App() {
       });
   }, []);
 
-  console.log(top5Games);
+  // console.log(top5Games);
 
   return (
     <div className="app">
