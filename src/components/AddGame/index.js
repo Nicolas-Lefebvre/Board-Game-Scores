@@ -150,9 +150,10 @@ function AddGame() {
                         rules={[
                           {
                             required: true,
-                            message: 'Il manque le Nom',
+                            message: 'Indiquer le Nom',
                           },
                         ]}
+                        label={"Nom joueur " + (key+1)}
                       >
                         <Input placeholder="Nom Joueur" />
                       </Form.Item>
@@ -165,6 +166,7 @@ function AddGame() {
                             message: 'Il manque le score',
                           },
                         ]}
+                        label={"Score joueur " + (key+1)}
                       >
                         <Input placeholder="Score" />
                       </Form.Item>
