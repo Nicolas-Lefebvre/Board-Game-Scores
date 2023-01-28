@@ -31,22 +31,8 @@ const formItemLayout = {
   wrapperCol: { span: 20 },
 };
 // const formItemLayout = {
-//   labelCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 8,
-//     },
-//   },
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 16,
-//     },
-//   },
+//     labelCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 8 }, lg: { span: 8 } },
+//     wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 12 }, lg: { span: 12 } }
 // };
 
 const normFile = (e) => {
@@ -102,26 +88,32 @@ function AddGame() {
           {/* ------------------------------------STATUS PARTIE--------------------------------- */}
           <section>
             <h3>Jeu</h3>
-            <Form.Item name="gameStatus" label={<span style={{ fontSize: '1.2rem' }}>Status partie :</span>}>
-              <Radio.Group>
-                <Radio value="finished"><span style={{ fontSize: '1.2rem' }}>Partie terminée</span></Radio>
-                <Radio value="pending">Partie en cours</Radio>
-              </Radio.Group>
-            </Form.Item>
+            <Space>
+              <Form.Item name="gameStatus" label={<span style={{ fontSize: '1.2rem' }}>Status partie :</span>}>
+                <Radio.Group>
+                  <Radio value="finished"><span style={{ fontSize: '1.2rem' }}>Partie terminée</span></Radio>
+                  <Radio value="pending">Partie en cours</Radio>
+                </Radio.Group>
+              </Form.Item>
+            </Space>
 
             {/* ------------------------------------SELECTION JEU------------------------------- */}
-            <Form.Item
-              name="boardGame"
-              label=<span>Jeu</span>
-              hasFeedback
-              rules={[{ required: true, message: 'Selectionnez un jeu' }]}
-            >
-              <Select placeholder="Please select a country">
-                <Option value="catan">Catan</Option>
-                <Option value="monopoly">Monopoly</Option>
-              </Select>
-            </Form.Item>
-            <Link to="/jeux/ajouter">Ajouter un jeu à ma collection</Link>
+            <Space>
+              <Form.Item
+                name="boardGame"
+                label=<span>Jeu</span>
+                hasFeedback
+                rules={[{ required: true, message: 'Selectionnez un jeu' }]}
+              >
+                <Select placeholder="Please select a country">
+                  <Option value="catan">Catan</Option>
+                  <Option value="monopoly">Monopoly</Option>
+                </Select>
+              </Form.Item>
+            </Space>
+            <Space>
+              <Link to="/jeux/ajouter">Ajouter un jeu à ma collection</Link>
+            </Space>
           </section>
 
           {/* ------------------------------------SELECTION JOUEURS----------------------------- */}
@@ -130,6 +122,7 @@ function AddGame() {
             <Form.List
               name="users"
               className="players-wrapper"
+              // style={{ display: 'flex', flexWrap: 'wrap', minWidth: "100px" }}
               initialValue={[
                 { name: '', score: '' },
                 { name: '', score: '' },
@@ -139,9 +132,13 @@ function AddGame() {
                 <>
                   {fields.map(({ key, name, ...restField }) => (
                     <Space
+                      className="add-player-container"
                       key={key}
                       style={{
                         display: 'flex',
+                        flexWrap: 'wrap',
+                        // flexDirection: 'column',
+                        // borderBottom: '1px solid',
                         marginBottom: 8,
                         justifyContent: 'center',
                       }}
