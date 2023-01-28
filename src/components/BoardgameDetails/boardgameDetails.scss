@@ -1,3 +1,5 @@
+@use 'src/styles/vars';
+
 .product-card {
 display: flex;
   flex-wrap: wrap;
@@ -8,6 +10,13 @@ display: flex;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    // width: 100vw;
+    text-align: left;
+    margin-left: 5rem;
+    font-size: 2rem;
+  }
 }
 
 .product-card__image {
@@ -85,16 +94,77 @@ display: flex;
       margin-right: 10px;
   }
 }
+.resultat-table {
+  // width: 70%;
+  margin: 2rem 5rem;
+  min-width: 200px;
+  max-width: 1200px;
+  // text-align-last: left;
+  // border: 3px solid vars.$main-color-dark;
+  // border-radius: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  
+
+  .table {
+    margin-bottom: 0px;
+    line-height: 2rem;
+
+    thead {
+
+      th {
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: vars.$main-color;
+      }
+    }
+
+    tbody {
+
+      th {
+        text-align: center;
+        vertical-align: middle;
+        font-weight: bold;
+        // display:table-cell;
+        &.desktop {
+          display: none;
+        }
+
+        img {
+        vertical-align: middle;
+        max-height: 1.2rem;
+        }
+      }
+
+      tr {
+
+        td {
+          vertical-align: middle;
+          &.desktop {
+            display: none;
+          }
+        }
+      }
+
+    }
+  }
+}
 
 table.product-card__stats {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  margin-left: 5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 45vw;
 }
 
 table.product-card__stats th,
 table.product-card__stats td {
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
 }

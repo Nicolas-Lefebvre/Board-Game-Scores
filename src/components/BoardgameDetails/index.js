@@ -3,37 +3,47 @@ import './boardgameDetails.scss';
 
 import image from 'src/assets/images/catan-300x300.jpg';
 
-const BoardgameDetails = ({ name, price, description, players, playtime, stats }) => {
+const BoardgameDetails = ({ name, editor, author, description, players, playtime, stats }) => {
   return (
     <div className="product-card">
-            <img className="product-card__image" src={image} alt={name} />
-            <div className="product-card__info">
-                <h3>{name}</h3>
-                <p>{description}</p>
-                <table className="product-card__stats">
-                    <thead>
-                        <tr>
-                            <th>Statistique</th>
-                            <th>Valeur</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Nombre de parties jouées</td>
-                            <td>{stats.played}</td>
-                        </tr>
-                        <tr>
-                            <td>Nom du champion</td>
-                            <td>{stats.champion}</td>
-                        </tr>
-                        <tr>
-                            <td>Nom du recordman</td>
-                            <td>{stats.recordholder}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+      <img className="product-card__image" src={image} alt={name} />
+      <div className="product-card__info">
+        <h3>{name}</h3>
+        <p><strong>Editeur :</strong> {editor}</p>
+        <p><strong>Auteur :</strong> {author}</p>
+        <p><strong>Nombre de joueurs :</strong> {players}</p>
+        <p><strong>description :</strong></p>
+        <p>{description}</p>
+        <div className="resultat-table">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th colSpan="2">Statistiques</th>
+                {/* <th scope="col">245</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Nombre de parties</td>
+                <td>245</td>
+              </tr>
+              <tr>
+                <td>Champion</td>
+                <td>Syham (5 victoires)</td>
+              </tr>
+              <tr>
+                <td>Recordman</td>
+                <td>Amar (5 victoires)</td>
+              </tr>
+              <tr>
+                <td>jeux joués</td>
+                <td>28</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
+    </div>
   );
 };
 
