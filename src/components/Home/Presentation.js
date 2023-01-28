@@ -18,7 +18,7 @@ function Presentation() {
       </section>
 
       <div>
-        <Link className="btn btn-primary" to="/inscription" role="button">Je m'inscris !</Link>
+        <Link style={{ marginBottom: '2rem' }} className="btn btn-primary" to="/inscription" role="button">Je m'inscris !</Link>
       </div>
 
     </div>
