@@ -15,6 +15,7 @@ import Home from '../Home';
 import Inscription from '../Inscription';
 import Connexion from '../Connexion';
 import BoardgameList from '../BoardgameList';
+import BoardgameDetails from '../BoardgameDetails';
 import AddBoardgame from '../AddBoardgame';
 import GameList from '../GameList';
 import Dashboard from '../Dashboard';
@@ -76,6 +77,20 @@ function App() {
         <Route path="/forgetpassword" element={<Forgetpassword />} />
 
         <Route path="/jeux" element={isLogged ? <BoardgameList /> : <GetConnected />} />
+        <Route
+          path="/jeux/:gameId"
+          element={
+          isLogged ? <BoardgameDetails
+          name="Catan"
+          image="https://example.com/catan.jpg"
+          price="50"
+          description="Un classique du jeu de stratégie où les joueurs collectent et échangent des ressources pour construire des colonies et des villes"
+          players="3-4"
+          playtime="90"
+          stats="90"
+        /> : <GetConnected />}
+
+        />
         <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
         <Route path="/parties" element={isLogged ? <GameList /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
