@@ -54,6 +54,9 @@ const { TextArea } = Input;
 function AddBoardgame() {
   const [allGamesLoading, setAllGamesLoading] = useState(true);
   const [allGames, setAllGames] = useState([]);
+  // disabled : si la requete API pour récupérer la liste de tous les jeux n'aboutie pas,
+  // la partie pour ajouter un jeu existant n'apparait pas.
+  const [disabled, setDisabled] = useState(true);
   // console.log(AllGames[0].results);
 
   // console.log(suggestions);
@@ -69,6 +72,8 @@ function AddBoardgame() {
         console.log('Recuperation des tous les jeux OK');
         console.log(response.data);
         setAllGames(response.data.results);
+
+        setDisabled(false);
       })
       .catch((error) => {
         console.log(error);
@@ -125,28 +130,33 @@ function AddBoardgame() {
   return (
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>
+      {/* -----------------------------------SELECTION JEU EXISTANT--------------------------- */}
+      {!disabled
+      && (
       <div className="form-container">
-        {/* -----------------------------------SELECTION JEU EXISTANT--------------------------- */}
         <section>
           <h3>Choisir un jeu existant</h3>
           <Form
+            disabled={disabled}
             name="validate_existing_game"
             // {...formItemLayout}
             onFinish={onSubmitExisting}
             // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
             // style={{ maxWidth: 2000 }}
           >
-            <input
-              className="existing-game-input"
-              // value="jeux"
-              // onChange={e => setValue(e.target.value)}
-              list="suggestions"
-            />
-            <datalist id="suggestions">
-              {allGames.map((game, index) => (
-                <option value={game.name} key={index} />
-              ))}
-            </datalist>
+            <Form.Item>
+              <input
+                className="existing-game-input"
+                // value="jeux"
+                // onChange={e => setValue(e.target.value)}
+                list="suggestions"
+              />
+              <datalist id="suggestions">
+                {allGames.map((game, index) => (
+                  <option value={game.name} key={index} aria-label={game.name} />
+                ))}
+              </datalist>
+            </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
               <Button type="primary" htmlType="submit">
                 Valider
@@ -155,6 +165,7 @@ function AddBoardgame() {
           </Form>
         </section>
       </div>
+      )}
 
       {/* ------------------------------------CREATION JEU-------------------------------------- */}
       <div className="form-container">
