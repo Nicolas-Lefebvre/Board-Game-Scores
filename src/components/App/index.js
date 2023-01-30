@@ -100,10 +100,12 @@ function App() {
 
         {/* ------------------------------------- GAMES ---------------------------------------- */}
         <Route
-          path="/parties/:partieId"
+          path="/parties/:gameId"
           element={
           isLogged ? (
             <GameDetails
+              loading={loading}
+              setLoading={setLoading}
               date="2023/02/01"
               name="Catan"
               image="https://example.com/catan.jpg"

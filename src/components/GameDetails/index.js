@@ -1,14 +1,42 @@
 /* eslint-disable arrow-body-style */
 import './GameDetails.scss';
+import axios from 'axios';
 
 import image from 'src/assets/images/catan-300x300.jpg';
 
-const GameDetails = ({ startDate, endDate, date, name, remarks, players, playtime, stats }) => {
+import Loader from '../Loader';
+
+let gameInfos = [];
+const GameDetails = ({ startDate, setLoading, loading, endDate, date, name, remarks, players, playtime, stats }) => {
+  // const [loading, setLoading] = useState(false);
+setLoading(true);
+  axios.get('http://laura-poitou.vpnuser.lan:8000/api/games/5')
+
+    .then((response) => {
+      console.log(response);
+      gameInfos = response.data.result;
+      console.log(gameInfos);
+
+      // console.log(response.data.results[0].name);
+    })
+
+    .catch((error) => {
+      console.log(error);
+    })
+
+    .finally(() => {
+      // traitement exécuté dans tous les cas, après then ou après catch
+      setLoading(false);
+    });
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className="gameDetails-card">
-      <img className="gameDetails-card__image" src={image} alt={name} />
+      <img className="gameDetails-card__image" src={image} alt={gameInfos.name} />
       <div className="gameDetails-card__info">
-        <h3>Partie du {date}</h3>
+        <h3>Partie du {gameInfos.startDate}</h3>
         <p><strong>Jeu :</strong> {name}</p>
         {/* <p><strong>Auteur :</strong> {author}</p> */}
         <p><strong>Participants :</strong> {players}</p>
