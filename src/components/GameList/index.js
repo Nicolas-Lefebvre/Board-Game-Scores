@@ -116,8 +116,7 @@ function GameList() {
             </div>
             {/* </div> */}
           </NavLink>
-        ),
-        )}
+        ))}
 
       </div>
 
