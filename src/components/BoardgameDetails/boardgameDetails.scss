@@ -1,7 +1,7 @@
 @use 'src/styles/vars';
 
 .boardgame-card {
-display: flex;
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding: 10px;
@@ -25,12 +25,11 @@ display: flex;
   .description {
     max-width: 1200px;
   }
-}
-
-.boardgame-card__image {
+  
+  .boardgame-card__image {
   min-width: 300px;
-    height: auto;
-    margin-right: 20px;
+  height: auto;
+  margin-right: 20px;
 }
 
 .boardgame-card__info {
@@ -180,38 +179,44 @@ table.boardgame-card__stats tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
+}
 @media only screen and (min-width: 600px) {
-  .boardgame-card__image {
+
+  .boardgame-card { 
+
+    .boardgame-card__image {
       width: 150px;
       margin-right: 10px;
-  }
+    }
+    
+    h3 {
+      // width: 100vw;
+      text-align: left !important;
+      margin-left: 1rem !important;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
 
-  h3 {
-    // width: 100vw;
-    text-align: left !important;
-    margin-left: 1rem !important;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-  }
-
-  p {
-    margin: 1rem;
-  }
-
-  .resultat-table {
-    // width: 70%;
-    margin: 2rem 1rem !important;
-    min-width: 300px !important;
-    max-width: 1200px;
-    // text-align-last: left;
-    // border: 3px solid vars.$main-color-dark;
-    // border-radius: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  // .boardgame-info {
-  //   max-width: 90%;
-  // }
+    p {
+      margin: 1rem;
+    }
+    
+    .resultat-table {
+      // width: 70%;
+      margin: 2rem 1rem !important;
+      min-width: 300px !important;
+      max-width: 1200px;
+      // text-align-last: left;
+      // border: 3px solid vars.$main-color-dark;
+      // border-radius: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    // .boardgame-info {
+      //   max-width: 90%;
+      // }
+    }
 }
+  
