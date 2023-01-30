@@ -6,12 +6,7 @@ import { Link } from 'react-router-dom';
 
 function Players() {
   return (
-<<<<<<< HEAD
       <div className="tableau_mesjoueurs">
-=======
-    
-         <div className="tables-wrapper_players">
->>>>>>> f195ac8b72b7571886f0b4b982749615cb5b704d
 
           <h2>Mes Joueurs</h2>
 
@@ -109,11 +104,7 @@ function Players() {
                     <td>Modifier/Supprimer</td>
                   </tr>
                   <tr>
-<<<<<<< HEAD
                     <td colSpan="6"><Link className="btn btn-primary" to="/joueurs/ajouter" role="button">Ajouter un joueur</Link></td>
-=======
-                    <td colSpan={6}><button>Ajouter un joueur</button></td>
->>>>>>> f195ac8b72b7571886f0b4b982749615cb5b704d
                   </tr>
                 </tbody>
               </table>
