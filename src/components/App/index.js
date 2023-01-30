@@ -18,6 +18,7 @@ import BoardgameList from '../BoardgameList';
 import BoardgameDetails from '../BoardgameDetails';
 import AddBoardgame from '../AddBoardgame';
 import GameList from '../GameList';
+import GameDetails from '../GameDetails';
 import Dashboard from '../Dashboard';
 import AddGame from '../AddGame';
 import GetConnected from '../GetConnected';
@@ -80,18 +81,43 @@ function App() {
         <Route
           path="/jeux/:gameId"
           element={
-          isLogged ? <BoardgameDetails
-          name="Catan"
-          image="https://example.com/catan.jpg"
-          editor="Super Meeple"
-          author="Eric marks"
-          description="Explorez l'île de Catane et utilisez vos ressources pour construire villes et routes. Contrôlez le plus grand territoire et remportez la partie. Catan est un jeu mêlant la gestion et la négociation."
-          players="3-4"
-          playtime="90"
-          stats="90"
-        /> : <GetConnected />}
-
+          isLogged
+            ? (
+              <BoardgameDetails
+                name="Catan"
+                image="https://example.com/catan.jpg"
+                editor="Super Meeple"
+                author="Eric marks"
+                description="Explorez l'île de Catane et utilisez vos ressources pour construire villes et routes. Contrôlez le plus grand territoire et remportez la partie. Catan est un jeu mêlant la gestion et la négociation."
+                players="3-4"
+                playtime="90"
+                stats="90"
+              />
+            )
+            : <GetConnected />
+          }
         />
+        <Route
+          path="/parties/:partieId"
+          element={
+          isLogged ? (
+            <GameDetails
+              date="2023/02/01"
+              name="Catan"
+              image="https://example.com/catan.jpg"
+              editor="Super Meeple"
+              author="Eric marks"
+              remarks="Une partie très sympa meêm si Syham a triché pour gagner, mais on a fait semblant de ne rien voir pour lui faire plaisir."
+              players="Amar, Syham, Laura, Nico"
+              playtime="90"
+              stats="90"
+              startDate="29/01/23"
+              endDate="01/02/23"
+            />
+          ) : <GetConnected />
+        }
+        />
+
         <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
         <Route path="/parties" element={isLogged ? <GameList /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />

@@ -5,15 +5,15 @@ import image from 'src/assets/images/catan-300x300.jpg';
 
 const BoardgameDetails = ({ name, editor, author, description, players, playtime, stats }) => {
   return (
-    <div className="product-card">
-      <img className="product-card__image" src={image} alt={name} />
-      <div className="product-card__info">
+    <div className="boardgame-card">
+      <img className="boardgame-card__image" src={image} alt={name} />
+      <div className="boardgame-card__info">
         <h3>{name}</h3>
         <p><strong>Editeur :</strong> {editor}</p>
         <p><strong>Auteur :</strong> {author}</p>
         <p><strong>Nombre de joueurs :</strong> {players}</p>
         <p><strong>description :</strong></p>
-        <p>{description}</p>
+        <p className="description">{description}</p>
         <div className="resultat-table">
           <table className="table table-striped">
             <thead>
@@ -36,7 +36,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
                 <td>Amar (5 victoires)</td>
               </tr>
               <tr>
-                <td>jeux joués</td>
+                <td>Nombre de parties</td>
                 <td>28</td>
               </tr>
             </tbody>
