@@ -9,7 +9,7 @@ import Loader from '../Loader';
 let gameInfos = [];
 const GameDetails = ({ startDate, setLoading, loading, endDate, date, name, remarks, players, playtime, stats }) => {
   // const [loading, setLoading] = useState(false);
-setLoading(true);
+  setLoading(true);
   axios.get('http://laura-poitou.vpnuser.lan:8000/api/games/5')
 
     .then((response) => {

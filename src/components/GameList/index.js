@@ -3,7 +3,6 @@ import image from 'src/assets/images/catan-300x300.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 
 import axios from 'axios';
-import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +10,7 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown, Space } from 'antd';
 
 import { NavLink } from 'react-router-dom';
-import GameDetails from '../GameDetails';
+import Loader from '../Loader';
 
 const items = [
   {
@@ -43,7 +42,8 @@ const items = [
 let gameList = [];
 
 // == Composant
-function GameList() {
+function GameList({ setLoading, loading }) {
+  setLoading(true);
   axios.get('http://laura-poitou.vpnuser.lan:8000/api/games')
 
     .then((response) => {
@@ -60,7 +60,7 @@ function GameList() {
 
     .finally(() => {
       // traitement exécuté dans tous les cas, après then ou après catch
-      // setLoading(false);
+      setLoading(false);
     });
 
   // const [gameDetails, setgameDetails] = useState(false);
@@ -69,9 +69,9 @@ function GameList() {
   //   setgameDetails(!gameDetails);
   // };
 
-  // if (gameDetails) {
-  //   return <GameDetails />;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className="container gameList">
 

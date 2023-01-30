@@ -121,7 +121,7 @@ function App() {
           ) : <GetConnected />
         }
         />
-        <Route path="/parties" element={isLogged ? <GameList /> : <GetConnected />} />
+        <Route path="/parties" element={isLogged ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
 
         {/* -------------------------------------------- PLAYERS ------------------------------- */}
