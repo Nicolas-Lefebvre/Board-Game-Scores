@@ -6,15 +6,13 @@ import { Link } from 'react-router-dom';
 
 function Players() {
   return (
-    
-         <div className="tableau_mesjoueurs">
+      <div className="tableau_mesjoueurs">
 
           <h2>Mes Joueurs</h2>
 
             <div className="resultat-table">
               <table className="table table-striped">
                 <thead>
-                  
                 </thead>
                 <tbody>
                   <tr>
