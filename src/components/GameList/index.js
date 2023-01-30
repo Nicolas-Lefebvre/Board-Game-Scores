@@ -3,6 +3,7 @@ import image from 'src/assets/images/catan-300x300.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 
 import axios from 'axios';
+import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -62,11 +63,15 @@ function GameList() {
       // setLoading(false);
     });
 
+  // const [gameDetails, setgameDetails] = useState(false);
   // const onClick = () => {
   //   // console.log('Click');
-  //   return <GameDetails />;
+  //   setgameDetails(!gameDetails);
   // };
 
+  // if (gameDetails) {
+  //   return <GameDetails />;
+  // }
   return (
     <div className="container gameList">
 
@@ -75,7 +80,7 @@ function GameList() {
       <div className="main">
 
         {gameList.map((game, index) => (
-          <NavLink className="card" to="#" key={index}>
+          <NavLink className="card" to={`/parties/${index}`} key={index}>
             {/* <div className="card"> */}
             <div className="game-card">
               <div className="img-container">
