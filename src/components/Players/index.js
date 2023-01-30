@@ -1,6 +1,7 @@
 import './players.scss';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 import lauriers from 'src/assets/images/laurier-records-2.png';
+import { Link } from 'react-router-dom';
 
 
 function Players() {
@@ -105,7 +106,7 @@ function Players() {
                     <td>Modifier/Supprimer</td>
                   </tr>
                   <tr>
-                    <td colSpan="6"><button>Ajouter un joueur</button></td>
+                    <td colSpan="6"><Link className="btn btn-primary" to="/joueurs/ajouter" role="button">Ajouter un joueur</Link></td>
                   </tr>
                 </tbody>
               </table>

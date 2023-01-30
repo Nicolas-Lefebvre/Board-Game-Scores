@@ -60,6 +60,7 @@ tr :last-child {
 td :last-child {
   background-color: rgb(17, 151, 247);
   border-radius: 10px;
+  margin-bottom: 0.5rem;
 }
 
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
