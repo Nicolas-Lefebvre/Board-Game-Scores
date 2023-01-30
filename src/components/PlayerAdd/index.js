@@ -1,0 +1,105 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import './playerAdd.scss';
+
+import axios from 'axios';
+// import Link from 'antd/es/typography/Link';
+
+import {
+  Button,
+  Form,
+  InputNumber,
+  Space,
+  Input,
+  // DatePicker,
+  Radio,
+} from 'antd';
+
+import { useNavigate } from 'react-router-dom';
+
+// const formItemLayout = {
+//   labelCol: { span: 0 },
+//   wrapperCol: { span: 24 },
+// };
+// const formItemLayout = {
+//   labelCol: {
+//     xs: {
+//       span: 24,
+//     },
+//     sm: {
+//       span: 8,
+//     },
+//   },
+//   wrapperCol: {
+//     xs: {
+//       span: 24,
+//     },
+//     sm: {
+//       span: 16,
+//     },
+//   },
+// };
+
+// ============================================ Composant===========================================
+function AddBoardgame() {
+  const navigate = useNavigate();
+
+  const onFinish = (values) => {
+    console.log('Received values of form: ', values);
+    // axios.post(
+    //   // URL
+    //   'http://laura-poitou.vpnuser.lan:8000/api/player',
+    //   // données
+    //   {
+    //     name: values.name,
+    //   },
+    // )
+    //   .then(() => {
+    //     console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+    //   .finally(() => {
+    //     navigate('/joueurs');
+    //   });
+  };
+
+  return (
+    <div className="container addGame-container">
+      <div className="form-container">
+        <section>
+          <h2>Ajouter un joueur</h2>
+          {/* <h3>Ajouter un nouveau joueur</h3> */}
+          <Form
+            name="validate_new_player"
+            // {...formItemLayout}
+            onFinish={onFinish}
+            // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
+            // style={{ maxWidth: 2000 }}
+          >
+            <Space>
+              <Form.Item label="Nom du joueur :">
+                <input
+                  className="existing-game-input"
+                  name="name"
+                />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">
+                  Valider
+                </Button>
+              </Form.Item>
+            </Space>
+          </Form>
+        </section>
+      </div>
+      );
+
+    </div>
+  );
+}
+
+// == Export
+export default AddBoardgame;

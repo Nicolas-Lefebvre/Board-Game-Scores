@@ -31,22 +31,8 @@ const formItemLayout = {
   wrapperCol: { span: 20 },
 };
 // const formItemLayout = {
-//   labelCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 8,
-//     },
-//   },
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 16,
-//     },
-//   },
+//     labelCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 8 }, lg: { span: 8 } },
+//     wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 12 }, lg: { span: 12 } }
 // };
 
 const normFile = (e) => {
@@ -84,6 +70,11 @@ const onFinish = (values) => {
   console.log('Received values of form: ', values);
 };
 
+let permission = false;
+const onPermissionChanged = () => {
+  permission = !permission;
+};
+
 // ============================================ Composant===========================================
 function AddGame() {
   return (
@@ -100,28 +91,34 @@ function AddGame() {
         >
 
           {/* ------------------------------------STATUS PARTIE--------------------------------- */}
-          <section>
+          <section style={{ display: 'flex', flexDirection: 'column' }}>
             <h3>Jeu</h3>
-            <Form.Item name="gameStatus" label={<span style={{ fontSize: '1.2rem' }}>Status partie :</span>}>
-              <Radio.Group>
-                <Radio value="finished"><span style={{ fontSize: '1.2rem' }}>Partie terminée</span></Radio>
-                <Radio value="pending">Partie en cours</Radio>
-              </Radio.Group>
-            </Form.Item>
+            <Space style={{ display: 'flex', justifyContent: 'center' }}>
+              <Form.Item name="gameStatus" label="Statut partie">
+                <Radio.Group>
+                  <Radio value="finished">Partie terminée</Radio>
+                  <Radio value="pending">Partie en cours</Radio>
+                </Radio.Group>
+              </Form.Item>
+            </Space>
 
             {/* ------------------------------------SELECTION JEU------------------------------- */}
-            <Form.Item
-              name="boardGame"
-              label=<span>Jeu</span>
-              hasFeedback
-              rules={[{ required: true, message: 'Selectionnez un jeu' }]}
-            >
-              <Select placeholder="Please select a country">
-                <Option value="catan">Catan</Option>
-                <Option value="monopoly">Monopoly</Option>
-              </Select>
-            </Form.Item>
-            <Link to="/jeux/ajouter">Ajouter un jeu à ma collection</Link>
+            <Space style={{ display: 'flex', justifyContent: 'center' }}>
+              <Form.Item
+                name="boardGame"
+                label="Jeu"
+                hasFeedback
+                rules={[{ required: true, message: 'Selectionnez un jeu' }]}
+              >
+                <Select placeholder="Selectionner un jeu">
+                  <Option value="catan">Catan</Option>
+                  <Option value="monopoly">Monopoly</Option>
+                </Select>
+              </Form.Item>
+            </Space>
+            <Space style={{ display: 'flex', justifyContent: 'center' }}>
+              <Link to="/jeux/ajouter" style={{ color: 'blue' }}>Ajouter un jeu à ma collection <br /><i style={{ fontStyle: 'italic', color: 'black' }}>(ceci vous amènera sur une nouvelle page)</i></Link>
+            </Space>
           </section>
 
           {/* ------------------------------------SELECTION JOUEURS----------------------------- */}
@@ -130,6 +127,7 @@ function AddGame() {
             <Form.List
               name="users"
               className="players-wrapper"
+              // style={{ display: 'flex', flexWrap: 'wrap', minWidth: "100px" }}
               initialValue={[
                 { name: '', score: '' },
                 { name: '', score: '' },
@@ -139,9 +137,13 @@ function AddGame() {
                 <>
                   {fields.map(({ key, name, ...restField }) => (
                     <Space
+                      className="add-player-container"
                       key={key}
                       style={{
                         display: 'flex',
+                        flexWrap: 'wrap',
+                        // flexDirection: 'column',
+                        // borderBottom: '1px solid',
                         marginBottom: 8,
                         justifyContent: 'center',
                       }}
@@ -153,9 +155,10 @@ function AddGame() {
                         rules={[
                           {
                             required: true,
-                            message: 'Il manque le Nom',
+                            message: 'Indiquer le Nom',
                           },
                         ]}
+                        label={`Nom joueur ${key + 1}`}
                       >
                         <Input placeholder="Nom Joueur" />
                       </Form.Item>
@@ -168,6 +171,7 @@ function AddGame() {
                             message: 'Il manque le score',
                           },
                         ]}
+                        label={`Score joueur ${key + 1}`}
                       >
                         <Input placeholder="Score" />
                       </Form.Item>
@@ -178,7 +182,13 @@ function AddGame() {
                         {...restField}
                         name={[name, 'winner']}
                       >
-                        <Switch />
+                        <Switch
+                          style={{ backgroundColor: permission ? 'green' : 'orange' }}
+                          checked={permission}
+                          checkedChildren="V"
+                          unCheckedChildren="L"
+                          onChange={(e) => onPermissionChanged(e, permission)}
+                        />
                       </Form.Item>
                       {/* ------------------------NOTE ------------------------ */}
                       <Form.Item name={[name, 'rate']} label="Note">
@@ -187,7 +197,7 @@ function AddGame() {
                       {/* ------------------------EQUIPE ----------------------- */}
                       <Form.Item label="N° équipe">
                         <Form.Item name={[name, 'teamNumber']} noStyle>
-                          <InputNumber min={1} max={10} />
+                          <InputNumber min={1} max={10} style={{width: '50px'}} />
                         </Form.Item>
                         {/* <span className="ant-form-text" style={{ marginLeft: 8 }}>
                           n° Equipe
@@ -222,37 +232,41 @@ function AddGame() {
             <Form.Item name="endDate" label="Date et heure de fin" {...config}>
               <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
             </Form.Item> */}
-            <FormItem name="startDate">
-              <div className="form-group">
-                <label htmlFor="partieDate">Début partie :
-                  <input type="datetime-local" id="partieDate" name="startDate" />
-                </label>
-              </div>
-            </FormItem>
-            <FormItem name="endDate">
-              <div className="form-group">
-                <label htmlFor="partieDate">Fin partie :
-                  <input type="datetime-local" id="partieDate" name="endDate" />
-                </label>
-              </div>
-            </FormItem>
+            <Space>
+              <FormItem name="startDate">
+                <div className="form-group">
+                  <label htmlFor="partieDate">Début partie :
+                    <input type="datetime-local" id="partieDate" name="startDate" />
+                  </label>
+                </div>
+              </FormItem>
+            </Space>
+            <Space>
+              <FormItem name="endDate">
+                <div className="form-group">
+                  <label htmlFor="partieDate">Fin partie :
+                    <input type="datetime-local" id="partieDate" name="endDate" />
+                  </label>
+                </div>
+              </FormItem>
+            </Space>
           </section>
           {/* ------------------------------------COMMENTAIRE ET PHOTO-------------------------- */}
           <section>
             <h3>Commentaires</h3>
-            <Form.Item label="TextArea">
+            <Form.Item label="Commentaires">
               <TextArea rows={4} />
             </Form.Item>
             <h3>Photo souvenir</h3>
             <Form.Item
               name="upload"
-              label="Upload"
+              label="Ajouter une photo"
               valuePropName="fileList"
               getValueFromEvent={normFile}
               extra="Formats acceptés"
             >
               <Upload name="logo" action="/upload.do" listType="picture">
-                <Button icon={<UploadOutlined />}>Click to upload</Button>
+                <Button icon={<UploadOutlined />}>Téléverser</Button>
               </Upload>
             </Form.Item>
           </section>

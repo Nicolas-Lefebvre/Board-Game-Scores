@@ -79,7 +79,7 @@ function Classement({ top5Games }) {
         </div>
 
         <div className="card mb-3 " style={{ maxWidth: '540px' }}>
-          <h3 className="card-title">Jeu le plus joué</h3>
+          <h3 className="card-title">Jeu le plus joué #2</h3>
           <div className="row g-0">
             <div className="col-md-4">
               <img src={image2} alt="" className="image" />

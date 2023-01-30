@@ -63,6 +63,10 @@
 
   .scores-container {
     border-bottom: 1px solid;
+    border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 
     select {
       max-width: 150px;
@@ -96,8 +100,11 @@
       min-width: 200px;
       max-width: 360px;
       // text-align-last: left;
-      border: 3px solid vars.$main-color-dark;
-      border-radius: 10px;
+      // border: 3px solid vars.$main-color-dark;
+      // border-radius: 10px;
+      border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
       
 
       .table {

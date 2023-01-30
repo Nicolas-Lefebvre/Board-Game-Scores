@@ -1,6 +1,8 @@
-// == Composant
+import './loader.scss';
+
 import { Spin, Space } from 'antd';
 
+// == Composant
 function Loader() {
   return (
     <div className="loader">

@@ -3,7 +3,21 @@
 
 .home {
 
+  .container {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    padding-bottom: 3rem;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    min-width: 80%;
 
+    p {
+      margin: 1.5rem;
+      text-align: center;
+    }
+  }
   .header-image {
     background-image:url(../../../src/assets/images/pexels-ylanite-koppens-776654\ \(1\).jpg);
     background-position: top;
@@ -48,8 +62,8 @@
     }
 
     .card-body h4 {
-      margin-top: 0;
-      margin-bottom: 0;
+      margin-top: 0.8rem;
+      margin-bottom: 0.8rem;
       padding-top: 0;
       text-align: left;;
       font-size: 1.5rem;
@@ -93,6 +107,12 @@
   
 
   @media (min-width: 750px) {
+
+    .container p {
+      margin-right: 3rem;
+      margin-left: 3rem;
+      text-align-last: left;
+    }
     .classement .card {
       min-width: 415px;
     }
