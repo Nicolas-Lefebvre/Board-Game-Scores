@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import './addGame.scss';
 
-import Link from 'antd/es/typography/Link';
+// import Link from 'antd/es/typography/Link';
+import { Link } from 'react-router-dom';
 import { UploadOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import {
   Button,
@@ -120,7 +121,7 @@ function AddGame() {
                 <Option value="monopoly">Monopoly</Option>
               </Select>
             </Form.Item>
-            <Link to="#">Ajouter un jeu à ma collection</Link>
+            <Link to="/jeux/ajouter">Ajouter un jeu à ma collection</Link>
           </section>
 
           {/* ------------------------------------SELECTION JOUEURS----------------------------- */}

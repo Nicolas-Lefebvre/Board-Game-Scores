@@ -1,8 +1,14 @@
 
+@use 'src/styles/vars';
+
 .addGame-container {
   .form-container {
     // display: flex;
     // justify-content: flex-start;
+
+    .existing-game-input {
+      margin-bottom: 1rem;
+    }
   }
 
   .ant-space {
@@ -14,4 +20,14 @@
 .ant-form-item {
   overflow-x: hidden !important;
 
+}
+
+button {
+  background-color: vars.$main-color !important;
+  color: white;
+
+  span {
+    color: white;
+    font-weight: bold;
+  }
 }
