@@ -3,6 +3,7 @@ import image from 'src/assets/images/catan-300x300.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 
 import axios from 'axios';
+import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -42,9 +43,9 @@ const items = [
 let gameList = [];
 
 // == Composant
-function GameList({ setLoading, loading }) {
-  setLoading(true);
-  axios.get('http://laura-poitou.vpnuser.lan:8000/api/games')
+function GameList() {
+  const [loading, setLoading] = useState(true);
+  axios.get('http://laura-poitou.vpnuser.lan:8000/api/games/')
 
     .then((response) => {
       console.log(response);

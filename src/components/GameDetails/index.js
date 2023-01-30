@@ -1,49 +1,51 @@
 /* eslint-disable arrow-body-style */
 import './GameDetails.scss';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 import image from 'src/assets/images/catan-300x300.jpg';
 
 import Loader from '../Loader';
 
 let gameInfos = [];
-const GameDetails = ({ startDate, setLoading, loading, endDate, date, name, remarks, players, playtime, stats }) => {
-  // const [loading, setLoading] = useState(false);
-  setLoading(true);
-  axios.get('http://laura-poitou.vpnuser.lan:8000/api/games/5')
+const GameDetails = ({ startDate, endDate, date, name, remarks, players, playtime, stats }) => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    axios.get('http://laura-poitou.vpnuser.lan:8000/api/games/5')
 
-    .then((response) => {
-      console.log(response);
-      gameInfos = response.data.result;
-      console.log(gameInfos);
+      .then((response) => {
+        console.log(response);
+        gameInfos = response.data.result;
+        console.log(gameInfos);
 
-      // console.log(response.data.results[0].name);
-    })
+        // console.log(response.data.results[0].name);
+      })
 
-    .catch((error) => {
-      console.log(error);
-    })
+      .catch((error) => {
+        console.log(error);
+      })
 
-    .finally(() => {
-      // traitement exécuté dans tous les cas, après then ou après catch
-      setLoading(false);
-    });
+      .finally(() => {
+        // traitement exécuté dans tous les cas, après then ou après catch
+        setLoading(false);
+      });
+  }, []);
 
   if (loading) {
     return <Loader />;
   }
   return (
     <div className="gameDetails-card">
-      <img className="gameDetails-card__image" src={image} alt={gameInfos.name} />
+      <img className="gameDetails-card__image" src={gameInfos.image} alt={gameInfos.name} />
       <div className="gameDetails-card__info">
         <h3>Partie du {gameInfos.startDate}</h3>
-        <p><strong>Jeu :</strong> {name}</p>
+        <p><strong>Jeu :</strong> {gameInfos.boardGame.name}</p>
         {/* <p><strong>Auteur :</strong> {author}</p> */}
         <p><strong>Participants :</strong> {players}</p>
-        <p><strong>Début partie : :</strong> {startDate}</p>
-        <p><strong>Fin partie :</strong> {endDate}</p>
+        <p><strong>Début partie :</strong> {gameInfos.startDate}</p>
+        <p><strong>Fin partie :</strong> {gameInfos.endDate}</p>
         <p><strong>Commentaires :</strong></p>
-        <p className="remarks">{remarks}</p>
+        <p className="remarks">{gameInfos.comment}</p>
         <div className="resultat-table">
           <table className="table table-striped">
             <thead>
@@ -55,11 +57,11 @@ const GameDetails = ({ startDate, setLoading, loading, endDate, date, name, rema
             <tbody>
               <tr>
                 <td>Début</td>
-                <td>{startDate}</td>
+                <td>{gameInfos.startDate}</td>
               </tr>
               <tr>
                 <td>Fin</td>
-                <td>{endDate}</td>
+                <td>{gameInfos.endDate}</td>
               </tr>
               <tr>
                 <td>Participants</td>

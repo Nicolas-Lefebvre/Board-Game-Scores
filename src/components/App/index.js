@@ -33,7 +33,7 @@ import PlayerAdd from '../PlayerAdd';
 // == Composant
 function App() {
   const [top5Games, setTop5Games] = useState(Data);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // eslint-disable-next-line no-unused-vars
   const [isLogged, setIsLogged] = useState(true);
