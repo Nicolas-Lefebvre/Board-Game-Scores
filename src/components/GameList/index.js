@@ -2,12 +2,15 @@ import './gameList.scss';
 import image from 'src/assets/images/catan-300x300.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 
+import axios from 'axios';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 // import { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
 
 import { NavLink } from 'react-router-dom';
+import GameDetails from '../GameDetails';
 
 const items = [
   {
@@ -36,8 +39,34 @@ const items = [
   },
 ];
 
+let gameList = [];
+
 // == Composant
 function GameList() {
+  axios.get('http://laura-poitou.vpnuser.lan:8000/api/games')
+
+    .then((response) => {
+      console.log(response);
+      gameList = response.data.results;
+      console.log(gameList);
+
+      // console.log(response.data.results[0].name);
+    })
+
+    .catch((error) => {
+      console.log(error);
+    })
+
+    .finally(() => {
+      // traitement exécuté dans tous les cas, après then ou après catch
+      // setLoading(false);
+    });
+
+  // const onClick = () => {
+  //   // console.log('Click');
+  //   return <GameDetails />;
+  // };
+
   return (
     <div className="container gameList">
 
@@ -45,276 +74,44 @@ function GameList() {
 
       <div className="main">
 
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="game-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
+        {gameList.map((game, index) => (
+          <NavLink className="card" to="#" key={index}>
+            {/* <div className="card"> */}
+            <div className="game-card">
+              <div className="img-container">
+                <img src={image} alt="" className="image" />
+              </div>
+              <div className="text-container">
+                <h5 className="card-title">{game.startDate.substr(0, 10)}</h5>
+                {/* <p className="category">Jeu de gestion</p> */}
+                <ul className="">
+                  <li>Les aventuriers du rail</li>
+                  <li className="winner-block">
+                    <div>{game.playerNumber} particpants</div>
+                    <img style={{ marginLeft: '1rem' }} src={winnerMedal} alt="medaille du gagnant" className="winner-img" />
+                    <div className="winner-name">Amar</div>
+                  </li>
+                  {/* <li>{game.playerNumber}</li> */}
+                </ul>
+              </div>
+              <div className="btn-container">
+                <Dropdown
+                  menu={{
+                    items,
+                  }}
+                >
+                  {/* <a onClick={(e) => e.preventDefault()}> */}
+                  <Space>
+                    <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
+                  </Space>
+                  {/* </a> */}
+                </Dropdown>
+              </div>
             </div>
-            <div className="text-container">
-              <h5 className="card-title">15 Janvier 2023</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Les aventuriers du rail</li>
-                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="game-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">15 Janvier 2023</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Les aventuriers du rail</li>
-                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="game-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">15 Janvier 2023</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Les aventuriers du rail</li>
-                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="game-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">15 Janvier 2023</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Les aventuriers du rail</li>
-                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="game-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">15 Janvier 2023</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Les aventuriers du rail</li>
-                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="game-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">15 Janvier 2023</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Les aventuriers du rail</li>
-                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="game-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">15 Janvier 2023</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Les aventuriers du rail</li>
-                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="game-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">15 Janvier 2023</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Les aventuriers du rail</li>
-                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="game-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">15 Janvier 2023</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Les aventuriers du rail</li>
-                <li className="winner-block"><img src={winnerMedal} alt="medaille du gagnant" className="winner-img" /><div className="winner-name">Amar</div></li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
+            {/* </div> */}
+          </NavLink>
+        ),
+        )}
 
       </div>
 

@@ -5,9 +5,9 @@ import image from 'src/assets/images/catan-300x300.jpg';
 
 const GameDetails = ({ startDate, endDate, date, name, remarks, players, playtime, stats }) => {
   return (
-    <div className="game-card">
-      <img className="game-card__image" src={image} alt={name} />
-      <div className="game-card__info">
+    <div className="gameDetails-card">
+      <img className="gameDetails-card__image" src={image} alt={name} />
+      <div className="gameDetails-card__info">
         <h3>Partie du {date}</h3>
         <p><strong>Jeu :</strong> {name}</p>
         {/* <p><strong>Auteur :</strong> {author}</p> */}
