@@ -63,7 +63,7 @@ function AddBoardgame() {
   useEffect(() => {
     axios.get(
     // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
+      'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
       // données
       {
       },
@@ -93,7 +93,7 @@ function AddBoardgame() {
     console.log('Received values of form: ', values, dateString);
     axios.post(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
+      'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
       // données
       {
         name: values.name,

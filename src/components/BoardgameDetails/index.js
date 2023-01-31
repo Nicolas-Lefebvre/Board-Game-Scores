@@ -1,9 +1,38 @@
 /* eslint-disable arrow-body-style */
 import './boardgameDetails.scss';
 
+import axios from 'axios';
+import { useState } from 'react';
+
 import image from 'src/assets/images/catan-300x300.jpg';
 
+import Loader from '../Loader';
+
+let boardgameInfos = [];
 const BoardgameDetails = ({ name, editor, author, description, players, playtime, stats }) => {
+  const [loading, setLoading] = useState(true);
+  axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/5')
+
+    .then((response) => {
+      console.log(response);
+      boardgameInfos = response.data.results;
+      console.log(boardgameInfos);
+
+      // console.log(response.data.results[0].name);
+    })
+
+    .catch((error) => {
+      console.log(error);
+    })
+
+    .finally(() => {
+      // traitement exécuté dans tous les cas, après then ou après catch
+      setLoading(false);
+    });
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className="boardgame-card">
       <img className="boardgame-card__image" src={image} alt={name} />

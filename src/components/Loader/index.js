@@ -14,7 +14,7 @@ function Loader() {
       >
         <Space>
           <Spin tip="Loading" size="large">
-            <div className="content" />
+            {/* <div className="content" /> */}
           </Spin>
         </Space>
       </Space>

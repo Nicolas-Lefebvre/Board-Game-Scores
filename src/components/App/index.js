@@ -28,12 +28,13 @@ import Cgu from '../Cgu';
 import Faq from '../Faq';
 import Forgetpassword from '../Forgetpassword';
 import Players from '../Players';
+import PlayerDetails from '../PlayerDetails';
 import PlayerAdd from '../PlayerAdd';
 
 // == Composant
 function App() {
   const [top5Games, setTop5Games] = useState(Data);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // eslint-disable-next-line no-unused-vars
   const [isLogged, setIsLogged] = useState(true);
@@ -43,7 +44,7 @@ function App() {
   const [token, setToken] = useState('');
 
   useEffect(() => {
-    axios.get('http://laura-poitou.vpnuser.lan:8000/api/boardgames/top5')
+    axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/top5')
 
       .then((response) => {
         // console.log(response);
@@ -100,10 +101,12 @@ function App() {
 
         {/* ------------------------------------- GAMES ---------------------------------------- */}
         <Route
-          path="/parties/:partieId"
+          path="/parties/:gameId"
           element={
           isLogged ? (
             <GameDetails
+              loading={loading}
+              setLoading={setLoading}
               date="2023/02/01"
               name="Catan"
               image="https://example.com/catan.jpg"
@@ -119,11 +122,12 @@ function App() {
           ) : <GetConnected />
         }
         />
-        <Route path="/parties" element={isLogged ? <GameList /> : <GetConnected />} />
+        <Route path="/parties" element={isLogged ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
 
         {/* -------------------------------------------- PLAYERS ------------------------------- */}
         <Route path="/joueurs" element={isLogged ? <Players /> : <GetConnected />} />
+        <Route path="/joueurs/:id" element={isLogged ? <PlayerDetails /> : <GetConnected />} />
         <Route path="/joueurs/ajouter" element={isLogged ? <PlayerAdd /> : <GetConnected />} />
 
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}

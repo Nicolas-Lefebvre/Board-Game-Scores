@@ -1,12 +1,14 @@
 import './boardgameList.scss';
 import image from 'src/assets/images/catan-300x300.jpg';
 
+import axios from 'axios';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 // import { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
-
-import { NavLink } from 'react-router-dom';
+import Loader from '../Loader';
 
 const items = [
   {
@@ -35,8 +37,32 @@ const items = [
   },
 ];
 
+let boardgames = [];
 // == Composant
 function BoardgameList() {
+  const [loading, setLoading] = useState(true);
+  axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/')
+
+    .then((response) => {
+      console.log(response);
+      boardgames = response.data.results;
+      console.log(boardgames);
+
+      // console.log(response.data.results[0].name);
+    })
+
+    .catch((error) => {
+      console.log(error);
+    })
+
+    .finally(() => {
+      // traitement exécuté dans tous les cas, après then ou après catch
+      setLoading(false);
+    });
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className="container gameList">
 
@@ -44,338 +70,38 @@ function BoardgameList() {
 
       <div className="main">
 
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <div className="btn-container">
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                {/* <a onClick={(e) => e.preventDefault()}> */}
-                <Space>
-                  <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                </Space>
-                {/* </a> */}
-              </Dropdown>
-            </div>
-          </div>
-          {/* </div> */}
-        </NavLink>
-        <NavLink className="card" to="#">
-          {/* <div className="card"> */}
-          <div className="collection-card">
-            <div className="img-container">
-              <img src={image} alt="" className="image" />
-            </div>
-            <div className="text-container">
-              <h5 className="card-title">Catan</h5>
-              {/* <p className="category">Jeu de gestion</p> */}
-              <ul className="">
-                <li>Parties : 15</li>
-                <li>Victoires : 15</li>
-              </ul>
-            </div>
-            <Dropdown
-              menu={{
-                items,
-              }}
-            >
-              {/* <a onClick={(e) => e.preventDefault()}> */}
-              <Space>
-                <div className="btn-wrapper">
-                  <div className="btn-container">
+        {boardgames.map((boardgame, index) => (
+          <NavLink className="card" to="#">
+            {/* <div className="card"> */}
+            <div className="collection-card">
+              <div className="img-container">
+                <img src={image} alt="" className="image" />
+              </div>
+              <div className="text-container">
+                <h5 className="card-title">Catan</h5>
+                {/* <p className="category">Jeu de gestion</p> */}
+                <ul className="">
+                  <li>Parties : 15</li>
+                  <li>Victoires : 15</li>
+                </ul>
+              </div>
+              <div className="btn-container">
+                <Dropdown
+                  menu={{
+                    items,
+                  }}
+                >
+                  {/* <a onClick={(e) => e.preventDefault()}> */}
+                  <Space>
                     <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
-                  </div>
-                </div>
-              </Space>
-              {/* </a> */}
-            </Dropdown>
-          </div>
-          {/* </div> */}
-        </NavLink>
+                  </Space>
+                  {/* </a> */}
+                </Dropdown>
+              </div>
+            </div>
+            {/* </div> */}
+          </NavLink>
+        ))}
 
       </div>
 

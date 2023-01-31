@@ -1,22 +1,22 @@
 /* eslint-disable arrow-body-style */
-import './GameDetails.scss';
+import './playerDetails.scss';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-import image from 'src/assets/images/catan-300x300.jpg';
+// import image from 'src/assets/images/catan-300x300.jpg';
 
 import Loader from '../Loader';
 
-let gameInfos = [];
-const GameDetails = ({ startDate, endDate, date, name, remarks, players, playtime, stats }) => {
+let playerInfos = [];
+const PlayerDetails = ({ startDate, endDate, date, name, remarks, players, playtime, stats }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get('http://syham-zedri.vpnuser.lan:8000/api/games/5')
+    axios.get('http://syham-zedri.vpnuser.lan:8000/api/player/5')
 
       .then((response) => {
         console.log(response);
-        gameInfos = response.data.result;
-        console.log(gameInfos);
+        playerInfos = response.data.result;
+        console.log(playerInfos);
 
         // console.log(response.data.results[0].name);
       })
@@ -36,16 +36,16 @@ const GameDetails = ({ startDate, endDate, date, name, remarks, players, playtim
   }
   return (
     <div className="gameDetails-card">
-      <img className="gameDetails-card__image" src={gameInfos.image} alt={gameInfos.name} />
+      <img className="gameDetails-card__image" src={playerInfos.image} alt={playerInfos.name} />
       <div className="gameDetails-card__info">
-        <h3>Partie du {gameInfos.startDate}</h3>
-        <p><strong>Jeu :</strong> {gameInfos.boardGame.name}</p>
+        <h3>Partie du {playerInfos.startDate}</h3>
+        <p><strong>Jeu :</strong> {playerInfos.boardGame.name}</p>
         {/* <p><strong>Auteur :</strong> {author}</p> */}
         <p><strong>Participants :</strong> {players}</p>
-        <p><strong>Début partie :</strong> {gameInfos.startDate}</p>
-        <p><strong>Fin partie :</strong> {gameInfos.endDate}</p>
+        <p><strong>Début partie :</strong> {playerInfos.startDate}</p>
+        <p><strong>Fin partie :</strong> {playerInfos.endDate}</p>
         <p><strong>Commentaires :</strong></p>
-        <p className="remarks">{gameInfos.comment}</p>
+        <p className="remarks">{playerInfos.comment}</p>
         <div className="resultat-table">
           <table className="table table-striped">
             <thead>
@@ -57,11 +57,11 @@ const GameDetails = ({ startDate, endDate, date, name, remarks, players, playtim
             <tbody>
               <tr>
                 <td>Début</td>
-                <td>{gameInfos.startDate}</td>
+                <td>{playerInfos.startDate}</td>
               </tr>
               <tr>
                 <td>Fin</td>
-                <td>{gameInfos.endDate}</td>
+                <td>{playerInfos.endDate}</td>
               </tr>
               <tr>
                 <td>Participants</td>
@@ -88,4 +88,4 @@ const GameDetails = ({ startDate, endDate, date, name, remarks, players, playtim
   );
 };
 
-export default GameDetails;
+export default PlayerDetails;

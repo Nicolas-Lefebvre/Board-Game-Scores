@@ -1,6 +1,6 @@
 @use 'src/styles/vars';
 
-.game-card {
+.gameDetails-card {
 display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -26,37 +26,37 @@ display: flex;
     max-width: 1200px;
   }
   
-  .game-card__image {
+  .gameDetails-card__image {
     min-width: 300px;
     height: auto;
     margin-right: 20px;
   }
   
-  .game-card__info {
+  .gameDetails-card__info {
     width: 60%;
     padding: 10px;
     flex: 1;
   }
   
-  .game-card__name {
+  .gameDetails-card__name {
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 10px;
   }
   
-  .game-card__price {
+  .gameDetails-card__price {
   font-size: 1.2em;
   color: #ff5722;
   margin-bottom: 10px;
 }
 
-.game-card__description {
+.gameDetails-card__description {
   font-size: 1em;
   line-height: 1.5;
   margin-bottom: 10px;
 }
 
-.game-card__details {
+.gameDetails-card__details {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -64,12 +64,12 @@ display: flex;
   margin-bottom: 10px;
 }
 
-.game-card__players,
-.game-card__playtime {
+.gameDetails-card__players,
+.gameDetails-card__playtime {
   margin-right: 20px;
 }
 
-.game-card__button {
+.gameDetails-card__button {
   padding: 10px 20px;
   background-color: #ff5722;
   color: #fff;
@@ -79,24 +79,24 @@ display: flex;
   cursor: pointer;
 }
 
-.game-card__button:hover {
+.gameDetails-card__button:hover {
   background-color: #f44336;
 }
 
-.game-card__stats {
+.gameDetails-card__stats {
   margin-top:10px;
   font-size: 0.9em;
   margin-bottom: 10px;
 }
 
-.game-card__played,
-.game-card__champion,
-.game-card__recordman {
+.gameDetails-card__played,
+.gameDetails-card__champion,
+.gameDetails-card__recordman {
   margin-top:5px;
 }
 
 // @media only screen and (max-width: 600px) {
-  //   .game-card__image {
+  //   .gameDetails-card__image {
     //       width: 150px;
     //       margin-right: 10px;
     //   }
@@ -159,7 +159,7 @@ display: flex;
   }
 }
 
-table.game-card__stats {
+table.gameDetails-card__stats {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
@@ -169,27 +169,27 @@ table.game-card__stats {
   max-width: 45vw;
 }
 
-table.game-card__stats th,
-table.game-card__stats td {
+table.gameDetails-card__stats th,
+table.gameDetails-card__stats td {
   // border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
 }
 
-table.game-card__stats th {
+table.gameDetails-card__stats th {
   background-color: #f2f2f2;
   font-weight: bold;
 }
 
-table.game-card__stats tr:nth-child(even) {
+table.gameDetails-card__stats tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
 }
 
 @media only screen and (min-width: 600px) {
-  .game-card {
-    .game-card__image {
+  .gameDetails-card {
+    .gameDetails-card__image {
         width: 150px;
         margin-right: 10px;
     }
@@ -219,7 +219,7 @@ table.game-card__stats tr:nth-child(even) {
       box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    // .boardgame-info {
+    // .boardgameDetails-info {
     //   max-width: 90%;
     // }
   }
