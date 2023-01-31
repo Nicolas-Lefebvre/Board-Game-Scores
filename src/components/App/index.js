@@ -28,6 +28,7 @@ import Cgu from '../Cgu';
 import Faq from '../Faq';
 import Forgetpassword from '../Forgetpassword';
 import Players from '../Players';
+import PlayerDetails from '../PlayerDetails';
 import PlayerAdd from '../PlayerAdd';
 
 // == Composant
@@ -126,6 +127,7 @@ function App() {
 
         {/* -------------------------------------------- PLAYERS ------------------------------- */}
         <Route path="/joueurs" element={isLogged ? <Players /> : <GetConnected />} />
+        <Route path="/joueurs/:id" element={isLogged ? <PlayerDetails /> : <GetConnected />} />
         <Route path="/joueurs/ajouter" element={isLogged ? <PlayerAdd /> : <GetConnected />} />
 
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}
