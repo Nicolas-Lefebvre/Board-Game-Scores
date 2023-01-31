@@ -41,7 +41,7 @@ let boardgames = [];
 // == Composant
 function BoardgameList() {
   const [loading, setLoading] = useState(true);
-  axios.get('http://laura-poitou.vpnuser.lan:8000/api/boardgames/user/3')
+  axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/')
 
     .then((response) => {
       console.log(response);

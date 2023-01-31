@@ -11,7 +11,7 @@ let gameInfos = [];
 const GameDetails = ({ startDate, endDate, date, name, remarks, players, playtime, stats }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get('http://laura-poitou.vpnuser.lan:8000/api/games/5')
+    axios.get('http://syham-zedri.vpnuser.lan:8000/api/games/5')
 
       .then((response) => {
         console.log(response);

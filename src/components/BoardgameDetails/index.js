@@ -11,7 +11,7 @@ import Loader from '../Loader';
 let boardgameInfos = [];
 const BoardgameDetails = ({ name, editor, author, description, players, playtime, stats }) => {
   const [loading, setLoading] = useState(true);
-  axios.get('http://laura-poitou.vpnuser.lan:8000/api/boardgames/5')
+  axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/5')
 
     .then((response) => {
       console.log(response);

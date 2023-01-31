@@ -45,7 +45,7 @@ let gameList = [];
 // == Composant
 function GameList() {
   const [loading, setLoading] = useState(true);
-  axios.get('http://laura-poitou.vpnuser.lan:8000/api/games/')
+  axios.get('http://syham-zedri.vpnuser.lan:8000/api/games')
 
     .then((response) => {
       console.log(response);

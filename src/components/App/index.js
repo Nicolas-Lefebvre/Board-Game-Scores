@@ -43,7 +43,7 @@ function App() {
   const [token, setToken] = useState('');
 
   useEffect(() => {
-    axios.get('http://laura-poitou.vpnuser.lan:8000/api/boardgames/top5')
+    axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/top5')
 
       .then((response) => {
         // console.log(response);
