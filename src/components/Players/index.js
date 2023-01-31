@@ -53,6 +53,7 @@ function Players() {
 
       <h2>Mes Joueurs</h2>
 
+      <div className="wrapper">
       <div className="resultat-table">
         <table className="table table-striped">
           <thead />
@@ -77,18 +78,18 @@ function Players() {
                   <FontAwesomeIcon
                     icon={faPenToSquare}
                     style={{
-                      marginRight: '.5rem',
-                      marginTop: '.3rem',
+                      // marginRight: '.5rem',
+                      marginTop: '.6rem',
                       color: '#0070ff',
                       fontSize: '1.7rem',
                     }}
                   />
                 </NavLink>
-                <Button onClick={showDeleteConfirm} type="dashed">
+                <Button onClick={showDeleteConfirm}>
                   <FontAwesomeIcon
                     icon={faTrashCan}
                     style={{
-                      marginLeft: '.5rem',
+                      // marginLeft: '.5rem',
                       color: 'red',
                       cursor: 'pointer',
                       fontSize: '1.7rem',
@@ -170,10 +171,11 @@ function Players() {
               <td>Modifier/Supprimer</td>
             </tr>
             <tr>
-              <td colSpan="6"><Link className="btn btn-primary" to="/joueurs/ajouter" role="button">Ajouter un joueur</Link></td>
+              <td colSpan="6"><Link className="btn btn-primary add-player-btn" to="/joueurs/ajouter" role="button">Ajouter un joueur</Link></td>
             </tr>
           </tbody>
         </table>
+      </div>
       </div>
 
     </div>
