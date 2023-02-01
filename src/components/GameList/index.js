@@ -45,13 +45,15 @@ let gameList = [];
 // == Composant
 function GameList() {
   const [loading, setLoading] = useState(true);
-  axios.get('http://syham-zedri.vpnuser.lan:8000/api/games')
+  axios.get('http://syham-zedri.vpnuser.lan:8000/api/usergame/1')
 
     .then((response) => {
       console.log(response);
       gameList = response.data.results;
       console.log(gameList);
 
+      const concatGameList = gameList.concat();
+      console.log(concatGameList);
       // console.log(response.data.results[0].name);
     })
 
@@ -80,22 +82,22 @@ function GameList() {
 
       <div className="main">
 
-        {gameList.map((game, index) => (
-          <NavLink className="card" to={`/parties/${index}`} key={index}>
+        {gameList.map((game) => (
+          <NavLink className="card" to={`/parties/id?game_id=${game.id}`} key={game.id}>
             {/* <div className="card"> */}
             <div className="game-card">
               <div className="img-container">
-                <img src={image} alt="" className="image" />
+                <img src={game.picture} alt="" className="image" />
               </div>
               <div className="text-container">
-                <h5 className="card-title">{game.startDate.substr(0, 10)}</h5>
+                <h5 className="card-title">{game.start_date.substr(0, 10)}</h5>
                 {/* <p className="category">Jeu de gestion</p> */}
                 <ul className="">
-                  <li>Les aventuriers du rail</li>
+                  <li>{game.board_game_name}</li>
                   <li className="winner-block">
-                    <div>{game.playerNumber} particpants</div>
+                    <div>{game.player_number} particpants</div>
                     <img style={{ marginLeft: '1rem' }} src={winnerMedal} alt="medaille du gagnant" className="winner-img" />
-                    <div className="winner-name">Amar</div>
+                    <div className="winner-name">{game.player_name}</div>
                   </li>
                   {/* <li>{game.playerNumber}</li> */}
                 </ul>

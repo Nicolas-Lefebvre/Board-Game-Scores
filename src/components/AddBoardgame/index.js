@@ -10,7 +10,7 @@ import {
   InputNumber,
   Space,
   Input,
-  // DatePicker,
+  Checkbox,
   Radio,
 } from 'antd';
 
@@ -54,6 +54,9 @@ const { TextArea } = Input;
 function AddBoardgame() {
   const [allGamesLoading, setAllGamesLoading] = useState(true);
   const [allGames, setAllGames] = useState([]);
+
+  const [allCategoriesLoading, setAllCategoriesLoading] = useState(true);
+  const [categoryList, setCategoryList] = useState([]);
   // disabled : si la requete API pour récupérer la liste de tous les jeux n'aboutie pas,
   // la partie pour ajouter un jeu existant n'apparait pas.
   const [disabled, setDisabled] = useState(true);
@@ -61,6 +64,7 @@ function AddBoardgame() {
 
   // console.log(suggestions);
   useEffect(() => {
+    // --------------------------GET ALL GAMES FOR PREFILL-------------------------
     axios.get(
     // URL
       'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
@@ -89,6 +93,7 @@ function AddBoardgame() {
     console.log('Submit existing game');
   };
 
+  // -------------------------------------------- VALIDATION OF FORM--------------------------------
   const onFinish = (values, dateString) => {
     console.log('Received values of form: ', values, dateString);
     axios.post(
@@ -105,6 +110,7 @@ function AddBoardgame() {
         description: values.description,
         minPlayer: values.min_player,
         maxPlayer: values.max_player,
+        categories: values.categories,
       },
     )
       .then(() => {
@@ -114,17 +120,32 @@ function AddBoardgame() {
         console.log(error);
       })
       .finally(() => {
-        navigate('/jeux');
+        // navigate('/jeux');
       });
   };
 
-  // --------------------------------ALL GAMES API REQUEST-----------------------------
-  // useEffect(() => {
-  // setLoading(true);
-  // }, [suggestions]);
+  // --------------------------------ALL CATEGORIES API REQUEST-----------------------------
+  useEffect(() => {
+    axios.get(
+      // URL
+      'http://syham-zedri.vpnuser.lan:8000/api/category',
+      // données
+    )
+      .then((response) => {
+        console.log('Récupéraion catégories SUCCES :');
+        console.log(response.data.results);
+        setCategoryList(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setAllCategoriesLoading(false);
+      });
+  }, []);
 
   // return loading && <Loader />;
-  if (allGamesLoading) {
+  if (allGamesLoading || allCategoriesLoading) {
     return <Loader />;
   }
   return (
@@ -208,6 +229,26 @@ function AddBoardgame() {
             <Space>
               <Form.Item label="Description" name="description">
                 <TextArea rows={4} cols={50} name="description" />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item name="categories">
+                <Checkbox.Group>
+                  <div className="categories-wrapper">
+                    {categoryList.map((category) => (
+                      <label key={category.id} htmlFor={category.id}>
+                        <Checkbox
+                          type="checkbox"
+                          value={category.id}
+                          // checked={checkedItems[category.value]}
+                          // onChange={handleChange}
+                        >
+                          {category.name}
+                        </Checkbox>
+                      </label>
+                    ))}
+                  </div>
+                </Checkbox.Group>
               </Form.Item>
             </Space>
             <Space>

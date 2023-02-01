@@ -11,7 +11,11 @@ let gameInfos = [];
 const GameDetails = ({ startDate, endDate, date, name, remarks, players, playtime, stats }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get('http://syham-zedri.vpnuser.lan:8000/api/games/5')
+    const queryParameters = new URLSearchParams(window.location.search);
+    const gameId = queryParameters.get('game_id');
+    console.log(gameId);
+
+    axios.get('http://syham-zedri.vpnuser.lan:8000/api/user/3/game/12')
 
       .then((response) => {
         console.log(response);
