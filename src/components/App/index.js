@@ -37,7 +37,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   // eslint-disable-next-line no-unused-vars
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
   // eslint-disable-next-line no-unused-vars
   // const [nickname, setNickname] = useState('');
   // eslint-disable-next-line no-unused-vars
@@ -63,7 +63,7 @@ function App() {
       });
   }, []);
 
-  // console.log(top5Games);
+  console.log(localStorage.getItem('BGStoken'));
 
   return (
     <div className="app">
@@ -77,11 +77,11 @@ function App() {
         />
 
         {/* --------------------------------------- BOARDGAMES -------------------------------- */}
-        <Route path="/jeux" element={isLogged ? <BoardgameList /> : <GetConnected />} />
+        <Route path="/jeux" element={localStorage.getItem('BGStoken') ? <BoardgameList /> : <GetConnected />} />
         <Route
           path="/jeux/:gameId"
           element={
-          isLogged
+            localStorage.getItem('BGStoken')
             ? (
               <BoardgameDetails
                 name="Catan"
@@ -97,13 +97,13 @@ function App() {
             : <GetConnected />
           }
         />
-        <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
+        <Route path="/jeux/ajouter" element={localStorage.getItem('BGStoken') ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
 
         {/* ------------------------------------- GAMES ---------------------------------------- */}
         <Route
           path="/parties/:gameId"
           element={
-          isLogged ? (
+            localStorage.getItem('BGStoken') ? (
             <GameDetails
               loading={loading}
               setLoading={setLoading}
@@ -122,20 +122,20 @@ function App() {
           ) : <GetConnected />
         }
         />
-        <Route path="/parties" element={isLogged ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
-        <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
+        <Route path="/parties" element={localStorage.getItem('BGStoken') ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
+        <Route path="/parties/ajouter" element={localStorage.getItem('BGStoken') ? <AddGame /> : <GetConnected />} />
 
         {/* -------------------------------------------- PLAYERS ------------------------------- */}
-        <Route path="/joueurs" element={isLogged ? <Players /> : <GetConnected />} />
-        <Route path="/joueurs/:id" element={isLogged ? <PlayerDetails /> : <GetConnected />} />
-        <Route path="/joueurs/ajouter" element={isLogged ? <PlayerAdd /> : <GetConnected />} />
+        <Route path="/joueurs" element={localStorage.getItem('BGStoken') ? <Players /> : <GetConnected />} />
+        <Route path="/joueurs/:id" element={localStorage.getItem('BGStoken') ? <PlayerDetails /> : <GetConnected />} />
+        <Route path="/joueurs/ajouter" element={localStorage.getItem('BGStoken') ? <PlayerAdd /> : <GetConnected />} />
 
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}
-        <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
+        <Route path="/tableau-de-bord" element={localStorage.getItem('BGStoken') ? <Dashboard /> : <GetConnected />} />
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />
-        <Route path="/connexion" element={isLogged ? <Disconnection setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
+        <Route path="/connexion" element={localStorage.getItem('BGStoken') ? <Disconnection setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />

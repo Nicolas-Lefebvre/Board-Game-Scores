@@ -10,6 +10,7 @@ function Disconnection({ setIsLogged, setToken }) {
     console.log('Deconnexion :');
     setIsLogged(false);
     setToken('');
+    localStorage.removeItem('BGStoken');
   };
 
   return (
