@@ -39,7 +39,7 @@ function Dashboard() {
           <h4>Résultats</h4>
 
           <select className="form-select" aria-label="Default select example">
-            <option selected value="1">Laura</option>
+            <option defaultValue value="1">Laura</option>
             <option value="2">Amar</option>
             <option value="3">Syham</option>
             <option value="3">Nico</option>
