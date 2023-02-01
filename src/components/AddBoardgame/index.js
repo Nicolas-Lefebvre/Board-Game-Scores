@@ -73,8 +73,8 @@ function AddBoardgame() {
       },
     )
       .then((response) => {
-        console.log('Recuperation des tous les jeux OK');
-        console.log(response.data);
+        // console.log('Recuperation des tous les jeux OK');
+        // console.log(response.data);
         setAllGames(response.data.results);
 
         setDisabled(false);
@@ -90,12 +90,12 @@ function AddBoardgame() {
   const navigate = useNavigate();
 
   const onSubmitExisting = () => {
-    console.log('Submit existing game');
+    // console.log('Submit existing game');
   };
 
   // -------------------------------------------- VALIDATION OF FORM--------------------------------
   const onFinish = (values, dateString) => {
-    console.log('Received values of form: ', values, dateString);
+    // console.log('Received values of form: ', values, dateString);
     axios.post(
       // URL
       'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
@@ -120,7 +120,7 @@ function AddBoardgame() {
         console.log(error);
       })
       .finally(() => {
-        // navigate('/jeux');
+        navigate('/jeux');
       });
   };
 
@@ -133,7 +133,7 @@ function AddBoardgame() {
     )
       .then((response) => {
         console.log('Récupéraion catégories SUCCES :');
-        console.log(response.data.results);
+        // console.log(response.data.results);
         setCategoryList(response.data.results);
       })
       .catch((error) => {

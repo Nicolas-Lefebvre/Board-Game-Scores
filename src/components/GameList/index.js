@@ -1,9 +1,9 @@
 import './gameList.scss';
-import image from 'src/assets/images/catan-300x300.jpg';
+
 import winnerMedal from 'src/assets/images/winner-medal.png';
 
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -13,58 +13,70 @@ import { Dropdown, Space } from 'antd';
 import { NavLink } from 'react-router-dom';
 import Loader from '../Loader';
 
-const items = [
-  {
-    key: '1',
-    label: (
-      <NavLink rel="noopener noreferrer" to="#">
-        Voir
-      </NavLink>
-    ),
-  },
-  {
-    key: '2',
-    label: (
-      <NavLink rel="noopener noreferrer" to="#">
-        Editer
-      </NavLink>
-    ),
-  },
-  {
-    key: '3',
-    label: (
-      <NavLink rel="noopener noreferrer" to="#">
-        Supprimer
-      </NavLink>
-    ),
-  },
-];
+// const items = [
+//   {
+//     key: '1',
+//     label: (
+//       <NavLink rel="noopener noreferrer" to="#">
+//         Voir
+//       </NavLink>
+//     ),
+//   },
+//   {
+//     key: '2',
+//     label: (
+//       <NavLink rel="noopener noreferrer" to="#">
+//         Editer
+//       </NavLink>
+//     ),
+//   },
+//   {
+//     key: '3',
+//     label: (
+//       <NavLink rel="noopener noreferrer" to="#">
+//         Supprimer
+//       </NavLink>
+//     ),
+//   },
+// ];
 
 let gameList = [];
 
 // == Composant
 function GameList() {
   const [loading, setLoading] = useState(true);
-  axios.get('http://syham-zedri.vpnuser.lan:8000/api/usergame/1')
 
-    .then((response) => {
-      console.log(response);
-      gameList = response.data.results;
-      console.log(gameList);
+  // ---------------------- Get token from local storage---------------------
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  };
 
-      const concatGameList = gameList.concat();
-      console.log(concatGameList);
-      // console.log(response.data.results[0].name);
-    })
+  useEffect(() => {
+    axios.get(
+      'http://syham-zedri.vpnuser.lan:8000/api/usergame',
+      config,
+    )
 
-    .catch((error) => {
-      console.log(error);
-    })
+      .then((response) => {
+        console.log('Liste des parties du user bien récupérée');
+        console.log(response);
+        gameList = response.data.results;
+        console.log(gameList);
 
-    .finally(() => {
-      // traitement exécuté dans tous les cas, après then ou après catch
-      setLoading(false);
-    });
+        // const concatGameList = gameList.concat();
+        // console.log(concatGameList);
+        // console.log(response.data.results[0].name);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+
+      .finally(() => {
+        // traitement exécuté dans tous les cas, après then ou après catch
+        setLoading(false);
+      });
+  }, []);
 
   // const [gameDetails, setgameDetails] = useState(false);
   // const onClick = () => {
@@ -105,7 +117,32 @@ function GameList() {
               <div className="btn-container">
                 <Dropdown
                   menu={{
-                    items,
+                    items: [
+                      {
+                        key: '1',
+                        label: (
+                          <NavLink rel="noopener noreferrer" to="#">
+                            Voir
+                          </NavLink>
+                        ),
+                      },
+                      {
+                        key: '2',
+                        label: (
+                          <NavLink rel="noopener noreferrer" to="#">
+                            Editer
+                          </NavLink>
+                        ),
+                      },
+                      {
+                        key: '3',
+                        label: (
+                          <NavLink rel="noopener noreferrer" to="#">
+                            Supprimer
+                          </NavLink>
+                        ),
+                      },
+                    ],
                   }}
                 >
                   {/* <a onClick={(e) => e.preventDefault()}> */}
