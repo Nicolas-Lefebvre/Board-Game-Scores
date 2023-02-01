@@ -7,11 +7,8 @@ import axios from 'axios';
 import {
   Button,
   Form,
-  InputNumber,
   Space,
   Input,
-  // DatePicker,
-  Radio,
 } from 'antd';
 
 // import { useEffect } from 'react';
@@ -24,12 +21,6 @@ import { useNavigate } from 'react-router-dom';
 // const formItemLayout = {
 //   labelCol: { span: 0 },
 //   wrapperCol: { span: 24 },
-// };
-
-const { TextArea } = Input;
-// -----------------YEAR PICKER INFOS--------------------
-// const onChange = (date, dateString) => {
-//   console.log(dateString);
 // };
 
 // ============================================ Composant===========================================
