@@ -78,7 +78,15 @@ const GameDetails = () => {
               </tr>
               <tr>
                 <td>Vainqueur(s)</td>
-                <td>Syham (45 points)</td>
+                <td>
+                  {gameInfos.map((game) => {
+                    if (game.is_winner == 1) {
+                      return <div>{game.player_name} - {game.score} points</div>;
+                    }
+                    {/* <td> {game.is_winner = 1 ? (return <div>game.player_name</div> ): return '' }</td>; */}
+                  })}
+                </td>
+                {/* <td>Syham (45 points)</td> */}
               </tr>
               <tr>
                 <td>Scores</td>
