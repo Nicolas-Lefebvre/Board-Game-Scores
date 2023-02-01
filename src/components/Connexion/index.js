@@ -12,6 +12,7 @@ import {
 
 // == Composant
 function Connexion({setIsLogged, setToken}) {
+  const navigate = useNavigate();
   const onFinish = (values) => {
     console.log('Success:', values);
     axios.post(
@@ -46,6 +47,9 @@ function Connexion({setIsLogged, setToken}) {
 
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        navigate('/tableau-de-bord');
       });
   };
 
@@ -81,10 +85,13 @@ function Connexion({setIsLogged, setToken}) {
           >
             <Input.Password />
           </Form.Item>
-           <Link className="forgetPassword" to="/forgetpassword" role="button"> Mot de passe oublié? </Link>
-          <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+            <Link className="forgetPassword" to="/forgetpassword" role="button"> Mot de passe oublié? </Link>
+          {/* <Form.Item
+            name="remember"
+            valuePropName="checked"
+            wrapperCol={{ offset: 8, span: 16 }}>
             <Checkbox>Se rappeler de moi</Checkbox>
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
