@@ -12,7 +12,7 @@ import Footer from '../Footer';
 import Data from '../../Data/Top5Games';
 
 import Home from '../Home';
-import Inscription from '../Inscription';
+import Subscribe from '../Subscribe';
 import Connexion from '../Connexion';
 import BoardgameList from '../BoardgameList';
 import BoardgameDetails from '../BoardgameDetails';
@@ -133,8 +133,8 @@ function App() {
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}
         <Route path="/tableau-de-bord" element={isLogged ? <Dashboard /> : <GetConnected />} />
 
-        {/* ----------------------------------------------------- OTHES------------------------- */}
-        <Route path="/inscription" element={<Inscription />} />
+        {/* ---------------------------------------------------- OTHERS------------------------- */}
+        <Route path="/inscription" element={<Subscribe />} />
         <Route path="/connexion" element={isLogged ? <Disconnection setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
