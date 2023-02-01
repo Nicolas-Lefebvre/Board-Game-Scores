@@ -35,6 +35,7 @@ function Connexion({setIsLogged, setToken}) {
         // setToken(response.data.token);
         setIsLogged(true);
         setToken(response.data.token);
+        localStorage.setItem('BGStoken', response.data.token);
         // setIsLogged(response.data.logged);
         // store.dispatch(actionToDispatch);
         // const navigate = useNavigate();
