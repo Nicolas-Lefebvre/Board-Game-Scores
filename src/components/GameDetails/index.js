@@ -81,7 +81,7 @@ const GameDetails = () => {
                 <td>Vainqueur(s)</td>
                 <td>
                   {gameInfos.map((game) => {
-                    if (game.is_winner == 1) {
+                    if (game.is_winner === 1) {
                       return <div>{game.player_name} - {game.score} points</div>;
                     }
                   })}
@@ -100,8 +100,8 @@ const GameDetails = () => {
             </tbody>
           </table>
         </div>
-          <Button variant="secondary">Modifier</Button>{' '}
-          <Button variant="danger" style={{ backgroundColor: 'red' }}>Supprimer</Button>{' '}
+        <Button variant="secondary">Modifier</Button>{' '}
+        <Button variant="danger" style={{ backgroundColor: 'red' }}>Supprimer</Button>{' '}
       </div>
     </div>
   );
