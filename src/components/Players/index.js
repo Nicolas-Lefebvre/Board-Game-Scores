@@ -126,7 +126,7 @@ function Players() {
                   {/* <td>5</td> */}
                   {/* <td>5</td> */}
                   <td>
-                    <NavLink to="/joueurs/modifier">
+                    <NavLink to={`/joueurs/modifier/?player_name=${player.player_name}&?player_id=${player.player_id}`}>
                       <FontAwesomeIcon
                         icon={faPenToSquare}
                         style={{

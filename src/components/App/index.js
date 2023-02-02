@@ -30,6 +30,7 @@ import Forgetpassword from '../Forgetpassword';
 import Players from '../Players';
 import PlayerDetails from '../PlayerDetails';
 import PlayerAdd from '../PlayerAdd';
+import PlayerEdit from '../PlayerEdit';
 
 // == Composant
 function App() {
@@ -129,6 +130,7 @@ function App() {
         <Route path="/joueurs" element={localStorage.getItem('BGStoken') ? <Players /> : <GetConnected />} />
         <Route path="/joueurs/:id" element={localStorage.getItem('BGStoken') ? <PlayerDetails /> : <GetConnected />} />
         <Route path="/joueurs/ajouter" element={localStorage.getItem('BGStoken') ? <PlayerAdd /> : <GetConnected />} />
+        <Route path="/joueurs/modifier" element={localStorage.getItem('BGStoken') ? <PlayerEdit /> : <GetConnected />} />
 
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}
         <Route path="/tableau-de-bord" element={localStorage.getItem('BGStoken') ? <Dashboard /> : <GetConnected />} />

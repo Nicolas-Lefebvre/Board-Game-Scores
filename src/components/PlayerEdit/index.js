@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import './playerAdd.scss';
+// import './playerAdd.scss';
 
 import axios from 'axios';
 // import Link from 'antd/es/typography/Link';
@@ -40,37 +40,41 @@ import { useNavigate } from 'react-router-dom';
 // };
 
 // ============================================ Composant===========================================
-function PlayerAdd() {
+function PlayerEdit() {
   const navigate = useNavigate();
+
+  const queryParameters = new URLSearchParams(window.location.search);
+  const playerId = queryParameters.get('player_id');
+  const playerName = queryParameters.get('player_name');
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    axios.post(
-      // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/new-players',
-      // données
-      config,
-      {
-        name: values.name,
-      },
-    )
-      .then(() => {
-        console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
-        navigate('/joueurs');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios.post(
+    //   // URL
+    //   'http://syham-zedri.vpnuser.lan:8000/api/user/new-players',
+    //   // données
+    //   config,
+    //   {
+    //     name: values.name,
+    //   },
+    // )
+    //   .then(() => {
+    //     console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
+    //     navigate('/joueurs');
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   return (
     <div className="container addGame-container">
       <div className="form-container">
         <section>
-          <h2>Ajouter un joueur</h2>
+          <h2>Modifier un joueur</h2>
           {/* <h3>Ajouter un nouveau joueur</h3> */}
           <Form
             name="validate_new_player"
@@ -80,12 +84,14 @@ function PlayerAdd() {
             // style={{ maxWidth: 2000 }}
           >
             <Space>
-              <Form.Item label="Nom du joueur" name="name">
-                <input
-                  className="existing-game-input"
-                  name="name"
-                />
-              </Form.Item>
+              {/* <Form.Item label="Nom du joueur" name="name" value="fsfsfs"> */}
+              <input
+                type="text"
+                value={playerName}
+                className="existing-game-input"
+                name="name"
+              />
+              {/* </Form.Item> */}
             </Space>
             <Space>
               <Form.Item>
@@ -103,4 +109,4 @@ function PlayerAdd() {
 }
 
 // == Export
-export default PlayerAdd;
+export default PlayerEdit;
