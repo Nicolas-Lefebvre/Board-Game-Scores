@@ -100,7 +100,7 @@ function GameList() {
       <div className="main">
 
         {uniqueGameList.map((game) => (
-          <NavLink className="card" to={`/parties/id?game_id=${game.id}`} key={game.id}>
+          <NavLink className="card" to={`/parties/id?game_id=${game.game_id}`} key={game.game_id}>
             {/* <div className="card"> */}
             <div className="game-card">
               <div className="img-container">

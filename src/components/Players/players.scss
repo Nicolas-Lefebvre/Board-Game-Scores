@@ -9,7 +9,7 @@
   margin: 1rem;
   border: 3px solid vars.$main-color-dark;
   border-radius: 10px;
-  min-width: 1200px;
+  min-width: 500px;
   // overflow-x: scroll;
 }
 
@@ -99,8 +99,8 @@ td :last-child {
 }
 
 :where(.css-dev-only-do-not-override-1i9hnpv).ant-btn-default {
-  background-color: #ffffff !important;
-  border-color: #d9d9d9;
+  background-color: #ffffff00 !important;
+  border-color: #d9d9d900;
   box-shadow: 0 2px 0rgba(0, 0, 0, 0.02);
   border: none;
 }

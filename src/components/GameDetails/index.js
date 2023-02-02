@@ -20,7 +20,7 @@ const GameDetails = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
     };
     axios.get(
-      'http://syham-zedri.vpnuser.lan:8000/api/user/game/12',
+      `http://syham-zedri.vpnuser.lan:8000/api/user/game/${gameId}`,
       config,
     )
       .then((response) => {
@@ -81,7 +81,7 @@ const GameDetails = () => {
                 <td>Vainqueur(s)</td>
                 <td>
                   {gameInfos.map((game) => {
-                    if (game.is_winner === 1) {
+                    if (game.is_winner == 1) {
                       return <div>{game.player_name} - {game.score} points</div>;
                     }
                   })}

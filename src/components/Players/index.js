@@ -3,15 +3,15 @@ import './players.scss';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import winnerMedal from 'src/assets/images/winner-medal.png';
-import lauriers from 'src/assets/images/laurier-records-2.png';
+// import winnerMedal from 'src/assets/images/winner-medal.png';
+// import lauriers from 'src/assets/images/laurier-records-2.png';
 import { Link, NavLink } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ExclamationCircleFilled } from '@ant-design/icons';
-import { Button, Modal, Space } from 'antd';
+import { Button, Modal } from 'antd';
 import Loader from '../Loader';
 
 const { confirm } = Modal;
@@ -19,6 +19,7 @@ const { confirm } = Modal;
 function Players() {
   const [loading, setLoading] = useState(true);
   const [playerList, setPlayerList] = useState([]);
+  const [lossplayerList, setLossPlayerList] = useState([]);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
@@ -35,6 +36,7 @@ function Players() {
         console.log('Recuperation de tous les joueurs OK');
         console.log(response.data);
         setPlayerList(response.data.results);
+        setLossPlayerList(response.data.results.filter((filteredPlayer) => (filteredPlayer.is_winner == 0)));
         // eslint-disable-next-line max-len
         // const winUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1));
         // eslint-disable-next-line max-len
@@ -110,9 +112,12 @@ function Players() {
               {/* { (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1))) } */}
               {(playerList.filter((filteredPlayer) => (filteredPlayer.is_winner == 1))).map((player) => (
                 <tr>
-                  <td>{player.player_name}</td>
+                  <td><Link to={`/joueurs/id?player_id=${player.player_id}`}>{player.player_name}</Link></td>
                   <td>{player.victory_number}</td>
-                  <td>18</td>
+                  <td>
+                    {/* -------------- on récupère le player concerné avec son id pour afficher cette fois le nombre de défaites */}
+                    { (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) }
+                  </td>
                   {/* <td>5</td> */}
                   {/* <td>5</td> */}
                   <td>

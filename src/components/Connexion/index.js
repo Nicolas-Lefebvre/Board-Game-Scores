@@ -26,7 +26,7 @@ function Connexion({setIsLogged, setToken}) {
     )
       .then((response) => {
         // console.log('LA REQUETE EST UN SUCCES');
-        // console.log(response.data);
+        console.log(response.data);
 
         // response.data : {logged: true, pseudo: 'John', token: 'eyJhbG....JIUzI1'}
 
