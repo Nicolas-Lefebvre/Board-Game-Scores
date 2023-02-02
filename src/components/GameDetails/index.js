@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 import image from 'src/assets/images/catan-300x300.jpg';
 
+import Button from 'react-bootstrap/Button';
 import Loader from '../Loader';
 
 let gameInfos = [];
@@ -83,7 +84,6 @@ const GameDetails = () => {
                     if (game.is_winner == 1) {
                       return <div>{game.player_name} - {game.score} points</div>;
                     }
-                    {/* <td> {game.is_winner = 1 ? (return <div>game.player_name</div> ): return '' }</td>; */}
                   })}
                 </td>
                 {/* <td>Syham (45 points)</td> */}
@@ -100,6 +100,8 @@ const GameDetails = () => {
             </tbody>
           </table>
         </div>
+          <Button variant="secondary">Modifier</Button>{' '}
+          <Button variant="danger" style={{ backgroundColor: 'red' }}>Supprimer</Button>{' '}
       </div>
     </div>
   );

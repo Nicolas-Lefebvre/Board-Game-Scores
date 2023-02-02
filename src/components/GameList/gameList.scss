@@ -5,6 +5,10 @@
   // display: flex;
   // flex-wrap: wrap;
 
+  button.btn.btn-danger {
+    background-color: red !important;
+  }
+
   .card {
     border: 1px solid #ccc;
   border-radius: 10px;
