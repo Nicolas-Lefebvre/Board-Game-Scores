@@ -2,6 +2,10 @@
 
 .tableau_mesjoueurs {
 
+  button span {
+    color: black !important;
+  }
+
   .wrapper {
     overflow-x: scroll;
   }
@@ -99,10 +103,14 @@ td :last-child {
 }
 
 :where(.css-dev-only-do-not-override-1i9hnpv).ant-btn-default {
-  background-color: #ffffff00 !important;
+  // background-color: #ffffff00 !important;
   border-color: #d9d9d900;
   box-shadow: 0 2px 0rgba(0, 0, 0, 0.02);
   border: none;
+}
+
+.delete-btn {
+  margin: .3rem 0 0 1rem;
 }
 
 @media (min-width: '700px') {

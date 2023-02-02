@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable max-len */
 import './players.scss';
 
@@ -103,6 +104,7 @@ function Players() {
             <tbody>
               <tr>
                 <th>Nom</th>
+                <th>Nb Total de parties</th>
                 <th>Victoires</th>
                 <th>Défaites</th>
                 {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th> */}
@@ -111,8 +113,11 @@ function Players() {
               </tr>
               {/* { (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1))) } */}
               {(playerList.filter((filteredPlayer) => (filteredPlayer.is_winner == 1))).map((player) => (
-                <tr>
+                <tr key={player.player_id}>
                   <td><Link to={`/joueurs/id?player_id=${player.player_id}`}>{player.player_name}</Link></td>
+                  <td>
+                    { Number((player.victory_number)) + Number((lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number))) }
+                  </td>
                   <td>{player.victory_number}</td>
                   <td>
                     {/* -------------- on récupère le player concerné avec son id pour afficher cette fois le nombre de défaites */}
@@ -132,8 +137,9 @@ function Players() {
                         }}
                       />
                     </NavLink>
-                    <Button onClick={showDeleteConfirm}>
+                    <span onClick={showDeleteConfirm}>
                       <FontAwesomeIcon
+                        className="delete-btn"
                         icon={faTrashCan}
                         style={{
                           // marginLeft: '.5rem',
@@ -142,84 +148,11 @@ function Players() {
                           fontSize: '1.7rem',
                         }}
                       />
-                    </Button>
+                    </span>
                   </td>
                 </tr>
-
               ))}
-{/* 
-              <tr>
-                <td>Syham</td>
-                <td>122</td>
-                <td>2</td>
-                <td>120</td>
-                <td>120</td>
-                <td>Modifier/Supprimer</td>
-              </tr>
-              <tr>
-                <td>Amar</td>
-                <td>15</td>
-                <td>12</td>
-                <td>3</td>
-                <td>3</td>
-                <td>Modifier/Supprimer</td>
-              </tr>
-              <tr>
-                <td>Nico</td>
-                <td>15</td>
-                <td>8</td>
-                <td>7</td>
-                <td>7</td>
-                <td>Modifier/Supprimer</td>
-              </tr>
-              <tr>
-                <td>Virginie</td>
-                <td>15</td>
-                <td>12</td>
-                <td>3</td>
-                <td>3</td>
-                <td>Modifier/Supprimer</td>
-              </tr>
-              <tr>
-                <td>Fabio</td>
-                <td>15</td>
-                <td>12</td>
-                <td>3</td>
-                <td>3</td>
-                <td>Modifier/Supprimer</td>
-              </tr>
-              <tr>
-                <td>Maman</td>
-                <td>15</td>
-                <td>12</td>
-                <td>3</td>
-                <td>3</td>
-                <td>Modifier/Supprimer</td>
-              </tr>
-              <tr>
-                <td>Papa</td>
-                <td>15</td>
-                <td>12</td>
-                <td>3</td>
-                <td>3</td>
-                <td>Modifier/Supprimer</td>
-              </tr>
-              <tr>
-                <td>Frère</td>
-                <td>15</td>
-                <td>12</td>
-                <td>3</td>
-                <td>3</td>
-                <td>Modifier/Supprimer</td>
-              </tr>
-              <tr>
-                <td>Soeur</td>
-                <td>15</td>
-                <td>12</td>
-                <td>3</td>
-                <td>3</td>
-                <td>Modifier/Supprimer</td>
-              </tr> */}
+
               <tr>
                 <td colSpan="6"><Link className="btn btn-primary add-player-btn" to="/joueurs/ajouter" role="button">Ajouter un joueur</Link></td>
               </tr>
