@@ -111,6 +111,7 @@ function AddBoardgame() {
         minPlayer: values.min_player,
         maxPlayer: values.max_player,
         categories: values.categories,
+        isCreatedByUser: true,
       },
     )
       .then(() => {
@@ -174,7 +175,7 @@ function AddBoardgame() {
               />
               <datalist id="suggestions">
                 {allGames.map((game, index) => (
-                  <option value={game.name} key={index} aria-label={game.name} />
+                  <option value={game.name} key={game.id} aria-label={game.name} />
                 ))}
               </datalist>
             </Form.Item>

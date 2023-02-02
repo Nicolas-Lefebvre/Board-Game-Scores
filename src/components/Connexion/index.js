@@ -25,8 +25,8 @@ function Connexion({setIsLogged, setToken}) {
       },
     )
       .then((response) => {
-        console.log('LA REQUETE EST UN SUCCES');
-        console.log(response.data);
+        // console.log('LA REQUETE EST UN SUCCES');
+        // console.log(response.data);
 
         // response.data : {logged: true, pseudo: 'John', token: 'eyJhbG....JIUzI1'}
 
@@ -44,13 +44,13 @@ function Connexion({setIsLogged, setToken}) {
         // on est authentifié, on a un JWT dans le state => on peut demander au serveur
         // les recettes préférées de l'utilisateur connecté
         // store.dispatch(fetchFavoriteRecipes());
+        navigate('/tableau-de-bord');
       })
 
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
-        navigate('/tableau-de-bord');
       });
   };
 

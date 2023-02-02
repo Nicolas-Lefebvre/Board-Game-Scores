@@ -41,6 +41,7 @@ import Loader from '../Loader';
 // ];
 
 let gameList = [];
+let uniqueGameList = [];
 
 // == Composant
 function GameList() {
@@ -60,8 +61,12 @@ function GameList() {
       .then((response) => {
         console.log('Liste des parties du user bien récupérée');
         console.log(response);
+        // -------------Tableau contenant toutes les parties (un object par gagnants)----------
         gameList = response.data.results;
+        // -------------Tableau contenant toutes les parties (un object par partie)----------
+        uniqueGameList = [...new Map(gameList.map((game) => [game.game_id, game])).values()];
         console.log(gameList);
+        console.log(uniqueGameList);
 
         // const concatGameList = gameList.concat();
         // console.log(concatGameList);
@@ -94,7 +99,7 @@ function GameList() {
 
       <div className="main">
 
-        {gameList.map((game) => (
+        {uniqueGameList.map((game) => (
           <NavLink className="card" to={`/parties/id?game_id=${game.id}`} key={game.id}>
             {/* <div className="card"> */}
             <div className="game-card">
@@ -105,11 +110,15 @@ function GameList() {
                 <h5 className="card-title">{game.start_date.substr(0, 10)}</h5>
                 {/* <p className="category">Jeu de gestion</p> */}
                 <ul className="">
-                  <li>{game.board_game_name}</li>
+                  <li><strong>{game.board_game_name}</strong></li>
                   <li className="winner-block">
-                    <div>{game.player_number} particpants</div>
+                    <div className="nb-participants">{game.player_number} participants</div>
                     <img style={{ marginLeft: '1rem' }} src={winnerMedal} alt="medaille du gagnant" className="winner-img" />
-                    <div className="winner-name">{game.player_name}</div>
+                    <div className="winner-name">
+                      {/* Récupération de la liste des gagnants pour chaque partie  */}
+                      {/* eslint-disable-next-line max-len */}
+                      { (gameList.filter((filteredGame) => (filteredGame.game_id === game.game_id))).map((subGame) => (<span>{subGame.player_name}</span>)) }
+                    </div>
                   </li>
                   {/* <li>{game.playerNumber}</li> */}
                 </ul>
