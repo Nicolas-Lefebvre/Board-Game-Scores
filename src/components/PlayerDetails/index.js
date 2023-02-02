@@ -47,12 +47,8 @@ const PlayerDetails = () => {
       <div className="gameDetails-card__info">
         <h3>{playerInfos[0].player_name}</h3>
         <p><strong>Nombre de parties :</strong> {(Number(playerInfos[0].victory_number)) + (Number(playerInfos[1].victory_number)) }</p>
-        {/* <p><strong>Auteur :</strong> {author}</p> */}
         <p><strong>Nombre de victoires :</strong> {playerInfos[0].victory_number}</p>
         <p><strong>Nombre de défaites :</strong> {playerInfos[1].victory_number}</p>
-        {/* <p><strong>Fin partie :</strong> {playerInfos.endDate}</p> */}
-        <p><strong>Commentaires :</strong></p>
-        {/* <p className="remarks">{playerInfos.comment}</p> */}
       </div>
     </div>
   );
