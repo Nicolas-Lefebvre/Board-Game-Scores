@@ -5,10 +5,15 @@ import { useState, useEffect } from 'react';
 
 import image from 'src/assets/images/catan-300x300.jpg';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import { Modal } from 'antd';
 import Button from 'react-bootstrap/Button';
 import Loader from '../Loader';
 
+const { confirm } = Modal;
 let gameInfos = [];
+
 const GameDetails = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -40,6 +45,45 @@ const GameDetails = () => {
         setLoading(false);
       });
   }, []);
+
+  // const showDeleteConfirm = () => {
+  //   confirm({
+  //     title: 'Etes-vous sûrs de vouloir supprimer cette partie ?',
+  //     icon: <ExclamationCircleFilled />,
+  //     content: 'Suppression définitive !',
+  //     okText: 'Oui',
+  //     okType: 'danger',
+  //     cancelText: 'Annuler',
+  //     onOk() {
+  //       console.log('OK');
+  //       const config = {
+  //         headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  //       };
+  //       axios.delete(
+  //       // URL
+  //         'http://syham-zedri.vpnuser.lan:8000/api/games/29',
+  //         // données
+  //         config,
+  //       )
+  //         .then((response) => {
+  //           console.log('Recuperation des tous les jeux OK');
+  //           console.log(response.data);
+  //           setAllGames(response.data.results);
+
+  //           setDisabled(false);
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //         })
+  //         .finally(() => {
+  //           setAllGamesLoading(false);
+  //         });
+  //     },
+  //     onCancel() {
+  //       console.log('Cancel');
+  //     },
+  //   });
+  // };
 
   if (loading) {
     return <Loader />;
@@ -101,7 +145,42 @@ const GameDetails = () => {
           </table>
         </div>
         <Button variant="secondary">Modifier</Button>{' '}
-        <Button variant="danger" style={{ backgroundColor: 'red' }}>Supprimer</Button>{' '}
+        <Button
+          variant="danger"
+          style={{ backgroundColor: 'red' }}
+          onClick={() => {
+            confirm({
+              title: 'Etes-vous sûrs de vouloir supprimer cette partie ?',
+              icon: <ExclamationCircleFilled />,
+              content: 'Suppression définitive !',
+              okText: 'Oui',
+              okType: 'danger',
+              cancelText: 'Annuler',
+              onOk() {
+                console.log('OK');
+                const config = {
+                  headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+                };
+                axios.delete(
+                // URL
+                  `http://syham-zedri.vpnuser.lan:8000/api/games/${gameInfos.game_id}`,
+                  // données
+                  config,
+                )
+                  .then(() => {
+                    console.log('Suppression de la partie OK');
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              },
+              onCancel() {
+                console.log('Cancel');
+              },
+            });
+          }}
+        >Supprimer
+        </Button>{' '}
       </div>
     </div>
   );
