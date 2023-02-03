@@ -2,11 +2,11 @@
 /* eslint-disable max-len */
 import './players.scss';
 
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import winnerMedal from 'src/assets/images/winner-medal.png';
 // import lauriers from 'src/assets/images/laurier-records-2.png';
-import { Link, useNavigate, NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
@@ -23,7 +23,6 @@ function Players() {
   const [playerListNoStats, setPlayerListNoStats] = useState([]);
   const [playerList, setPlayerList] = useState([]);
   const [lossplayerList, setLossPlayerList] = useState([]);
-  const [deletedPlayerId, setDeletedPlayerId] = useState('');
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
@@ -99,7 +98,6 @@ function Players() {
         )
           .then(() => {
             console.log('Supression du joueur OK');
-            setDeletedPlayerId(deletePlayerId);
 
             // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
             axios.get(
@@ -159,9 +157,9 @@ function Players() {
 
                   {
                     // On cherche dans la liste de tous les joueurs si on a une correspondance dans la liste des joueurs qui ont au moins une partie
-                    (playerList.find((filteredPlayer) => (filteredPlayer.player_id == playerNoStat.id))) ?
+                    (playerList.find((filteredPlayer) => (filteredPlayer.player_id == playerNoStat.id)))
                     // Si oui, on affiche les stats correspondantes
-                      (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner == 1 && filteredPlayer.player_id == playerNoStat.id))).map((player) => (
+                      ? (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner == 1 && filteredPlayer.player_id == playerNoStat.id))).map((player) => (
                         <React.Fragment key={player.player_id}>
                           <td>
                             { Number((player.victory_number)) + Number((lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number))) }
@@ -223,7 +221,8 @@ function Players() {
                             <span onClick={() => {
                               // setDeletePlayerId(player.player_id)}
                               showDeleteConfirm(playerNoStat.id);
-                            }}>
+                            }}
+                            >
                               <FontAwesomeIcon
                                 className="delete-btn"
                                 icon={faTrashCan}

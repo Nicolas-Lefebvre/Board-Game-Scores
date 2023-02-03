@@ -8,42 +8,12 @@ import {
   Button,
   message,
   Form,
-  InputNumber,
   Space,
   Input,
-  // DatePicker,
-  Radio,
 } from 'antd';
-
-import { useNavigate } from 'react-router-dom';
-
-// const formItemLayout = {
-//   labelCol: { span: 0 },
-//   wrapperCol: { span: 24 },
-// };
-// const formItemLayout = {
-//   labelCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 8,
-//     },
-//   },
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 16,
-//     },
-//   },
-// };
 
 // ============================================ Composant===========================================
 function PlayerAdd() {
-  const navigate = useNavigate();
-
   const [messageApi, contextHolder] = message.useMessage();
   const key = 'updatable';
   const openMessage = () => {
