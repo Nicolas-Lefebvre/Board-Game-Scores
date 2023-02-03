@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import {
   Button,
+  message,
   Form,
   InputNumber,
   Space,
@@ -43,6 +44,17 @@ import { useNavigate } from 'react-router-dom';
 function PlayerAdd() {
   const navigate = useNavigate();
 
+  const [messageApi, contextHolder] = message.useMessage();
+  const key = 'updatable';
+  const openMessage = () => {
+      messageApi.open({
+        key,
+        type: 'success',
+        content: 'Joueur bien ajouté!',
+        duration: 2,
+      });
+  };
+
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
@@ -59,7 +71,10 @@ function PlayerAdd() {
     )
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
-        navigate('/joueurs');
+
+        openMessage();
+
+        // setTimeout(navigate('/joueurs'), 5000);
       })
       .catch((error) => {
         console.log(error);
@@ -89,6 +104,7 @@ function PlayerAdd() {
             </Space>
             <Space>
               <Form.Item>
+                {contextHolder};
                 <Button type="primary" htmlType="submit">
                   Valider
                 </Button>

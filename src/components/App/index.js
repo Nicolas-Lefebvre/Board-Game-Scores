@@ -27,7 +27,7 @@ import Contact from '../Contact';
 import Cgu from '../Cgu';
 import Faq from '../Faq';
 import Forgetpassword from '../Forgetpassword';
-import Players from '../Players';
+import Players from '../PlayerList';
 import PlayerDetails from '../PlayerDetails';
 import PlayerAdd from '../PlayerAdd';
 import PlayerEdit from '../PlayerEdit';

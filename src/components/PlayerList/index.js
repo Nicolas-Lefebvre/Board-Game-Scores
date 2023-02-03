@@ -18,13 +18,41 @@ import Loader from '../Loader';
 const { confirm } = Modal;
 
 function Players() {
-  const [loading, setLoading] = useState(true);
+  const [loadingAll, setLoadingAll] = useState(true);
+  const [loadingStats, setLoadingStats] = useState(true);
+  const [playerListNoStats, setPlayerListNoStats] = useState([]);
   const [playerList, setPlayerList] = useState([]);
   const [lossplayerList, setLossPlayerList] = useState([]);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
+
+  // -------------- RECUPERATION LISTE JOUEURS SANS STATS --------------------
+  useEffect(() => {
+    axios.get(
+      // URL
+      'http://syham-zedri.vpnuser.lan:8000/api/user/players',
+      // données
+      config,
+    )
+      .then((response) => {
+        console.log('Recuperation de tous les joueurs no stat OK');
+        console.log(response.data);
+        setPlayerListNoStats(response.data.results);
+        // setLossPlayerList(response.data.results.filter((filteredPlayer) => (filteredPlayer.is_winner == 0)));
+        // eslint-disable-next-line max-len
+        // const winUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1));
+        // eslint-disable-next-line max-len
+        // const lossUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 0));
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoadingAll(false);
+      });
+  }, []);
 
   useEffect(() => {
     axios.get(
@@ -47,7 +75,7 @@ function Players() {
         console.log(error);
       })
       .finally(() => {
-        setLoading(false);
+        setLoadingStats(false);
       });
   }, []);
 
@@ -88,7 +116,7 @@ function Players() {
     });
   };
 
-  if (loading) {
+  if (loadingAll || loadingStats) {
     return <Loader />;
   }
   return (
