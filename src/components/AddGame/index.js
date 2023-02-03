@@ -3,24 +3,17 @@ import './addGame.scss';
 
 // import Link from 'antd/es/typography/Link';
 import { Link } from 'react-router-dom';
-import { UploadOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import {
   Button,
-  // Checkbox,
-  // Col,
   Form,
   InputNumber,
   Radio,
   Rate,
-  // Row,
   Select,
-  // Slider,
   Switch,
-  Upload,
   Space,
   Input,
-  // DatePicker,
-  // TimePicker,
 } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';

@@ -3,8 +3,6 @@ import './GameDetails.scss';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-import image from 'src/assets/images/catan-300x300.jpg';
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Modal } from 'antd';
