@@ -50,12 +50,12 @@ function PlayerAdd() {
     console.log('Received values of form: ', values);
     axios.post(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/new-players',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/player',
       // données
-      config,
       {
         name: values.name,
       },
+      config,
     )
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
