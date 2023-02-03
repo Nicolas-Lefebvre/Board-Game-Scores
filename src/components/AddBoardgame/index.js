@@ -10,7 +10,7 @@ import {
   InputNumber,
   Space,
   Input,
-  // DatePicker,
+  Checkbox,
   Radio,
 } from 'antd';
 
@@ -54,6 +54,9 @@ const { TextArea } = Input;
 function AddBoardgame() {
   const [allGamesLoading, setAllGamesLoading] = useState(true);
   const [allGames, setAllGames] = useState([]);
+
+  const [allCategoriesLoading, setAllCategoriesLoading] = useState(true);
+  const [categoryList, setCategoryList] = useState([]);
   // disabled : si la requete API pour récupérer la liste de tous les jeux n'aboutie pas,
   // la partie pour ajouter un jeu existant n'apparait pas.
   const [disabled, setDisabled] = useState(true);
@@ -61,6 +64,7 @@ function AddBoardgame() {
 
   // console.log(suggestions);
   useEffect(() => {
+    // --------------------------GET ALL GAMES FOR PREFILL-------------------------
     axios.get(
     // URL
       'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
@@ -69,8 +73,8 @@ function AddBoardgame() {
       },
     )
       .then((response) => {
-        console.log('Recuperation des tous les jeux OK');
-        console.log(response.data);
+        // console.log('Recuperation des tous les jeux OK');
+        // console.log(response.data);
         setAllGames(response.data.results);
 
         setDisabled(false);
@@ -86,11 +90,12 @@ function AddBoardgame() {
   const navigate = useNavigate();
 
   const onSubmitExisting = () => {
-    console.log('Submit existing game');
+    // console.log('Submit existing game');
   };
 
+  // -------------------------------------------- VALIDATION OF FORM--------------------------------
   const onFinish = (values, dateString) => {
-    console.log('Received values of form: ', values, dateString);
+    // console.log('Received values of form: ', values, dateString);
     axios.post(
       // URL
       'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
@@ -105,6 +110,8 @@ function AddBoardgame() {
         description: values.description,
         minPlayer: values.min_player,
         maxPlayer: values.max_player,
+        categories: values.categories,
+        isCreatedByUser: true,
       },
     )
       .then(() => {
@@ -118,13 +125,28 @@ function AddBoardgame() {
       });
   };
 
-  // --------------------------------ALL GAMES API REQUEST-----------------------------
-  // useEffect(() => {
-  // setLoading(true);
-  // }, [suggestions]);
+  // --------------------------------ALL CATEGORIES API REQUEST-----------------------------
+  useEffect(() => {
+    axios.get(
+      // URL
+      'http://syham-zedri.vpnuser.lan:8000/api/category',
+      // données
+    )
+      .then((response) => {
+        console.log('Récupéraion catégories SUCCES :');
+        // console.log(response.data.results);
+        setCategoryList(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setAllCategoriesLoading(false);
+      });
+  }, []);
 
   // return loading && <Loader />;
-  if (allGamesLoading) {
+  if (allGamesLoading || allCategoriesLoading) {
     return <Loader />;
   }
   return (
@@ -153,7 +175,7 @@ function AddBoardgame() {
               />
               <datalist id="suggestions">
                 {allGames.map((game, index) => (
-                  <option value={game.name} key={index} aria-label={game.name} />
+                  <option value={game.name} key={game.id} aria-label={game.name} />
                 ))}
               </datalist>
             </Form.Item>
@@ -211,11 +233,31 @@ function AddBoardgame() {
               </Form.Item>
             </Space>
             <Space>
+              <Form.Item name="categories">
+                <Checkbox.Group>
+                  <div className="categories-wrapper">
+                    {categoryList.map((category) => (
+                      <label key={category.id} htmlFor={category.id}>
+                        <Checkbox
+                          type="checkbox"
+                          value={category.id}
+                          // checked={checkedItems[category.value]}
+                          // onChange={handleChange}
+                        >
+                          {category.name}
+                        </Checkbox>
+                      </label>
+                    ))}
+                  </div>
+                </Checkbox.Group>
+              </Form.Item>
+            </Space>
+            <Space>
               <Form.Item name="scoreType" label="Type de scoring">
                 <Radio.Group>
-                  <Radio value="highestScore">Le plus haut score gagne</Radio>
-                  <Radio value="lowestScore">Le plus petit score gagne</Radio>
-                  <Radio value="noScore">Pas de système de scoring</Radio>
+                  <Radio value="highest score">Le plus haut score gagne</Radio>
+                  <Radio value="lowest score">Le plus petit score gagne</Radio>
+                  <Radio value="no score">Pas de système de scoring</Radio>
                 </Radio.Group>
               </Form.Item>
             </Space>

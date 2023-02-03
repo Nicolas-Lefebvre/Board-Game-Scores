@@ -56,8 +56,15 @@ function Navbar() {
                 </div>
                 {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/joueurs">Mes joueurs</NavLink>
+              <li className="nav-item dropdown">
+                <NavLink to="/joueurs" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
+                  Mes joueurs
+                </NavLink>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <NavLink className="dropdown-item" to="/joueurs">Liste des joueurs</NavLink>
+                  <NavLink className="dropdown-item" to="joueurs/ajouter">Ajouter un joueur</NavLink>
+                </div>
+                {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
             </ul>
             <ul className="navbar-avatar">

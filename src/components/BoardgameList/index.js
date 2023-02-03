@@ -1,8 +1,7 @@
 import './boardgameList.scss';
-import image from 'src/assets/images/catan-300x300.jpg';
 
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -37,28 +36,37 @@ const items = [
   },
 ];
 
-let boardgames = [];
 // == Composant
 function BoardgameList() {
   const [loading, setLoading] = useState(true);
-  axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/')
+  const [boardgameList, setBoardgameList] = useState([]);
 
-    .then((response) => {
-      console.log(response);
-      boardgames = response.data.results;
-      console.log(boardgames);
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  };
 
-      // console.log(response.data.results[0].name);
-    })
+  useEffect(() => {
+    axios.get(
+      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames',
+      config,
+    )
 
-    .catch((error) => {
-      console.log(error);
-    })
+      .then((response) => {
+        console.log(response);
+        setBoardgameList(response.data.results);
 
-    .finally(() => {
-      // traitement exécuté dans tous les cas, après then ou après catch
-      setLoading(false);
-    });
+        // console.log(response.data.results[0].name);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+
+      .finally(() => {
+        // traitement exécuté dans tous les cas, après then ou après catch
+        setLoading(false);
+      });
+  }, []);
 
   if (loading) {
     return <Loader />;
@@ -70,15 +78,15 @@ function BoardgameList() {
 
       <div className="main">
 
-        {boardgames.map((boardgame, index) => (
-          <NavLink className="card" to="#">
+        {boardgameList.map((boardgame) => (
+          <NavLink className="card" to={`/jeux/?boardgame_id=${boardgame.id}`} key={boardgame.id}>
             {/* <div className="card"> */}
             <div className="collection-card">
               <div className="img-container">
-                <img src={image} alt="" className="image" />
+                <img src={boardgame.picture} alt={boardgame.name} className="image" />
               </div>
               <div className="text-container">
-                <h5 className="card-title">Catan</h5>
+                <h5 className="card-title">{boardgame.name}</h5>
                 {/* <p className="category">Jeu de gestion</p> */}
                 <ul className="">
                   <li>Parties : 15</li>

@@ -11,7 +11,11 @@ import Loader from '../Loader';
 let boardgameInfos = [];
 const BoardgameDetails = ({ name, editor, author, description, players, playtime, stats }) => {
   const [loading, setLoading] = useState(true);
-  axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/5')
+
+  const queryParameters = new URLSearchParams(window.location.search);
+  const boardgameId = queryParameters.get('boardgame_id');
+
+  axios.get(`http://syham-zedri.vpnuser.lan:8000/api/boardgames/${boardgameId}`)
 
     .then((response) => {
       console.log(response);

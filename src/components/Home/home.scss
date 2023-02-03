@@ -19,11 +19,7 @@
     }
   }
   .header-image {
-    background-image:url(../../../src/assets/images/pexels-ylanite-koppens-776654\ \(1\).jpg);
-    background-position: top;
-    width: 99.1vw;
-    height: 300px;
-    background-size:cover;
+    display: none;
   }
 
   .presentation {
@@ -125,6 +121,15 @@
 
     .classement-pie {
       margin: auto;
+    }
+
+    .header-image {
+      display: block;
+      background-image:url(../../../src/assets/images/pexels-ylanite-koppens-776654\ \(1\).jpg);
+      background-position:center;
+      width: 99.1vw;
+      height: 300px;
+      background-size:cover;
     }
 
   }

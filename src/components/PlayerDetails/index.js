@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable arrow-body-style */
 import './playerDetails.scss';
 import axios from 'axios';
@@ -7,18 +8,24 @@ import { useState, useEffect } from 'react';
 
 import Loader from '../Loader';
 
-let playerInfos = [];
-const PlayerDetails = ({ startDate, endDate, date, name, remarks, players, playtime, stats }) => {
+const PlayerDetails = () => {
   const [loading, setLoading] = useState(true);
+  const [playerInfos, setplayerInfos] = useState([]);
+
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  };
   useEffect(() => {
-    axios.get('http://syham-zedri.vpnuser.lan:8000/api/player/5')
+    const queryParameters = new URLSearchParams(window.location.search);
+    const playerId = queryParameters.get('player_id');
+    axios.get(
+      `http://syham-zedri.vpnuser.lan:8000/api/user/player/${playerId}/stats`,
+      config,
+    )
 
       .then((response) => {
         console.log(response);
-        playerInfos = response.data.result;
-        console.log(playerInfos);
-
-        // console.log(response.data.results[0].name);
+        setplayerInfos(response.data.results);
       })
 
       .catch((error) => {
@@ -36,53 +43,12 @@ const PlayerDetails = ({ startDate, endDate, date, name, remarks, players, playt
   }
   return (
     <div className="gameDetails-card">
-      <img className="gameDetails-card__image" src={playerInfos.image} alt={playerInfos.name} />
+      {/* <img className="gameDetails-card__image" src={playerInfos.image} alt={playerInfos.name} /> */}
       <div className="gameDetails-card__info">
-        <h3>Partie du {playerInfos.startDate}</h3>
-        <p><strong>Jeu :</strong> {playerInfos.boardGame.name}</p>
-        {/* <p><strong>Auteur :</strong> {author}</p> */}
-        <p><strong>Participants :</strong> {players}</p>
-        <p><strong>Début partie :</strong> {playerInfos.startDate}</p>
-        <p><strong>Fin partie :</strong> {playerInfos.endDate}</p>
-        <p><strong>Commentaires :</strong></p>
-        <p className="remarks">{playerInfos.comment}</p>
-        <div className="resultat-table">
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th colSpan="2">Statistiques</th>
-                {/* <th scope="col">245</th> */}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Début</td>
-                <td>{playerInfos.startDate}</td>
-              </tr>
-              <tr>
-                <td>Fin</td>
-                <td>{playerInfos.endDate}</td>
-              </tr>
-              <tr>
-                <td>Participants</td>
-                <td>{players}</td>
-              </tr>
-              <tr>
-                <td>Vainqueur(s)</td>
-                <td>Syham (45 points)</td>
-              </tr>
-              <tr>
-                <td>Scores</td>
-                <td>
-                  <div><strong>Amar</strong> - 15 points - fairplay 5/5</div>
-                  <div><strong>Laura</strong> - 20 points - fairplay 5/5</div>
-                  <div><strong>Syham</strong> - 45 points - fairplay 5/5</div>
-                  <div><strong>Nico</strong> - 12 points - fairplay 5/5</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h3>{playerInfos[0].player_name}</h3>
+        <p><strong>Nombre de parties :</strong> {(Number(playerInfos[0].victory_number)) + (Number(playerInfos[1].victory_number)) }</p>
+        <p><strong>Nombre de victoires :</strong> {playerInfos[0].victory_number}</p>
+        <p><strong>Nombre de défaites :</strong> {playerInfos[1].victory_number}</p>
       </div>
     </div>
   );

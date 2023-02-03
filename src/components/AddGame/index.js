@@ -3,25 +3,20 @@ import './addGame.scss';
 
 // import Link from 'antd/es/typography/Link';
 import { Link } from 'react-router-dom';
-import { UploadOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import {
   Button,
-  // Checkbox,
-  // Col,
   Form,
   InputNumber,
   Radio,
   Rate,
-  // Row,
   Select,
-  // Slider,
   Switch,
-  Upload,
   Space,
   Input,
-  // DatePicker,
-  // TimePicker,
 } from 'antd';
+import axios from 'axios';
+import { useState } from 'react';
 import FormItem from 'antd/es/form/FormItem';
 
 const { Option } = Select;
@@ -68,6 +63,31 @@ const { TextArea } = Input;
 // -------------------------------------------------------
 const onFinish = (values) => {
   console.log('Received values of form: ', values);
+
+  axios.post(
+    // URL
+    'http://syham-zedri.vpnuser.lan:8000/api/games59',
+    // données
+    {
+      startDate: values.startDate,
+      endDate: values.endDate,
+      playerNumber: values.players.length,
+      picture: null,
+      status: values.status,
+      comment: values.comment,
+      boardGame: values.boardGameId,
+      players: values.players,
+    },
+  )
+    .then(() => {
+      console.log('LA REQUETE EST UN SUCCES. partie bien ajoutée');
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      // navigate('/jeux');
+    });
 };
 
 let permission = false;
@@ -75,8 +95,47 @@ const onPermissionChanged = () => {
   permission = !permission;
 };
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+};
 // ============================================ Composant===========================================
 function AddGame() {
+  const [allGames, setAllGames] = useState([]);
+  axios.get(
+    // URL
+    'http://syham-zedri.vpnuser.lan:8000/api/games59',
+    // données
+    config,
+  )
+    .then((response) => {
+      console.log('Récupération des jeux OK');
+      setAllGames(response.data.results);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      // navigate('/jeux');
+    });
+
+  const [allPlayers, setAllPlayers] = useState([]);
+  axios.get(
+    // URL
+    'http://syham-zedri.vpnuser.lan:8000/api/user/players',
+    // données
+    config,
+  )
+    .then((response) => {
+      console.log('Récupération des joueurs OK');
+      setAllPlayers(response.data.results);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      // navigate('/jeux');
+    });
+
   return (
     <div className="container addGame-container">
       <h2>Ajouter une partie</h2>
@@ -94,7 +153,7 @@ function AddGame() {
           <section style={{ display: 'flex', flexDirection: 'column' }}>
             <h3>Jeu</h3>
             <Space style={{ display: 'flex', justifyContent: 'center' }}>
-              <Form.Item name="gameStatus" label="Statut partie">
+              <Form.Item name="status" label="Statut partie">
                 <Radio.Group>
                   <Radio value="finished">Partie terminée</Radio>
                   <Radio value="pending">Partie en cours</Radio>
@@ -105,14 +164,14 @@ function AddGame() {
             {/* ------------------------------------SELECTION JEU------------------------------- */}
             <Space style={{ display: 'flex', justifyContent: 'center' }}>
               <Form.Item
-                name="boardGame"
+                name="boardGameId"
                 label="Jeu"
                 hasFeedback
                 rules={[{ required: true, message: 'Selectionnez un jeu' }]}
               >
                 <Select placeholder="Selectionner un jeu">
-                  <Option value="catan">Catan</Option>
-                  <Option value="monopoly">Monopoly</Option>
+                  <Option value="2">Catan</Option>
+                  <Option value="3">Monopoly</Option>
                 </Select>
               </Form.Item>
             </Space>
@@ -125,7 +184,7 @@ function AddGame() {
           <section>
             <h3>Joueurs</h3>
             <Form.List
-              name="users"
+              name="players"
               className="players-wrapper"
               // style={{ display: 'flex', flexWrap: 'wrap', minWidth: "100px" }}
               initialValue={[
@@ -257,8 +316,8 @@ function AddGame() {
             <Form.Item label="Commentaires">
               <TextArea rows={4} />
             </Form.Item>
-            <h3>Photo souvenir</h3>
-            <Form.Item
+            {/* <h3>Photo souvenir</h3> */}
+            {/* <Form.Item
               name="upload"
               label="Ajouter une photo"
               valuePropName="fileList"
@@ -268,7 +327,7 @@ function AddGame() {
               <Upload name="logo" action="/upload.do" listType="picture">
                 <Button icon={<UploadOutlined />}>Téléverser</Button>
               </Upload>
-            </Form.Item>
+            </Form.Item> */}
           </section>
 
           <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
