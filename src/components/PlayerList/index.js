@@ -144,45 +144,83 @@ function Players() {
                 <tr key={playerNoStat.id}>
                   <td><Link to={`/joueurs/id?player_id=${playerNoStat.id}`}>{playerNoStat.name}</Link></td>
 
-                  {(playerList.filter((filteredPlayer) => (filteredPlayer.is_winner == 1 && filteredPlayer.player_id == playerNoStat.id))).map((player) => (
-                    <>
-                      <td>
-                        { Number((player.victory_number)) + Number((lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number))) }
-                      </td>
-                      <td>{player.victory_number}</td>
-                      <td>
-                        {/* -------------- on récupère le player concerné avec son id pour afficher cette fois le nombre de défaites */}
-                        { (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) }
-                      </td>
-                      {/* <td>5</td> */}
-                      {/* <td>5</td> */}
-                      <td>
-                        <NavLink to={`/joueurs/modifier/?player_name=${player.player_name}&?player_id=${player.player_id}`}>
-                          <FontAwesomeIcon
-                            icon={faPenToSquare}
-                            style={{
-                              // marginRight: '.5rem',
-                              marginTop: '.6rem',
-                              color: '#0070ff',
-                              fontSize: '1.7rem',
-                            }}
-                          />
-                        </NavLink>
-                        <span onClick={showDeleteConfirm}>
-                          <FontAwesomeIcon
-                            className="delete-btn"
-                            icon={faTrashCan}
-                            style={{
-                              // marginLeft: '.5rem',
-                              color: 'red',
-                              cursor: 'pointer',
-                              fontSize: '1.7rem',
-                            }}
-                          />
-                        </span>
-                      </td>
-                    </>
-                  ))}
+                  {
+                    // On cherche dans la liste de tous les joueurs si on a une correspondance dans la liste des joueurs qui ont au moins une partie
+                    (playerList.find((filteredPlayer) => (filteredPlayer.player_id == playerNoStat.id))) ?
+                    // Si oui, on affiche les stats correspondantes
+                      (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner == 1 && filteredPlayer.player_id == playerNoStat.id))).map((player) => (
+                        <>
+                          <td>
+                            { Number((player.victory_number)) + Number((lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number))) }
+                          </td>
+                          <td>{player.victory_number}</td>
+                          <td>
+                            {/* -------------- on récupère le player concerné avec son id pour afficher cette fois le nombre de défaites */}
+                            { (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) }
+                          </td>
+                          {/* <td>5</td> */}
+                          {/* <td>5</td> */}
+                          <td>
+                            <NavLink to={`/joueurs/modifier/?player_name=${player.player_name}&?player_id=${player.player_id}`}>
+                              <FontAwesomeIcon
+                                icon={faPenToSquare}
+                                style={{
+                                  // marginRight: '.5rem',
+                                  marginTop: '.6rem',
+                                  color: '#0070ff',
+                                  fontSize: '1.7rem',
+                                }}
+                              />
+                            </NavLink>
+                            <span onClick={showDeleteConfirm}>
+                              <FontAwesomeIcon
+                                className="delete-btn"
+                                icon={faTrashCan}
+                                style={{
+                                  // marginLeft: '.5rem',
+                                  color: 'red',
+                                  cursor: 'pointer',
+                                  fontSize: '1.7rem',
+                                }}
+                              />
+                            </span>
+                          </td>
+                        </>
+                      ))
+                      // Si non, on affiche 0 pour chaque colonne
+                      : (
+                        <>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>
+                            <NavLink to={`/joueurs/modifier/?player_name=${playerNoStat.name}&?player_id=${playerNoStat.id}`}>
+                              <FontAwesomeIcon
+                                icon={faPenToSquare}
+                                style={{
+                                  // marginRight: '.5rem',
+                                  marginTop: '.6rem',
+                                  color: '#0070ff',
+                                  fontSize: '1.7rem',
+                                }}
+                              />
+                            </NavLink>
+                            <span onClick={showDeleteConfirm}>
+                              <FontAwesomeIcon
+                                className="delete-btn"
+                                icon={faTrashCan}
+                                style={{
+                                  // marginLeft: '.5rem',
+                                  color: 'red',
+                                  cursor: 'pointer',
+                                  fontSize: '1.7rem',
+                                }}
+                              />
+                            </span>
+                          </td>
+                        </>
+                      )
+                  }
                 </tr>
               ))}
 
