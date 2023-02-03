@@ -52,22 +52,22 @@ function PlayerEdit() {
   };
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    // axios.post(
-    //   // URL
-    //   'http://syham-zedri.vpnuser.lan:8000/api/user/new-players',
-    //   // données
-    //   config,
-    //   {
-    //     name: values.name,
-    //   },
-    // )
-    //   .then(() => {
-    //     console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
-    //     navigate('/joueurs');
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    axios.patch(
+      // URL
+      `http://syham-zedri.vpnuser.lan:8000/api/user/player/${playerId}`,
+      // données
+      config,
+      {
+        name: values.name,
+      },
+    )
+      .then(() => {
+        console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
+        navigate('/joueurs');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -84,14 +84,14 @@ function PlayerEdit() {
             // style={{ maxWidth: 2000 }}
           >
             <Space>
-              {/* <Form.Item label="Nom du joueur" name="name" value="fsfsfs"> */}
-              <input
-                type="text"
-                value={playerName}
-                className="existing-game-input"
-                name="name"
-              />
-              {/* </Form.Item> */}
+              <Form.Item label="Nom du joueur" name="name">
+                <Input
+                  type="text"
+                  defaultValue={playerName}
+                  className="existing-game-input"
+                  name="name"
+                />
+              </Form.Item>
             </Space>
             <Space>
               <Form.Item>
