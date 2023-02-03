@@ -41,7 +41,7 @@
     text-align: center;
     vertical-align: middle;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-decoration: underline;
     // display:table-cell;
     &.desktop {
@@ -58,9 +58,9 @@
     
     td {
       vertical-align: middle;
-      &.desktop {
-        display: none;
-
+      
+      a {
+        font-size: 1.2rem !important;
       }
       // .add-player-btn {
       //       position: sticky;

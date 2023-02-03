@@ -81,7 +81,7 @@ function PlayerAdd() {
           >
             <Space>
               <Form.Item label="Nom du joueur" name="name">
-                <input
+                <Input
                   className="existing-game-input"
                   name="name"
                 />
