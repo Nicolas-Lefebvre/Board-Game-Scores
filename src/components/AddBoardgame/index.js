@@ -255,9 +255,9 @@ function AddBoardgame() {
             <Space>
               <Form.Item name="scoreType" label="Type de scoring">
                 <Radio.Group>
-                  <Radio value="highestScore">Le plus haut score gagne</Radio>
-                  <Radio value="lowestScore">Le plus petit score gagne</Radio>
-                  <Radio value="noScore">Pas de système de scoring</Radio>
+                  <Radio value="highest score">Le plus haut score gagne</Radio>
+                  <Radio value="lowest score">Le plus petit score gagne</Radio>
+                  <Radio value="no score">Pas de système de scoring</Radio>
                 </Radio.Group>
               </Form.Item>
             </Space>

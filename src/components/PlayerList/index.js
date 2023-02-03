@@ -6,13 +6,13 @@ import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 // import winnerMedal from 'src/assets/images/winner-medal.png';
 // import lauriers from 'src/assets/images/laurier-records-2.png';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useNavigate, NavLink } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ExclamationCircleFilled } from '@ant-design/icons';
-import { Button, Modal } from 'antd';
+import { Modal } from 'antd';
 import Loader from '../Loader';
 
 const { confirm } = Modal;
@@ -23,6 +23,7 @@ function Players() {
   const [playerListNoStats, setPlayerListNoStats] = useState([]);
   const [playerList, setPlayerList] = useState([]);
   const [lossplayerList, setLossPlayerList] = useState([]);
+  const [deletedPlayerId, setDeletedPlayerId] = useState('');
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
@@ -77,9 +78,9 @@ function Players() {
       .finally(() => {
         setLoadingStats(false);
       });
-  }, []);
+  }, [playerListNoStats]);
 
-  const showDeleteConfirm = () => {
+  const showDeleteConfirm = (deletePlayerId) => {
     confirm({
       title: 'Etes-vous sûrs de vouloir supprimer ce joueur ?',
       icon: <ExclamationCircleFilled />,
@@ -88,27 +89,39 @@ function Players() {
       okType: 'danger',
       cancelText: 'Annuler',
       onOk() {
+        console.log(deletePlayerId);
         console.log('OK');
-        // axios.get(
-        // // URL
-        //   'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
-        //   // données
-        //   {
-        //   },
-        // )
-        //   .then((response) => {
-        //     console.log('Recuperation des tous les jeux OK');
-        //     console.log(response.data);
-        //     setAllGames(response.data.results);
+        axios.delete(
+        // URL
+          `http://syham-zedri.vpnuser.lan:8000/api/player/${deletePlayerId}`,
+          // données
+          config,
+        )
+          .then(() => {
+            console.log('Supression du joueur OK');
+            setDeletedPlayerId(deletePlayerId);
 
-        //     setDisabled(false);
-        //   })
-        //   .catch((error) => {
-        //     console.log(error);
-        //   })
-        //   .finally(() => {
-        //     setAllGamesLoading(false);
-        //   });
+            // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
+            axios.get(
+              // URL
+              'http://syham-zedri.vpnuser.lan:8000/api/user/players',
+              // données
+              config,
+            )
+              .then((response) => {
+                console.log('MAJ de la liste de tous les joueurs OK');
+                setPlayerListNoStats(response.data.results);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          })
+
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+          });
       },
       onCancel() {
         console.log('Cancel');
@@ -158,10 +171,8 @@ function Players() {
                             {/* -------------- on récupère le player concerné avec son id pour afficher cette fois le nombre de défaites */}
                             { (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) }
                           </td>
-                          {/* <td>5</td> */}
-                          {/* <td>5</td> */}
                           <td>
-                            <NavLink to={`/joueurs/modifier/?player_name=${player.player_name}&?player_id=${player.player_id}`}>
+                            <NavLink to={`/joueurs/modifier/?player_id=${player.player_id}&player_name=${player.player_name}`}>
                               <FontAwesomeIcon
                                 icon={faPenToSquare}
                                 style={{
@@ -172,7 +183,11 @@ function Players() {
                                 }}
                               />
                             </NavLink>
-                            <span onClick={showDeleteConfirm}>
+                            <span onClick={() => {
+                              // setDeletePlayerId(player.player_id)}
+                              showDeleteConfirm(player.player_id);
+                            }}
+                            >
                               <FontAwesomeIcon
                                 className="delete-btn"
                                 icon={faTrashCan}
@@ -194,7 +209,7 @@ function Players() {
                           <td>0</td>
                           <td>0</td>
                           <td>
-                            <NavLink to={`/joueurs/modifier/?player_name=${playerNoStat.name}&?player_id=${playerNoStat.id}`}>
+                            <NavLink to={`/joueurs/modifier/?player_name=${playerNoStat.name}&player_id=${playerNoStat.id}`}>
                               <FontAwesomeIcon
                                 icon={faPenToSquare}
                                 style={{
@@ -205,7 +220,10 @@ function Players() {
                                 }}
                               />
                             </NavLink>
-                            <span onClick={showDeleteConfirm}>
+                            <span onClick={() => {
+                              // setDeletePlayerId(player.player_id)}
+                              showDeleteConfirm(playerNoStat.id);
+                            }}>
                               <FontAwesomeIcon
                                 className="delete-btn"
                                 icon={faTrashCan}

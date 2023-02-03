@@ -7,37 +7,11 @@ import axios from 'axios';
 import {
   Button,
   Form,
-  InputNumber,
   Space,
   Input,
-  // DatePicker,
-  Radio,
 } from 'antd';
 
 import { useNavigate } from 'react-router-dom';
-
-// const formItemLayout = {
-//   labelCol: { span: 0 },
-//   wrapperCol: { span: 24 },
-// };
-// const formItemLayout = {
-//   labelCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 8,
-//     },
-//   },
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 16,
-//     },
-//   },
-// };
 
 // ============================================ Composant===========================================
 function PlayerEdit() {
@@ -50,16 +24,18 @@ function PlayerEdit() {
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
+  console.log(playerId);
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
+    console.log(playerName);
     axios.patch(
       // URL
       `http://syham-zedri.vpnuser.lan:8000/api/user/player/${playerId}`,
       // données
-      config,
       {
         name: values.name,
       },
+      config,
     )
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');

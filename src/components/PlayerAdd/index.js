@@ -47,12 +47,12 @@ function PlayerAdd() {
   const [messageApi, contextHolder] = message.useMessage();
   const key = 'updatable';
   const openMessage = () => {
-      messageApi.open({
-        key,
-        type: 'success',
-        content: 'Joueur bien ajouté!',
-        duration: 2,
-      });
+    messageApi.open({
+      key,
+      type: 'success',
+      content: 'Joueur bien ajouté!',
+      duration: 2,
+    });
   };
 
   const config = {
