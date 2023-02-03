@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 import './players.scss';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 // import winnerMedal from 'src/assets/images/winner-medal.png';
 // import lauriers from 'src/assets/images/laurier-records-2.png';
@@ -149,7 +149,7 @@ function Players() {
                     (playerList.find((filteredPlayer) => (filteredPlayer.player_id == playerNoStat.id))) ?
                     // Si oui, on affiche les stats correspondantes
                       (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner == 1 && filteredPlayer.player_id == playerNoStat.id))).map((player) => (
-                        <>
+                        <React.Fragment key={player.player_id}>
                           <td>
                             { Number((player.victory_number)) + Number((lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number))) }
                           </td>
@@ -185,11 +185,11 @@ function Players() {
                               />
                             </span>
                           </td>
-                        </>
+                        </React.Fragment>
                       ))
                       // Si non, on affiche 0 pour chaque colonne
                       : (
-                        <>
+                        <React.Fragment key={playerNoStat.id}>
                           <td>0</td>
                           <td>0</td>
                           <td>0</td>
@@ -218,7 +218,7 @@ function Players() {
                               />
                             </span>
                           </td>
-                        </>
+                        </React.Fragment>
                       )
                   }
                 </tr>
