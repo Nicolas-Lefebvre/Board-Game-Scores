@@ -3,45 +3,45 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ResponsivePie } from '@nivo/pie';
 
-const data = [
-  {
-    id: 'catan',
-    label: 'catan',
-    value: 23,
-    color: 'hsl(15, 70%, 50%)',
-  },
-  {
-    id: 'Monopoly',
-    label: 'Monopoly',
-    value: 21,
-    color: 'hsl(30, 70%, 50%)',
-  },
-  {
-    id: 'Les aventuriers du rail',
-    label: 'Les aventuriers du rail',
-    value: 19,
-    color: 'hsl(30, 70%, 50%)',
-  },
-  {
-    id: 'Puerto Rico',
-    label: 'Puerto Rico',
-    value: 15,
-    color: 'hsl(30, 70%, 50%)',
-  },
-  {
-    id: 'La bonne paye',
-    label: 'La bonne paye',
-    value: 13,
-    color: 'hsl(30, 70%, 50%)',
-  },
-];
+// const top5GamesData = [
+//   {
+//     id: 'catan',
+//     label: 'catan',
+//     value: 23,
+//     color: 'hsl(15, 70%, 50%)',
+//   },
+//   {
+//     id: 'Monopoly',
+//     label: 'Monopoly',
+//     value: 21,
+//     color: 'hsl(30, 70%, 50%)',
+//   },
+//   {
+//     id: 'Les aventuriers du rail',
+//     label: 'Les aventuriers du rail',
+//     value: 19,
+//     color: 'hsl(30, 70%, 50%)',
+//   },
+//   {
+//     id: 'Puerto Rico',
+//     label: 'Puerto Rico',
+//     value: 15,
+//     color: 'hsl(30, 70%, 50%)',
+//   },
+//   {
+//     id: 'La bonne paye',
+//     label: 'La bonne paye',
+//     value: 13,
+//     color: 'hsl(30, 70%, 50%)',
+//   },
+// ];
 
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const GamesPieChart = () => (
+const GamesPieChart = ({ data }) => (
   // <div style={{ height: '200px' }}>
   <ResponsivePie
     data={data}
