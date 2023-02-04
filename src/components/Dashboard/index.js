@@ -1,10 +1,15 @@
+/* eslint-disable max-len */
 import './dashboard.scss';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { ResponsivePie } from '@nivo/pie';
 
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 import lauriers from 'src/assets/images/laurier-records-2.png';
 
+import Loader from '../Loader';
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
 import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
@@ -12,6 +17,75 @@ import PlayersPieChart from './PieCharts/PlayersPieChart';
 
 // == Composant
 function Dashboard() {
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  };
+
+  const [loadingPlayerResults, setloadingPlayerResults] = useState(true);
+
+  const [playerList, setPlayerList] = useState([]);
+  const [lossPlayerList, setLossPlayerList] = useState([]);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get(
+      // URL
+      'http://syham-zedri.vpnuser.lan:8000/api/user/players/stats',
+      // données
+      config,
+    )
+      .then((response) => {
+        console.log('Recuperation de tous les joueurs OK');
+        console.log(response.data);
+        setPlayerList(response.data.results);
+        setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
+        const numberOfPlayer = lossPlayerList.length;
+
+        // On rempli le premier camembert avec les données du joueur en index zéro par défaut
+        setData(
+          [
+            {
+              id: 'victoires',
+              label: 'victoires',
+              value: response.data.results[0].victory_number,
+              color: 'hsl(15, 70%, 50%)',
+            },
+            {
+              id: 'défaites',
+              label: 'Défaites',
+              value: response.data.results[numberOfPlayer].victory_number,
+              color: 'hsl(30, 70%, 50%)',
+            },
+          ],
+        );
+        setloadingPlayerResults(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const onChange = () => {
+    setData(
+      [
+        {
+          id: 'victoires',
+          label: 'victoires',
+          value: 447,
+          color: 'hsl(15, 70%, 50%)',
+        },
+        {
+          id: 'défaites',
+          label: 'Défaites',
+          value: 269,
+          color: 'hsl(30, 70%, 50%)',
+        },
+      ],
+    );
+  };
+
+  if (loadingPlayerResults) {
+    return <Loader />;
+  }
   return (
 
     <div className="container dashboard">
@@ -38,17 +112,74 @@ function Dashboard() {
 
           <h4>Résultats</h4>
 
-          <select className="form-select" aria-label="Default select example">
-            <option defaultValue value="1">Laura</option>
-            <option value="2">Amar</option>
-            <option value="3">Syham</option>
-            <option value="3">Nico</option>
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            onChange={onChange}
+          >
+            {playerList.map((player) => (
+              <option value={player.player_id}>{player.player_name}</option>
+            ))}
           </select>
 
           <div className="resultats-wrapper">
 
             <div className="resultat-pieChart">
-              <ResultPieChart />
+              <ResponsivePie
+                data={data}
+                margin={{
+                  top: 40,
+                  right: 40,
+                  bottom: 40,
+                  left: -10,
+                }}
+                valueFormat=" ^-~f"
+                activeOuterRadiusOffset={8}
+                colors={['green', 'red']}
+                colorsBy="index"
+                borderWidth={1}
+                borderColor={{
+                  from: 'color',
+                  modifiers: [
+                    [
+                      'darker',
+                      0.2,
+                    ],
+                  ],
+                }}
+                enableArcLinkLabels={false}
+                arcLinkLabelsSkipAngle={10}
+                arcLinkLabelsTextColor="#333333"
+                arcLinkLabelsThickness={2}
+                arcLinkLabelsColor={{ from: 'color' }}
+                arcLabelsRadiusOffset={0.65}
+                arcLabelsTextColor="#ffffff"
+                legends={[
+                  {
+                    anchor: 'right',
+                    direction: 'column',
+                    justify: false,
+                    translateX: 50,
+                    translateY: 10,
+                    itemsSpacing: 0,
+                    itemWidth: 89,
+                    itemHeight: 30,
+                    itemTextColor: 'black',
+                    itemDirection: 'left-to-right',
+                    itemOpacity: 1,
+                    symbolSize: 18,
+                    symbolShape: 'circle',
+                    effects: [
+                      {
+                        on: 'hover',
+                        style: {
+                          itemTextColor: '#000',
+                        },
+                      },
+                    ],
+                  },
+                ]}
+              />
             </div>
           </div>
 

@@ -54,6 +54,7 @@ function Players() {
       });
   }, []);
 
+  // -------------- RECUPERATION LISTE JOUEURS AVEC STATS --------------------
   useEffect(() => {
     axios.get(
       // URL
