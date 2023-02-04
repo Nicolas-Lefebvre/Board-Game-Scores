@@ -24,7 +24,9 @@ function Dashboard() {
   const [loadingPlayerResults, setloadingPlayerResults] = useState(true);
 
   const [playerList, setPlayerList] = useState([]);
+  const [playerListSingle, setPlayerListSingle] = useState([]);
   const [lossPlayerList, setLossPlayerList] = useState([]);
+  const [selectedPlayerId, setSelectedPlayerId] = useState('');
   const [data, setData] = useState([]);
   useEffect(() => {
     axios.get(
@@ -37,8 +39,9 @@ function Dashboard() {
         console.log('Recuperation de tous les joueurs OK');
         console.log(response.data);
         setPlayerList(response.data.results);
-        setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
+        setSelectedPlayerId(response.data.results[0].player_id);
         const numberOfPlayer = lossPlayerList.length;
+        setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
 
         // On rempli le premier camembert avec les données du joueur en index zéro par défaut
         setData(
@@ -57,26 +60,41 @@ function Dashboard() {
             },
           ],
         );
+
         setloadingPlayerResults(false);
       })
+      // .then(() => {
+      //   console.log(playerList);
+      //   setPlayerListSingle(playerList.slice(0, lossPlayerList.length));
+      // })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const onChange = () => {
+  const onChange = (event) => {
+    console.log(event.target.value);
+    const filteredPlayer = playerList.filter((player) => (
+      player.player_id == event.target.value
+    ));
+    console.log(filteredPlayer);
+    const victoryNumber = filteredPlayer[0].victory_number;
+    const lossNumber = filteredPlayer[1].victory_number;
+
+    setSelectedPlayerId(event.target.value);
+
     setData(
       [
         {
           id: 'victoires',
           label: 'victoires',
-          value: 447,
+          value: victoryNumber,
           color: 'hsl(15, 70%, 50%)',
         },
         {
           id: 'défaites',
           label: 'Défaites',
-          value: 269,
+          value: lossNumber,
           color: 'hsl(30, 70%, 50%)',
         },
       ],
@@ -117,8 +135,8 @@ function Dashboard() {
             aria-label="Default select example"
             onChange={onChange}
           >
-            {playerList.map((player) => (
-              <option value={player.player_id}>{player.player_name}</option>
+            {(playerList.slice(0, lossPlayerList.length)).map((player) => (
+              <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
             ))}
           </select>
 
@@ -195,7 +213,11 @@ function Dashboard() {
                 <tbody>
                   <tr>
                     <td>Parties</td>
-                    <td>245</td>
+                    <td>
+                      {
+                        playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number
+                      }
+                    </td>
                   </tr>
                   <tr>
                     <td>Victoires</td>
