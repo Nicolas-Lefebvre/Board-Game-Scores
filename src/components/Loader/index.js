@@ -1,12 +1,13 @@
 import './loader.scss';
+import Image from 'src/assets/images/meeple-loader.png';
 
-import { Spin, Space } from 'antd';
+// import { Spin, Space } from 'antd';
 
 // == Composant
 function Loader() {
   return (
-    <div className="loader">
-      <Space
+    <div className="spinner">
+      {/* <Space
         direction="vertical"
         style={{
           width: '100%',
@@ -17,7 +18,10 @@ function Loader() {
             <div className="content" />
           </Spin>
         </Space>
-      </Space>
+      </Space> */}
+
+      <img src={Image} alt="Loading" />
+      <i>Chargement...</i>
 
     </div>
   );
