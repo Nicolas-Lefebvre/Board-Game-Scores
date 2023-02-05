@@ -16,7 +16,7 @@ import Subscribe from '../Subscribe';
 import Connexion from '../Connexion';
 import BoardgameList from '../BoardgameList';
 import BoardgameDetails from '../BoardgameDetails';
-import AddBoardgame from '../AddBoardgame';
+import AddBoardgame from '../Boardgame/BoardgameAdd';
 import GameList from '../GameList';
 import GameDetails from '../GameDetails';
 import Dashboard from '../Dashboard';

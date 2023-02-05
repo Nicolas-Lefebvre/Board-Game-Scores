@@ -41,7 +41,7 @@
 
 // ----------------------------- BLOCK CLASSEMENT--------------------------
   .classement {
-    max-height: 500px;
+    // max-height: 500px;
 
     .card-container {
       display: flex;
@@ -101,29 +101,31 @@
   .HomeDashBoard {
     margin-bottom: 10rem;
   }
+
+
   
-
   @media (min-width: 750px) {
-
+    
     .container p {
       margin-right: 3rem;
       margin-left: 3rem;
       text-align-last: left;
     }
+    
     .classement .card {
       min-width: 415px;
     }
-
+    
     .chart-card {
       display: flex;
       justify-content: center;
       margin: 5rem;
     }
-
+    
     .classement-pie {
       margin: auto;
     }
-
+    
     .header-image {
       display: block;
       background-image:url(../../../src/assets/images/pexels-ylanite-koppens-776654\ \(1\).jpg);
@@ -132,11 +134,16 @@
       height: 300px;
       background-size:cover;
     }
-
+    
   }
-
-
+  
+  
 }
 
+@media (min-width: 1500px) {
+  .classement {
+    max-height: 500px;
+  }
+}
 
 

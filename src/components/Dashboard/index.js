@@ -11,9 +11,9 @@ import lauriers from 'src/assets/images/laurier-records-2.png';
 
 import Loader from '../Loader';
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
-import ResultPieChart from './PieCharts/ResultPieChart';
+// import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
-import PlayersPieChart from './PieCharts/PlayersPieChart';
+// import PlayersPieChart from './PieCharts/PlayersPieChart';
 
 // == Composant
 function Dashboard() {
