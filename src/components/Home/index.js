@@ -1,6 +1,6 @@
 import './home.scss';
 // import image from 'src/assets/images/game-gc51c3c193_1920.jpg';
-import Loader from '../Loader';
+
 import Header from './Header';
 import Presentation from './Presentation';
 import Classement from './Classement';
