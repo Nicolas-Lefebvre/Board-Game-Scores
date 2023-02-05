@@ -14,8 +14,12 @@
 
 .spinner img {
   animation: spin 1s linear infinite;
-  max-height: 30px;
+  max-height: 50px;
   margin-bottom: 10px;
+}
+
+i {
+  font-style: italic;
 }
 
 @keyframes spin {

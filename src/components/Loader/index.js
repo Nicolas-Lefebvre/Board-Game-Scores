@@ -1,5 +1,5 @@
 import './loader.scss';
-import Image from 'src/assets/images/meeple-loader.png';
+import Image from 'src/assets/images/blue-meeple-image.png';
 
 // import { Spin, Space } from 'antd';
 
