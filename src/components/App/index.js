@@ -31,6 +31,7 @@ import Players from '../PlayerList';
 import PlayerDetails from '../PlayerDetails';
 import PlayerAdd from '../PlayerAdd';
 import PlayerEdit from '../PlayerEdit';
+import Page404 from '../Page404';
 
 // == Composant
 function App() {
@@ -142,6 +143,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />
         <Route path="/faq" element={<Faq />} />
+        <Route path="*" element={<Page404 />} />
 
       </Routes>
 
