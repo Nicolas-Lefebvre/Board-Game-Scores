@@ -65,7 +65,7 @@ function App() {
       });
   }, []);
 
-  console.log(localStorage.getItem('BGStoken'));
+  // console.log(localStorage.getItem('BGStoken'));
 
   return (
     <div className="app">
