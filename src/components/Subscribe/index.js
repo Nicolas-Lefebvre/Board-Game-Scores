@@ -3,7 +3,7 @@ import './subscribe.scss';
 
 import axios from 'axios';
 // import Link from 'antd/es/typography/Link';
-
+import { EyeTwoTone } from '@ant-design/icons';
 import {
   Button,
   Form,
@@ -72,17 +72,17 @@ function Subscribe() {
             <h3>Inscription</h3>
             <Space>
               <Form.Item label="Pseudo" name="nickname">
-                <Input name="pseudo" required />
+                <Input name="pseudo" placeholder="Pseudo" required />
               </Form.Item>
             </Space>
             <Space>
               <Form.Item label="Email" name="email">
-                <Input name="email" required />
+                <Input name="email" placeholder="Email" required />
               </Form.Item>
             </Space>
             <Space>
               <Form.Item label="Mot de passe" name="password">
-                <Input name="password" required />
+                <Input.Password placeholder="Mot de passe" />
               </Form.Item>
             </Space>
             <Space>

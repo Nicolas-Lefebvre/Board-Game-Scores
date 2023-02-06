@@ -14,6 +14,7 @@ import Loader from '../Loader';
 import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
 import PlayersPieChart from './PieCharts/PlayersPieChart';
+import AddBoardgame from '../AddBoardgame';
 
 // == Composant
 function Dashboard() {
@@ -60,8 +61,6 @@ function Dashboard() {
             },
           ],
         );
-
-        setloadingPlayerResults(false);
       })
       // .then(() => {
       //   console.log(playerList);
@@ -69,6 +68,9 @@ function Dashboard() {
       // })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setloadingPlayerResults(false);
       });
   }, []);
 
@@ -244,6 +246,13 @@ function Dashboard() {
 
   if (loadingPlayerResults) {
     return <Loader />;
+  }
+  if (!loadingPlayerResults && !playerList.victory_number) {
+    return (
+      <div className="container dashboard">
+        <h2 style={{ marginTop: '40vh' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
+      </div>
+    );
   }
   return (
 

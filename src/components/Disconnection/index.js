@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 
 // == Composant
-function Disconnection({ setIsLogged, setToken }) {
+function Disconnection({ setIsLogged, isLogged, setToken }) {
   const navigate = useNavigate();
 
   const handleClickOnDashboard = () => {
