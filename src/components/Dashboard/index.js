@@ -111,7 +111,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/player/3/boardgames5',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames5',
       // données
       config,
     )
@@ -168,7 +168,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/player/3/categories5',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/categories5',
       // données
       config,
     )
@@ -247,13 +247,13 @@ function Dashboard() {
   if (loadingPlayerResults) {
     return <Loader />;
   }
-  if (!loadingPlayerResults && !playerList.victory_number) {
-    return (
-      <div className="container dashboard">
-        <h2 style={{ marginTop: '40vh' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
-      </div>
-    );
-  }
+  // if (!loadingPlayerResults && !playerList.player_id) {
+  //   return (
+  //     <div className="container dashboard">
+  //       <h2 style={{ marginTop: '40vh' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
+  //     </div>
+  //   );
+  // }
   return (
 
     <div className="container dashboard">

@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
   Button,
-  // Checkbox,
+  Space,
   Form,
   Input,
 } from 'antd';
@@ -60,49 +60,73 @@ function Connexion({setIsLogged, setToken}) {
 
   return (
     <div className="form-container">
-      <h2>Connexion</h2>
-        <Form
-          name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600, fontSize: '2rem' }}
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
+      <section>
+        <h2>Connexion</h2>
+          <Form
+            name="basic"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            style={{ maxWidth: 600, fontSize: '2rem' }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Space style={{ minHeight: '100px' }}>
+              <Form.Item
+                label="Adresse Email"
+                placeholder="Adresse Email"
+                name="username"
+                rules={[{ required: true, message: 'Email' }]}
+                style={{ overflow: 'hidden' }}
+              >
+                <Input />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item
+                label="Mot de passe"
+                placeholder="Mot de passe"
+                name="password"
+                rules={[{ required: true, message: 'Mot de passe' }]}
+              >
+                <Input.Password />
+              </Form.Item>
+            </Space>
+              {/* <Link className="forgetPassword" to="/forgetpassword" role="button"> Mot de passe oublié? </Link> */}
+            {/* <Form.Item
+              name="remember"
+              valuePropName="checked"
+              wrapperCol={{ offset: 8, span: 16 }}>
+              <Checkbox>Se rappeler de moi</Checkbox>
+            </Form.Item> */}
+            <Space style={{ justifyContent: 'center' }}>
+              <Form.Item
+                // wrapperCol={{ offset: 8, span: 16 }}
+                style={{ textAlign: 'center' }}
+              >
+                <Button type="primary" htmlType="submit">
+                  Se connecter
+                </Button>
+              </Form.Item>
+            </Space>
+          </Form>
+      </section>
+
+    <section>
+      <h2 style={{ marginTop: '2rem' }}>Vous n'êtes pas encore inscrit?</h2>
+      {/* <Link className="btn btn-primary" to="/inscription" role="button"> */}
+        <Button
+          type="primary"
+          htmlType="submit"
+          onClick={() => {
+            navigate('/inscription');
+          }}
         >
-          <Form.Item
-            label="Adresse Email"
-            name="username"
-            rules={[{ required: true, message: 'Email' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Mot de passe"
-            name="password"
-            rules={[{ required: true, message: 'Mot de passe' }]}
-          >
-            <Input.Password />
-          </Form.Item>
-            <Link className="forgetPassword" to="/forgetpassword" role="button"> Mot de passe oublié? </Link>
-          {/* <Form.Item
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{ offset: 8, span: 16 }}>
-            <Checkbox>Se rappeler de moi</Checkbox>
-          </Form.Item> */}
-
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              Se connecter
-            </Button>
-          </Form.Item>
-        </Form>
-
-    <h2>Vous n'êtes pas encore inscrit?</h2>
-    <Link className="btn btn-primary" to="/inscription" role="button">Inscrivez vous!</Link>
+          Inscrivez vous !
+        </Button>
+      {/* </Link> */}
+    </section>
 
     </div>
   );

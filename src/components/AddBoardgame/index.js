@@ -52,6 +52,9 @@ const { TextArea } = Input;
 
 // ============================================ Composant===========================================
 function AddBoardgame() {
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  };
   const [allGamesLoading, setAllGamesLoading] = useState(true);
   const [allGames, setAllGames] = useState([]);
 
@@ -96,33 +99,34 @@ function AddBoardgame() {
   // -------------------------------------------- VALIDATION OF FORM--------------------------------
   const onFinish = (values, dateString) => {
     // console.log('Received values of form: ', values, dateString);
-    axios.post(
-      // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
-      // données
-      {
-        name: values.name,
-        editor: values.editor,
-        author: values.author,
-        year: values.year,
-        scoreType: values.scoreType,
-        picture: values.picture,
-        description: values.description,
-        minPlayer: values.min_player,
-        maxPlayer: values.max_player,
-        categories: values.categories,
-        isCreatedByUser: true,
-      },
-    )
-      .then(() => {
-        console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        navigate('/jeux');
-      });
+    // axios.post(
+    //   // URL
+    //   'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
+    //   // données
+    //   {
+    //     name: values.name,
+    //     editor: values.editor,
+    //     author: values.author,
+    //     year: values.year,
+    //     scoreType: values.scoreType,
+    //     picture: values.picture,
+    //     description: values.description,
+    //     minPlayer: values.min_player,
+    //     maxPlayer: values.max_player,
+    //     categories: values.categories,
+    //     isCreatedByUser: true,
+    //   },
+    //   config,
+    // )
+    //   .then(() => {
+    //     console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+    //   .finally(() => {
+    //     // navigate('/jeux');
+    //   });
   };
 
   // --------------------------------ALL CATEGORIES API REQUEST-----------------------------
@@ -253,7 +257,12 @@ function AddBoardgame() {
               </Form.Item>
             </Space>
             <Space>
-              <Form.Item name="scoreType" label="Type de scoring">
+              <Form.Item
+                name="scoreType"
+                label="Type de scoring"
+                rules={[{ required: true }]}
+                style={{ minHeight:'100px' }}
+              >
                 <Radio.Group>
                   <Radio value="highest score">Le plus haut score gagne</Radio>
                   <Radio value="lowest score">Le plus petit score gagne</Radio>
@@ -262,11 +271,11 @@ function AddBoardgame() {
               </Form.Item>
             </Space>
             <Space>
-              <Form.Item label="Joueurs Min*" name="max_player">
-                <InputNumber name="max_player" min={1} required />
-              </Form.Item>
-              <Form.Item label="Joueurs Max*" name="min_player">
+              <Form.Item label="Joueurs Min*" name="min_player">
                 <InputNumber name="min_player" min={1} required />
+              </Form.Item>
+              <Form.Item label="Joueurs Max*" name="max_player">
+                <InputNumber name="max_player" min={1} required />
               </Form.Item>
             </Space>
 
