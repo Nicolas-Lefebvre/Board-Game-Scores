@@ -79,7 +79,7 @@ function BoardgameList() {
       <div className="main">
 
         {boardgameList.map((boardgame) => (
-          <NavLink className="card" to={`/jeux/?boardgame_id=${boardgame.id}`} key={boardgame.id}>
+          <NavLink className="card" to={`/jeux/${boardgame.id}?boardgame_id=${boardgame.id}`} key={boardgame.id}>
             {/* <div className="card"> */}
             <div className="collection-card">
               <div className="img-container">
