@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import './gameList.scss';
 
 import winnerMedal from 'src/assets/images/winner-medal.png';
@@ -7,8 +8,9 @@ import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 // import { MenuProps } from 'antd';
-import { Dropdown, Space } from 'antd';
+import { Dropdown, Space, Modal, } from 'antd';
 
 import { NavLink } from 'react-router-dom';
 import Loader from '../Loader';
@@ -39,6 +41,7 @@ import Loader from '../Loader';
 //     ),
 //   },
 // ];
+const { confirm } = Modal;
 
 let gameList = [];
 let uniqueGameList = [];
@@ -54,7 +57,7 @@ function GameList() {
 
   useEffect(() => {
     axios.get(
-      'http://syham-zedri.vpnuser.lan:8000/api/usergame',
+      'http://laura-poitou.vpnuser.lan:8000/api/usergame',
       config,
     )
 
@@ -83,6 +86,54 @@ function GameList() {
       });
   }, []);
 
+  // --------------------- CLICK ON GAME DELETE ----------------------------
+  // const showDeleteConfirm = (deleteGameId) => {
+  //   confirm({
+  //     title: 'Etes-vous sûrs de vouloir supprimer ce joueur ?',
+  //     icon: <ExclamationCircleFilled />,
+  //     content: 'suppression définitive !',
+  //     okText: 'Oui',
+  //     okType: 'danger',
+  //     cancelText: 'Annuler',
+  //     onOk() {
+  //       console.log(deleteGameId);
+  //       console.log('OK');
+  //       axios.delete(
+  //       // URL
+  //         `http://laura-poitou.vpnuser.lan:8000/api/games/${deleteGameId}`,
+  //         // données
+  //         config,
+  //       )
+  //         .then(() => {
+  //           console.log('Supression de la partie OK');
+
+  //           // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
+  //           axios.get(
+  //             // URL
+  //             'http://laura-poitou.vpnuser.lan:8000/api/usergame',
+  //             // données
+  //             config,
+  //           )
+  //             .then((response) => {
+  //               console.log('MAJ de la liste de toutes les parties OK');
+  //               // setPlayerListNoStats(response.data.results);
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //             });
+  //         })
+
+  //         .catch((error) => {
+  //           console.log(error);
+  //         })
+  //         .finally(() => {
+  //         });
+  //     },
+  //     onCancel() {
+  //       console.log('Cancel');
+  //     },
+  //   });
+  // };
   // const [gameDetails, setgameDetails] = useState(false);
   // const onClick = () => {
   //   // console.log('Click');
@@ -124,7 +175,7 @@ function GameList() {
                 </ul>
               </div>
               <div className="btn-container">
-                <Dropdown
+                {/* <Dropdown
                   menu={{
                     items: [
                       {
@@ -146,7 +197,13 @@ function GameList() {
                       {
                         key: '3',
                         label: (
-                          <NavLink rel="noopener noreferrer" to="#">
+                          <NavLink
+                            rel="noopener noreferrer"
+                            to="#"
+                            onClick={(e) => {
+                              showDeleteConfirm(game.game_id);
+                            }}
+                          >
                             Supprimer
                           </NavLink>
                         ),
@@ -154,12 +211,10 @@ function GameList() {
                     ],
                   }}
                 >
-                  {/* <a onClick={(e) => e.preventDefault()}> */}
                   <Space>
                     <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
                   </Space>
-                  {/* </a> */}
-                </Dropdown>
+                </Dropdown> */}
               </div>
             </div>
             {/* </div> */}

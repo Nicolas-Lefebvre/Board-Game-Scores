@@ -7,12 +7,14 @@ import { useState, useEffect } from 'react';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Modal } from 'antd';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
 
 const { confirm } = Modal;
 let gameInfos = [];
 
 const GameDetails = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const queryParameters = new URLSearchParams(window.location.search);
@@ -23,7 +25,7 @@ const GameDetails = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
     };
     axios.get(
-      `http://syham-zedri.vpnuser.lan:8000/api/user/game/${gameId}`,
+      `http://laura-poitou.vpnuser.lan:8000/api/user/game/${gameId}`,
       config,
     )
       .then((response) => {
@@ -59,7 +61,7 @@ const GameDetails = () => {
   //       };
   //       axios.delete(
   //       // URL
-  //         'http://syham-zedri.vpnuser.lan:8000/api/games/29',
+  //         'http://laura-poitou.vpnuser.lan:8000/api/games/29',
   //         // données
   //         config,
   //       )
@@ -142,7 +144,14 @@ const GameDetails = () => {
             </tbody>
           </table>
         </div>
-        <Button variant="secondary">Modifier</Button>{' '}
+        <Button
+          variant="secondary"
+          onClick={() => {
+            navigate(`/parties/modifier/${gameInfos[0].game_id}`);
+          }}
+        >
+          Modifier
+        </Button>{' '}
         <Button
           variant="danger"
           style={{ backgroundColor: 'red' }}
@@ -161,7 +170,7 @@ const GameDetails = () => {
                 };
                 axios.delete(
                 // URL
-                  `http://syham-zedri.vpnuser.lan:8000/api/games/${gameInfos.game_id}`,
+                  `http://laura-poitou.vpnuser.lan:8000/api/games/${gameInfos.game_id}`,
                   // données
                   config,
                 )

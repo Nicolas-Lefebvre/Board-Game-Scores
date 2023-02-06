@@ -2,7 +2,7 @@
 import './addGame.scss';
 
 // import Link from 'antd/es/typography/Link';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import {
   Button,
@@ -57,11 +57,13 @@ function AddGame() {
   const [isTeam, setIsTeam] = useState(false);
   const [allBoardGames, setAllBoardGamess] = useState([]);
   const [allBoardgamesloading, setAllBoardgamesloading] = useState(true);
+
+  const navigate = useNavigate();
   // ------------------ Recuperation de la liste de tous les jeux  --------------------------
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames',
+      'http://laura-poitou.vpnuser.lan:8000/api/user/collection',
       // données
       config,
     )
@@ -83,7 +85,7 @@ function AddGame() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/players',
+      'http://laura-poitou.vpnuser.lan:8000/api/user/players',
       // données
       config,
     )
@@ -109,7 +111,7 @@ function AddGame() {
 
     axios.post(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/games',
+      'http://laura-poitou.vpnuser.lan:8000/api/games',
       // données
       {
         startDate: values.startDate,
@@ -118,7 +120,7 @@ function AddGame() {
         picture: null,
         status: values.status,
         comment: (values.comment ? values.comment : null),
-        boardGame: values.boardGameId,
+        boardGame: values.boardGame,
         players: values.players,
 
       },
@@ -126,6 +128,7 @@ function AddGame() {
     )
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. partie bien ajoutée');
+        navigate('/parties');
       })
       .catch((error) => {
         console.log(error);
@@ -157,8 +160,8 @@ function AddGame() {
             <Space style={{ display: 'flex', justifyContent: 'center' }}>
               <Form.Item name="status" label="Statut partie">
                 <Radio.Group>
-                  <Radio value="true">Partie terminée</Radio>
-                  <Radio value="false">Partie en cours</Radio>
+                  <Radio value={true}>Partie terminée</Radio>
+                  <Radio value={false}>Partie en cours</Radio>
                 </Radio.Group>
               </Form.Item>
             </Space>

@@ -19,7 +19,7 @@ const PlayerDetails = () => {
     const queryParameters = new URLSearchParams(window.location.search);
     const playerId = queryParameters.get('player_id');
     axios.get(
-      `http://syham-zedri.vpnuser.lan:8000/api/user/player/${playerId}/stats`,
+      `http://laura-poitou.vpnuser.lan:8000/api/user/player/${playerId}/stats`,
       config,
     )
 

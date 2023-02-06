@@ -9,7 +9,6 @@ import image from 'src/assets/images/catan-300x300.jpg';
 
 import Loader from '../Loader';
 
-let boardgameInfos = [];
 const BoardgameDetails = ({ name, editor, author, description, players, playtime, stats }) => {
   const [loading, setLoading] = useState(true);
   const [boardgameInfos, setBoardgameInfos] = useState([]);
@@ -17,8 +16,14 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
   const queryParameters = new URLSearchParams(window.location.search);
   const boardgameId = queryParameters.get('boardgame_id');
 
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  };
   useEffect(() => {
-    axios.get(`http://syham-zedri.vpnuser.lan:8000/api/boardgames/${boardgameId}`)
+    axios.get(
+      `http://laura-poitou.vpnuser.lan:8000/api/user/boardgames/${boardgameId}`,
+      config,
+    )
 
       .then((response) => {
         console.log(response);
@@ -41,14 +46,14 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
   }
   return (
     <div className="boardgame-card">
-      <img className="boardgame-card__image" src={boardgameInfos.picture} alt={boardgameInfos.name} />
+      <img className="boardgame-card__image" src={boardgameInfos[0].picture} alt={boardgameInfos[0].name} />
       <div className="boardgame-card__info">
-        <h3>{boardgameInfos.name}</h3>
-        <p><strong>Editeur :</strong> {boardgameInfos.editor}</p>
-        <p><strong>Auteur :</strong> {boardgameInfos.author}</p>
-        <p><strong>Nombre de joueurs :</strong> de {boardgameInfos.minPlayer} à {boardgameInfos.maxPlayer} joueurs</p>
+        <h3>{boardgameInfos[0].name}</h3>
+        <p><strong>Editeur :</strong> {boardgameInfos[0].editor}</p>
+        <p><strong>Auteur :</strong> {boardgameInfos[0].author}</p>
+        <p><strong>Nombre de joueurs :</strong> de {boardgameInfos[0].minPlayer} à {boardgameInfos[0].maxPlayer} joueurs</p>
         <p><strong>description :</strong></p>
-        <p className="description">{boardgameInfos.description}</p>
+        <p className="description">{boardgameInfos[0].description}</p>
         <div className="resultat-table">
           <table className="table table-striped">
             <thead>
@@ -60,7 +65,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
             <tbody>
               <tr>
                 <td>Nombre de parties</td>
-                <td>{boardgameInfos.games.length}</td>
+                <td>{boardgameInfos[0].game_number}</td>
               </tr>
               {/* <tr>
                 <td>Champion</td>

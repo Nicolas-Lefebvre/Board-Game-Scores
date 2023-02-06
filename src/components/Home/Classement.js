@@ -55,8 +55,8 @@ function Classement({ top5Games, loading }) {
                     {/* <p className="game-category">Jeu de gestion</p> */}
                     <ul>
                       <li><strong>{top5Games[0].game_number}</strong> Parties jouées</li>
-                      <li><strong>25</strong> Record</li>
-                      <li><strong>3544</strong> Joueurs</li>
+                      {/* <li><strong>25</strong> Record</li> */}
+                      {/* <li><strong>3544</strong> Joueurs</li> */}
                     </ul>
                   </div>
                 </div>
@@ -83,17 +83,17 @@ function Classement({ top5Games, loading }) {
             <div className="card mb-3 " style={{ maxWidth: '540px' }}>
               <h3 className="card-title">Jeu le plus joué #2</h3>
               <div className="row g-0">
-                <div className="col-md-4">
+                {/* <div className="col-md-4">
                   <img src={image2} alt="" className="image" />
-                </div>
+                </div> */}
                 <div className="col-md-8">
                   <div className="card-body">
                     <h4>{top5Games[1].name}</h4>
                     {/* <p className="game-category">Jeu de gestion</p> */}
                     <ul>
                       <li><strong>{top5Games[1].game_number}</strong> Parties jouées</li>
-                      <li><strong>25</strong> Record cette semaine</li>
-                      <li><strong>3544</strong> Joueurs</li>
+                      {/* <li><strong>25</strong> Record cette semaine</li> */}
+                      {/* <li><strong>3544</strong> Joueurs</li> */}
                     </ul>
                   </div>
                 </div>

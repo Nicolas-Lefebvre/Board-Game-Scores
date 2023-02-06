@@ -19,6 +19,7 @@ import BoardgameDetails from '../BoardgameDetails';
 import AddBoardgame from '../AddBoardgame';
 import GameList from '../GameList';
 import GameDetails from '../GameDetails';
+import GameEdit from '../GameEdit';
 import Dashboard from '../Dashboard';
 import AddGame from '../AddGame';
 import GetConnected from '../GetConnected';
@@ -46,7 +47,7 @@ function App() {
   const [token, setToken] = useState('');
 
   useEffect(() => {
-    axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/top5')
+    axios.get('http://laura-poitou.vpnuser.lan:8000/api/boardgames/top5')
 
       .then((response) => {
         // console.log(response);
@@ -121,6 +122,14 @@ function App() {
                 startDate="29/01/23"
                 endDate="01/02/23"
               />
+            ) : <GetConnected />
+        }
+        />
+        <Route
+          path="/parties/modifier/:id"
+          element={
+            localStorage.getItem('BGStoken') ? (
+              <GameEdit />
             ) : <GetConnected />
         }
         />

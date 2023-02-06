@@ -50,7 +50,7 @@ function AddBoardgame() {
     // --------------------------GET ALL GAMES FOR PREFILL-------------------------
     axios.get(
     // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
+      'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
       // données
       {
       },
@@ -78,7 +78,7 @@ function AddBoardgame() {
     console.log(values);
     axios.post(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/collection/boardgames/',
+      'http://laura-poitou.vpnuser.lan:8000/api/user/collection/boardgames/',
       // données
       {
         boardgame: values.boardgame,
@@ -101,7 +101,7 @@ function AddBoardgame() {
     // console.log('Received values of form: ', values, dateString);
     axios.post(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
+      'http://laura-poitou.vpnuser.lan:8000/api/boardgames',
       // données
       {
         name: values.name,
@@ -133,7 +133,7 @@ function AddBoardgame() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/category',
+      'http://laura-poitou.vpnuser.lan:8000/api/category',
       // données
     )
       .then((response) => {

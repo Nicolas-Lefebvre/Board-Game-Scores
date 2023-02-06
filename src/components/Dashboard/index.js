@@ -22,17 +22,40 @@ function Dashboard() {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
 
-  const [loadingPlayerResults, setloadingPlayerResults] = useState(true);
+  const [loadingPlayerResults, setLoadingPlayerResults] = useState(true);
 
   const [playerList, setPlayerList] = useState([]);
+  const [userInfos, setUserInfos] = useState([]);
+  const [loadingUserInfos, setLoadingUserInfos] = useState(true);
   // const [playerListSingle, setPlayerListSingle] = useState([]);
   const [lossPlayerList, setLossPlayerList] = useState([]);
   const [selectedPlayerId, setSelectedPlayerId] = useState('');
   const [data, setData] = useState([]);
+
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/players/stats',
+      'http://laura-poitou.vpnuser.lan:8000/api/user',
+      // données
+      config,
+    )
+      .then((response) => {
+        console.log('Recuperation des infos du user OK');
+        console.log(response.data);
+        setUserInfos(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoadingUserInfos(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get(
+      // URL
+      'http://laura-poitou.vpnuser.lan:8000/api/user/players/stats',
       // données
       config,
     )
@@ -70,7 +93,7 @@ function Dashboard() {
         console.log(error);
       })
       .finally(() => {
-        setloadingPlayerResults(false);
+        setLoadingPlayerResults(false);
       });
   }, []);
 
@@ -111,7 +134,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames5',
+      'http://laura-poitou.vpnuser.lan:8000/api/user/boardgames5',
       // données
       config,
     )
@@ -168,7 +191,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/categories5',
+      'http://laura-poitou.vpnuser.lan:8000/api/user/categories5',
       // données
       config,
     )
@@ -193,7 +216,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/players5',
+      'http://laura-poitou.vpnuser.lan:8000/api/user/players5',
       // données
       config,
     )
@@ -244,7 +267,7 @@ function Dashboard() {
       });
   }, []);
 
-  if (loadingPlayerResults) {
+  if (loadingPlayerResults || loadingUserInfos) {
     return <Loader />;
   }
   // if (!loadingPlayerResults && !playerList.player_id) {
@@ -267,9 +290,9 @@ function Dashboard() {
             <img src={avatarPic} alt="" />
           </div>
           <div className="profil-text">
-            <h3 className="pseudo">Nicolas66</h3>
-            <p className="email">email@gmail.com</p>
-            <p className="email">Né le : 22/12/1987</p>
+            <h3 className="pseudo">{userInfos.nickname}</h3>
+            <p className="email">{userInfos.email}</p>
+            <p className="email">Né le : {userInfos.birthday.substr(0, 10)}</p>
             <p className="profil-edit-btn"><Link className="profil-edit-link" to="#">modifier</Link></p>
           </div>
         </section>
@@ -393,12 +416,11 @@ function Dashboard() {
                 </tbody>
               </table>
             </div>
-            <div className="resultat-table">
+            {/* <div className="resultat-table">
               <table className="table table-striped">
                 <thead>
                   <tr>
                     <th colSpan="4">Dernières parties</th>
-                    {/* <th scope="col">245</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -428,7 +450,7 @@ function Dashboard() {
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div> */}
           </div>
 
         </section>
