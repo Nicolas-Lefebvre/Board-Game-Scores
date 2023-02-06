@@ -25,30 +25,33 @@ import { useNavigate } from 'react-router-dom';
 
 // ============================================ Composant===========================================
 function Subscribe() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  };
   const onFinish = (values, dateString) => {
     console.log('Received values of form: ', values, dateString);
-    // axios.post(
-    //   // URL
-    //   'http://syham-zedri.vpnuser.lan:8000/api/subscribe',
-    //   // données
-    //   {
-    //     pseudo: values.pseudo,
-    //     email: values.email,
-    //     password: values.password,
-    //     birthDate: values.birthDate,
-    //   },
-    // )
-    //   .then(() => {
-    //     console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {
-    //     // navigate('/jeux');
-    //   });
+    axios.post(
+      // URL
+      'http://syham-zedri.vpnuser.lan:8000/api/user',
+      // données
+      {
+        nickname: values.nickname,
+        email: values.email,
+        password: values.password,
+        birthday: values.birthday,
+      },
+    )
+      .then(() => {
+        console.log('LA REQUETE EST UN SUCCES. user bien inscrit');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        // navigate('/jeux');
+      });
   };
 
   return (
@@ -68,7 +71,7 @@ function Subscribe() {
           <section>
             <h3>Inscription</h3>
             <Space>
-              <Form.Item label="Pseudo" name="pseudo">
+              <Form.Item label="Pseudo" name="nickname">
                 <Input name="pseudo" required />
               </Form.Item>
             </Space>
@@ -83,7 +86,7 @@ function Subscribe() {
               </Form.Item>
             </Space>
             <Space>
-              <Form.Item name="birthdate">
+              <Form.Item name="birthday">
                 <div className="form-group">
                   <label htmlFor="birthdate">Date de naissance :
                     <input type="date" id="birthdate" name="birthdate" className="birthDate" required />
