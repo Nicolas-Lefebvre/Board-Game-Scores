@@ -39,15 +39,18 @@ const items = [
 // == Composant
 function BoardgameList() {
   const [loading, setLoading] = useState(true);
+  const [playedBoardgamesloading, setPlayedBoardgamesloading] = useState(true);
   const [boardgameList, setBoardgameList] = useState([]);
+  const [playedBoardgameList, setPlayedBoardgameList] = useState([]);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
 
+  // RECUPERATION DE TOUS LES JEUX AVEC OU SANS PARTIE
   useEffect(() => {
     axios.get(
-      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/collection',
       config,
     )
 
@@ -65,6 +68,30 @@ function BoardgameList() {
       .finally(() => {
         // traitement exécuté dans tous les cas, après then ou après catch
         setLoading(false);
+      });
+  }, []);
+
+  // RECUPERATION DE TOUS LES JEUX AVEC AU MOINS UNE PARTIE, INDIQUANT LE NBRE TOTAL DE PARTIES
+  useEffect(() => {
+    axios.get(
+      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames',
+      config,
+    )
+
+      .then((response) => {
+        console.log(response);
+        setPlayedBoardgameList(response.data.results);
+
+        // console.log(response.data.results[0].name);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+
+      .finally(() => {
+        // traitement exécuté dans tous les cas, après then ou après catch
+        setPlayedBoardgamesloading(false);
       });
   }, []);
 
@@ -89,8 +116,15 @@ function BoardgameList() {
                 <h5 className="card-title">{boardgame.name}</h5>
                 {/* <p className="category">Jeu de gestion</p> */}
                 <ul className="">
-                  <li>Parties : 15</li>
-                  <li>Victoires : 15</li>
+                  <li>
+                    parties:
+                    {(playedBoardgameList.find((playedBoardgame) => (
+                      playedBoardgame.board_game_id === boardgame.board_games_id)))
+                      ? (playedBoardgameList.find((playedBoardgame) => (
+                        playedBoardgame.board_game_id === boardgame.board_games_id))).game_number
+                      : '0'}
+                  </li>
+                  {/* <li>Victoires : 15</li> */}
                 </ul>
               </div>
               <div className="btn-container">

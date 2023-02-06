@@ -117,7 +117,7 @@ function GameList() {
                     <div className="winner-name">
                       {/* Récupération de la liste des gagnants pour chaque partie  */}
                       {/* eslint-disable-next-line max-len */}
-                      { (gameList.filter((filteredGame) => (filteredGame.game_id === game.game_id))).map((subGame) => (<span>{subGame.player_name}</span>)) }
+                      { (gameList.filter((filteredGame) => (filteredGame.game_id === game.game_id))).map((subGame) => (<span key={subGame.id}>{subGame.player_name}</span>)) }
                     </div>
                   </li>
                   {/* <li>{game.playerNumber}</li> */}

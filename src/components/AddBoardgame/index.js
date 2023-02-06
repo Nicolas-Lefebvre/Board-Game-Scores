@@ -12,6 +12,7 @@ import {
   Input,
   Checkbox,
   Radio,
+  Select,
 } from 'antd';
 
 // import { useEffect } from 'react';
@@ -21,28 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Loader from '../Loader';
 
-// const formItemLayout = {
-//   labelCol: { span: 0 },
-//   wrapperCol: { span: 24 },
-// };
-// const formItemLayout = {
-//   labelCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 8,
-//     },
-//   },
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 16,
-//     },
-//   },
-// };
+const { Option } = Select;
 
 const { TextArea } = Input;
 // -----------------YEAR PICKER INFOS--------------------
@@ -91,42 +71,62 @@ function AddBoardgame() {
   }, []);
 
   const navigate = useNavigate();
+  const [selectedBoardGameId, setSelectedBoardGameId] = useState('');
 
-  const onSubmitExisting = () => {
-    // console.log('Submit existing game');
+  // ----------------------------VALIDATION OF EXISTING BOARDGAME FORM----------------------------
+  const onSubmitExisting = (values) => {
+    console.log(values);
+    axios.post(
+      // URL
+      'http://syham-zedri.vpnuser.lan:8000/api/user/collection/boardgames/',
+      // données
+      {
+        boardgame: values.boardgame,
+      },
+      config,
+    )
+      .then(() => {
+        console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        navigate('/jeux');
+      });
   };
 
-  // -------------------------------------------- VALIDATION OF FORM--------------------------------
-  const onFinish = (values, dateString) => {
+  // ----------------------------VALIDATION OF CREATE BOARDGAME FORM--------------------------------
+  const onFinish = (values) => {
     // console.log('Received values of form: ', values, dateString);
-    // axios.post(
-    //   // URL
-    //   'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
-    //   // données
-    //   {
-    //     name: values.name,
-    //     editor: values.editor,
-    //     author: values.author,
-    //     year: values.year,
-    //     scoreType: values.scoreType,
-    //     picture: values.picture,
-    //     description: values.description,
-    //     minPlayer: values.min_player,
-    //     maxPlayer: values.max_player,
-    //     categories: values.categories,
-    //     isCreatedByUser: true,
-    //   },
-    //   config,
-    // )
-    //   .then(() => {
-    //     console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {
-    //     // navigate('/jeux');
-    //   });
+    axios.post(
+      // URL
+      'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
+      // données
+      {
+        name: values.name,
+        editor: values.editor,
+        author: values.author,
+        year: values.year,
+        scoreType: values.scoreType,
+        picture: values.picture,
+        description: values.description,
+        minPlayer: values.min_player,
+        maxPlayer: values.max_player,
+        categories: values.categories,
+        isCreatedByUser: true,
+      },
+      config,
+    )
+      .then(() => {
+        console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        // navigate('/jeux');
+      });
   };
 
   // --------------------------------ALL CATEGORIES API REQUEST-----------------------------
@@ -170,19 +170,51 @@ function AddBoardgame() {
             // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
             // style={{ maxWidth: 2000 }}
           >
-            <Form.Item>
+            <Form.Item
+              // {...restField}
+              name="boardgame"
+              rules={[
+                {
+                  required: true,
+                  message: 'Indiquer le jeu',
+                },
+              ]}
+              // label={`Nom joueur ${key + 1}`}
+            >
+              {/* <Input placeholder="Nom Joueur" /> */}
+              <Select placeholder="Selectionner un jeu" style={{ minWidth: '100px' }}>
+                {allGames.map((game) => (
+                  <Option
+                    key={game.id}
+                    value={Number(game.id)}
+                  >
+                    {game.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+
+            {/* <Form.Item name="boardgame">
               <input
                 className="existing-game-input"
                 // value="jeux"
+                name="boardgame"
                 // onChange={e => setValue(e.target.value)}
                 list="suggestions"
               />
-              <datalist id="suggestions">
-                {allGames.map((game, index) => (
-                  <option value={game.name} key={game.id} aria-label={game.name} />
+              <datalist id="suggestions" name="boardgame">
+                {allGames.map((game) => (
+                  <option
+                    value={game.name}
+                    key={game.id}
+                    aria-label={game.name}
+                    onChange={() => {
+                      setSelectedBoardGameId(game.id);
+                    }}
+                  />
                 ))}
               </datalist>
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
               <Button type="primary" htmlType="submit">
                 Valider
