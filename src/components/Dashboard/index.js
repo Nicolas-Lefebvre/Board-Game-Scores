@@ -32,6 +32,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   const [selectedPlayerId, setSelectedPlayerId] = useState('');
   const [data, setData] = useState([]);
 
+  // =====================================  RECUPERATION INFOS USER =============================
   useEffect(() => {
     axios.get(
       // URL

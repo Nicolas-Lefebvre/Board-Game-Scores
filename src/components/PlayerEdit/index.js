@@ -56,14 +56,16 @@ function PlayerEdit() {
             name="validate_new_player"
             // {...formItemLayout}
             onFinish={onFinish}
-            // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
+            initialValues={{
+              name: playerName,
+            }}
             // style={{ maxWidth: 2000 }}
           >
             <Space>
               <Form.Item label="Nom du joueur" name="name">
                 <Input
                   type="text"
-                  defaultValue={playerName}
+                  // defaultValue={playerName}
                   className="existing-game-input"
                   name="name"
                 />

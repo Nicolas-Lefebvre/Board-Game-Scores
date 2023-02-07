@@ -36,7 +36,7 @@ function PlayerEdit({ setUserInfos, userInfos }) {
     )
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. profil bien modifié');
-        // navigate('/tableau-de-bord');
+        navigate('/tableau-de-bord');
       })
       .catch((error) => {
         console.log(error);
