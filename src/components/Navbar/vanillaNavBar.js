@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import './navbar.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +9,7 @@ import jwtDecode from 'jwt-decode';
 import { NavLink, Link } from 'react-router-dom';
 
 // == Composant
-function Navbar() {
+function Navbar({ token }) {
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
   const url = new URL('http://syham-zedri.vpnuser.lan:8000/back/login');
   console.log(url.pathname);
@@ -84,6 +85,7 @@ function Navbar() {
                 <Link className="nav-link connexion-wrapper" to="/connexion">
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
                   {/* <FontAwesomeIcon icon="fa-solid fa-user-tie" /> */}
+                  {token ? '' : ''}
                   <div className="seConnecter">{localStorage.getItem('BGStoken') ? 'Se déconnecter' : 'Se connecter'}</div>
                 </Link>
               </li>

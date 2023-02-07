@@ -47,6 +47,15 @@ function App() {
   const [token, setToken] = useState('');
 
   useEffect(() => {
+    if (localStorage.getItem('BGStoken')) {
+      setToken(localStorage.getItem('BGStoken'));
+    }
+    // else {
+    //   setToken(localStorage.getItem(''));
+    // }
+  }, []);
+
+  useEffect(() => {
     axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/top5')
 
       .then((response) => {
@@ -71,7 +80,7 @@ function App() {
   return (
     <div className="app">
 
-      <Navbar />
+      <Navbar token={token} />
 
       <Routes>
         <Route
@@ -147,7 +156,7 @@ function App() {
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />
-        <Route path="/connexion" element={localStorage.getItem('BGStoken') ? <Disconnection token={token} isLogged={isLogged} setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
+        <Route path="/connexion" element={token ? <Disconnection token={token} isLogged={isLogged} setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />

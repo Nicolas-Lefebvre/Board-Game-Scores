@@ -128,17 +128,15 @@ function BoardgameList() {
                 </ul>
               </div>
               <div className="btn-container">
-                <Dropdown
+                {/* <Dropdown
                   menu={{
                     items,
                   }}
                 >
-                  {/* <a onClick={(e) => e.preventDefault()}> */}
                   <Space>
                     <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: 'green' }} />
                   </Space>
-                  {/* </a> */}
-                </Dropdown>
+                </Dropdown> */}
               </div>
             </div>
             {/* </div> */}

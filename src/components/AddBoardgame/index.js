@@ -81,7 +81,7 @@ function AddBoardgame() {
       'http://syham-zedri.vpnuser.lan:8000/api/user/collection/boardgames/',
       // données
       {
-        boardgame: values.boardgame,
+        boardGames: values.boardgame,
       },
       config,
     )

@@ -46,7 +46,7 @@ function Connexion({setIsLogged, setToken, token}) {
         // on est authentifié, on a un JWT dans le state => on peut demander au serveur
         // les recettes préférées de l'utilisateur connecté
         // store.dispatch(fetchFavoriteRecipes());
-        // navigate('/tableau-de-bord');
+        navigate('/tableau-de-bord');
       })
 
       .catch((error) => {

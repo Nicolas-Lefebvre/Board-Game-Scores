@@ -4,12 +4,17 @@ import './boardgameDetails.scss';
 
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-
-import image from 'src/assets/images/catan-300x300.jpg';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import { Button, Modal } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import Loader from '../Loader';
 
+const { confirm } = Modal;
+
 const BoardgameDetails = ({ name, editor, author, description, players, playtime, stats }) => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [boardgameInfos, setBoardgameInfos] = useState([]);
 
@@ -56,6 +61,40 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
       });
   }, []);
 
+  const showDeleteConfirm = (deleteGameId) => {
+    confirm({
+      title: 'Etes-vous sûrs de vouloir supprimer ce joueur ?',
+      icon: <ExclamationCircleFilled />,
+      content: 'suppression définitive !',
+      okText: 'Oui',
+      okType: 'danger',
+      cancelText: 'Annuler',
+      onOk() {
+        console.log(deleteGameId);
+        console.log('OK');
+        axios.delete(
+        // URL
+          `http://syham-zedri.vpnuser.lan:8000/api/user/boardgame/${deleteGameId}/delete`,
+          // données
+          config,
+        )
+          .then(() => {
+            console.log('Supression du jeu OK');
+          })
+
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            navigate('/jeux');
+          });
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -98,6 +137,22 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
             </tbody>
           </table>
         </div>
+        <Button
+          variant="secondary"
+          // onClick={() => {
+          //   navigate(`/parties/modifier/${gameInfos[0].game_id}`);
+          // }}
+        >
+          Modifier
+        </Button>{' '}
+        <Button
+          variant="danger"
+          style={{ backgroundColor: 'red' }}
+          onClick={() => {
+            showDeleteConfirm(boardgameInfos[0].board_game_id);
+          }}
+        >Supprimer
+        </Button>{' '}
       </div>
     </div>
   );

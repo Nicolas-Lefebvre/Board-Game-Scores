@@ -405,7 +405,7 @@ function Dashboard() {
                     <td>Défaites</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number
+                        playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number
                       }
                     </td>
                   </tr>
@@ -499,7 +499,7 @@ function Dashboard() {
                         {/* <td>18</td>
                         <td>5</td> */}
                         <td className="desktop">Laura</td>
-                        <td className="desktop">5</td>
+                        <td className="desktop">2</td>
                         <td className="desktop">Syham</td>
                         <td className="desktop">12</td>
                       </tr>
@@ -508,40 +508,40 @@ function Dashboard() {
                         <td>{top5Games[1].game_number}</td>
                         {/* <td>2</td>
                         <td>120</td> */}
-                        <td className="desktop">Laura</td>
-                        <td className="desktop">5</td>
+                        <td className="desktop">Amar</td>
+                        <td className="desktop">3</td>
                         <td className="desktop">Syham</td>
-                        <td className="desktop">12</td>
+                        <td className="desktop">24</td>
                       </tr>
                       <tr>
                         <td><Link to={`/jeux/${top5Games[2].board_game_id}`}>{top5Games[2].board_game_name}</Link></td>
                         <td>{top5Games[2].game_number}</td>
                         {/* <td>12</td>
                         <td>3</td> */}
-                        <td className="desktop">Laura</td>
-                        <td className="desktop">5</td>
                         <td className="desktop">Nico</td>
-                        <td className="desktop">12</td>
+                        <td className="desktop">2</td>
+                        <td className="desktop">Nico</td>
+                        <td className="desktop">32</td>
                       </tr>
                       <tr>
                         <td><Link to={`/jeux/${top5Games[3].board_game_id}`}>{top5Games[3].board_game_name}</Link></td>
                         <td>{top5Games[3].game_number}</td>
                         {/* <td>8</td>
                         <td>7</td> */}
-                        <td className="desktop">Laura</td>
+                        <td className="desktop">Syham</td>
                         <td className="desktop">5</td>
                         <td className="desktop">Amar</td>
-                        <td className="desktop">12</td>
+                        <td className="desktop">23</td>
                       </tr>
                       <tr>
                         <td><Link to={`/jeux/${top5Games[4].board_game_id}`}>{top5Games[4].board_game_name}</Link></td>
                         <td>{top5Games[4].game_number}</td>
                         {/* <td>12</td>
                         <td>3</td> */}
-                        <td className="desktop">Laura</td>
+                        <td className="desktop">Alexis</td>
                         <td className="desktop">5</td>
                         <td className="desktop">Syham</td>
-                        <td className="desktop">12</td>
+                        <td className="desktop">24</td>
                       </tr>
                     </tbody>
                   </table>
@@ -657,38 +657,38 @@ function Dashboard() {
                       <tr>
                         <th>Catégorie</th>
                         <th>Parties</th>
-                        <th>Victoires</th>
-                        <th>Défaites</th>
+                        {/* <th>Victoires</th>
+                        <th>Défaites</th> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[0].name}</td>
                         <td>{top5Categories[0].Category_number}</td>
-                        <td>18</td>
-                        <td>5</td>
+                        {/* <td>18</td> */}
+                        {/* <td>5</td> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[1].name}</td>
                         <td>{top5Categories[1].Category_number}</td>
-                        <td>2</td>
-                        <td>120</td>
+                        {/* <td>2</td> */}
+                        {/* <td>120</td> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[2].name}</td>
                         <td>{top5Categories[2].Category_number}</td>
-                        <td>12</td>
-                        <td>3</td>
+                        {/* <td>12</td> */}
+                        {/* <td>3</td> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[3].name}</td>
                         <td>{top5Categories[3].Category_number}</td>
-                        <td>8</td>
-                        <td>7</td>
+                        {/* <td>8</td> */}
+                        {/* <td>7</td> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[4].name}</td>
                         <td>{top5Categories[4].Category_number}</td>
-                        <td>12</td>
-                        <td>3</td>
+                        {/* <td>12</td> */}
+                        {/* <td>3</td> */}
                       </tr>
                     </tbody>
                   </table>
@@ -732,36 +732,36 @@ function Dashboard() {
                         <td><Link to={`/joueurs/id?player_id=${top5Players[0].player_id}`}>{top5Players[0].player_name}</Link></td>
                         <td>{top5Players[0].victory_number}</td>
                         <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id))).victory_number }</td>
-                        <td>5</td>
-                        <td>5</td>
+                        <td>2</td>
+                        <td>1</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[1].player_id}`}>{top5Players[1].player_name}</Link></td>
                         <td>{top5Players[1].victory_number}</td>
                         <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id))).victory_number }</td>
-                        <td>120</td>
-                        <td>120</td>
+                        <td>1</td>
+                        <td>0</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[2].player_id}`}>{top5Players[2].player_name}</Link></td>
                         <td>{top5Players[2].victory_number}</td>
                         <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id))).victory_number }</td>
-                        <td>3</td>
-                        <td>3</td>
+                        <td>1</td>
+                        <td>0</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[3].player_id}`}>{top5Players[3].player_name}</Link></td>
                         <td>{top5Players[3].victory_number}</td>
                         <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id))).victory_number }</td>
-                        <td>7</td>
-                        <td>7</td>
+                        <td>1</td>
+                        <td>2</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[4].player_id}`}>{top5Players[4].player_name}</Link></td>
                         <td>{top5Players[4].victory_number}</td>
                         <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id))).victory_number }</td>
-                        <td>3</td>
-                        <td>3</td>
+                        <td>2</td>
+                        <td>1</td>
                       </tr>
                     </tbody>
                   </table>
