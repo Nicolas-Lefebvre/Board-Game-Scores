@@ -27,28 +27,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
 
       .then((response) => {
         console.log(response);
-
-        if (response.data.result.find((game) => game.game_number) === true) {
-          setBoardgameInfos(response.data.result);
-        }
-        else {
-          axios.get(
-            `http://syham-zedri.vpnuser.lan:8000/api/user/boardgameNG/${boardgameId}`,
-            config,
-          )
-            .then((response2) => {
-              console.log(response2);
-              setBoardgameInfos(response2.data.result);
-              // console.log(response.data.results[0].name);
-            })
-            .catch((error) => {
-              console.log(error);
-            })
-            .finally(() => {
-              setLoading(false);
-            });
-        }
-        // console.log(response.data.results[0].name);
+        setBoardgameInfos(response.data.result);
       })
 
       .catch((error) => {
@@ -73,9 +52,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
         //       setLoading(false);
         //     });
         // traitement exécuté dans tous les cas, après then ou après catch
-        if (boardgameInfos[0].game_number) {
-          setLoading(false);
-        }
+        setLoading(false);
       });
   }, []);
 
@@ -94,7 +71,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
         <h3>{boardgameInfos[0].name}</h3>
         <p><strong>Editeur :</strong> {boardgameInfos[0].editor}</p>
         <p><strong>Auteur :</strong> {boardgameInfos[0].author}</p>
-        <p><strong>Nombre de joueurs :</strong> de {boardgameInfos[0].minPlayer} à {boardgameInfos[0].maxPlayer} joueurs</p>
+        <p><strong>Nombre de joueurs :</strong> de {boardgameInfos[0].min_player} à {boardgameInfos[0].max_player} joueurs</p>
         <p><strong>description :</strong></p>
         <p className="description">{boardgameInfos[0].description}</p>
         <div className="resultat-table">
@@ -108,7 +85,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
             <tbody>
               <tr>
                 <td>Nombre de parties</td>
-                <td>{boardgameInfos[0].game_number}</td>
+                <td>{boardgameInfos[0].game_number ? boardgameInfos[0].game_number : '0'}</td>
               </tr>
               {/* <tr>
                 <td>Champion</td>

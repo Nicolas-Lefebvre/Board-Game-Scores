@@ -66,6 +66,9 @@ function Navbar() {
                 </div>
                 {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
+              {/* <li className="nav-item">
+                <NavLink className="nav-link" aria-current="page" to="http://syham-zedri.vpnuser.lan:8000/back/home">Back Office</NavLink>
+              </li> */}
             </ul>
             <ul className="navbar-avatar">
               <li className="nav-item">
