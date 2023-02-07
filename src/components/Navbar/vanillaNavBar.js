@@ -84,7 +84,7 @@ function Navbar() {
                 <Link className="nav-link connexion-wrapper" to="/connexion">
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
                   {/* <FontAwesomeIcon icon="fa-solid fa-user-tie" /> */}
-                  <div className="seConnecter">Se connecter</div>
+                  <div className="seConnecter">{localStorage.getItem('BGStoken') ? 'Se déconnecter' : 'Se connecter'}</div>
                 </Link>
               </li>
 

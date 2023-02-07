@@ -1,3 +1,5 @@
+import './disconnection.scss';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 
@@ -20,11 +22,11 @@ function Disconnection({ setIsLogged, isLogged, setToken }) {
   return (
     <div className="container">
 
-      <h2>Vous êtes déjà connectés</h2>
+      <h2>Etes-vous sûrs ?</h2>
       {/* <Space wrap> */}
       <Link to="/tableau-de-bord"><Button type="primary" onClick={handleClickOnDashboard}>Accéder à mon tableau de bord</Button></Link>
       <h3>Ou</h3>
-      <Button type="primary" onClick={handleClickOnDisconnection} danger>Déconnexion</Button>
+      <Button type="primary" onClick={handleClickOnDisconnection} danger style={{ backgroundColor: 'red !important' }}>Déconnexion</Button>
       {/* </Space> */}
 
     </div>
