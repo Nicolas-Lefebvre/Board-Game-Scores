@@ -10,7 +10,7 @@ import { NavLink, Link } from 'react-router-dom';
 // == Composant
 function Navbar() {
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
-  const url = new URL('http://syham-zedri.vpnuser.lan:8000/back/home');
+  const url = new URL('http://syham-zedri.vpnuser.lan:8000/back/login');
   console.log(url.pathname);
 
   return (
@@ -74,7 +74,7 @@ function Navbar() {
               </li>
               {role === 'ROLE_ADMIN' ? (
                 <li className="nav-item">
-                  <NavLink className="nav-link" aria-current="page" to={`//${url}`} rel="noopener noreferrer">Back Office</NavLink>
+                  <a className="nav-link" aria-current="page" href={`${url}`} rel="noopener noreferrer">Back Office</a>
                 </li>
               )
                 : ''}
