@@ -17,7 +17,7 @@ import PlayersPieChart from './PieCharts/PlayersPieChart';
 import AddBoardgame from '../AddBoardgame';
 
 // == Composant
-function Dashboard() {
+function Dashboard({ setUserInfos, userInfos }) {
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
@@ -25,7 +25,7 @@ function Dashboard() {
   const [loadingPlayerResults, setLoadingPlayerResults] = useState(true);
 
   const [playerList, setPlayerList] = useState([]);
-  const [userInfos, setUserInfos] = useState([]);
+
   const [loadingUserInfos, setLoadingUserInfos] = useState(true);
   // const [playerListSingle, setPlayerListSingle] = useState([]);
   const [lossPlayerList, setLossPlayerList] = useState([]);
@@ -293,7 +293,7 @@ function Dashboard() {
             <h3 className="pseudo">{userInfos.nickname}</h3>
             <p className="email">{userInfos.email}</p>
             <p className="email">Né le : {userInfos.birthday.substr(0, 10)}</p>
-            <p className="profil-edit-btn"><Link className="profil-edit-link" to="#">modifier</Link></p>
+            <p className="profil-edit-btn"><Link className="profil-edit-link" to="/profil/modifier">modifier</Link></p>
           </div>
         </section>
 

@@ -33,9 +33,11 @@ import PlayerDetails from '../PlayerDetails';
 import PlayerAdd from '../PlayerAdd';
 import PlayerEdit from '../PlayerEdit';
 import Page404 from '../Page404';
+import ProfilEdit from '../ProfilEdit';
 
 // == Composant
 function App() {
+  const [userInfos, setUserInfos] = useState([]);
   const [top5Games, setTop5Games] = useState(Data);
   const [loading, setLoading] = useState(true);
 
@@ -152,7 +154,7 @@ function App() {
         <Route path="/joueurs/modifier" element={localStorage.getItem('BGStoken') ? <PlayerEdit /> : <GetConnected />} />
 
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}
-        <Route path="/tableau-de-bord" element={localStorage.getItem('BGStoken') ? <Dashboard /> : <GetConnected />} />
+        <Route path="/tableau-de-bord" element={localStorage.getItem('BGStoken') ? <Dashboard setUserInfos={setUserInfos} userInfos={userInfos} /> : <GetConnected />} />
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />
@@ -162,6 +164,7 @@ function App() {
         <Route path="/cgu" element={<Cgu />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="*" element={<Page404 />} />
+        <Route path="/profil/modifier" element={<ProfilEdit setUserInfos={setUserInfos} userInfos={userInfos} />} />
 
       </Routes>
 
