@@ -2,11 +2,17 @@ import './navbar.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import jwtDecode from 'jwt-decode';
 
 import { NavLink, Link } from 'react-router-dom';
 
 // == Composant
 function Navbar() {
+  const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
+  const url = new URL('http://syham-zedri.vpnuser.lan:8000/back/home');
+  console.log(url.pathname);
+
   return (
     <div className="navbar">
 
@@ -66,9 +72,12 @@ function Navbar() {
                 </div>
                 {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
-              {/* <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="http://syham-zedri.vpnuser.lan:8000/back/home">Back Office</NavLink>
-              </li> */}
+              {role === 'ROLE_ADMIN' ? (
+                <li className="nav-item">
+                  <NavLink className="nav-link" aria-current="page" to={`//${url}`} rel="noopener noreferrer">Back Office</NavLink>
+                </li>
+              )
+                : ''}
             </ul>
             <ul className="navbar-avatar">
               <li className="nav-item">

@@ -147,7 +147,7 @@ function App() {
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />
-        <Route path="/connexion" element={localStorage.getItem('BGStoken') ? <Disconnection isLogged={isLogged} setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
+        <Route path="/connexion" element={localStorage.getItem('BGStoken') ? <Disconnection token={token} isLogged={isLogged} setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />

@@ -14,7 +14,7 @@ function Disconnection({ setIsLogged, isLogged, setToken }) {
     setIsLogged(false);
     setToken('');
     localStorage.removeItem('BGStoken');
-    // navigate('/connexion');
+    navigate('/connexion');
   };
 
   return (

@@ -38,7 +38,7 @@ function Classement({ top5Games, loading }) {
   return (
     <div className="container classement">
 
-      <h2>Classement</h2>
+      <h2>Classement de la semaine</h2>
 
       {loading ? (<Loader />)
         : (
@@ -47,7 +47,7 @@ function Classement({ top5Games, loading }) {
               <h3 className="card-title">Jeu le plus joué #1</h3>
               <div className="row g-0">
                 <div className="col-md-4">
-                  <img src={image} alt="" className="image" />
+                  <img src={top5Games[0].picture} alt="" className="image" />
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
@@ -83,9 +83,9 @@ function Classement({ top5Games, loading }) {
             <div className="card mb-3 " style={{ maxWidth: '540px' }}>
               <h3 className="card-title">Jeu le plus joué #2</h3>
               <div className="row g-0">
-                {/* <div className="col-md-4">
-                  <img src={image2} alt="" className="image" />
-                </div> */}
+                <div className="col-md-4">
+                  <img src={top5Games[1].picture} alt="" className="image" />
+                </div>
                 <div className="col-md-8">
                   <div className="card-body">
                     <h4>{top5Games[1].name}</h4>

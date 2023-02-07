@@ -1,9 +1,12 @@
+import image2 from 'src/assets/images/dashboard.jpg';
+
 // == Composant
 function HomeDashboard() {
   return (
     <div className="container HomeDashBoard">
-      <h2>Tableau de Bord</h2>
-      <p>
+      <h2>Créez votre tableau de Bord !</h2>
+      <img src={image2} alt="" className="image" style={{ minWidth: '80%' }} />
+      {/* <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. In, eius! Distinctio
         at numquam dolores, expedita recusandae,
         neque aut asperiores inventore autem aperiam officia quos praesentium dolore nobis?
@@ -20,7 +23,7 @@ function HomeDashboard() {
         Distinctio voluptates dignissimos velit facilis, nam delectus
         repellendus dolor rem. Quam laboriosam recusandae culpa,
         ducimus repellat optio dolorem autem cupiditate porro adipisci!
-      </p>
+      </p> */}
     </div>
   );
 }

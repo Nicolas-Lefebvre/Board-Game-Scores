@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-indent */
 import './connexion.scss';
 // import { setToken, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import {
   Button,
@@ -11,7 +13,7 @@ import {
 } from 'antd';
 
 // == Composant
-function Connexion({setIsLogged, setToken}) {
+function Connexion({setIsLogged, setToken, token}) {
   const navigate = useNavigate();
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -44,13 +46,17 @@ function Connexion({setIsLogged, setToken}) {
         // on est authentifié, on a un JWT dans le state => on peut demander au serveur
         // les recettes préférées de l'utilisateur connecté
         // store.dispatch(fetchFavoriteRecipes());
-        navigate('/tableau-de-bord');
+        // navigate('/tableau-de-bord');
       })
 
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
+        // const token2 = localStorage.getItem('BGStoken');
+        // console.log(token2);
+        // const decodedToken = jwtDecode(token2);
+        // console.log(decodedToken);
       });
   };
 
