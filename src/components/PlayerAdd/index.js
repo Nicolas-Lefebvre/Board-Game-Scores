@@ -32,7 +32,7 @@ function PlayerAdd() {
     console.log('Received values of form: ', values);
     axios.post(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user/player',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/player',
       // données
       {
         name: values.name,

@@ -17,7 +17,7 @@ function Connexion({setIsLogged, setToken}) {
     console.log('Success:', values);
     axios.post(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/login_check',
+      'http://syham-zedri.vpnuser.lan:8000/api/login_check',
       // données
       {
         username: values.username,

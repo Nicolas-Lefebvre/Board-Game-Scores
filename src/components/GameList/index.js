@@ -15,32 +15,7 @@ import { Dropdown, Space, Modal, } from 'antd';
 import { NavLink } from 'react-router-dom';
 import Loader from '../Loader';
 
-// const items = [
-//   {
-//     key: '1',
-//     label: (
-//       <NavLink rel="noopener noreferrer" to="#">
-//         Voir
-//       </NavLink>
-//     ),
-//   },
-//   {
-//     key: '2',
-//     label: (
-//       <NavLink rel="noopener noreferrer" to="#">
-//         Editer
-//       </NavLink>
-//     ),
-//   },
-//   {
-//     key: '3',
-//     label: (
-//       <NavLink rel="noopener noreferrer" to="#">
-//         Supprimer
-//       </NavLink>
-//     ),
-//   },
-// ];
+
 const { confirm } = Modal;
 
 let gameList = [];
@@ -57,7 +32,7 @@ function GameList() {
 
   useEffect(() => {
     axios.get(
-      'http://laura-poitou.vpnuser.lan:8000/api/usergame',
+      'http://syham-zedri.vpnuser.lan:8000/api/usergame',
       config,
     )
 
@@ -100,7 +75,7 @@ function GameList() {
   //       console.log('OK');
   //       axios.delete(
   //       // URL
-  //         `http://laura-poitou.vpnuser.lan:8000/api/games/${deleteGameId}`,
+  //         `http://syham-zedri.vpnuser.lan:8000/api/game/${deleteGameId}`,
   //         // données
   //         config,
   //       )
@@ -110,7 +85,7 @@ function GameList() {
   //           // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
   //           axios.get(
   //             // URL
-  //             'http://laura-poitou.vpnuser.lan:8000/api/usergame',
+  //             'http://syham-zedri.vpnuser.lan:8000/api/usergame',
   //             // données
   //             config,
   //           )
@@ -134,11 +109,11 @@ function GameList() {
   //     },
   //   });
   // };
-  // const [gameDetails, setgameDetails] = useState(false);
-  // const onClick = () => {
-  //   // console.log('Click');
-  //   setgameDetails(!gameDetails);
-  // };
+  const [gameDetails, setgameDetails] = useState(false);
+  const onClick = () => {
+    // console.log('Click');
+    setgameDetails(!gameDetails);
+  };
 
   if (loading) {
     return <Loader />;
@@ -174,8 +149,8 @@ function GameList() {
                   {/* <li>{game.playerNumber}</li> */}
                 </ul>
               </div>
-              <div className="btn-container">
-                {/* <Dropdown
+              {/* <div className="btn-container">
+                <Dropdown
                   menu={{
                     items: [
                       {
@@ -214,8 +189,8 @@ function GameList() {
                   <Space>
                     <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
                   </Space>
-                </Dropdown> */}
-              </div>
+                </Dropdown>
+              </div> */}
             </div>
             {/* </div> */}
           </NavLink>

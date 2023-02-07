@@ -35,7 +35,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user',
+      'http://syham-zedri.vpnuser.lan:8000/api/user',
       // données
       config,
     )
@@ -55,7 +55,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user/players/stats',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/players/stats',
       // données
       config,
     )
@@ -134,7 +134,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user/boardgames5',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames5',
       // données
       config,
     )
@@ -191,7 +191,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user/categories5',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/categories5',
       // données
       config,
     )
@@ -216,7 +216,7 @@ function Dashboard() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user/players5',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/players5',
       // données
       config,
     )

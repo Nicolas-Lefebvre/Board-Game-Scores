@@ -63,7 +63,7 @@ function AddGame() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user/collection',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/collection',
       // données
       config,
     )
@@ -85,7 +85,7 @@ function AddGame() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user/players',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/players',
       // données
       config,
     )
@@ -111,7 +111,7 @@ function AddGame() {
 
     axios.post(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/games',
+      'http://syham-zedri.vpnuser.lan:8000/api/games',
       // données
       {
         startDate: values.startDate,

@@ -32,7 +32,7 @@ function Players() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user/players',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/players',
       // données
       config,
     )
@@ -58,7 +58,7 @@ function Players() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://laura-poitou.vpnuser.lan:8000/api/user/players/stats',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/players/stats',
       // données
       config,
     )
@@ -93,7 +93,7 @@ function Players() {
         console.log('OK');
         axios.delete(
         // URL
-          `http://laura-poitou.vpnuser.lan:8000/api/player/${deletePlayerId}`,
+          `http://syham-zedri.vpnuser.lan:8000/api/player/${deletePlayerId}`,
           // données
           config,
         )
@@ -103,7 +103,7 @@ function Players() {
             // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
             axios.get(
               // URL
-              'http://laura-poitou.vpnuser.lan:8000/api/user/players',
+              'http://syham-zedri.vpnuser.lan:8000/api/user/players',
               // données
               config,
             )

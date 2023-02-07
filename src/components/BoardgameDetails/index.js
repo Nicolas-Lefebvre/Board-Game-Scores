@@ -21,13 +21,33 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
   };
   useEffect(() => {
     axios.get(
-      `http://laura-poitou.vpnuser.lan:8000/api/user/boardgames/${boardgameId}`,
+      `http://syham-zedri.vpnuser.lan:8000/api/user/boardgames/${boardgameId}`,
       config,
     )
 
       .then((response) => {
         console.log(response);
-        setBoardgameInfos(response.data.result);
+
+        if (response.data.result.find((game) => game.game_number) === true) {
+          setBoardgameInfos(response.data.result);
+        }
+        else {
+          axios.get(
+            `http://syham-zedri.vpnuser.lan:8000/api/user/boardgameNG/${boardgameId}`,
+            config,
+          )
+            .then((response2) => {
+              console.log(response2);
+              setBoardgameInfos(response2.data.result);
+              // console.log(response.data.results[0].name);
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+            .finally(() => {
+              setLoading(false);
+            });
+        }
         // console.log(response.data.results[0].name);
       })
 
@@ -36,14 +56,37 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
       })
 
       .finally(() => {
+        // if (boardgameInfos.game_number == false) {
+        //   axios.get(
+        //     `http://syham-zedri.vpnuser.lan:8000/api/user/boardgameNG/${boardgameId}`,
+        //     config,
+        //   )
+        //     .then((response) => {
+        //       console.log(response);
+        //       setBoardgameInfos(response.data.result);
+        //       // console.log(response.data.results[0].name);
+        //     })
+        //     .catch((error) => {
+        //       console.log(error);
+        //     })
+        //     .finally(() => {
+        //       setLoading(false);
+        //     });
         // traitement exécuté dans tous les cas, après then ou après catch
-        setLoading(false);
+        if (boardgameInfos[0].game_number) {
+          setLoading(false);
+        }
       });
   }, []);
 
   if (loading) {
     return <Loader />;
   }
+  // if (!boardgameInfos.name) {
+  //   return (
+  //     <h2>Aucune donnée à afficher</h2>
+  //   );
+  // }
   return (
     <div className="boardgame-card">
       <img className="boardgame-card__image" src={boardgameInfos[0].picture} alt={boardgameInfos[0].name} />

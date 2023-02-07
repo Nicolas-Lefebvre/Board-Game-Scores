@@ -30,7 +30,7 @@ function PlayerEdit() {
     console.log(playerName);
     axios.patch(
       // URL
-      `http://laura-poitou.vpnuser.lan:8000/api/user/player/${playerId}`,
+      `http://syham-zedri.vpnuser.lan:8000/api/user/player/${playerId}`,
       // données
       {
         name: values.name,
