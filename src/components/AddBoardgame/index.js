@@ -125,7 +125,7 @@ function AddBoardgame() {
         console.log(error);
       })
       .finally(() => {
-        // navigate('/jeux');
+        navigate('/jeux');
       });
   };
 

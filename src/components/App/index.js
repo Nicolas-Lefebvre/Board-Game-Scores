@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import Navbar from '../Navbar/vanillaNavBar';
 import Footer from '../Footer';
 
-import Data from '../../Data/Top5Games';
+// import Data from '../../Data/Top5Games';
 
 import Home from '../Home';
 import Subscribe from '../Subscribe';
@@ -38,7 +38,7 @@ import ProfilEdit from '../ProfilEdit';
 // == Composant
 function App() {
   const [userInfos, setUserInfos] = useState([]);
-  const [top5Games, setTop5Games] = useState(Data);
+  const [top5Games, setTop5Games] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // eslint-disable-next-line no-unused-vars

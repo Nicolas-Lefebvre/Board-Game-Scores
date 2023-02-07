@@ -11,14 +11,16 @@ function Classement({ top5Games, loading }) {
   console.log(top5Games);
   console.log(top5Games[0]);
 
-  const data = [
-    ["Catan", "Hours per Day"],
-    [top5Games[0].name, top5Games[0].game_number],
-    [top5Games[1].name, top5Games[1].game_number],
-    [top5Games[2].name, top5Games[2].game_number],
-    [top5Games[3].name, top5Games[3].game_number],
-    [top5Games[4].name, top5Games[4].game_number],
-  ];
+  if (!top5Games.length === 0) {
+    const data = [
+      ["Catan", "Hours per Day"],
+      [top5Games[0].name, top5Games[0].game_number],
+      [top5Games[1].name, top5Games[1].game_number],
+      [top5Games[2].name, top5Games[2].game_number],
+      [top5Games[3].name, top5Games[3].game_number],
+      [top5Games[4].name, top5Games[4].game_number],
+    ];
+  }
 
   const options = {
     // title: 'Top jeux',
@@ -35,6 +37,13 @@ function Classement({ top5Games, loading }) {
     // legendPosition: 'labeled',
   };
 
+  if (!top5Games) {
+    return (
+      <div className="container">
+        <h2 style={{ marginTop: '40vh' }}>Aucun donnée disponible !</h2>
+      </div>
+    );
+  }
   return (
     <div className="container classement">
 
@@ -47,7 +56,7 @@ function Classement({ top5Games, loading }) {
               <h3 className="card-title">Jeu le plus joué #1</h3>
               <div className="row g-0">
                 <div className="col-md-4">
-                  <img src={top5Games[0].picture} alt="" className="image" />
+                  {/* <img src={top5Games[0].picture} alt="" className="image" /> */}
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
@@ -84,7 +93,7 @@ function Classement({ top5Games, loading }) {
               <h3 className="card-title">Jeu le plus joué #2</h3>
               <div className="row g-0">
                 <div className="col-md-4">
-                  <img src={top5Games[1].picture} alt="" className="image" />
+                  {/* <img src={top5Games[1].picture} alt="" className="image" /> */}
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">

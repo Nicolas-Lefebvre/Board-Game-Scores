@@ -271,13 +271,13 @@ function Dashboard({ setUserInfos, userInfos }) {
   if (loadingPlayerResults || loadingUserInfos) {
     return <Loader />;
   }
-  // if (!loadingPlayerResults && !playerList.player_id) {
-  //   return (
-  //     <div className="container dashboard">
-  //       <h2 style={{ marginTop: '40vh' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
-  //     </div>
-  //   );
-  // }
+  if (!loadingPlayerResults && !playerList.player_id) {
+    return (
+      <div className="container dashboard">
+        <h2 style={{ marginTop: '40vh' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
+      </div>
+    );
+  }
   return (
 
     <div className="container dashboard">

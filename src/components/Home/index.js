@@ -13,7 +13,7 @@ function Home({ top5Games, loading }) {
 
       <Header />
       <Presentation />
-      <Classement loading={loading} top5Games={top5Games} />
+      {/* <Classement loading={loading} top5Games={top5Games} /> */}
       <HomeDashboard />
 
       {/* <img src={image} alt="" className="header-image" /> */}

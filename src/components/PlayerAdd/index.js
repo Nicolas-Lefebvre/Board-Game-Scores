@@ -62,7 +62,7 @@ function PlayerAdd() {
             // {...formItemLayout}
             onFinish={onFinish}
             // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
-            // style={{ maxWidth: 2000 }}
+            style={{ alignItems: 'center' }}
           >
             <Space>
               <Form.Item label="Nom du joueur" name="name">
@@ -74,7 +74,7 @@ function PlayerAdd() {
             </Space>
             <Space>
               <Form.Item>
-                {contextHolder};
+                {contextHolder}
                 <Button type="primary" htmlType="submit">
                   Valider
                 </Button>

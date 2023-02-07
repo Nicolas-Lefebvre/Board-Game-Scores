@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
 import './addGame.scss';
 
@@ -247,7 +248,7 @@ function AddGame() {
                         label={`Nom joueur ${key + 1}`}
                       >
                         {/* <Input placeholder="Nom Joueur" /> */}
-                        <Select placeholder="Selectionner un joueur" style={{ minWidth: '100px' }}>
+                        <Select placeholder="Selectionner un joueur" style={{ minWidth: '200px' }}>
                           {allPlayers.map((player) => (
                             <Option
                               key={player.id}
