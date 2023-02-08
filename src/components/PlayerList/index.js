@@ -168,7 +168,7 @@ function Players() {
                           <td>{player.victory_number}</td>
                           <td>
                             {/* -------------- on récupère le player concerné avec son id pour afficher cette fois le nombre de défaites */}
-                            { (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) }
+                            { (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).victory_number ? (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) : '0' }
                           </td>
                           <td>
                             <NavLink to={`/joueurs/modifier/?player_id=${player.player_id}&player_name=${player.player_name}`}>
