@@ -151,6 +151,7 @@ const GameDetails = () => {
         </Button>{' '}
         <Button
           variant="danger"
+          className="red-btn"
           style={{ backgroundColor: 'red' }}
           onClick={() => {
             showDeleteConfirm(gameInfos[0].game_id);

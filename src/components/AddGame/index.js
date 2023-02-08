@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -129,6 +130,10 @@ function AddGame() {
       }
     }
 
+    if (!values.status) {
+      values.status = false;
+    }
+
     axios.post(
       // URL
       'http://syham-zedri.vpnuser.lan:8000/api/games',
@@ -235,8 +240,12 @@ function AddGame() {
               className="players-wrapper"
               // style={{ display: 'flex', flexWrap: 'wrap', minWidth: "100px" }}
               initialValue={[
-                { player: null, score: null, fairplay: 5, isWinner: false, isTeam: isTeam, team: null },
-                { player: null, score: null, fairplay: 5, isWinner: false, isTeam: isTeam, team: null },
+                {
+                  player: null, score: null, fairplay: 5, isWinner: false, isTeam: isTeam, team: null,
+                },
+                {
+                  player: null, score: null, fairplay: 5, isWinner: false, isTeam: isTeam, team: null,
+                },
               ]}
             >
               {(fields, { add, remove }) => (

@@ -117,12 +117,12 @@ function BoardgameList() {
                 {/* <p className="category">Jeu de gestion</p> */}
                 <ul className="">
                   <li>
-                    parties:
+                    Parties : 
                     {(playedBoardgameList.find((playedBoardgame) => (
                       playedBoardgame.board_game_id === boardgame.board_games_id)))
-                      ? (playedBoardgameList.find((playedBoardgame) => (
+                      ? ' ' + (playedBoardgameList.find((playedBoardgame) => (
                         playedBoardgame.board_game_id === boardgame.board_games_id))).game_number
-                      : '0'}
+                      : ' 0'}
                   </li>
                   {/* <li>Victoires : 15</li> */}
                 </ul>

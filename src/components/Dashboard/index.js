@@ -298,7 +298,7 @@ function Dashboard({ setUserInfos, userInfos }) {
             <h3 className="pseudo">{userInfos.nickname}</h3>
             <p className="email">{userInfos.email}</p>
             <p className="email">Né le : {userInfos.birthday.substr(0, 10)}</p>
-            <p className="profil-edit-btn"><Link className="profil-edit-link" to="/profil/modifier">modifier</Link></p>
+            <p className="profil-edit-btn"><Link className="profil-edit-link" to="/profil/modifier">Modifier</Link></p>
           </div>
         </section>
 
@@ -499,7 +499,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Recordman</th> */}
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[0].board_game_id}`}>{top5Games[0].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[0].board_game_id}?boardgame_id=${top5Games[0].board_game_id}`}>{top5Games[0].board_game_name}</Link></td>
                         <td>{top5Games[0].game_number}</td>
                         {/* <td>18</td>
                         <td>5</td> */}
@@ -509,7 +509,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <td className="desktop">12</td>
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[1].board_game_id}`}>{top5Games[1].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[1].board_game_id}?boardgame_id=${top5Games[1].board_game_id}`}>{top5Games[1].board_game_name}</Link></td>
                         <td>{top5Games[1].game_number}</td>
                         {/* <td>2</td>
                         <td>120</td> */}
@@ -519,7 +519,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <td className="desktop">24</td>
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[2].board_game_id}`}>{top5Games[2].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[2].board_game_id}?boardgame_id=${top5Games[2].board_game_id}`}>{top5Games[2].board_game_name}</Link></td>
                         <td>{top5Games[2].game_number}</td>
                         {/* <td>12</td>
                         <td>3</td> */}
@@ -529,7 +529,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <td className="desktop">32</td>
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[3].board_game_id}`}>{top5Games[3].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[3].board_game_id}?boardgame_id=${top5Games[3].board_game_id}`}>{top5Games[3].board_game_name}</Link></td>
                         <td>{top5Games[3].game_number}</td>
                         {/* <td>8</td>
                         <td>7</td> */}
@@ -539,7 +539,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <td className="desktop">23</td>
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[4].board_game_id}`}>{top5Games[4].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[4].board_game_id}?boardgame_id=${top5Games[4].board_game_id}`}>{top5Games[4].board_game_name}</Link></td>
                         <td>{top5Games[4].game_number}</td>
                         {/* <td>12</td>
                         <td>3</td> */}

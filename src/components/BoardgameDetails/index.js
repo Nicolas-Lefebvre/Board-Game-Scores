@@ -146,8 +146,9 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
           Modifier
         </Button>{' '}
         <Button
+          className="red-btn"
           variant="danger"
-          style={{ backgroundColor: 'red' }}
+          // style={{ backgroundColor: 'red' }}
           onClick={() => {
             showDeleteConfirm(boardgameInfos[0].board_game_id);
           }}
