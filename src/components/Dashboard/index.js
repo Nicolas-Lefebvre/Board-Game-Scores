@@ -394,7 +394,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>
                       {
                         Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number))
-                        + (Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1])) ? Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number)) : 0)
+                        + (((lossPlayerList.find((player) => (player.player_id == selectedPlayerId)))) ? Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number)) : 0)
                       }
                     </td>
                   </tr>

@@ -12,8 +12,11 @@ import {
   Input,
 } from 'antd';
 
+import { useNavigate } from 'react-router-dom';
+
 // ============================================ Composant===========================================
 function PlayerAdd() {
+  const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
   const key = 'updatable';
   const openMessage = () => {
@@ -42,9 +45,9 @@ function PlayerAdd() {
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
 
-        openMessage();
+        // openMessage();
 
-        // setTimeout(navigate('/joueurs'), 5000);
+        navigate('/joueurs');
       })
       .catch((error) => {
         console.log(error);

@@ -63,7 +63,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
 
   const showDeleteConfirm = (deleteGameId) => {
     confirm({
-      title: 'Etes-vous sûrs de vouloir supprimer ce joueur ?',
+      title: 'Etes-vous sûrs de vouloir supprimer ce jeu ?',
       icon: <ExclamationCircleFilled />,
       content: 'suppression définitive !',
       okText: 'Oui',

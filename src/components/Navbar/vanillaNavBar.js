@@ -36,6 +36,16 @@ function Navbar({ token }) {
                 <NavLink className="nav-link" to="/tableau-de-bord">Tableau de bord</NavLink>
               </li>
               <li className="nav-item dropdown">
+                <NavLink to="/joueurs" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
+                  Mes joueurs
+                </NavLink>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <NavLink className="dropdown-item" to="/joueurs">Liste des joueurs</NavLink>
+                  <NavLink className="dropdown-item" to="joueurs/ajouter">Ajouter un joueur</NavLink>
+                </div>
+                {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
+              </li>
+              <li className="nav-item dropdown">
                 <NavLink to="/jeux" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes jeux</NavLink>
                 <ul className="dropdown-menu">
                   <li><NavLink className="dropdown-item" to="jeux">Liste des jeux</NavLink></li>
@@ -60,16 +70,6 @@ function Navbar({ token }) {
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <NavLink className="dropdown-item" to="parties">Liste des parties</NavLink>
                   <NavLink className="dropdown-item" to="parties/ajouter">Ajouter une partie</NavLink>
-                </div>
-                {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
-              </li>
-              <li className="nav-item dropdown">
-                <NavLink to="/joueurs" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
-                  Mes joueurs
-                </NavLink>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <NavLink className="dropdown-item" to="/joueurs">Liste des joueurs</NavLink>
-                  <NavLink className="dropdown-item" to="joueurs/ajouter">Ajouter un joueur</NavLink>
                 </div>
                 {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
