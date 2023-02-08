@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
 import './addGame.scss';
@@ -109,6 +110,24 @@ function AddGame() {
     console.log('Received values of form: ', values);
     console.log(values.comment ? values.comment : null);
     console.log(values.players.length);
+
+    for (const item of values.players) {
+      if (!item.isTeam) {
+        item.isTeam = false;
+      }
+    }
+
+    for (const item of values.players) {
+      if (!item.isWinner) {
+        item.isWinner = false;
+      }
+    }
+
+    for (const item of values.players) {
+      if (!item.team) {
+        item.team = null;
+      }
+    }
 
     axios.post(
       // URL

@@ -53,6 +53,7 @@ function Dashboard({ setUserInfos, userInfos }) {
       });
   }, []);
 
+  // =====================================  RECUPERATION STATS PAR JOUEUR =============================
   useEffect(() => {
     axios.get(
       // URL
@@ -65,8 +66,8 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log(response.data);
         setPlayerList(response.data.results);
         setSelectedPlayerId(response.data.results[0].player_id);
-        const numberOfPlayer = lossPlayerList.length;
         setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
+        const numberOfPlayer = lossPlayerList.length;
 
         // On rempli le premier camembert avec les données du joueur en index zéro par défaut
         setData(
@@ -105,7 +106,7 @@ function Dashboard({ setUserInfos, userInfos }) {
     ));
     console.log(filteredPlayer);
     const victoryNumber = filteredPlayer[0].victory_number;
-    const lossNumber = filteredPlayer[1].victory_number;
+    const lossNumber = (filteredPlayer[1] ? filteredPlayer[1].victory_number : '0');
 
     setSelectedPlayerId(event.target.value);
 
@@ -132,6 +133,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   const [top5Games, setTop5Games] = useState([]);
   const [top5GamesData, setTop5GamesData] = useState([]);
 
+  // =====================================  RECUPERATION TOP 5 JEUX =============================
   useEffect(() => {
     axios.get(
       // URL
@@ -189,6 +191,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   const [loadingTop5Categories, setLoadingTop5Categories] = useState(true);
   const [top5Categories, setTop5Categories] = useState([]);
 
+  // =====================================  RECUPERATION TOP 5 CATEGORIES =============================
   useEffect(() => {
     axios.get(
       // URL
@@ -214,6 +217,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   const [top5Players, setTop5Players] = useState([]);
   const [top5PlayersData, setTop5PlayersData] = useState([]);
 
+  // =====================================  RECUPERATION TOP 5 JOUEURS =============================
   useEffect(() => {
     axios.get(
       // URL
@@ -271,13 +275,13 @@ function Dashboard({ setUserInfos, userInfos }) {
   if (loadingPlayerResults || loadingUserInfos) {
     return <Loader />;
   }
-  if (!loadingPlayerResults && !playerList.player_id) {
-    return (
-      <div className="container dashboard">
-        <h2 style={{ marginTop: '40vh' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
-      </div>
-    );
-  }
+  // if (!loadingPlayerResults && !playerList.player_id) {
+  //   return (
+  //     <div className="container dashboard">
+  //       <h2 style={{ marginTop: '40vh' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
+  //     </div>
+  //   );
+  // }
   return (
 
     <div className="container dashboard">
@@ -309,7 +313,7 @@ function Dashboard({ setUserInfos, userInfos }) {
             aria-label="Default select example"
             onChange={onChange}
           >
-            {(playerList.slice(0, lossPlayerList.length)).map((player) => (
+            {(playerList.slice(0, lossPlayerList.length+1)).map((player) => (
               <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
             ))}
           </select>
@@ -390,7 +394,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>
                       {
                         Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number))
-                        + Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number))
+                        + (Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1])) ? Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number)) : 0)
                       }
                     </td>
                   </tr>
@@ -398,7 +402,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Victoires</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number
+                        playerList.filter((player) => (player.player_id == selectedPlayerId))[0] ? playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number : '0'
                       }
                     </td>
                   </tr>
@@ -406,7 +410,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Défaites</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number
+                        playerList.filter((player) => (player.player_id == selectedPlayerId))[1] ? playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number : '0'
                       }
                     </td>
                   </tr>
@@ -732,35 +736,35 @@ function Dashboard({ setUserInfos, userInfos }) {
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[0].player_id}`}>{top5Players[0].player_name}</Link></td>
                         <td>{top5Players[0].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id))).victory_number }</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id))).victory_number) : '0' }</td>
                         <td>2</td>
                         <td>1</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[1].player_id}`}>{top5Players[1].player_name}</Link></td>
                         <td>{top5Players[1].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id))).victory_number }</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id))).victory_number) : '0' }</td>
                         <td>1</td>
                         <td>0</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[2].player_id}`}>{top5Players[2].player_name}</Link></td>
                         <td>{top5Players[2].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id))).victory_number }</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id))).victory_number) : '0' }</td>
                         <td>1</td>
                         <td>0</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[3].player_id}`}>{top5Players[3].player_name}</Link></td>
                         <td>{top5Players[3].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id))).victory_number }</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id))).victory_number) : '0' }</td>
                         <td>1</td>
                         <td>2</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[4].player_id}`}>{top5Players[4].player_name}</Link></td>
                         <td>{top5Players[4].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id))).victory_number }</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id))).victory_number) : '0' }</td>
                         <td>2</td>
                         <td>1</td>
                       </tr>
