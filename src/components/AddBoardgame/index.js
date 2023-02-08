@@ -296,9 +296,9 @@ function AddBoardgame() {
                 style={{ minHeight:'100px' }}
               >
                 <Radio.Group>
-                  <Radio value="highest score">Le plus haut score gagne</Radio>
-                  <Radio value="lowest score">Le plus petit score gagne</Radio>
-                  <Radio value="no score">Pas de système de scoring</Radio>
+                  <Radio value="Highest score">Le plus haut score gagne</Radio>
+                  <Radio value="Lowest score">Le plus petit score gagne</Radio>
+                  <Radio value="No score">Pas de système de scoring</Radio>
                 </Radio.Group>
               </Form.Item>
             </Space>

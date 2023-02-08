@@ -283,7 +283,7 @@ function AddGame() {
                         name={[name, 'score']}
                         rules={[
                           {
-                            required: true,
+                            required: false,
                             message: 'Il manque le score',
                           },
                         ]}

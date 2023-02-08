@@ -5,6 +5,7 @@ import Header from './Header';
 import Presentation from './Presentation';
 import Classement from './Classement';
 import HomeDashboard from './HomeDashboard';
+import Loader from '../Loader';
 
 // == Composant
 function Home({ top5Games, loading }) {
@@ -13,7 +14,7 @@ function Home({ top5Games, loading }) {
 
       <Header />
       <Presentation />
-      {/* <Classement loading={loading} top5Games={top5Games} /> */}
+      {!loading ? <Classement loading={loading} top5Games={top5Games} /> : <Loader />}
       <HomeDashboard />
 
       {/* <img src={image} alt="" className="header-image" /> */}
