@@ -331,7 +331,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                 }}
                 valueFormat=" ^-~f"
                 activeOuterRadiusOffset={8}
-                colors={['green', 'red']}
+                colors={['green', 'rgb(228, 26, 28)']}
                 colorsBy="index"
                 borderWidth={1}
                 borderColor={{
