@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable arrow-body-style */
 import './GameDetails.scss';
 import axios from 'axios';
@@ -7,21 +8,24 @@ import { useState, useEffect } from 'react';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Modal } from 'antd';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
 
 const { confirm } = Modal;
 let gameInfos = [];
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+};
+
 const GameDetails = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const queryParameters = new URLSearchParams(window.location.search);
     const gameId = queryParameters.get('game_id');
     console.log(gameId);
 
-    const config = {
-      headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
-    };
     axios.get(
       `http://syham-zedri.vpnuser.lan:8000/api/user/game/${gameId}`,
       config,
@@ -44,44 +48,39 @@ const GameDetails = () => {
       });
   }, []);
 
-  // const showDeleteConfirm = () => {
-  //   confirm({
-  //     title: 'Etes-vous sûrs de vouloir supprimer cette partie ?',
-  //     icon: <ExclamationCircleFilled />,
-  //     content: 'Suppression définitive !',
-  //     okText: 'Oui',
-  //     okType: 'danger',
-  //     cancelText: 'Annuler',
-  //     onOk() {
-  //       console.log('OK');
-  //       const config = {
-  //         headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
-  //       };
-  //       axios.delete(
-  //       // URL
-  //         'http://syham-zedri.vpnuser.lan:8000/api/games/29',
-  //         // données
-  //         config,
-  //       )
-  //         .then((response) => {
-  //           console.log('Recuperation des tous les jeux OK');
-  //           console.log(response.data);
-  //           setAllGames(response.data.results);
+  const showDeleteConfirm = (deleteGameId) => {
+    confirm({
+      title: 'Etes-vous sûrs de vouloir supprimer ce joueur ?',
+      icon: <ExclamationCircleFilled />,
+      content: 'suppression définitive !',
+      okText: 'Oui',
+      okType: 'danger',
+      cancelText: 'Annuler',
+      onOk() {
+        console.log(deleteGameId);
+        console.log('OK');
+        axios.delete(
+        // URL
+          `http://syham-zedri.vpnuser.lan:8000/api/game/${deleteGameId}`,
+          // données
+          config,
+        )
+          .then(() => {
+            console.log('Supression de la partie OK');
+          })
 
-  //           setDisabled(false);
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         })
-  //         .finally(() => {
-  //           setAllGamesLoading(false);
-  //         });
-  //     },
-  //     onCancel() {
-  //       console.log('Cancel');
-  //     },
-  //   });
-  // };
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            navigate('/parties');
+          });
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
 
   if (loading) {
     return <Loader />;
@@ -142,40 +141,20 @@ const GameDetails = () => {
             </tbody>
           </table>
         </div>
-        <Button variant="secondary">Modifier</Button>{' '}
+        <Button
+          variant="secondary"
+          // onClick={() => {
+          //   navigate(`/parties/modifier/${gameInfos[0].game_id}`);
+          // }}
+        >
+          Modifier
+        </Button>{' '}
         <Button
           variant="danger"
+          className="red-btn"
           style={{ backgroundColor: 'red' }}
           onClick={() => {
-            confirm({
-              title: 'Etes-vous sûrs de vouloir supprimer cette partie ?',
-              icon: <ExclamationCircleFilled />,
-              content: 'Suppression définitive !',
-              okText: 'Oui',
-              okType: 'danger',
-              cancelText: 'Annuler',
-              onOk() {
-                console.log('OK');
-                const config = {
-                  headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
-                };
-                axios.delete(
-                // URL
-                  `http://syham-zedri.vpnuser.lan:8000/api/games/${gameInfos.game_id}`,
-                  // données
-                  config,
-                )
-                  .then(() => {
-                    console.log('Suppression de la partie OK');
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });
-              },
-              onCancel() {
-                console.log('Cancel');
-              },
-            });
+            showDeleteConfirm(gameInfos[0].game_id);
           }}
         >Supprimer
         </Button>{' '}

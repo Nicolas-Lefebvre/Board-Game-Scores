@@ -11,6 +11,7 @@ function Classement({ top5Games, loading }) {
   console.log(top5Games);
   console.log(top5Games[0]);
 
+  // if (!top5Games.length === 0) {
   const data = [
     ["Catan", "Hours per Day"],
     [top5Games[0].name, top5Games[0].game_number],
@@ -19,6 +20,7 @@ function Classement({ top5Games, loading }) {
     [top5Games[3].name, top5Games[3].game_number],
     [top5Games[4].name, top5Games[4].game_number],
   ];
+  // }
 
   const options = {
     // title: 'Top jeux',
@@ -35,10 +37,17 @@ function Classement({ top5Games, loading }) {
     // legendPosition: 'labeled',
   };
 
+  if (!top5Games) {
+    return (
+      <div className="container">
+        <h2 style={{ marginTop: '40vh' }}>Aucun donnée disponible !</h2>
+      </div>
+    );
+  }
   return (
     <div className="container classement">
 
-      <h2>Classement</h2>
+      <h2>Classement de la semaine</h2>
 
       {loading ? (<Loader />)
         : (
@@ -47,7 +56,7 @@ function Classement({ top5Games, loading }) {
               <h3 className="card-title">Jeu le plus joué #1</h3>
               <div className="row g-0">
                 <div className="col-md-4">
-                  <img src={image} alt="" className="image" />
+                  <img src={top5Games[0].picture} alt="" className="image" />
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
@@ -55,8 +64,8 @@ function Classement({ top5Games, loading }) {
                     {/* <p className="game-category">Jeu de gestion</p> */}
                     <ul>
                       <li><strong>{top5Games[0].game_number}</strong> Parties jouées</li>
-                      <li><strong>25</strong> Record</li>
-                      <li><strong>3544</strong> Joueurs</li>
+                      {/* <li><strong>25</strong> Record</li> */}
+                      {/* <li><strong>3544</strong> Joueurs</li> */}
                     </ul>
                   </div>
                 </div>
@@ -84,7 +93,7 @@ function Classement({ top5Games, loading }) {
               <h3 className="card-title">Jeu le plus joué #2</h3>
               <div className="row g-0">
                 <div className="col-md-4">
-                  <img src={image2} alt="" className="image" />
+                  <img src={top5Games[1].picture} alt="" className="image" />
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
@@ -92,8 +101,8 @@ function Classement({ top5Games, loading }) {
                     {/* <p className="game-category">Jeu de gestion</p> */}
                     <ul>
                       <li><strong>{top5Games[1].game_number}</strong> Parties jouées</li>
-                      <li><strong>25</strong> Record cette semaine</li>
-                      <li><strong>3544</strong> Joueurs</li>
+                      {/* <li><strong>25</strong> Record cette semaine</li> */}
+                      {/* <li><strong>3544</strong> Joueurs</li> */}
                     </ul>
                   </div>
                 </div>

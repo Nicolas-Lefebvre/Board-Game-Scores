@@ -9,16 +9,17 @@ import { useState, useEffect } from 'react';
 import Navbar from '../Navbar/vanillaNavBar';
 import Footer from '../Footer';
 
-import Data from '../../Data/Top5Games';
+// import Data from '../../Data/Top5Games';
 
 import Home from '../Home';
 import Subscribe from '../Subscribe';
 import Connexion from '../Connexion';
 import BoardgameList from '../BoardgameList';
 import BoardgameDetails from '../BoardgameDetails';
-import AddBoardgame from '../Boardgame/BoardgameAdd';
+import AddBoardgame from '../AddBoardgame';
 import GameList from '../GameList';
 import GameDetails from '../GameDetails';
+import GameEdit from '../GameEdit';
 import Dashboard from '../Dashboard';
 import AddGame from '../AddGame';
 import GetConnected from '../GetConnected';
@@ -32,10 +33,12 @@ import PlayerDetails from '../PlayerDetails';
 import PlayerAdd from '../PlayerAdd';
 import PlayerEdit from '../PlayerEdit';
 import Page404 from '../Page404';
+import ProfilEdit from '../ProfilEdit';
 
 // == Composant
 function App() {
-  const [top5Games, setTop5Games] = useState(Data);
+  const [userInfos, setUserInfos] = useState([]);
+  const [top5Games, setTop5Games] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // eslint-disable-next-line no-unused-vars
@@ -46,10 +49,19 @@ function App() {
   const [token, setToken] = useState('');
 
   useEffect(() => {
+    if (localStorage.getItem('BGStoken')) {
+      setToken(localStorage.getItem('BGStoken'));
+    }
+    // else {
+    //   setToken(localStorage.getItem(''));
+    // }
+  }, []);
+
+  useEffect(() => {
     axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/top5')
 
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         // console.log(response.data.results);
         setTop5Games(response.data.results);
         // console.log(response.data.results[0].name);
@@ -65,12 +77,12 @@ function App() {
       });
   }, []);
 
-  console.log(localStorage.getItem('BGStoken'));
+  // console.log(localStorage.getItem('BGStoken'));
 
   return (
     <div className="app">
 
-      <Navbar />
+      <Navbar token={token} />
 
       <Routes>
         <Route
@@ -124,6 +136,14 @@ function App() {
             ) : <GetConnected />
         }
         />
+        <Route
+          path="/parties/modifier/:id"
+          element={
+            localStorage.getItem('BGStoken') ? (
+              <GameEdit />
+            ) : <GetConnected />
+        }
+        />
         <Route path="/parties" element={localStorage.getItem('BGStoken') ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={localStorage.getItem('BGStoken') ? <AddGame /> : <GetConnected />} />
 
@@ -134,16 +154,17 @@ function App() {
         <Route path="/joueurs/modifier" element={localStorage.getItem('BGStoken') ? <PlayerEdit /> : <GetConnected />} />
 
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}
-        <Route path="/tableau-de-bord" element={localStorage.getItem('BGStoken') ? <Dashboard /> : <GetConnected />} />
+        <Route path="/tableau-de-bord" element={localStorage.getItem('BGStoken') ? <Dashboard setUserInfos={setUserInfos} userInfos={userInfos} /> : <GetConnected />} />
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />
-        <Route path="/connexion" element={localStorage.getItem('BGStoken') ? <Disconnection setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
+        <Route path="/connexion" element={token ? <Disconnection token={token} isLogged={isLogged} setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="*" element={<Page404 />} />
+        <Route path="/profil/modifier" element={<ProfilEdit setUserInfos={setUserInfos} userInfos={userInfos} />} />
 
       </Routes>
 

@@ -50,7 +50,10 @@
       margin-top: 2rem;
     }
 
-    
+    img {
+      margin:0;
+    } 
+
     .card {
       margin: auto;
       width: 32%;
@@ -109,7 +112,7 @@
     .container p {
       margin-right: 3rem;
       margin-left: 3rem;
-      text-align-last: left;
+      text-align: left;
     }
     
     .classement .card {

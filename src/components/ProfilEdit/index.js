@@ -14,32 +14,29 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 // ============================================ Composant===========================================
-function PlayerEdit() {
+function PlayerEdit({ setUserInfos, userInfos }) {
   const navigate = useNavigate();
-
-  const queryParameters = new URLSearchParams(window.location.search);
-  const playerId = queryParameters.get('player_id');
-  const playerName = queryParameters.get('player_name');
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
-  console.log(playerId);
+
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    console.log(playerName);
     axios.patch(
       // URL
-      `http://syham-zedri.vpnuser.lan:8000/api/user/player/${playerId}`,
+      'http://syham-zedri.vpnuser.lan:8000/api/user/infos',
       // données
       {
-        name: values.name,
+        nickname: values.nickname,
+        email: values.email,
+        birthday: values.birthday,
       },
       config,
     )
       .then(() => {
-        console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
-        navigate('/joueurs');
+        console.log('LA REQUETE EST UN SUCCES. profil bien modifié');
+        navigate('/tableau-de-bord');
       })
       .catch((error) => {
         console.log(error);
@@ -50,24 +47,49 @@ function PlayerEdit() {
     <div className="container addGame-container">
       <div className="form-container">
         <section>
-          <h2>Modifier un joueur</h2>
+          <h2>Modifier le profil</h2>
           {/* <h3>Ajouter un nouveau joueur</h3> */}
           <Form
             name="validate_new_player"
-            // {...formItemLayout}
+            style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}
             onFinish={onFinish}
             initialValues={{
-              name: playerName,
+              nickname: userInfos.nickname,
+              email: userInfos.email,
+              birthday: userInfos.birthday.substr(0, 10),
             }}
             // style={{ maxWidth: 2000 }}
           >
             <Space>
-              <Form.Item label="Nom du joueur" name="name">
+              <Form.Item label="Pseudo" name="nickname">
                 <Input
+                  style={{ minWidth: '100px' }}
                   type="text"
-                  // defaultValue={playerName}
+                  // defaultValue={userInfos.nickname}
                   className="existing-game-input"
-                  name="name"
+                  name="nickname"
+                />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item label="Email" name="email">
+                <Input
+                  style={{ minWidth: '100px' }}
+                  type="email"
+                  // defaultValue={userInfos.email}
+                  className="existing-game-input"
+                  name="email"
+                />
+              </Form.Item>
+            </Space>
+            <Space>
+              <Form.Item label="Date de naissance" name="birthday">
+                <Input
+                  style={{ minWidth: '100px' }}
+                  type="date"
+                  // defaultValue={userInfos.birthday}
+                  className="existing-game-input"
+                  name="birthday"
                 />
               </Form.Item>
             </Space>

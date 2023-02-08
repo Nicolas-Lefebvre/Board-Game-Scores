@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink, Link } from 'react-router-dom';
 import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
+
 function CollapsibleExample() {
   return (
     <Navbar collapseOnSelect expand="lg">

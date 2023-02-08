@@ -12,6 +12,7 @@ import {
   Input,
   Checkbox,
   Radio,
+  Select,
 } from 'antd';
 
 // import { useEffect } from 'react';
@@ -21,28 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Loader from '../Loader';
 
-// const formItemLayout = {
-//   labelCol: { span: 0 },
-//   wrapperCol: { span: 24 },
-// };
-// const formItemLayout = {
-//   labelCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 8,
-//     },
-//   },
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 16,
-//     },
-//   },
-// };
+const { Option } = Select;
 
 const { TextArea } = Input;
 // -----------------YEAR PICKER INFOS--------------------
@@ -52,6 +32,9 @@ const { TextArea } = Input;
 
 // ============================================ Composant===========================================
 function AddBoardgame() {
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  };
   const [allGamesLoading, setAllGamesLoading] = useState(true);
   const [allGames, setAllGames] = useState([]);
 
@@ -88,13 +71,33 @@ function AddBoardgame() {
   }, []);
 
   const navigate = useNavigate();
+  const [selectedBoardGameId, setSelectedBoardGameId] = useState('');
 
-  const onSubmitExisting = () => {
-    // console.log('Submit existing game');
+  // ----------------------------VALIDATION OF EXISTING BOARDGAME FORM----------------------------
+  const onSubmitExisting = (values) => {
+    console.log(values);
+    axios.post(
+      // URL
+      'http://syham-zedri.vpnuser.lan:8000/api/user/collection/boardgames/',
+      // données
+      {
+        boardGames: values.boardgame,
+      },
+      config,
+    )
+      .then(() => {
+        console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        navigate('/jeux');
+      });
   };
 
-  // -------------------------------------------- VALIDATION OF FORM--------------------------------
-  const onFinish = (values, dateString) => {
+  // ----------------------------VALIDATION OF CREATE BOARDGAME FORM--------------------------------
+  const onFinish = (values) => {
     // console.log('Received values of form: ', values, dateString);
     axios.post(
       // URL
@@ -113,6 +116,7 @@ function AddBoardgame() {
         categories: values.categories,
         isCreatedByUser: true,
       },
+      config,
     )
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
@@ -166,19 +170,51 @@ function AddBoardgame() {
             // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
             // style={{ maxWidth: 2000 }}
           >
-            <Form.Item>
+            <Form.Item
+              // {...restField}
+              name="boardgame"
+              rules={[
+                {
+                  required: true,
+                  message: 'Indiquer le jeu',
+                },
+              ]}
+              // label={`Nom joueur ${key + 1}`}
+            >
+              {/* <Input placeholder="Nom Joueur" /> */}
+              <Select placeholder="Selectionner un jeu" style={{ minWidth: '100px' }}>
+                {allGames.map((game) => (
+                  <Option
+                    key={game.id}
+                    value={Number(game.id)}
+                  >
+                    {game.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+
+            {/* <Form.Item name="boardgame">
               <input
                 className="existing-game-input"
                 // value="jeux"
+                name="boardgame"
                 // onChange={e => setValue(e.target.value)}
                 list="suggestions"
               />
-              <datalist id="suggestions">
-                {allGames.map((game, index) => (
-                  <option value={game.name} key={game.id} aria-label={game.name} />
+              <datalist id="suggestions" name="boardgame">
+                {allGames.map((game) => (
+                  <option
+                    value={game.name}
+                    key={game.id}
+                    aria-label={game.name}
+                    onChange={() => {
+                      setSelectedBoardGameId(game.id);
+                    }}
+                  />
                 ))}
               </datalist>
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
               <Button type="primary" htmlType="submit">
                 Valider
@@ -253,20 +289,25 @@ function AddBoardgame() {
               </Form.Item>
             </Space>
             <Space>
-              <Form.Item name="scoreType" label="Type de scoring">
+              <Form.Item
+                name="scoreType"
+                label="Type de scoring"
+                rules={[{ required: true }]}
+                style={{ minHeight:'100px' }}
+              >
                 <Radio.Group>
-                  <Radio value="highest score">Le plus haut score gagne</Radio>
-                  <Radio value="lowest score">Le plus petit score gagne</Radio>
-                  <Radio value="no score">Pas de système de scoring</Radio>
+                  <Radio value="Highest score">Le plus haut score gagne</Radio>
+                  <Radio value="Lowest score">Le plus petit score gagne</Radio>
+                  <Radio value="No score">Pas de système de scoring</Radio>
                 </Radio.Group>
               </Form.Item>
             </Space>
             <Space>
-              <Form.Item label="Joueurs Min*" name="max_player">
-                <InputNumber name="max_player" min={1} required />
-              </Form.Item>
-              <Form.Item label="Joueurs Max*" name="min_player">
+              <Form.Item label="Joueurs Min*" name="min_player">
                 <InputNumber name="min_player" min={1} required />
+              </Form.Item>
+              <Form.Item label="Joueurs Max*" name="max_player">
+                <InputNumber name="max_player" min={1} required />
               </Form.Item>
             </Space>
 

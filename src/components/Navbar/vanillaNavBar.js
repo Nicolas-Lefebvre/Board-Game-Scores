@@ -1,12 +1,19 @@
+/* eslint-disable max-len */
 import './navbar.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import jwtDecode from 'jwt-decode';
 
 import { NavLink, Link } from 'react-router-dom';
 
 // == Composant
-function Navbar() {
+function Navbar({ token }) {
+  const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
+  const url = new URL('http://syham-zedri.vpnuser.lan:8000/login');
+  console.log(url.pathname);
+
   return (
     <div className="navbar">
 
@@ -27,6 +34,16 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/tableau-de-bord">Tableau de bord</NavLink>
+              </li>
+              <li className="nav-item dropdown">
+                <NavLink to="/joueurs" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
+                  Mes joueurs
+                </NavLink>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <NavLink className="dropdown-item" to="/joueurs">Liste des joueurs</NavLink>
+                  <NavLink className="dropdown-item" to="joueurs/ajouter">Ajouter un joueur</NavLink>
+                </div>
+                {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
               <li className="nav-item dropdown">
                 <NavLink to="/jeux" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes jeux</NavLink>
@@ -56,23 +73,20 @@ function Navbar() {
                 </div>
                 {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
-              <li className="nav-item dropdown">
-                <NavLink to="/joueurs" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
-                  Mes joueurs
-                </NavLink>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <NavLink className="dropdown-item" to="/joueurs">Liste des joueurs</NavLink>
-                  <NavLink className="dropdown-item" to="joueurs/ajouter">Ajouter un joueur</NavLink>
-                </div>
-                {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
-              </li>
+              {role === 'ROLE_ADMIN' ? (
+                <li className="nav-item">
+                  <a className="nav-link" aria-current="page" href={`${url}`} rel="noopener noreferrer">Back Office</a>
+                </li>
+              )
+                : ''}
             </ul>
             <ul className="navbar-avatar">
               <li className="nav-item">
                 <Link className="nav-link connexion-wrapper" to="/connexion">
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
                   {/* <FontAwesomeIcon icon="fa-solid fa-user-tie" /> */}
-                  <div className="seConnecter">Se connecter</div>
+                  {token ? '' : ''}
+                  <div className="seConnecter">{localStorage.getItem('BGStoken') ? 'Se déconnecter' : 'Se connecter'}</div>
                 </Link>
               </li>
 

@@ -1,8 +1,10 @@
+import './disconnection.scss';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 
 // == Composant
-function Disconnection({ setIsLogged, setToken }) {
+function Disconnection({ setIsLogged, isLogged, setToken }) {
   const navigate = useNavigate();
 
   const handleClickOnDashboard = () => {
@@ -14,13 +16,13 @@ function Disconnection({ setIsLogged, setToken }) {
     setIsLogged(false);
     setToken('');
     localStorage.removeItem('BGStoken');
-    // navigate('/connexion');
+    navigate('/connexion');
   };
 
   return (
     <div className="container">
 
-      <h2>Vous êtes déjà connectés</h2>
+      <h2>Etes-vous sûrs ?</h2>
       {/* <Space wrap> */}
       <Link to="/tableau-de-bord"><Button type="primary" onClick={handleClickOnDashboard}>Accéder à mon tableau de bord</Button></Link>
       <h3>Ou</h3>

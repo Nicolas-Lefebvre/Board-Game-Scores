@@ -17,10 +17,11 @@ function Presentation() {
         </p>
       </section>
 
-      <div>
+      { localStorage.getItem('BGStoken') ? '' :
+      (<div>
         <Link style={{ marginBottom: '2rem' }} className="btn btn-primary" to="/inscription" role="button">Je m'inscris !</Link>
-      </div>
-
+      </div>)
+    }
     </div>
   );
 }

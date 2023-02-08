@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import './gameList.scss';
 
 import winnerMedal from 'src/assets/images/winner-medal.png';
@@ -7,38 +8,15 @@ import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 // import { MenuProps } from 'antd';
-import { Dropdown, Space } from 'antd';
+import { Dropdown, Space, Modal, } from 'antd';
 
 import { NavLink } from 'react-router-dom';
 import Loader from '../Loader';
 
-// const items = [
-//   {
-//     key: '1',
-//     label: (
-//       <NavLink rel="noopener noreferrer" to="#">
-//         Voir
-//       </NavLink>
-//     ),
-//   },
-//   {
-//     key: '2',
-//     label: (
-//       <NavLink rel="noopener noreferrer" to="#">
-//         Editer
-//       </NavLink>
-//     ),
-//   },
-//   {
-//     key: '3',
-//     label: (
-//       <NavLink rel="noopener noreferrer" to="#">
-//         Supprimer
-//       </NavLink>
-//     ),
-//   },
-// ];
+
+const { confirm } = Modal;
 
 let gameList = [];
 let uniqueGameList = [];
@@ -83,11 +61,59 @@ function GameList() {
       });
   }, []);
 
-  // const [gameDetails, setgameDetails] = useState(false);
-  // const onClick = () => {
-  //   // console.log('Click');
-  //   setgameDetails(!gameDetails);
+  // --------------------- CLICK ON GAME DELETE ----------------------------
+  // const showDeleteConfirm = (deleteGameId) => {
+  //   confirm({
+  //     title: 'Etes-vous sûrs de vouloir supprimer ce joueur ?',
+  //     icon: <ExclamationCircleFilled />,
+  //     content: 'suppression définitive !',
+  //     okText: 'Oui',
+  //     okType: 'danger',
+  //     cancelText: 'Annuler',
+  //     onOk() {
+  //       console.log(deleteGameId);
+  //       console.log('OK');
+  //       axios.delete(
+  //       // URL
+  //         `http://syham-zedri.vpnuser.lan:8000/api/game/${deleteGameId}`,
+  //         // données
+  //         config,
+  //       )
+  //         .then(() => {
+  //           console.log('Supression de la partie OK');
+
+  //           // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
+  //           axios.get(
+  //             // URL
+  //             'http://syham-zedri.vpnuser.lan:8000/api/usergame',
+  //             // données
+  //             config,
+  //           )
+  //             .then((response) => {
+  //               console.log('MAJ de la liste de toutes les parties OK');
+  //               // setPlayerListNoStats(response.data.results);
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //             });
+  //         })
+
+  //         .catch((error) => {
+  //           console.log(error);
+  //         })
+  //         .finally(() => {
+  //         });
+  //     },
+  //     onCancel() {
+  //       console.log('Cancel');
+  //     },
+  //   });
   // };
+  const [gameDetails, setgameDetails] = useState(false);
+  const onClick = () => {
+    // console.log('Click');
+    setgameDetails(!gameDetails);
+  };
 
   if (loading) {
     return <Loader />;
@@ -117,13 +143,13 @@ function GameList() {
                     <div className="winner-name">
                       {/* Récupération de la liste des gagnants pour chaque partie  */}
                       {/* eslint-disable-next-line max-len */}
-                      { (gameList.filter((filteredGame) => (filteredGame.game_id === game.game_id))).map((subGame) => (<span>{subGame.player_name}</span>)) }
+                      { (gameList.filter((filteredGame) => (filteredGame.game_id === game.game_id))).map((subGame) => (<span key={subGame.id}>{subGame.player_name}</span>)) }
                     </div>
                   </li>
                   {/* <li>{game.playerNumber}</li> */}
                 </ul>
               </div>
-              <div className="btn-container">
+              {/* <div className="btn-container">
                 <Dropdown
                   menu={{
                     items: [
@@ -146,7 +172,13 @@ function GameList() {
                       {
                         key: '3',
                         label: (
-                          <NavLink rel="noopener noreferrer" to="#">
+                          <NavLink
+                            rel="noopener noreferrer"
+                            to="#"
+                            onClick={(e) => {
+                              showDeleteConfirm(game.game_id);
+                            }}
+                          >
                             Supprimer
                           </NavLink>
                         ),
@@ -154,13 +186,11 @@ function GameList() {
                     ],
                   }}
                 >
-                  {/* <a onClick={(e) => e.preventDefault()}> */}
                   <Space>
                     <FontAwesomeIcon icon={faCaretDown} className="title-icon" style={{ fontSize: '2rem', color: '#2f71af' }} />
                   </Space>
-                  {/* </a> */}
                 </Dropdown>
-              </div>
+              </div> */}
             </div>
             {/* </div> */}
           </NavLink>

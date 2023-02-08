@@ -11,23 +11,49 @@ import lauriers from 'src/assets/images/laurier-records-2.png';
 
 import Loader from '../Loader';
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
-// import ResultPieChart from './PieCharts/ResultPieChart';
+import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
-// import PlayersPieChart from './PieCharts/PlayersPieChart';
+import PlayersPieChart from './PieCharts/PlayersPieChart';
+import AddBoardgame from '../AddBoardgame';
 
 // == Composant
-function Dashboard() {
+function Dashboard({ setUserInfos, userInfos }) {
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
 
-  const [loadingPlayerResults, setloadingPlayerResults] = useState(true);
+  const [loadingPlayerResults, setLoadingPlayerResults] = useState(true);
 
   const [playerList, setPlayerList] = useState([]);
+
+  const [loadingUserInfos, setLoadingUserInfos] = useState(true);
   // const [playerListSingle, setPlayerListSingle] = useState([]);
   const [lossPlayerList, setLossPlayerList] = useState([]);
   const [selectedPlayerId, setSelectedPlayerId] = useState('');
   const [data, setData] = useState([]);
+
+  // =====================================  RECUPERATION INFOS USER =============================
+  useEffect(() => {
+    axios.get(
+      // URL
+      'http://syham-zedri.vpnuser.lan:8000/api/user',
+      // données
+      config,
+    )
+      .then((response) => {
+        console.log('Recuperation des infos du user OK');
+        console.log(response.data);
+        setUserInfos(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoadingUserInfos(false);
+      });
+  }, []);
+
+  // =====================================  RECUPERATION STATS PAR JOUEUR =============================
   useEffect(() => {
     axios.get(
       // URL
@@ -40,8 +66,8 @@ function Dashboard() {
         console.log(response.data);
         setPlayerList(response.data.results);
         setSelectedPlayerId(response.data.results[0].player_id);
-        const numberOfPlayer = lossPlayerList.length;
         setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
+        const numberOfPlayer = lossPlayerList.length;
 
         // On rempli le premier camembert avec les données du joueur en index zéro par défaut
         setData(
@@ -60,8 +86,6 @@ function Dashboard() {
             },
           ],
         );
-
-        setloadingPlayerResults(false);
       })
       // .then(() => {
       //   console.log(playerList);
@@ -69,6 +93,9 @@ function Dashboard() {
       // })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setLoadingPlayerResults(false);
       });
   }, []);
 
@@ -79,7 +106,7 @@ function Dashboard() {
     ));
     console.log(filteredPlayer);
     const victoryNumber = filteredPlayer[0].victory_number;
-    const lossNumber = filteredPlayer[1].victory_number;
+    const lossNumber = (filteredPlayer[1] ? filteredPlayer[1].victory_number : '0');
 
     setSelectedPlayerId(event.target.value);
 
@@ -106,10 +133,11 @@ function Dashboard() {
   const [top5Games, setTop5Games] = useState([]);
   const [top5GamesData, setTop5GamesData] = useState([]);
 
+  // =====================================  RECUPERATION TOP 5 JEUX =============================
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/player/3/boardgames5',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames5',
       // données
       config,
     )
@@ -163,10 +191,11 @@ function Dashboard() {
   const [loadingTop5Categories, setLoadingTop5Categories] = useState(true);
   const [top5Categories, setTop5Categories] = useState([]);
 
+  // =====================================  RECUPERATION TOP 5 CATEGORIES =============================
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/player/3/categories5',
+      'http://syham-zedri.vpnuser.lan:8000/api/user/categories5',
       // données
       config,
     )
@@ -188,6 +217,7 @@ function Dashboard() {
   const [top5Players, setTop5Players] = useState([]);
   const [top5PlayersData, setTop5PlayersData] = useState([]);
 
+  // =====================================  RECUPERATION TOP 5 JOUEURS =============================
   useEffect(() => {
     axios.get(
       // URL
@@ -242,8 +272,15 @@ function Dashboard() {
       });
   }, []);
 
-  if (loadingPlayerResults) {
+  if (loadingPlayerResults || loadingUserInfos) {
     return <Loader />;
+  }
+  if (!loadingPlayerResults && !playerList[0]) {
+    return (
+      <div className="container dashboard">
+        <h2 style={{ marginTop: '40vh' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
+      </div>
+    );
   }
   return (
 
@@ -258,10 +295,10 @@ function Dashboard() {
             <img src={avatarPic} alt="" />
           </div>
           <div className="profil-text">
-            <h3 className="pseudo">Nicolas66</h3>
-            <p className="email">email@gmail.com</p>
-            <p className="email">Né le : 22/12/1987</p>
-            <p className="profil-edit-btn"><Link className="profil-edit-link" to="#">modifier</Link></p>
+            <h3 className="pseudo">{userInfos.nickname}</h3>
+            <p className="email">{userInfos.email}</p>
+            <p className="email">Né le : {userInfos.birthday.substr(0, 10)}</p>
+            <p className="profil-edit-btn"><Link className="profil-edit-link" to="/profil/modifier">Modifier</Link></p>
           </div>
         </section>
 
@@ -276,7 +313,7 @@ function Dashboard() {
             aria-label="Default select example"
             onChange={onChange}
           >
-            {(playerList.slice(0, lossPlayerList.length)).map((player) => (
+            {(playerList.slice(0, lossPlayerList.length+1)).map((player) => (
               <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
             ))}
           </select>
@@ -357,7 +394,7 @@ function Dashboard() {
                     <td>
                       {
                         Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number))
-                        + Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number))
+                        + (((lossPlayerList.find((player) => (player.player_id == selectedPlayerId)))) ? Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number)) : 0)
                       }
                     </td>
                   </tr>
@@ -365,7 +402,7 @@ function Dashboard() {
                     <td>Victoires</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number
+                        playerList.filter((player) => (player.player_id == selectedPlayerId))[0] ? playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number : '0'
                       }
                     </td>
                   </tr>
@@ -373,7 +410,7 @@ function Dashboard() {
                     <td>Défaites</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number
+                        playerList.filter((player) => (player.player_id == selectedPlayerId))[1] ? playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number : '0'
                       }
                     </td>
                   </tr>
@@ -384,12 +421,11 @@ function Dashboard() {
                 </tbody>
               </table>
             </div>
-            <div className="resultat-table">
+            {/* <div className="resultat-table">
               <table className="table table-striped">
                 <thead>
                   <tr>
                     <th colSpan="4">Dernières parties</th>
-                    {/* <th scope="col">245</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -419,7 +455,7 @@ function Dashboard() {
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div> */}
           </div>
 
         </section>
@@ -463,54 +499,54 @@ function Dashboard() {
                         <th>Recordman</th> */}
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[0].board_game_id}`}>{top5Games[0].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[0].board_game_id}?boardgame_id=${top5Games[0].board_game_id}`}>{top5Games[0].board_game_name}</Link></td>
                         <td>{top5Games[0].game_number}</td>
                         {/* <td>18</td>
                         <td>5</td> */}
                         <td className="desktop">Laura</td>
-                        <td className="desktop">5</td>
+                        <td className="desktop">2</td>
                         <td className="desktop">Syham</td>
                         <td className="desktop">12</td>
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[1].board_game_id}`}>{top5Games[1].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[1].board_game_id}?boardgame_id=${top5Games[1].board_game_id}`}>{top5Games[1].board_game_name}</Link></td>
                         <td>{top5Games[1].game_number}</td>
                         {/* <td>2</td>
                         <td>120</td> */}
-                        <td className="desktop">Laura</td>
-                        <td className="desktop">5</td>
+                        <td className="desktop">Amar</td>
+                        <td className="desktop">3</td>
                         <td className="desktop">Syham</td>
-                        <td className="desktop">12</td>
+                        <td className="desktop">24</td>
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[2].board_game_id}`}>{top5Games[2].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[2].board_game_id}?boardgame_id=${top5Games[2].board_game_id}`}>{top5Games[2].board_game_name}</Link></td>
                         <td>{top5Games[2].game_number}</td>
                         {/* <td>12</td>
                         <td>3</td> */}
-                        <td className="desktop">Laura</td>
-                        <td className="desktop">5</td>
                         <td className="desktop">Nico</td>
-                        <td className="desktop">12</td>
+                        <td className="desktop">2</td>
+                        <td className="desktop">Nico</td>
+                        <td className="desktop">32</td>
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[3].board_game_id}`}>{top5Games[3].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[3].board_game_id}?boardgame_id=${top5Games[3].board_game_id}`}>{top5Games[3].board_game_name}</Link></td>
                         <td>{top5Games[3].game_number}</td>
                         {/* <td>8</td>
                         <td>7</td> */}
-                        <td className="desktop">Laura</td>
+                        <td className="desktop">Syham</td>
                         <td className="desktop">5</td>
                         <td className="desktop">Amar</td>
-                        <td className="desktop">12</td>
+                        <td className="desktop">23</td>
                       </tr>
                       <tr>
-                        <td><Link to={`/jeux/${top5Games[4].board_game_id}`}>{top5Games[4].board_game_name}</Link></td>
+                        <td><Link to={`/jeux/${top5Games[4].board_game_id}?boardgame_id=${top5Games[4].board_game_id}`}>{top5Games[4].board_game_name}</Link></td>
                         <td>{top5Games[4].game_number}</td>
                         {/* <td>12</td>
                         <td>3</td> */}
-                        <td className="desktop">Laura</td>
+                        <td className="desktop">Alexis</td>
                         <td className="desktop">5</td>
                         <td className="desktop">Syham</td>
-                        <td className="desktop">12</td>
+                        <td className="desktop">24</td>
                       </tr>
                     </tbody>
                   </table>
@@ -626,38 +662,38 @@ function Dashboard() {
                       <tr>
                         <th>Catégorie</th>
                         <th>Parties</th>
-                        <th>Victoires</th>
-                        <th>Défaites</th>
+                        {/* <th>Victoires</th>
+                        <th>Défaites</th> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[0].name}</td>
                         <td>{top5Categories[0].Category_number}</td>
-                        <td>18</td>
-                        <td>5</td>
+                        {/* <td>18</td> */}
+                        {/* <td>5</td> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[1].name}</td>
                         <td>{top5Categories[1].Category_number}</td>
-                        <td>2</td>
-                        <td>120</td>
+                        {/* <td>2</td> */}
+                        {/* <td>120</td> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[2].name}</td>
                         <td>{top5Categories[2].Category_number}</td>
-                        <td>12</td>
-                        <td>3</td>
+                        {/* <td>12</td> */}
+                        {/* <td>3</td> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[3].name}</td>
                         <td>{top5Categories[3].Category_number}</td>
-                        <td>8</td>
-                        <td>7</td>
+                        {/* <td>8</td> */}
+                        {/* <td>7</td> */}
                       </tr>
                       <tr>
                         <td>{top5Categories[4].name}</td>
                         <td>{top5Categories[4].Category_number}</td>
-                        <td>12</td>
-                        <td>3</td>
+                        {/* <td>12</td> */}
+                        {/* <td>3</td> */}
                       </tr>
                     </tbody>
                   </table>
@@ -700,37 +736,37 @@ function Dashboard() {
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[0].player_id}`}>{top5Players[0].player_name}</Link></td>
                         <td>{top5Players[0].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id))).victory_number }</td>
-                        <td>5</td>
-                        <td>5</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id))).victory_number) : '0' }</td>
+                        <td>2</td>
+                        <td>1</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[1].player_id}`}>{top5Players[1].player_name}</Link></td>
                         <td>{top5Players[1].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id))).victory_number }</td>
-                        <td>120</td>
-                        <td>120</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id))).victory_number) : '0' }</td>
+                        <td>1</td>
+                        <td>0</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[2].player_id}`}>{top5Players[2].player_name}</Link></td>
                         <td>{top5Players[2].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id))).victory_number }</td>
-                        <td>3</td>
-                        <td>3</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id))).victory_number) : '0' }</td>
+                        <td>1</td>
+                        <td>0</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[3].player_id}`}>{top5Players[3].player_name}</Link></td>
                         <td>{top5Players[3].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id))).victory_number }</td>
-                        <td>7</td>
-                        <td>7</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id))).victory_number) : '0' }</td>
+                        <td>1</td>
+                        <td>2</td>
                       </tr>
                       <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[4].player_id}`}>{top5Players[4].player_name}</Link></td>
                         <td>{top5Players[4].victory_number}</td>
-                        <td>{ (lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id))).victory_number }</td>
-                        <td>3</td>
-                        <td>3</td>
+                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id))).victory_number) : '0' }</td>
+                        <td>2</td>
+                        <td>1</td>
                       </tr>
                     </tbody>
                   </table>
