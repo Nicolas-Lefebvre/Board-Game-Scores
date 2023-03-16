@@ -32,7 +32,7 @@ function GameList() {
 
   useEffect(() => {
     axios.get(
-      'http://syham-zedri.vpnuser.lan:8000/api/usergame',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/usergame',
       config,
     )
 
@@ -75,7 +75,7 @@ function GameList() {
   //       console.log('OK');
   //       axios.delete(
   //       // URL
-  //         `http://syham-zedri.vpnuser.lan:8000/api/game/${deleteGameId}`,
+  //         `http://nicolas-lefebvre.vpnuser.lan:8000/api/game/${deleteGameId}`,
   //         // données
   //         config,
   //       )
@@ -85,7 +85,7 @@ function GameList() {
   //           // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
   //           axios.get(
   //             // URL
-  //             'http://syham-zedri.vpnuser.lan:8000/api/usergame',
+  //             'http://nicolas-lefebvre.vpnuser.lan:8000/api/usergame',
   //             // données
   //             config,
   //           )

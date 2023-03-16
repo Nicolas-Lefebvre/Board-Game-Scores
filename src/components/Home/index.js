@@ -14,7 +14,7 @@ function Home({ top5Games, loading }) {
 
       <Header />
       <Presentation />
-      {!loading ? <Classement loading={loading} top5Games={top5Games} /> : <Loader />}
+      {!loading && top5Games.length !== 0 ? <Classement loading={loading} top5Games={top5Games} /> : <Loader />}
       <HomeDashboard />
 
       {/* <img src={image} alt="" className="header-image" /> */}

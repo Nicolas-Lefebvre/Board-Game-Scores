@@ -13,3 +13,11 @@ $secondary-color: green;
 .red-btn {
   background-color: #c31313!important;
 }
+
+label {
+  font-size: 25px;
+}
+
+:where(.css-dev-only-do-not-override-1i9hnpv).ant-form-item .ant-form-item-label >label {
+  font-size: 18px;
+}

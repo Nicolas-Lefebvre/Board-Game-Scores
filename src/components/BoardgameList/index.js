@@ -50,7 +50,7 @@ function BoardgameList() {
   // RECUPERATION DE TOUS LES JEUX AVEC OU SANS PARTIE
   useEffect(() => {
     axios.get(
-      'http://syham-zedri.vpnuser.lan:8000/api/user/collection',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/collection',
       config,
     )
 
@@ -74,7 +74,7 @@ function BoardgameList() {
   // RECUPERATION DE TOUS LES JEUX AVEC AU MOINS UNE PARTIE, INDIQUANT LE NBRE TOTAL DE PARTIES
   useEffect(() => {
     axios.get(
-      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames',
       config,
     )
 

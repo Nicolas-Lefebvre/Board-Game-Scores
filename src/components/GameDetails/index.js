@@ -27,7 +27,7 @@ const GameDetails = () => {
     console.log(gameId);
 
     axios.get(
-      `http://syham-zedri.vpnuser.lan:8000/api/user/game/${gameId}`,
+      `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/game/${gameId}`,
       config,
     )
       .then((response) => {
@@ -61,7 +61,7 @@ const GameDetails = () => {
         console.log('OK');
         axios.delete(
         // URL
-          `http://syham-zedri.vpnuser.lan:8000/api/game/${deleteGameId}`,
+          `http://nicolas-lefebvre.vpnuser.lan:8000/api/game/${deleteGameId}`,
           // données
           config,
         )
