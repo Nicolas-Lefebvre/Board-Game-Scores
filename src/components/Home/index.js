@@ -38,7 +38,7 @@ function Home() {
       <Header />
       <Presentation />
       {/* {top5Games.length === 0 ? '' : <Loader />} */}
-      {boardgamesLoaded ? (top5Games.length !== 0 ? <Classement loading={loading} top5Games={top5Games} /> : '') : <Loader />}
+      {boardgamesLoaded ? (top5Games.length >= 5 ? <Classement /> : '') : <Loader />}
       <HomeDashboard />
 
     </div>
