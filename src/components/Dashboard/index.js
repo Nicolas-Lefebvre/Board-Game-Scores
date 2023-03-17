@@ -295,7 +295,7 @@ function Dashboard({ setUserInfos, userInfos }) {
             </div>
           </section>
           <div className="container dashboard">
-            <h2 style={{ marginTop: '10vh', color: 'grey', fontStyle: 'italic' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
+            <h2 style={{ marginTop: '20vh', color: 'grey', fontStyle: 'italic' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
           </div>
         </main>
       </div>
