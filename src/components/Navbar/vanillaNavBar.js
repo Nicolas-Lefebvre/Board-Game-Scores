@@ -11,7 +11,7 @@ import { NavLink, Link } from 'react-router-dom';
 // == Composant
 function Navbar({ token }) {
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
-  const url = new URL('http://syham-zedri.vpnuser.lan:8000/login');
+  const url = new URL('http://nicolas-lefebvre.vpnuser.lan:8000/login');
   console.log(url.pathname);
 
   return (
