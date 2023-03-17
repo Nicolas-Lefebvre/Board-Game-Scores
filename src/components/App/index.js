@@ -34,6 +34,8 @@ import PlayerAdd from '../PlayerAdd';
 import PlayerEdit from '../PlayerEdit';
 import Page404 from '../Page404';
 import ProfilEdit from '../ProfilEdit';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTop5Games } from '../../actions/boardgames';
 
 // == Composant
 function App() {
@@ -57,25 +59,25 @@ function App() {
     // }
   }, []);
 
-  useEffect(() => {
-    axios.get('http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames/top5')
+  // useEffect(() => {
+  //   axios.get('http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames/top5')
 
-      .then((response) => {
-        console.log(response);
-        // console.log(response.data.results);
-        setTop5Games(response.data.results);
-        // console.log(response.data.results[0].name);
-      })
+  //     .then((response) => {
+  //       console.log(response);
+  //       // console.log(response.data.results);
+  //       setTop5Games(response.data.results);
+  //       // console.log(response.data.results[0].name);
+  //     })
 
-      .catch((error) => {
-        console.log(error);
-      })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
 
-      .finally(() => {
-        // traitement exécuté dans tous les cas, après then ou après catch
-        setLoading(false);
-      });
-  }, []);
+  //     .finally(() => {
+  //       // traitement exécuté dans tous les cas, après then ou après catch
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   // console.log(localStorage.getItem('BGStoken'));
 

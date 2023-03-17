@@ -66,8 +66,11 @@
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-google-charts": "^4.0.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0",
-    "react-vis": "^1.11.12"
+    "react-vis": "^1.11.12",
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9"
   },
   "jest": {
     "modulePaths": [

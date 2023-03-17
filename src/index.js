@@ -4,6 +4,8 @@ import { createRoot } from 'react-dom/client';
 // import de React Router
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from 'src/store';
 
 // == Import : local
 // Composants
@@ -14,7 +16,9 @@ import App from 'src/components/App';
 //    => crée une structure d'objets imbriqués (DOM virtuel)
 const rootReactElement = (
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 );
 

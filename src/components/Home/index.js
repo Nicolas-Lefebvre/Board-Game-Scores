@@ -1,7 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
 import './home.scss';
 import PropTypes from 'prop-types';
+
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchTop5Games } from '../../actions/boardgames';
 
 import Header from './Header';
 import Presentation from './Presentation';
@@ -10,14 +15,30 @@ import HomeDashboard from './HomeDashboard';
 import Loader from '../Loader';
 
 // == Composant
-function Home({ top5Games, loading }) {
+function Home({ loading }) {
+  const boardgamesLoaded = useSelector((state) => state.boardgames.top5GamesLoaded);
+  console.log(boardgamesLoaded);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTop5Games());
+  }, []);
+
+  const top5Games = useSelector((state) => state.boardgames.top5Games);
+
+  // useEffect(() => {
+  //   const dispatch = useDispatch();
+  //   dispatch(fetchTop5Games());
+  //   console.log(top5Games);
+  // }, []);
+
   return (
     <div className="home">
 
       <Header />
       <Presentation />
-      {top5Games.length === 0 ? '' : <Loader />}
-      {!loading ? (top5Games.length !== 0 ? <Classement loading={loading} top5Games={top5Games} /> : '') : <Loader />}
+      {/* {top5Games.length === 0 ? '' : <Loader />} */}
+      {boardgamesLoaded ? (top5Games.length !== 0 ? <Classement loading={loading} top5Games={top5Games} /> : '') : <Loader />}
       <HomeDashboard />
 
     </div>
