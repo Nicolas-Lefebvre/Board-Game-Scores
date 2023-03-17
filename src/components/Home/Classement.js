@@ -1,5 +1,7 @@
-import image from 'src/assets/images/catan-300x300.jpg';
-import image2 from 'src/assets/images/la-bonne-paye.jpg';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useSelector } from 'react-redux';
+// import image from 'src/assets/images/catan-300x300.jpg';
+// import image2 from 'src/assets/images/la-bonne-paye.jpg';
 // import image3 from 'src/assets/images/13_4527287_6_60_FR.jpg';
 // import PieChart from './PieChart/PieChart';
 import { Chart } from 'react-google-charts';
@@ -7,13 +9,15 @@ import { Chart } from 'react-google-charts';
 import Loader from '../Loader';
 
 // == Composant
-function Classement({ top5Games, loading }) {
-  console.log(top5Games);
-  console.log(top5Games[0]);
+function Classement() {
+  // console.log(top5Games);
+  // console.log(top5Games[0]);
+  const top5Games = useSelector((state) => state.boardgames.top5Games);
+  const top5GamesLoaded = useSelector((state) => state.boardgames.top5GamesLoaded);
 
   // if (!top5Games.length === 0) {
   const data = [
-    ["Catan", "Hours per Day"],
+    ['Catan', 'Hours per Day'],
     [top5Games[0].name, top5Games[0].game_number],
     [top5Games[1].name, top5Games[1].game_number],
     [top5Games[2].name, top5Games[2].game_number],
@@ -49,7 +53,7 @@ function Classement({ top5Games, loading }) {
 
       <h2>Classement de la semaine</h2>
 
-      {loading ? (<Loader />)
+      {!top5GamesLoaded ? (<Loader />)
         : (
           <div className="card-container">
             <div className="card mb-3 " style={{ maxWidth: '540px' }}>

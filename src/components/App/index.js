@@ -1,16 +1,14 @@
 // == Import
 import './styles.scss';
 
-import axios from 'axios';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useDispatch, useSelector } from 'react-redux';
 
 import Navbar from '../Navbar/vanillaNavBar';
 import Footer from '../Footer';
-
-// import Data from '../../Data/Top5Games';
-
 import Home from '../Home';
 import Subscribe from '../Subscribe';
 import Connexion from '../Connexion';
@@ -34,13 +32,10 @@ import PlayerAdd from '../PlayerAdd';
 import PlayerEdit from '../PlayerEdit';
 import Page404 from '../Page404';
 import ProfilEdit from '../ProfilEdit';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTop5Games } from '../../actions/boardgames';
 
 // == Composant
 function App() {
   const [userInfos, setUserInfos] = useState([]);
-  const [top5Games, setTop5Games] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // eslint-disable-next-line no-unused-vars
@@ -89,7 +84,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={(<Home top5Games={top5Games} loading={loading} />)}
+          element={(<Home />)}
         />
 
         {/* --------------------------------------- BOARDGAMES -------------------------------- */}

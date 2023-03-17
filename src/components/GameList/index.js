@@ -118,6 +118,13 @@ function GameList() {
   if (loading) {
     return <Loader />;
   }
+  if (!loading && gameList.length === 0) {
+    return (
+      <div className="container">
+        <h2 style={{ marginTop: '20vh', color: 'grey', fontStyle: 'italic' }}>Vous n'avez encore aucune donnée : ajoutez votre première partie</h2>
+      </div>
+    );
+  }
   return (
     <div className="container gameList">
 

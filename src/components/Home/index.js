@@ -15,7 +15,7 @@ import HomeDashboard from './HomeDashboard';
 import Loader from '../Loader';
 
 // == Composant
-function Home({ loading }) {
+function Home() {
   const boardgamesLoaded = useSelector((state) => state.boardgames.top5GamesLoaded);
   console.log(boardgamesLoaded);
 
@@ -46,18 +46,6 @@ function Home({ loading }) {
 }
 
 Home.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  /* list doit être un tableau d'objets, et on précise les propriétés de l'objet (la
-    "forme" des objets) */
-  top5Games: PropTypes.arrayOf(
-    // shape : "des objets qui ont cette forme-là"
-    PropTypes.shape({
-      // propriété: type attendu
-      // il faut une propriété id, de type number
-      game_number: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
 };
 
 // == Export

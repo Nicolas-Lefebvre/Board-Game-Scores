@@ -12,7 +12,6 @@ import { NavLink, Link } from 'react-router-dom';
 function Navbar({ token }) {
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
   const url = new URL('http://nicolas-lefebvre.vpnuser.lan:8000/login');
-  console.log(url.pathname);
 
   return (
     <div className="navbar">

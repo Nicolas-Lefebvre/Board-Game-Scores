@@ -98,6 +98,13 @@ function BoardgameList() {
   if (loading) {
     return <Loader />;
   }
+  if (!loading && boardgameList.length === 0) {
+    return (
+      <div className="container">
+        <h2 style={{ marginTop: '20vh', color: 'grey', fontStyle: 'italic' }}>Vous n'avez encore aucune donnée : ajoutez votre premier jeu</h2>
+      </div>
+    );
+  }
   return (
     <div className="container gameList">
 
