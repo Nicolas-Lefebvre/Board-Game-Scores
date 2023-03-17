@@ -35,7 +35,7 @@ function PlayerAdd() {
     console.log('Received values of form: ', values);
     axios.post(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/player',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/player',
       // données
       {
         name: values.name,

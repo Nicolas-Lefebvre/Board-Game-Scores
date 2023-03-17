@@ -18,6 +18,10 @@ h3 {
   
 }
 
+.comment-form-item label {
+  color: white !important;
+}
+
 @media (max-width: 1200px){
   .add-player-container {
     // flex-direction: column;

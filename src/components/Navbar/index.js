@@ -13,7 +13,9 @@ function CollapsibleExample() {
       <Container>
         <Navbar.Brand href="#home"><FontAwesomeIcon icon={faDice} className="title-icon" /><h1>Board Game Score</h1></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
         <Navbar.Collapse id="responsive-navbar-nav" className="">
+
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Accueil</Nav.Link>
             <Nav.Link as={Link} to="/tableau-de-bord">Tableau de bord</Nav.Link>
@@ -31,10 +33,13 @@ function CollapsibleExample() {
               <NavDropdown.Item as={Link} to="/joueurs/ajouter">Ajouter un joueur</NavDropdown.Item>
             </NavDropdown>
           </Nav>
+
           <Nav>
             <Nav.Link href="#deets"><FontAwesomeIcon icon={faUserTie} className="icon" /> Se connecter</Nav.Link>
           </Nav>
+
         </Navbar.Collapse>
+
       </Container>
     </Navbar>
   );

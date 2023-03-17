@@ -25,7 +25,7 @@ function PlayerEdit({ setUserInfos, userInfos }) {
     console.log('Received values of form: ', values);
     axios.patch(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/infos',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/infos',
       // données
       {
         nickname: values.nickname,

@@ -58,7 +58,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    axios.get('http://syham-zedri.vpnuser.lan:8000/api/boardgames/top5')
+    axios.get('http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames/top5')
 
       .then((response) => {
         console.log(response);

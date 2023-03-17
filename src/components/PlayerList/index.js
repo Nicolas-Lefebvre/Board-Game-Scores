@@ -32,7 +32,7 @@ function Players() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/players',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players',
       // données
       config,
     )
@@ -58,7 +58,7 @@ function Players() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/players/stats',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players/stats',
       // données
       config,
     )
@@ -93,7 +93,7 @@ function Players() {
         console.log('OK');
         axios.delete(
         // URL
-          `http://syham-zedri.vpnuser.lan:8000/api/player/${deletePlayerId}`,
+          `http://nicolas-lefebvre.vpnuser.lan:8000/api/player/${deletePlayerId}`,
           // données
           config,
         )
@@ -103,7 +103,7 @@ function Players() {
             // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
             axios.get(
               // URL
-              'http://syham-zedri.vpnuser.lan:8000/api/user/players',
+              'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players',
               // données
               config,
             )
@@ -168,7 +168,7 @@ function Players() {
                           <td>{player.victory_number}</td>
                           <td>
                             {/* -------------- on récupère le player concerné avec son id pour afficher cette fois le nombre de défaites */}
-                            { (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).victory_number ? (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) : '0' }
+                            { (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).length > 0 ? (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) : '0' }
                           </td>
                           <td>
                             <NavLink to={`/joueurs/modifier/?player_id=${player.player_id}&player_name=${player.player_name}`}>

@@ -52,11 +52,11 @@ const onPermissionChanged = () => {
   permission = !permission;
 };
 
-const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
-};
 // ============================================ Composant===========================================
 function AddGame() {
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  };
   const [isTeam, setIsTeam] = useState(false);
   const [allBoardGames, setAllBoardGamess] = useState([]);
   const [allBoardgamesloading, setAllBoardgamesloading] = useState(true);
@@ -66,7 +66,7 @@ function AddGame() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/collection',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/collection',
       // données
       config,
     )
@@ -77,8 +77,6 @@ function AddGame() {
       })
       .catch((error) => {
         console.log(error);
-      })
-      .finally(() => {
       });
   }, []);
 
@@ -88,7 +86,7 @@ function AddGame() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/players',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players',
       // données
       config,
     )
@@ -136,7 +134,7 @@ function AddGame() {
 
     axios.post(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/games',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/games',
       // données
       {
         startDate: values.startDate,
@@ -379,7 +377,7 @@ function AddGame() {
           {/* ------------------------------------COMMENTAIRE ET PHOTO-------------------------- */}
           <section>
             <h3>Commentaires</h3>
-            <Form.Item label="Commentaires" name="comment">
+            <Form.Item label="Commentaires" name="comment" className="comment-form-item">
               <TextArea rows={4} />
             </Form.Item>
             {/* <h3>Photo souvenir</h3> */}
