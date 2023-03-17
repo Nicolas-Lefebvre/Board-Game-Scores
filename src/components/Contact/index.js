@@ -53,7 +53,7 @@ function Contact() {
       console.log('Received values of form: ', values, dateString);
       axios.post(
         // URL
-        'http://syham-zedri.vpnuser.lan:8000/api/boardgames',
+        'http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames',
         // données
         {
           name: values.name,
@@ -94,9 +94,11 @@ function Contact() {
           >
             <p>Vous pouvez nous contacter sur les réseaux sociaux ou via notre formulaire de contact, nous vous répondrons dans les meilleurs délais!</p>
 
-            <img src={Facebook} alt="" className="image" />
-            <img src={Instagram} alt="" className="image" />
-            <img src={Twitter} alt="" className="image" />
+            <div className="social-wrapper">
+              <img src={Facebook} alt="" className="image" />
+              <img src={Instagram} alt="" className="image" />
+              <img src={Twitter} alt="" className="image" />
+            </div>
 
             <section>
               <Space>

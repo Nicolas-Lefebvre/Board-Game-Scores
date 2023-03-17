@@ -11,10 +11,10 @@ import lauriers from 'src/assets/images/laurier-records-2.png';
 
 import Loader from '../Loader';
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
-import ResultPieChart from './PieCharts/ResultPieChart';
+// import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
-import PlayersPieChart from './PieCharts/PlayersPieChart';
-import AddBoardgame from '../AddBoardgame';
+// import PlayersPieChart from './PieCharts/PlayersPieChart';
+// import AddBoardgame from '../AddBoardgame';
 
 // == Composant
 function Dashboard({ setUserInfos, userInfos }) {
@@ -36,7 +36,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user',
       // données
       config,
     )
@@ -57,7 +57,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/players/stats',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players/stats',
       // données
       config,
     )
@@ -137,7 +137,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/boardgames5',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames5',
       // données
       config,
     )
@@ -195,7 +195,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/categories5',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/categories5',
       // données
       config,
     )
@@ -221,7 +221,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://syham-zedri.vpnuser.lan:8000/api/user/players5',
+      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players5',
       // données
       config,
     )
@@ -278,7 +278,26 @@ function Dashboard({ setUserInfos, userInfos }) {
   if (!loadingPlayerResults && !playerList[0]) {
     return (
       <div className="container dashboard">
-        <h2 style={{ marginTop: '40vh' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
+
+        <h2>Mon tableau de bord</h2>
+
+        <main className="main">
+
+          <section className="profil-container">
+            <div className="avatar-img">
+              <img src={avatarPic} alt="" />
+            </div>
+            <div className="profil-text">
+              <h3 className="pseudo">{userInfos.nickname}</h3>
+              <p className="email">{userInfos.email}</p>
+              <p className="email">Né le : {userInfos.birthday.substr(0, 10)}</p>
+              <p className="profil-edit-btn"><Link className="profil-edit-link" to="/profil/modifier">Modifier</Link></p>
+            </div>
+          </section>
+          <div className="container dashboard">
+            <h2 style={{ marginTop: '20vh', color: 'grey', fontStyle: 'italic' }}>Vous n'avez encore aucune donnée : enregistrez votre première partie</h2>
+          </div>
+        </main>
       </div>
     );
   }

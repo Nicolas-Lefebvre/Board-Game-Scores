@@ -26,7 +26,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
   };
   useEffect(() => {
     axios.get(
-      `http://syham-zedri.vpnuser.lan:8000/api/user/boardgames/${boardgameId}`,
+      `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames/${boardgameId}`,
       config,
     )
 
@@ -42,7 +42,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
       .finally(() => {
         // if (boardgameInfos.game_number == false) {
         //   axios.get(
-        //     `http://syham-zedri.vpnuser.lan:8000/api/user/boardgameNG/${boardgameId}`,
+        //     `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgameNG/${boardgameId}`,
         //     config,
         //   )
         //     .then((response) => {
@@ -74,7 +74,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
         console.log('OK');
         axios.delete(
         // URL
-          `http://syham-zedri.vpnuser.lan:8000/api/user/boardgame/${deleteGameId}/delete`,
+          `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgame/${deleteGameId}/delete`,
           // données
           config,
         )
