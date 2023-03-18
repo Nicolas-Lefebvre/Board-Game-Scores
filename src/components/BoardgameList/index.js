@@ -2,6 +2,7 @@
 import './boardgameList.scss';
 
 import { useSelector, useDispatch } from 'react-redux';
+import jwtDecode from 'jwt-decode';
 
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -12,32 +13,32 @@ import { NavLink } from 'react-router-dom';
 import Loader from '../Loader';
 import { fetchBoardgameList, fetchPlayedBoardgameList } from '../../actions/boardgames';
 
-const items = [
-  {
-    key: '1',
-    label: (
-      <NavLink rel="noopener noreferrer" to="#">
-        Voir
-      </NavLink>
-    ),
-  },
-  {
-    key: '2',
-    label: (
-      <NavLink rel="noopener noreferrer" to="#">
-        Editer
-      </NavLink>
-    ),
-  },
-  {
-    key: '3',
-    label: (
-      <NavLink rel="noopener noreferrer" to="#">
-        Supprimer
-      </NavLink>
-    ),
-  },
-];
+// const items = [
+//   {
+//     key: '1',
+//     label: (
+//       <NavLink rel="noopener noreferrer" to="#">
+//         Voir
+//       </NavLink>
+//     ),
+//   },
+//   {
+//     key: '2',
+//     label: (
+//       <NavLink rel="noopener noreferrer" to="#">
+//         Editer
+//       </NavLink>
+//     ),
+//   },
+//   {
+//     key: '3',
+//     label: (
+//       <NavLink rel="noopener noreferrer" to="#">
+//         Supprimer
+//       </NavLink>
+//     ),
+//   },
+// ];
 
 // == Composant
 function BoardgameList() {
@@ -58,12 +59,22 @@ function BoardgameList() {
   }, []);
   const playedBoardgameList = useSelector((state) => state.boardgames.playedBoardgameList);
 
-  console.log(boardgameList);
-  console.log(playedBoardgameList);
+  // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
+  let isExpired = false;
+  const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
+  console.log(decodedToken);
+  const dateNow = new Date();
+
+  if (decodedToken.exp < dateNow.getTime()) {
+    isExpired = true;
+  }
+
+  // ------------------------------------------------------------------------------
 
   if (!boardgameListLoaded || !playedBoardgameListLoaded) {
     return <Loader />;
   }
+
   if (boardgameListLoaded && playedBoardgameListLoaded && boardgameList.length === 0) {
     return (
       <div className="container">
@@ -71,6 +82,7 @@ function BoardgameList() {
       </div>
     );
   }
+
   return (
     <div className="container gameList">
 

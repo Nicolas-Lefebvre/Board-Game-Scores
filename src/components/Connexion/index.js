@@ -38,6 +38,8 @@ function Connexion({setIsLogged, setToken, token}) {
         setIsLogged(true);
         setToken(response.data.token);
         localStorage.setItem('BGStoken', response.data.token);
+        const decoded = jwtDecode(response.data.token);
+        console.log(decoded);
         // setIsLogged(response.data.logged);
         // store.dispatch(actionToDispatch);
         // const navigate = useNavigate();

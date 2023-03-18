@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useDispatch, useSelector } from 'react-redux';
+import jwtDecode from 'jwt-decode';
 
 import Navbar from '../Navbar/vanillaNavBar';
 import Footer from '../Footer';
@@ -40,6 +41,21 @@ function App() {
 
   // eslint-disable-next-line no-unused-vars
   const [isLogged, setIsLogged] = useState(false);
+
+  // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
+  if (localStorage.getItem('BGStoken')) {
+    const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
+    console.log(decodedToken);
+    const dateNow = new Date();
+    console.log(dateNow.getTime());
+
+    if (decodedToken.exp > dateNow.getTime()) {
+      setIsLogged(false);
+      localStorage.removeItem('BGStoken');
+    }
+  }
+  // ------------------------------------------------------------------------------
+
   // eslint-disable-next-line no-unused-vars
   // const [nickname, setNickname] = useState('');
   // eslint-disable-next-line no-unused-vars

@@ -3,63 +3,66 @@ import './gameList.scss';
 
 import winnerMedal from 'src/assets/images/winner-medal.png';
 
-import axios from 'axios';
+// import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { ExclamationCircleFilled } from '@ant-design/icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+// import { ExclamationCircleFilled } from '@ant-design/icons';
 // import { MenuProps } from 'antd';
-import { Dropdown, Space, Modal, } from 'antd';
+import { Dropdown, Space, Modal } from 'antd';
 
 import { NavLink } from 'react-router-dom';
 import Loader from '../Loader';
+import { fetchGameList } from '../../actions/games';
 
+// const { confirm } = Modal;
 
-const { confirm } = Modal;
-
-let gameList = [];
-let uniqueGameList = [];
+// let uniqueGameList = [];
 
 // == Composant
 function GameList() {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
+  const gameListLoaded = useSelector((state) => state.games.gameListLoaded);
+  console.log(gameListLoaded);
 
-  // ---------------------- Get token from local storage---------------------
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get(
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/usergame',
-      config,
-    )
+    dispatch(fetchGameList());
+    // axios.get(
+    //   'http://nicolas-lefebvre.vpnuser.lan:8000/api/usergame',
+    //   config,
+    // )
 
-      .then((response) => {
-        console.log('Liste des parties du user bien récupérée');
-        console.log(response);
-        // -------------Tableau contenant toutes les parties (un object par gagnants)----------
-        gameList = response.data.results;
-        // -------------Tableau contenant toutes les parties (un object par partie)----------
-        uniqueGameList = [...new Map(gameList.map((game) => [game.game_id, game])).values()];
-        console.log(gameList);
-        console.log(uniqueGameList);
+    //   .then((response) => {
+    //     console.log('Liste des parties du user bien récupérée');
+    //     console.log(response);
+    //     // -------------Tableau contenant toutes les parties (un object par gagnants)----------
+    //     gameList = response.data.results;
+    //     // -------------Tableau contenant toutes les parties (un object par partie)----------
+    //     uniqueGameList = [...new Map(gameList.map((game) => [game.game_id, game])).values()];
+    //     console.log(gameList);
+    //     console.log(uniqueGameList);
 
-        // const concatGameList = gameList.concat();
-        // console.log(concatGameList);
-        // console.log(response.data.results[0].name);
-      })
+    //     // const concatGameList = gameList.concat();
+    //     // console.log(concatGameList);
+    //     // console.log(response.data.results[0].name);
+    //   })
 
-      .catch((error) => {
-        console.log(error);
-      })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
 
-      .finally(() => {
-        // traitement exécuté dans tous les cas, après then ou après catch
-        setLoading(false);
-      });
+    //   .finally(() => {
+    //     // traitement exécuté dans tous les cas, après then ou après catch
+    //     setLoading(false);
+    //   });
   }, []);
+  const gameList = useSelector((state) => state.games.gameList);
+  console.log(gameList);
+  const uniqueGameList = [...new Map(gameList.map((game) => [game.game_id, game])).values()];
 
   // --------------------- CLICK ON GAME DELETE ----------------------------
   // const showDeleteConfirm = (deleteGameId) => {
@@ -115,10 +118,10 @@ function GameList() {
     setgameDetails(!gameDetails);
   };
 
-  if (loading) {
+  if (!gameListLoaded) {
     return <Loader />;
   }
-  if (!loading && gameList.length === 0) {
+  if (gameListLoaded && gameList.length === 0) {
     return (
       <div className="container">
         <h2 style={{ marginTop: '20vh', color: 'grey', fontStyle: 'italic' }}>Vous n'avez encore aucune donnée : ajoutez votre première partie</h2>
