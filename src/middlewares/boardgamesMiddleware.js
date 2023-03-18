@@ -3,9 +3,13 @@ import axios from 'axios';
 import {
   FETCH_TOP5GAMES,
   saveTop5Games,
+  FETCH_BOARDGAMELIST,
+  saveBoardgameList,
+  FETCH_PLAYEDBOARDGAMELIST,
+  savePlayedBoardgameList,
 } from '../actions/boardgames';
 
-const recipesMiddleware = (store) => (next) => (action) => {
+const boardgamesMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_TOP5GAMES:
       // console.log('ici appel à lAPI');
@@ -14,8 +18,7 @@ const recipesMiddleware = (store) => (next) => (action) => {
 
         .then((response) => {
           // console.log(response.data);
-          const actionToDispatch = saveTop5Games(response.data.results);
-          store.dispatch(actionToDispatch);
+          store.dispatch(saveTop5Games(response.data.results));
         })
 
         .catch((error) => {
@@ -24,31 +27,53 @@ const recipesMiddleware = (store) => (next) => (action) => {
 
       break;
 
-      // case FETCH_FAVORITE_RECIPES:
-      //   axios.get(
-      //     // URL
-      //     'http://localhost:3001/favorites',
-      //     // options, notamment les headers
-      //     {
-      //       headers: {
-      //         Authorization: `Bearer ${store.getState().user.token}`,
-      //       },
-      //     },
-      //   )
-      //     .then((response) => {
-      //       // console.log(response);
+    case FETCH_BOARDGAMELIST:
+      axios.get(
+        // URL
+        'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/collection',
+        // options, notamment les headers
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
+          },
+        },
+      )
+        .then((response) => {
+          // console.log(response);
 
-      //       // on va enregistrer dans le state les infos de la réponse
-      //       store.dispatch(saveFavoriteRecipes(response.data.favorite));
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      //   break;
+          // on va enregistrer dans le state les infos de la réponse
+          store.dispatch(saveBoardgameList(response.data.results));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+
+    case FETCH_PLAYEDBOARDGAMELIST:
+      axios.get(
+        // URL
+        'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames',
+        // options, notamment les headers
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
+          },
+        },
+      )
+        .then((response) => {
+          // console.log(response);
+
+          // on va enregistrer dans le state les infos de la réponse
+          store.dispatch(savePlayedBoardgameList(response.data.results));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
 
     default:
   }
   next(action);
 };
 
-export default recipesMiddleware;
+export default boardgamesMiddleware;

@@ -1,13 +1,16 @@
+/* eslint-disable max-len */
 import './boardgameList.scss';
 
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 // import { MenuProps } from 'antd';
 // import { Dropdown, Space } from 'antd';
 import Loader from '../Loader';
+import { fetchBoardgameList, fetchPlayedBoardgameList } from '../../actions/boardgames';
 
 const items = [
   {
@@ -38,67 +41,30 @@ const items = [
 
 // == Composant
 function BoardgameList() {
-  const [loading, setLoading] = useState(true);
-  const [playedBoardgamesloading, setPlayedBoardgamesloading] = useState(true);
-  const [boardgameList, setBoardgameList] = useState([]);
-  const [playedBoardgameList, setPlayedBoardgameList] = useState([]);
+  const boardgameListLoaded = useSelector((state) => state.boardgames.boardgameListLoaded);
+  const playedBoardgameListLoaded = useSelector((state) => state.boardgames.playedBoardgameListLoaded);
 
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
-  };
+  const dispatch = useDispatch();
 
   // RECUPERATION DE TOUS LES JEUX AVEC OU SANS PARTIE
   useEffect(() => {
-    axios.get(
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/collection',
-      config,
-    )
-
-      .then((response) => {
-        console.log(response);
-        setBoardgameList(response.data.results);
-
-        // console.log(response.data.results[0].name);
-      })
-
-      .catch((error) => {
-        console.log(error);
-      })
-
-      .finally(() => {
-        // traitement exécuté dans tous les cas, après then ou après catch
-        setLoading(false);
-      });
+    dispatch(fetchBoardgameList());
   }, []);
+  const boardgameList = useSelector((state) => state.boardgames.boardgameList);
 
   // RECUPERATION DE TOUS LES JEUX AVEC AU MOINS UNE PARTIE, INDIQUANT LE NBRE TOTAL DE PARTIES
   useEffect(() => {
-    axios.get(
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames',
-      config,
-    )
-
-      .then((response) => {
-        console.log(response);
-        setPlayedBoardgameList(response.data.results);
-
-        // console.log(response.data.results[0].name);
-      })
-
-      .catch((error) => {
-        console.log(error);
-      })
-
-      .finally(() => {
-        // traitement exécuté dans tous les cas, après then ou après catch
-        setPlayedBoardgamesloading(false);
-      });
+    dispatch(fetchPlayedBoardgameList());
   }, []);
+  const playedBoardgameList = useSelector((state) => state.boardgames.playedBoardgameList);
 
-  if (loading) {
+  console.log(boardgameList);
+  console.log(playedBoardgameList);
+
+  if (!boardgameListLoaded || !playedBoardgameListLoaded) {
     return <Loader />;
   }
-  if (!loading && boardgameList.length === 0) {
+  if (boardgameListLoaded && playedBoardgameListLoaded && boardgameList.length === 0) {
     return (
       <div className="container">
         <h2 style={{ marginTop: '20vh', color: 'grey', fontStyle: 'italic' }}>Vous n'avez encore aucune donnée : ajoutez votre premier jeu</h2>

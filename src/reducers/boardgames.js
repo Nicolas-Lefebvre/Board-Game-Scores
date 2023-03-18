@@ -1,28 +1,41 @@
 // import data from 'src/data';
-import { SAVE_TOP5GAMES } from '../actions/boardgames';
+import {
+  SAVE_PLAYEDBOARDGAMELIST,
+  SAVE_BOARDGAMELIST,
+  SAVE_TOP5GAMES,
+} from '../actions/boardgames';
 
 export const initialState = {
   top5Games: [],
-  // favorite: [],
-  // indique si les recettes sont en cours de chargement
   top5GamesLoaded: false,
+  boardgameList: [],
+  boardgameListLoaded: false,
+  playedBoardgameList: [],
+  playedBoardgameListLoaded: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case SAVE_TOP5GAMES:
-
       return {
         ...state,
         top5Games: action.top5Games,
         top5GamesLoaded: true,
       };
 
-      // case SAVE_FAVORITE_RECIPES:
-      //   return {
-      //     ...state,
-      //     favorite: action.recipes,
-      //   };
+    case SAVE_PLAYEDBOARDGAMELIST:
+      return {
+        ...state,
+        playedBoardgameList: action.playedBoardgameList,
+        playedBoardgameListLoaded: true,
+      };
+
+    case SAVE_BOARDGAMELIST:
+      return {
+        ...state,
+        boardgameList: action.boardgameList,
+        boardgameListLoaded: true,
+      };
 
     default:
       return state;

@@ -5,7 +5,7 @@ import {
   saveTop5Games,
 } from '../actions/boardgames';
 
-const recipesMiddleware = (store) => (next) => (action) => {
+const gamesMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_TOP5GAMES:
       // console.log('ici appel à lAPI');
@@ -51,4 +51,4 @@ const recipesMiddleware = (store) => (next) => (action) => {
   next(action);
 };
 
-export default recipesMiddleware;
+export default gamesMiddleware;
