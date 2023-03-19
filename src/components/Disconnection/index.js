@@ -2,10 +2,13 @@ import './disconnection.scss';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { disconnect } from '../../actions/user';
 
 // == Composant
 function Disconnection({ setIsLogged, isLogged, setToken }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClickOnDashboard = () => {
     console.log('Go to Dashboard');
@@ -13,8 +16,8 @@ function Disconnection({ setIsLogged, isLogged, setToken }) {
   };
   const handleClickOnDisconnection = () => {
     console.log('Deconnexion :');
-    setIsLogged(false);
-    setToken('');
+    dispatch(disconnect());
+    // setToken('');
     localStorage.removeItem('BGStoken');
     navigate('/connexion');
   };

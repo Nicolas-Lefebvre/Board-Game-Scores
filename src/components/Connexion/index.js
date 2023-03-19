@@ -2,9 +2,11 @@
 import './connexion.scss';
 // import { setToken, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
 // eslint-disable-next-line import/no-extraneous-dependencies
-import jwtDecode from 'jwt-decode';
-import axios from 'axios';
+// import jwtDecode from 'jwt-decode';
+// import axios from 'axios';
 import {
   Button,
   Space,
@@ -12,54 +14,64 @@ import {
   Input,
 } from 'antd';
 
+import { submitLogin } from '../../actions/user';
+
 // == Composant
-function Connexion({setIsLogged, setToken, token}) {
+function Connexion() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const onFinish = (values) => {
     console.log('Success:', values);
-    axios.post(
-      // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/login_check',
-      // données
-      {
-        username: values.username,
-        password: values.password,
-      },
-    )
-      .then((response) => {
-        // console.log('LA REQUETE EST UN SUCCES');
-        console.log(response.data);
+    dispatch(submitLogin(values.username, values.password));
 
-        // response.data : {logged: true, pseudo: 'John', token: 'eyJhbG....JIUzI1'}
+    const isLogged = useSelector((state) => state.user.isLogged);
+    if (isLogged) {
+      navigate('/tableau-de-bord');
+    }
+    // axios.post(
+    //   // URL
+    //   'http://nicolas-lefebvre.vpnuser.lan:8000/api/login_check',
+    //   // données
+    //   {
+    //     username: values.username,
+    //     password: values.password,
+    //   },
+    // )
+    //   .then((response) => {
+    //     // console.log('LA REQUETE EST UN SUCCES');
+    //     console.log(response.data);
 
-        // on dispatch une action pour envoyer les infos de la réponse dans le state
-        // setNickname(response.data.pseudo);
-        // setToken(response.data.token);
-        setIsLogged(true);
-        setToken(response.data.token);
-        localStorage.setItem('BGStoken', response.data.token);
-        const decoded = jwtDecode(response.data.token);
-        console.log(decoded);
-        // setIsLogged(response.data.logged);
-        // store.dispatch(actionToDispatch);
-        // const navigate = useNavigate();
-        // navigate('/dashboard', { replace: true });
+    //     // response.data : {logged: true, pseudo: 'John', token: 'eyJhbG....JIUzI1'}
 
-        // on est authentifié, on a un JWT dans le state => on peut demander au serveur
-        // les recettes préférées de l'utilisateur connecté
-        // store.dispatch(fetchFavoriteRecipes());
-        navigate('/tableau-de-bord');
-      })
+    //     // on dispatch une action pour envoyer les infos de la réponse dans le state
+    //     // setNickname(response.data.pseudo);
+    //     // setToken(response.data.token);
+    //     setIsLogged(true);
+    //     setToken(response.data.token);
+    //     localStorage.setItem('BGStoken', response.data.token);
+    //     const decoded = jwtDecode(response.data.token);
+    //     console.log(decoded);
+    //     // setIsLogged(response.data.logged);
+    //     // store.dispatch(actionToDispatch);
+    //     // const navigate = useNavigate();
+    //     // navigate('/dashboard', { replace: true });
 
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        // const token2 = localStorage.getItem('BGStoken');
-        // console.log(token2);
-        // const decodedToken = jwtDecode(token2);
-        // console.log(decodedToken);
-      });
+    //     // on est authentifié, on a un JWT dans le state => on peut demander au serveur
+    //     // les recettes préférées de l'utilisateur connecté
+    //     // store.dispatch(fetchFavoriteRecipes());
+    //     navigate('/tableau-de-bord');
+    //   })
+
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+    //   .finally(() => {
+    //     // const token2 = localStorage.getItem('BGStoken');
+    //     // console.log(token2);
+    //     // const decodedToken = jwtDecode(token2);
+    //     // console.log(decodedToken);
+    //   });
   };
 
   const onFinishFailed = (errorInfo) => {

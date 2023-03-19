@@ -33,6 +33,7 @@ import PlayerAdd from '../PlayerAdd';
 import PlayerEdit from '../PlayerEdit';
 import Page404 from '../Page404';
 import ProfilEdit from '../ProfilEdit';
+import { checkTokenValidity } from '../../actions/user';
 
 // == Composant
 function App() {
@@ -40,35 +41,28 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   // eslint-disable-next-line no-unused-vars
-  const [isLogged, setIsLogged] = useState(false);
+  // const [isLogged, setIsLogged] = useState(false);
+  const isLogged = useSelector((state) => state.user.isLogged);
 
-  // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
+  const dispatch = useDispatch();
   if (localStorage.getItem('BGStoken')) {
-    const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
-    console.log(decodedToken);
-    const dateNow = new Date();
-    console.log(dateNow.getTime());
-
-    if (decodedToken.exp > dateNow.getTime()) {
-      setIsLogged(false);
-      localStorage.removeItem('BGStoken');
-    }
+    dispatch(checkTokenValidity());
   }
-  // ------------------------------------------------------------------------------
 
   // eslint-disable-next-line no-unused-vars
   // const [nickname, setNickname] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useState('');
+  // const [token, setToken] = useState('');
+  const token = useSelector((state) => state.user.token);
 
-  useEffect(() => {
-    if (localStorage.getItem('BGStoken')) {
-      setToken(localStorage.getItem('BGStoken'));
-    }
-    // else {
-    //   setToken(localStorage.getItem(''));
-    // }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem('BGStoken')) {
+  //     setToken(localStorage.getItem('BGStoken'));
+  //   }
+  //   // else {
+  //   //   setToken(localStorage.getItem(''));
+  //   // }
+  // }, []);
 
   // useEffect(() => {
   //   axios.get('http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames/top5')
@@ -171,7 +165,7 @@ function App() {
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />
-        <Route path="/connexion" element={token ? <Disconnection token={token} isLogged={isLogged} setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
+        <Route path="/connexion" element={token ? <Disconnection /> : <Connexion />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />
