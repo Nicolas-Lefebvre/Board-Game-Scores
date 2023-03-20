@@ -3,6 +3,8 @@ import axios from 'axios';
 import {
   FETCH_GAMELIST,
   saveGameList,
+  FETCH_GAMEINFOS,
+  saveGameInfos,
 } from '../actions/games';
 
 const gamesMiddleware = (store) => (next) => (action) => {
@@ -30,27 +32,28 @@ const gamesMiddleware = (store) => (next) => (action) => {
 
       break;
 
-      // case FETCH_FAVORITE_RECIPES:
-      //   axios.get(
-      //     // URL
-      //     'http://localhost:3001/favorites',
-      //     // options, notamment les headers
-      //     {
-      //       headers: {
-      //         Authorization: `Bearer ${store.getState().user.token}`,
-      //       },
-      //     },
-      //   )
-      //     .then((response) => {
-      //       // console.log(response);
+    case FETCH_GAMEINFOS:
+      axios.get(
+        // URL
+        `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/game/${action.gameId}`,
+        // options, notamment les headers
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
+          },
+        },
+      )
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.results);
 
-      //       // on va enregistrer dans le state les infos de la réponse
-      //       store.dispatch(saveFavoriteRecipes(response.data.favorite));
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      //   break;
+          // on va enregistrer dans le state les infos de la réponse
+          store.dispatch(saveGameInfos(response.data.results));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
 
     default:
   }

@@ -1,11 +1,14 @@
 // import data from 'src/data';
 import {
   SAVE_GAMELIST,
+  SAVE_GAMEINFOS,
 } from '../actions/games';
 
 export const initialState = {
   gameList: [],
   gameListLoaded: false,
+  gameInfos: [],
+  gameInfosLoaded: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -15,6 +18,13 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         gameList: action.gameList,
         gameListLoaded: true,
+      };
+
+    case SAVE_GAMEINFOS:
+      return {
+        ...state,
+        gameInfos: action.gameInfos,
+        gameInfosLoaded: true,
       };
 
     default:

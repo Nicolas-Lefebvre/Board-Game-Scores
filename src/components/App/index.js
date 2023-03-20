@@ -111,19 +111,19 @@ function App() {
           element={
             localStorage.getItem('BGStoken') ? (
               <GameDetails
-                loading={loading}
-                setLoading={setLoading}
-                date="2023/02/01"
-                name="Catan"
-                image="https://example.com/catan.jpg"
-                editor="Super Meeple"
-                author="Eric marks"
-                remarks="Une partie très sympa même si Syham a triché pour gagner, mais on a fait semblant de ne rien voir pour lui faire plaisir."
-                players="Amar, Syham, Laura, Nico"
-                playtime="90"
-                stats="90"
-                startDate="29/01/23"
-                endDate="01/02/23"
+                // loading={loading}
+                // setLoading={setLoading}
+                // date="2023/02/01"
+                // name="Catan"
+                // image="https://example.com/catan.jpg"
+                // editor="Super Meeple"
+                // author="Eric marks"
+                // remarks="Une partie très sympa même si Syham a ien voir pour lui faire plaisir."
+                // players="Amar, Syham, Laura, Nico"
+                // playtime="90"
+                // stats="90"
+                // startDate="29/01/23"
+                // endDate="01/02/23"
               />
             ) : <GetConnected />
         }
