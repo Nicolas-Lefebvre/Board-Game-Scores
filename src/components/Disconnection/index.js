@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { disconnect } from '../../actions/user';
 
 // == Composant
-function Disconnection({ setIsLogged, isLogged, setToken }) {
+function Disconnection({setIsLogged, isLogged, setToken }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

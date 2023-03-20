@@ -100,23 +100,8 @@ function App() {
         {/* --------------------------------------- BOARDGAMES -------------------------------- */}
         <Route path="/jeux" element={localStorage.getItem('BGStoken') ? <BoardgameList /> : <GetConnected />} />
         <Route
-          path="/jeux/:gameId"
-          element={
-            localStorage.getItem('BGStoken')
-              ? (
-                <BoardgameDetails
-                  name="Catan"
-                  image="https://example.com/catan.jpg"
-                  editor="Super Meeple"
-                  author="Eric marks"
-                  description="Explorez l'île de Catane et utilisez vos ressources pour construire villes et routes. Contrôlez le plus grand territoire et remportez la partie. Catan est un jeu mêlant la gestion et la négociation."
-                  players="3-4"
-                  playtime="90"
-                  stats="90"
-                />
-              )
-              : <GetConnected />
-          }
+          path="/jeux/:boardgameId"
+          element={localStorage.getItem('BGStoken') ? (<BoardgameDetails />) : <GetConnected />}
         />
         <Route path="/jeux/ajouter" element={localStorage.getItem('BGStoken') ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
 

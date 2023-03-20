@@ -8,6 +8,9 @@ export const FETCH_BOARDGAMELIST = 'FETCH_BOARDGAMELIST';
 export const SAVE_PLAYEDBOARDGAMELIST = 'SAVE_PLAYEDBOARDGAMELIST';
 export const FETCH_PLAYEDBOARDGAMELIST = 'FETCH_PLAYEDBOARDGAMELIST';
 
+export const FETCH_BOARDGAMEINFOS = 'FETCH_BOARDGAMEINFOS';
+export const SAVE_BOARDGAMEINFOS = 'SAVE_BOARDGAMEINFOS';
+
 // === action creators
 export const saveTop5Games = (top5Games) => ({
   type: SAVE_TOP5GAMES,
@@ -40,4 +43,16 @@ export const savePlayedBoardgameList = (playedBoardgameList) => ({
 export const fetchPlayedBoardgameList = () => ({
   type: FETCH_PLAYEDBOARDGAMELIST,
   /* value: newValue, */
+});
+
+export const fetchBoardgameInfos = (boardgameId) => ({
+  type: FETCH_BOARDGAMEINFOS,
+  /* value: newValue, */
+  boardgameId: boardgameId,
+});
+
+export const saveBoardgameInfos = (boardgameInfos) => ({
+  type: SAVE_BOARDGAMEINFOS,
+  /* value: newValue, */
+  boardgameInfos: boardgameInfos,
 });

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 import {
   FETCH_TOP5GAMES,
@@ -7,6 +8,8 @@ import {
   saveBoardgameList,
   FETCH_PLAYEDBOARDGAMELIST,
   savePlayedBoardgameList,
+  FETCH_BOARDGAMEINFOS,
+  saveBoardgameInfos,
 } from '../actions/boardgames';
 
 const boardgamesMiddleware = (store) => (next) => (action) => {
@@ -65,6 +68,29 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
 
           // on va enregistrer dans le state les infos de la réponse
           store.dispatch(savePlayedBoardgameList(response.data.results));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+
+    case FETCH_BOARDGAMEINFOS:
+      axios.get(
+        // URL
+        `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames/${action.boardgameId}`,
+        // options, notamment les headers
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
+          },
+        },
+      )
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.result);
+
+          // on va enregistrer dans le state les infos de la réponse
+          store.dispatch(saveBoardgameInfos(response.data.result));
         })
         .catch((error) => {
           console.log(error);

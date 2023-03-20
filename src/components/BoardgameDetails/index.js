@@ -3,63 +3,77 @@
 import './boardgameDetails.scss';
 
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Button, Modal } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchBoardgameInfos } from '../../actions/boardgames';
+
 
 import Loader from '../Loader';
 
 const { confirm } = Modal;
 
-const BoardgameDetails = ({ name, editor, author, description, players, playtime, stats }) => {
+const BoardgameDetails = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [boardgameInfos, setBoardgameInfos] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [boardgameInfos, setBoardgameInfos] = useState([]);
 
-  const queryParameters = new URLSearchParams(window.location.search);
-  const boardgameId = queryParameters.get('boardgame_id');
+  // const queryParameters = new URLSearchParams(window.location.search);
+  // const boardgameId = queryParameters.get('boardgame_id');
+  const { boardgameId } = useParams();
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    axios.get(
-      `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames/${boardgameId}`,
-      config,
-    )
+    dispatch(fetchBoardgameInfos(boardgameId));
 
-      .then((response) => {
-        console.log(response);
-        setBoardgameInfos(response.data.result);
-      })
+    // axios.get(
+    //   `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames/${boardgameId}`,
+    //   config,
+    // )
 
-      .catch((error) => {
-        console.log(error);
-      })
+    //   .then((response) => {
+    //     console.log(response);
+    //     setBoardgameInfos(response.data.result);
+    //   })
 
-      .finally(() => {
-        // if (boardgameInfos.game_number == false) {
-        //   axios.get(
-        //     `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgameNG/${boardgameId}`,
-        //     config,
-        //   )
-        //     .then((response) => {
-        //       console.log(response);
-        //       setBoardgameInfos(response.data.result);
-        //       // console.log(response.data.results[0].name);
-        //     })
-        //     .catch((error) => {
-        //       console.log(error);
-        //     })
-        //     .finally(() => {
-        //       setLoading(false);
-        //     });
-        // traitement exécuté dans tous les cas, après then ou après catch
-        setLoading(false);
-      });
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+
+    //   .finally(() => {
+    //     // if (boardgameInfos.game_number == false) {
+    //     //   axios.get(
+    //     //     `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgameNG/${boardgameId}`,
+    //     //     config,
+    //     //   )
+    //     //     .then((response) => {
+    //     //       console.log(response);
+    //     //       setBoardgameInfos(response.data.result);
+    //     //       // console.log(response.data.results[0].name);
+    //     //     })
+    //     //     .catch((error) => {
+    //     //       console.log(error);
+    //     //     })
+    //     //     .finally(() => {
+    //     //       setLoading(false);
+    //     //     });
+    //     // traitement exécuté dans tous les cas, après then ou après catch
+    //     setLoading(false);
+    //   });
   }, []);
+  const boardgameInfos = useSelector((state) => state.boardgames.boardgameInfos);
+  const boardgameInfosLoaded = useSelector((state) => state.boardgames.boardgameInfosLoaded);
+
+  console.log(boardgameInfosLoaded);
+  console.log(boardgameInfos);
 
   const showDeleteConfirm = (deleteGameId) => {
     confirm({
@@ -95,7 +109,7 @@ const BoardgameDetails = ({ name, editor, author, description, players, playtime
     });
   };
 
-  if (loading) {
+  if (!boardgameInfosLoaded) {
     return <Loader />;
   }
   // if (!boardgameInfos.name) {
