@@ -9,6 +9,8 @@ export const SAVE_LOSSPLAYERLIST = 'SAVE_LOSSPLAYERLIST';
 
 export const FETCH_PLAYERINFOS = 'FETCH_PLAYERINFOS';
 
+export const DELETE_PLAYER = 'DELETE_PLAYER';
+
 // === action creators
 
 export const savePlayerListNoStats = (playerListNoStats) => ({
@@ -37,4 +39,10 @@ export const saveLossPlayerList = (lossPlayerList) => ({
   type: SAVE_LOSSPLAYERLIST,
   /* value: newValue, */
   lossPlayerList: lossPlayerList,
+});
+
+export const deletePlayer = (playerId) => ({
+  type: DELETE_PLAYER,
+  /* value: newValue, */
+  playerId: playerId,
 });

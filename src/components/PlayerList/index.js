@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 import './players.scss';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 // import winnerMedal from 'src/assets/images/winner-medal.png';
@@ -15,82 +15,32 @@ import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Modal } from 'antd';
 import Loader from '../Loader';
-import { fetchPlayerListNoStats, fetchPlayerList } from '../../actions/players';
+import { fetchPlayerListNoStats, fetchPlayerList, deletePlayer } from '../../actions/players';
 
 const { confirm } = Modal;
 
 function Players() {
-  // const [loadingAll, setLoadingAll] = useState(true);
-  // const [loadingStats, setLoadingStats] = useState(true);
-  // const [playerListNoStats, setPlayerListNoStats] = useState([]);
-  // const [playerList, setPlayerList] = useState([]);
-  // const [lossplayerList, setLossPlayerList] = useState([]);
   const playerListNoStatsLoaded = useSelector((state) => state.players.playerListNoStatsLoaded);
   const playerListLoaded = useSelector((state) => state.players.playerListLoaded);
-  console.log(playerListNoStatsLoaded);
-  console.log(playerListLoaded);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
 
   const dispatch = useDispatch();
+
   // -------------- RECUPERATION LISTE JOUEURS SANS STATS --------------------
   useEffect(() => {
     dispatch(fetchPlayerListNoStats());
-
-    // axios.get(
-    //   // URL
-    //   'http://127.0.0.1:8000/api/user/players',
-    //   // données
-    //   config,
-    // )
-    //   .then((response) => {
-    //     console.log('Recuperation de tous les joueurs no stat OK');
-    //     console.log(response.data);
-    //     setPlayerListNoStats(response.data.results);
-    //     // setLossPlayerList(response.data.results.filter((filteredPlayer) => (filteredPlayer.is_winner == 0)));
-    //     // eslint-disable-next-line max-len
-    //     // const winUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1));
-    //     // eslint-disable-next-line max-len
-    //     // const lossUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 0));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {
-    //     setLoadingAll(false);
-    //   });
   }, []);
+
   const playerListNoStats = useSelector((state) => state.players.playerListNoStats);
 
   // -------------- RECUPERATION LISTE JOUEURS AVEC STATS --------------------
   useEffect(() => {
     dispatch(fetchPlayerList());
-
-    // axios.get(
-    //   // URL
-    //   'http://127.0.0.1:8000/api/user/players/stats',
-    //   // données
-    //   config,
-    // )
-    //   .then((response) => {
-    //     console.log('Recuperation de tous les joueurs OK');
-    //     console.log(response.data);
-    //     setPlayerList(response.data.results);
-    //     setLossPlayerList(response.data.results.filter((filteredPlayer) => (filteredPlayer.is_winner == 0)));
-    //     // eslint-disable-next-line max-len
-    //     // const winUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1));
-    //     // eslint-disable-next-line max-len
-    //     // const lossUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 0));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {
-    //     setLoadingStats(false);
-    //   });
   }, [playerListNoStats]);
+
   const playerList = useSelector((state) => state.players.playerList);
   const lossPlayerList = useSelector((state) => state.players.lossPlayerList);
 
@@ -105,38 +55,41 @@ function Players() {
       onOk() {
         console.log(deletePlayerId);
         console.log('OK');
-        axios.delete(
-        // URL
-          `http://127.0.0.1:8000/api/player/${deletePlayerId}`,
-          // données
-          config,
-        )
-          .then(() => {
-            console.log('Supression du joueur OK');
+        dispatch(deletePlayer(deletePlayerId));
+        // dispatch(fetchPlayerListNoStats());
 
-            // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
+        // axios.delete(
+        // // URL
+        //   `http://127.0.0.1:8000/api/player/${deletePlayerId}`,
+        //   // données
+        //   config,
+        // )
+        //   .then(() => {
+        //     console.log('Supression du joueur OK');
 
-            dispatch(fetchPlayerListNoStats());
-            // axios.get(
-            //   // URL
-            //   'http://127.0.0.1:8000/api/user/players',
-            //   // données
-            //   config,
-            // )
-            //   .then((response) => {
-            //     console.log('MAJ de la liste de tous les joueurs OK');
-            //     setPlayerListNoStats(response.data.results);
-            //   })
-            //   .catch((error) => {
-            //     console.log(error);
-            //   });
-          })
+        //     // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
 
-          .catch((error) => {
-            console.log(error);
-          })
-          .finally(() => {
-          });
+        //     dispatch(fetchPlayerListNoStats());
+        //     // axios.get(
+        //     //   // URL
+        //     //   'http://127.0.0.1:8000/api/user/players',
+        //     //   // données
+        //     //   config,
+        //     // )
+        //     //   .then((response) => {
+        //     //     console.log('MAJ de la liste de tous les joueurs OK');
+        //     //     setPlayerListNoStats(response.data.results);
+        //     //   })
+        //     //   .catch((error) => {
+        //     //     console.log(error);
+        //     //   });
+        //   })
+
+        //   .catch((error) => {
+        //     console.log(error);
+        //   })
+        //   .finally(() => {
+        //   });
       },
       onCancel() {
         console.log('Cancel');
