@@ -3,10 +3,8 @@
 import './players.scss';
 
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-// import winnerMedal from 'src/assets/images/winner-medal.png';
-// import lauriers from 'src/assets/images/laurier-records-2.png';
+
 import { Link, NavLink } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,10 +20,6 @@ const { confirm } = Modal;
 function Players() {
   const playerListNoStatsLoaded = useSelector((state) => state.players.playerListNoStatsLoaded);
   const playerListLoaded = useSelector((state) => state.players.playerListLoaded);
-
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
-  };
 
   const dispatch = useDispatch();
 
@@ -53,46 +47,12 @@ function Players() {
       okType: 'danger',
       cancelText: 'Annuler',
       onOk() {
-        console.log(deletePlayerId);
-        console.log('OK');
+        // console.log(deletePlayerId);
+        // console.log('OK');
         dispatch(deletePlayer(deletePlayerId));
-        // dispatch(fetchPlayerListNoStats());
-
-        // axios.delete(
-        // // URL
-        //   `http://127.0.0.1:8000/api/player/${deletePlayerId}`,
-        //   // données
-        //   config,
-        // )
-        //   .then(() => {
-        //     console.log('Supression du joueur OK');
-
-        //     // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
-
-        //     dispatch(fetchPlayerListNoStats());
-        //     // axios.get(
-        //     //   // URL
-        //     //   'http://127.0.0.1:8000/api/user/players',
-        //     //   // données
-        //     //   config,
-        //     // )
-        //     //   .then((response) => {
-        //     //     console.log('MAJ de la liste de tous les joueurs OK');
-        //     //     setPlayerListNoStats(response.data.results);
-        //     //   })
-        //     //   .catch((error) => {
-        //     //     console.log(error);
-        //     //   });
-        //   })
-
-        //   .catch((error) => {
-        //     console.log(error);
-        //   })
-        //   .finally(() => {
-        //   });
       },
       onCancel() {
-        console.log('Cancel');
+        // console.log('Cancel');
       },
     });
   };
