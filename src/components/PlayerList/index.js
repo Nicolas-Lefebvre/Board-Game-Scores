@@ -4,6 +4,7 @@ import './players.scss';
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 // import winnerMedal from 'src/assets/images/winner-medal.png';
 // import lauriers from 'src/assets/images/laurier-records-2.png';
 import { Link, NavLink } from 'react-router-dom';
@@ -14,71 +15,84 @@ import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Modal } from 'antd';
 import Loader from '../Loader';
+import { fetchPlayerListNoStats, fetchPlayerList } from '../../actions/players';
 
 const { confirm } = Modal;
 
 function Players() {
-  const [loadingAll, setLoadingAll] = useState(true);
-  const [loadingStats, setLoadingStats] = useState(true);
-  const [playerListNoStats, setPlayerListNoStats] = useState([]);
-  const [playerList, setPlayerList] = useState([]);
-  const [lossplayerList, setLossPlayerList] = useState([]);
+  // const [loadingAll, setLoadingAll] = useState(true);
+  // const [loadingStats, setLoadingStats] = useState(true);
+  // const [playerListNoStats, setPlayerListNoStats] = useState([]);
+  // const [playerList, setPlayerList] = useState([]);
+  // const [lossplayerList, setLossPlayerList] = useState([]);
+  const playerListNoStatsLoaded = useSelector((state) => state.players.playerListNoStatsLoaded);
+  const playerListLoaded = useSelector((state) => state.players.playerListLoaded);
+  console.log(playerListNoStatsLoaded);
+  console.log(playerListLoaded);
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
 
+  const dispatch = useDispatch();
   // -------------- RECUPERATION LISTE JOUEURS SANS STATS --------------------
   useEffect(() => {
-    axios.get(
-      // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players',
-      // données
-      config,
-    )
-      .then((response) => {
-        console.log('Recuperation de tous les joueurs no stat OK');
-        console.log(response.data);
-        setPlayerListNoStats(response.data.results);
-        // setLossPlayerList(response.data.results.filter((filteredPlayer) => (filteredPlayer.is_winner == 0)));
-        // eslint-disable-next-line max-len
-        // const winUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1));
-        // eslint-disable-next-line max-len
-        // const lossUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 0));
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoadingAll(false);
-      });
+    dispatch(fetchPlayerListNoStats());
+
+    // axios.get(
+    //   // URL
+    //   'http://127.0.0.1:8000/api/user/players',
+    //   // données
+    //   config,
+    // )
+    //   .then((response) => {
+    //     console.log('Recuperation de tous les joueurs no stat OK');
+    //     console.log(response.data);
+    //     setPlayerListNoStats(response.data.results);
+    //     // setLossPlayerList(response.data.results.filter((filteredPlayer) => (filteredPlayer.is_winner == 0)));
+    //     // eslint-disable-next-line max-len
+    //     // const winUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1));
+    //     // eslint-disable-next-line max-len
+    //     // const lossUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 0));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+    //   .finally(() => {
+    //     setLoadingAll(false);
+    //   });
   }, []);
+  const playerListNoStats = useSelector((state) => state.players.playerListNoStats);
 
   // -------------- RECUPERATION LISTE JOUEURS AVEC STATS --------------------
   useEffect(() => {
-    axios.get(
-      // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players/stats',
-      // données
-      config,
-    )
-      .then((response) => {
-        console.log('Recuperation de tous les joueurs OK');
-        console.log(response.data);
-        setPlayerList(response.data.results);
-        setLossPlayerList(response.data.results.filter((filteredPlayer) => (filteredPlayer.is_winner == 0)));
-        // eslint-disable-next-line max-len
-        // const winUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1));
-        // eslint-disable-next-line max-len
-        // const lossUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 0));
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoadingStats(false);
-      });
+    dispatch(fetchPlayerList());
+
+    // axios.get(
+    //   // URL
+    //   'http://127.0.0.1:8000/api/user/players/stats',
+    //   // données
+    //   config,
+    // )
+    //   .then((response) => {
+    //     console.log('Recuperation de tous les joueurs OK');
+    //     console.log(response.data);
+    //     setPlayerList(response.data.results);
+    //     setLossPlayerList(response.data.results.filter((filteredPlayer) => (filteredPlayer.is_winner == 0)));
+    //     // eslint-disable-next-line max-len
+    //     // const winUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1));
+    //     // eslint-disable-next-line max-len
+    //     // const lossUniquePlayerList = playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 0));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+    //   .finally(() => {
+    //     setLoadingStats(false);
+    //   });
   }, [playerListNoStats]);
+  const playerList = useSelector((state) => state.players.playerList);
+  const lossPlayerList = useSelector((state) => state.players.lossPlayerList);
 
   const showDeleteConfirm = (deletePlayerId) => {
     confirm({
@@ -93,7 +107,7 @@ function Players() {
         console.log('OK');
         axios.delete(
         // URL
-          `http://nicolas-lefebvre.vpnuser.lan:8000/api/player/${deletePlayerId}`,
+          `http://127.0.0.1:8000/api/player/${deletePlayerId}`,
           // données
           config,
         )
@@ -101,19 +115,21 @@ function Players() {
             console.log('Supression du joueur OK');
 
             // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
-            axios.get(
-              // URL
-              'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players',
-              // données
-              config,
-            )
-              .then((response) => {
-                console.log('MAJ de la liste de tous les joueurs OK');
-                setPlayerListNoStats(response.data.results);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+
+            dispatch(fetchPlayerListNoStats());
+            // axios.get(
+            //   // URL
+            //   'http://127.0.0.1:8000/api/user/players',
+            //   // données
+            //   config,
+            // )
+            //   .then((response) => {
+            //     console.log('MAJ de la liste de tous les joueurs OK');
+            //     setPlayerListNoStats(response.data.results);
+            //   })
+            //   .catch((error) => {
+            //     console.log(error);
+            //   });
           })
 
           .catch((error) => {
@@ -128,7 +144,7 @@ function Players() {
     });
   };
 
-  if (loadingAll || loadingStats) {
+  if (!playerListNoStatsLoaded || !playerListLoaded) {
     return <Loader />;
   }
   return (
@@ -163,12 +179,12 @@ function Players() {
                       ? (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner == 1 && filteredPlayer.player_id == playerNoStat.id))).map((player) => (
                         <React.Fragment key={player.player_id}>
                           <td>
-                            { Number((player.victory_number)) + Number((lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number))) }
+                            { Number((player.victory_number)) + Number((lossPlayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number))) }
                           </td>
                           <td>{player.victory_number}</td>
                           <td>
                             {/* -------------- on récupère le player concerné avec son id pour afficher cette fois le nombre de défaites */}
-                            { (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).length > 0 ? (lossplayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) : '0' }
+                            { (lossPlayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).length > 0 ? (lossPlayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) : '0' }
                           </td>
                           <td>
                             <NavLink to={`/joueurs/modifier/?player_id=${player.player_id}&player_name=${player.player_name}`}>

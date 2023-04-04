@@ -13,7 +13,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
       // console.log('ici appel à lAPI');
       // traitement, par exemple requête API avec axios
       axios.get(
-        'http://nicolas-lefebvre.vpnuser.lan:8000/api/usergame',
+        'http://127.0.0.1:8000/api/usergame',
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
@@ -35,7 +35,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
     case FETCH_GAMEINFOS:
       axios.get(
         // URL
-        `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/game/${action.gameId}`,
+        `http://127.0.0.1:8000/api/user/game/${action.gameId}`,
         // options, notamment les headers
         {
           headers: {

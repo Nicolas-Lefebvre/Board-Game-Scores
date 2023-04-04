@@ -49,7 +49,7 @@ const GameDetails = () => {
         console.log('OK');
         axios.delete(
         // URL
-          `http://nicolas-lefebvre.vpnuser.lan:8000/api/game/${deleteGameId}`,
+          `http://127.0.0.1:8000/api/game/${deleteGameId}`,
           // données
           config,
         )

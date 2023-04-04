@@ -35,7 +35,7 @@ const BoardgameDetails = () => {
     dispatch(fetchBoardgameInfos(boardgameId));
 
     // axios.get(
-    //   `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames/${boardgameId}`,
+    //   `http://127.0.0.1:8000/api/user/boardgames/${boardgameId}`,
     //   config,
     // )
 
@@ -51,7 +51,7 @@ const BoardgameDetails = () => {
     //   .finally(() => {
     //     // if (boardgameInfos.game_number == false) {
     //     //   axios.get(
-    //     //     `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgameNG/${boardgameId}`,
+    //     //     `http://127.0.0.1:8000/api/user/boardgameNG/${boardgameId}`,
     //     //     config,
     //     //   )
     //     //     .then((response) => {
@@ -88,7 +88,7 @@ const BoardgameDetails = () => {
         console.log('OK');
         axios.delete(
         // URL
-          `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgame/${deleteGameId}/delete`,
+          `http://127.0.0.1:8000/api/user/boardgame/${deleteGameId}/delete`,
           // données
           config,
         )

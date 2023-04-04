@@ -32,7 +32,7 @@ function GameList() {
   useEffect(() => {
     dispatch(fetchGameList());
     // axios.get(
-    //   'http://nicolas-lefebvre.vpnuser.lan:8000/api/usergame',
+    //   'http://127.0.0.1:8000/api/usergame',
     //   config,
     // )
 
@@ -78,7 +78,7 @@ function GameList() {
   //       console.log('OK');
   //       axios.delete(
   //       // URL
-  //         `http://nicolas-lefebvre.vpnuser.lan:8000/api/game/${deleteGameId}`,
+  //         `http://127.0.0.1:8000/api/game/${deleteGameId}`,
   //         // données
   //         config,
   //       )
@@ -88,7 +88,7 @@ function GameList() {
   //           // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
   //           axios.get(
   //             // URL
-  //             'http://nicolas-lefebvre.vpnuser.lan:8000/api/usergame',
+  //             'http://127.0.0.1:8000/api/usergame',
   //             // données
   //             config,
   //           )

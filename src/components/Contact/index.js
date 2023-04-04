@@ -53,7 +53,7 @@ function Contact() {
       console.log('Received values of form: ', values, dateString);
       axios.post(
         // URL
-        'http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames',
+        'http://127.0.0.1:8000/api/boardgames',
         // données
         {
           name: values.name,

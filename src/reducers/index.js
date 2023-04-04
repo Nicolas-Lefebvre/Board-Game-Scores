@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import boardgamesReducer from './boardgames';
 import gamesReducer from './games';
 import userReducer from './user';
+import playersReducer from './players';
 
 // un reducer qui combine les autres (le store veut un seul reducer)
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   boardgames: boardgamesReducer,
   games: gamesReducer,
   user: userReducer,
+  players: playersReducer,
 });
 
 export default rootReducer;

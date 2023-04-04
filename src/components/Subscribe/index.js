@@ -34,7 +34,7 @@ function Subscribe() {
     console.log('Received values of form: ', values, dateString);
     axios.post(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user',
+      'http://127.0.0.1:8000/api/user',
       // données
       {
         nickname: values.nickname,

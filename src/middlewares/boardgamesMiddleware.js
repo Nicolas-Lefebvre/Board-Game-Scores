@@ -17,7 +17,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_TOP5GAMES:
       // console.log('ici appel à lAPI');
       // traitement, par exemple requête API avec axios
-      axios.get('http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames/top5')
+      axios.get('http://127.0.0.1:8000/api/boardgames/top5')
 
         .then((response) => {
           // console.log(response.data);
@@ -33,7 +33,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_BOARDGAMELIST:
       axios.get(
         // URL
-        'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/collection',
+        'http://127.0.0.1:8000/api/user/collection',
         // options, notamment les headers
         {
           headers: {
@@ -55,7 +55,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_PLAYEDBOARDGAMELIST:
       axios.get(
         // URL
-        'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames',
+        'http://127.0.0.1:8000/api/user/boardgames',
         // options, notamment les headers
         {
           headers: {
@@ -77,7 +77,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_BOARDGAMEINFOS:
       axios.get(
         // URL
-        `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames/${action.boardgameId}`,
+        `http://127.0.0.1:8000/api/user/boardgames/${action.boardgameId}`,
         // options, notamment les headers
         {
           headers: {

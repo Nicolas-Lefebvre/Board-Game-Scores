@@ -14,7 +14,7 @@ const userMiddleware = (store) => (next) => (action) => {
       // console.log('ici appel à lAPI');
       // traitement, par exemple requête API avec axios
       axios.post(
-        'http://nicolas-lefebvre.vpnuser.lan:8000/api/login_check',
+        'http://127.0.0.1:8000/api/login_check',
         {
           username: action.username,
           password: action.password,

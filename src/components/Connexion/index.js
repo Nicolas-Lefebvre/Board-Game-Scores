@@ -25,13 +25,13 @@ function Connexion() {
     console.log('Success:', values);
     dispatch(submitLogin(values.username, values.password));
 
-    const isLogged = useSelector((state) => state.user.isLogged);
-    if (isLogged) {
-      navigate('/tableau-de-bord');
-    }
+    // const isLogged = useSelector((state) => state.user.isLogged);
+    // if (isLogged) {
+    //   navigate('/tableau-de-bord');
+    // }
     // axios.post(
     //   // URL
-    //   'http://nicolas-lefebvre.vpnuser.lan:8000/api/login_check',
+    //   'http://127.0.0.1:8000/api/login_check',
     //   // données
     //   {
     //     username: values.username,

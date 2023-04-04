@@ -7,6 +7,7 @@ import reducer from '../reducers';
 import boardgamesMiddleware from '../middlewares/boardgamesMiddleware';
 import gamesMiddleware from '../middlewares/gamesMiddleware';
 import userMiddleware from '../middlewares/userMiddleware';
+import playersMiddleware from '../middlewares/playersMiddleware';
 
 // une autre façon d'intégrer redux-devtools_extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -16,6 +17,7 @@ const enhancers = composeEnhancers(
     boardgamesMiddleware,
     gamesMiddleware,
     userMiddleware,
+    playersMiddleware,
   ),
 );
 

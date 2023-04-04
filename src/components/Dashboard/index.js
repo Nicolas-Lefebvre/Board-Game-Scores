@@ -36,7 +36,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user',
+      'http://127.0.0.1:8000/api/user',
       // données
       config,
     )
@@ -57,7 +57,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players/stats',
+      'http://127.0.0.1:8000/api/user/players/stats',
       // données
       config,
     )
@@ -137,7 +137,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames5',
+      'http://127.0.0.1:8000/api/user/boardgames5',
       // données
       config,
     )
@@ -195,7 +195,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/categories5',
+      'http://127.0.0.1:8000/api/user/categories5',
       // données
       config,
     )
@@ -221,7 +221,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players5',
+      'http://127.0.0.1:8000/api/user/players5',
       // données
       config,
     )

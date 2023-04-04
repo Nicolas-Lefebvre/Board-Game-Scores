@@ -66,7 +66,7 @@ function AddGame() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/collection',
+      'http://127.0.0.1:8000/api/user/collection',
       // données
       config,
     )
@@ -86,7 +86,7 @@ function AddGame() {
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players',
+      'http://127.0.0.1:8000/api/user/players',
       // données
       config,
     )
@@ -134,7 +134,7 @@ function AddGame() {
 
     axios.post(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/games',
+      'http://127.0.0.1:8000/api/games',
       // données
       {
         startDate: values.startDate,

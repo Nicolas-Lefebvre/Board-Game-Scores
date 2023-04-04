@@ -28,7 +28,7 @@ const PlayerDetails = () => {
     const queryParameters = new URLSearchParams(window.location.search);
     const playerId = queryParameters.get('player_id');
     axios.get(
-      `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/player/${playerId}/stats`,
+      `http://127.0.0.1:8000/api/user/player/${playerId}/stats`,
       config,
     )
 
@@ -60,7 +60,7 @@ const PlayerDetails = () => {
         console.log('OK');
         axios.delete(
         // URL
-          `http://nicolas-lefebvre.vpnuser.lan:8000/api/player/${deletePlayerId}`,
+          `http://127.0.0.1:8000/api/player/${deletePlayerId}`,
           // données
           config,
         )
