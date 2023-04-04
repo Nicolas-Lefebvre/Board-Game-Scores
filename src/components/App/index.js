@@ -92,10 +92,7 @@ function App() {
       <Navbar token={token} />
 
       <Routes>
-        <Route
-          path="/"
-          element={(<Home />)}
-        />
+        <Route path="/" element={(<Home />)} />
 
         {/* --------------------------------------- BOARDGAMES -------------------------------- */}
         <Route path="/jeux" element={localStorage.getItem('BGStoken') ? <BoardgameList /> : <GetConnected />} />
@@ -109,32 +106,12 @@ function App() {
         <Route
           path="/parties/:gameId"
           element={
-            localStorage.getItem('BGStoken') ? (
-              <GameDetails
-                // loading={loading}
-                // setLoading={setLoading}
-                // date="2023/02/01"
-                // name="Catan"
-                // image="https://example.com/catan.jpg"
-                // editor="Super Meeple"
-                // author="Eric marks"
-                // remarks="Une partie très sympa même si Syham a ien voir pour lui faire plaisir."
-                // players="Amar, Syham, Laura, Nico"
-                // playtime="90"
-                // stats="90"
-                // startDate="29/01/23"
-                // endDate="01/02/23"
-              />
-            ) : <GetConnected />
+            localStorage.getItem('BGStoken') ? (<GameDetails />) : <GetConnected />
         }
         />
         <Route
           path="/parties/modifier/:id"
-          element={
-            localStorage.getItem('BGStoken') ? (
-              <GameEdit />
-            ) : <GetConnected />
-        }
+          element={localStorage.getItem('BGStoken') ? (<GameEdit />) : <GetConnected />}
         />
         <Route path="/parties" element={localStorage.getItem('BGStoken') ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
         <Route path="/parties/ajouter" element={localStorage.getItem('BGStoken') ? <AddGame /> : <GetConnected />} />
@@ -150,7 +127,7 @@ function App() {
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />
-        <Route path="/connexion" element={token ? <Disconnection /> : <Connexion />} />
+        <Route path="/connexion" element={isLogged ? <Disconnection /> : <Connexion />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />

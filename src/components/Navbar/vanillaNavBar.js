@@ -81,7 +81,7 @@ function Navbar({ token }) {
             </ul>
             <ul className="navbar-avatar">
               <li className="nav-item">
-                <Link className="nav-link connexion-wrapper" to="/connexion">
+                <Link className="nav-link connexion-wrapper" to={localStorage.getItem('BGStoken') ? '/connexion' : '/deconnexion'}>
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
                   {/* <FontAwesomeIcon icon="fa-solid fa-user-tie" /> */}
                   {token ? '' : ''}
