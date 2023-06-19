@@ -1,5 +1,5 @@
 // === action types
-export const SAVE_TOP5GAMES = 'SAVE_RECIPES';
+export const SAVE_TOP5GAMES = 'SAVE_TOP5GAMES';
 export const FETCH_TOP5GAMES = 'FETCH_TOP5GAMES';
 
 export const SAVE_BOARDGAMELIST = 'SAVE_BOARDGAMELIST';
@@ -8,8 +8,11 @@ export const FETCH_BOARDGAMELIST = 'FETCH_BOARDGAMELIST';
 export const SAVE_ALLBOARDGAMELIST = 'SAVE_ALLBOARDGAMELIST';
 export const FETCH_ALLBOARDGAMELIST = 'FETCH_ALLBOARDGAMELIST';
 
+export const ADD_EXISTINGBOARDGAME = 'ADD_EXISTINGBOARDGAME';
+
 export const SAVE_PLAYEDBOARDGAMELIST = 'SAVE_PLAYEDBOARDGAMELIST';
 export const FETCH_PLAYEDBOARDGAMELIST = 'FETCH_PLAYEDBOARDGAMELIST';
+
 
 export const FETCH_BOARDGAMEINFOS = 'FETCH_BOARDGAMEINFOS';
 export const SAVE_BOARDGAMEINFOS = 'SAVE_BOARDGAMEINFOS';
@@ -38,7 +41,7 @@ export const fetchBoardgameList = () => ({
 });
 
 export const saveAllBoardgameList = (allBoardgameList) => ({
-  type: SAVE_BOARDGAMELIST,
+  type: SAVE_ALLBOARDGAMELIST,
   /* value: newValue, */
   allBoardgameList: allBoardgameList,
 });
@@ -46,6 +49,12 @@ export const saveAllBoardgameList = (allBoardgameList) => ({
 export const fetchAllBoardgameList = () => ({
   type: FETCH_ALLBOARDGAMELIST,
   /* value: newValue, */
+});
+
+export const addExistingBoardgame = (existingBoardgame) => ({
+  type: ADD_EXISTINGBOARDGAME,
+  /* value: newValue, */
+  existingBoardgame: existingBoardgame,
 });
 
 export const savePlayedBoardgameList = (playedBoardgameList) => ({

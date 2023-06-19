@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom';
 // import AllGames from '../../Data/AllGames';
 import { useState, useEffect } from 'react';
 import Loader from '../Loader';
-import { fetchAllBoardgameList } from '../../actions/boardgames';
+import { addExistingBoardgame, fetchAllBoardgameList } from '../../actions/boardgames';
 
 const { Option } = Select;
 
@@ -51,56 +51,41 @@ function AddBoardgame() {
   const allBoardgameListLoaded = useSelector((state) => state.boardgames.allBoardgameListLoaded);
 
   // console.log(suggestions);
+
+  // --------------------------GET ALL GAMES FOR PREFILL------------------------------------------
   useEffect(() => {
-    // --------------------------GET ALL GAMES FOR PREFILL-------------------------
     dispatch(fetchAllBoardgameList());
-
-  //   axios.get(
-  //   // URL
-  //     'http://127.0.0.1:8000/api/boardgames',
-  //     // données
-  //     {
-  //     },
-  //   )
-  //     .then((response) => {
-  //       // console.log('Recuperation des tous les jeux OK');
-  //       // console.log(response.data);
-  //       setAllGames(response.data.results);
-
-  //       setDisabled(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
-  //     .finally(() => {
-  //       setAllGamesLoading(false);
-  //     });
   }, []);
+
+  // Récupération liste des jeux complète (tous jeux confondus) dans le state
+  const allBoardgameList = useSelector((state) => state.boardgames.allBoardgameList);
+  // console.log(allBoardgameList);
 
   const navigate = useNavigate();
   const [selectedBoardGameId, setSelectedBoardGameId] = useState('');
 
   // ----------------------------VALIDATION OF EXISTING BOARDGAME FORM----------------------------
   const onSubmitExisting = (values) => {
+    dispatch(addExistingBoardgame(values.boardgame));
     console.log(values);
-    axios.post(
-      // URL
-      'http://127.0.0.1:8000/api/user/collection/boardgames/',
-      // données
-      {
-        boardGames: values.boardgame,
-      },
-      config,
-    )
-      .then(() => {
-        console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        navigate('/jeux');
-      });
+    // axios.post(
+    //   // URL
+    //   'http://127.0.0.1:8000/api/user/collection/boardgames/',
+    //   // données
+    //   {
+    //     boardGames: values.boardgame,
+    //   },
+    //   config,
+    // )
+    //   .then(() => {
+    //     console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+    //   .finally(() => {
+    //     navigate('/jeux');
+    //   });
   };
 
   // ----------------------------VALIDATION OF CREATE BOARDGAME FORM--------------------------------
@@ -164,13 +149,13 @@ function AddBoardgame() {
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>
       {/* -----------------------------------SELECTION JEU EXISTANT--------------------------- */}
-      {!disabled
-      && (
+      {/* {!disabled
+      && ( */}
       <div className="form-container">
         <section>
           <h3>Choisir un jeu existant</h3>
           <Form
-            disabled={disabled}
+            // disabled={disabled}
             name="validate_existing_game"
             // {...formItemLayout}
             onFinish={onSubmitExisting}
@@ -190,7 +175,7 @@ function AddBoardgame() {
             >
               {/* <Input placeholder="Nom Joueur" /> */}
               <Select placeholder="Selectionner un jeu" style={{ minWidth: '100px' }}>
-                {allGames.map((game) => (
+                {allBoardgameList.map((game) => (
                   <Option
                     key={game.id}
                     value={Number(game.id)}
@@ -230,7 +215,7 @@ function AddBoardgame() {
           </Form>
         </section>
       </div>
-      )}
+      {/* )} */}
 
       {/* ------------------------------------CREATION JEU-------------------------------------- */}
       <div className="form-container">

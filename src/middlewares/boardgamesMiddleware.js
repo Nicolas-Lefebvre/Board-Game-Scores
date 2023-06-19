@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+// import {browserHistory} from 'react-router';
 // import { useParams } from 'react-router-dom';
 
 import {
@@ -8,6 +10,7 @@ import {
   saveBoardgameList,
   FETCH_ALLBOARDGAMELIST,
   saveAllBoardgameList,
+  ADD_EXISTINGBOARDGAME,
   FETCH_PLAYEDBOARDGAMELIST,
   savePlayedBoardgameList,
   FETCH_BOARDGAMEINFOS,
@@ -15,6 +18,7 @@ import {
 } from '../actions/boardgames';
 
 const boardgamesMiddleware = (store) => (next) => (action) => {
+  // const navigate = useNavigate();
   switch (action.type) {
     case FETCH_TOP5GAMES:
       // console.log('ici appel à lAPI');
@@ -70,6 +74,33 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log(error);
+        });
+      break;
+
+    // AJOUT D'UN JEU EXISTANT DANS LA BDD A LA COLLECTION DU USER
+    case ADD_EXISTINGBOARDGAME:
+      axios.post(
+        // URL
+        'http://127.0.0.1:8000/api/user/collection/boardgames/',
+        // données
+        {
+          boardGames: action.existingBoardgame,
+        },
+        // options, notamment les headers
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
+          },
+        },
+      )
+        .then(() => {
+          console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          browserHistory.replace({ pathname: '/jeux' });
         });
       break;
 
