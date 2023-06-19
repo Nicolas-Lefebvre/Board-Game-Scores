@@ -25,7 +25,7 @@ import { fetchGameList } from '../../actions/games';
 function GameList() {
   // const [loading, setLoading] = useState(true);
   const gameListLoaded = useSelector((state) => state.games.gameListLoaded);
-  console.log(gameListLoaded);
+  // console.log(gameListLoaded);
 
   const dispatch = useDispatch();
 

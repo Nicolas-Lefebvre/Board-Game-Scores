@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 import {
   FETCH_TOP5GAMES,
   saveTop5Games,
   FETCH_BOARDGAMELIST,
   saveBoardgameList,
+  FETCH_ALLBOARDGAMELIST,
+  saveAllBoardgameList,
   FETCH_PLAYEDBOARDGAMELIST,
   savePlayedBoardgameList,
   FETCH_BOARDGAMEINFOS,
@@ -46,6 +48,25 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
 
           // on va enregistrer dans le state les infos de la réponse
           store.dispatch(saveBoardgameList(response.data.results));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+
+    case FETCH_ALLBOARDGAMELIST:
+      axios.get(
+        // URL
+        'http://127.0.0.1:8000/api/boardgames',
+        // options, notamment les headers
+        {
+        },
+      )
+        .then((response) => {
+          // console.log(response);
+
+          // on va enregistrer dans le state les infos de la réponse
+          store.dispatch(saveAllBoardgameList(response.data.results));
         })
         .catch((error) => {
           console.log(error);

@@ -5,6 +5,9 @@ export const FETCH_TOP5GAMES = 'FETCH_TOP5GAMES';
 export const SAVE_BOARDGAMELIST = 'SAVE_BOARDGAMELIST';
 export const FETCH_BOARDGAMELIST = 'FETCH_BOARDGAMELIST';
 
+export const SAVE_ALLBOARDGAMELIST = 'SAVE_ALLBOARDGAMELIST';
+export const FETCH_ALLBOARDGAMELIST = 'FETCH_ALLBOARDGAMELIST';
+
 export const SAVE_PLAYEDBOARDGAMELIST = 'SAVE_PLAYEDBOARDGAMELIST';
 export const FETCH_PLAYEDBOARDGAMELIST = 'FETCH_PLAYEDBOARDGAMELIST';
 
@@ -31,6 +34,17 @@ export const saveBoardgameList = (boardgameList) => ({
 
 export const fetchBoardgameList = () => ({
   type: FETCH_BOARDGAMELIST,
+  /* value: newValue, */
+});
+
+export const saveAllBoardgameList = (allBoardgameList) => ({
+  type: SAVE_BOARDGAMELIST,
+  /* value: newValue, */
+  allBoardgameList: allBoardgameList,
+});
+
+export const fetchAllBoardgameList = () => ({
+  type: FETCH_ALLBOARDGAMELIST,
   /* value: newValue, */
 });
 

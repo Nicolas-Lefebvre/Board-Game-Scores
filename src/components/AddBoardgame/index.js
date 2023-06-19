@@ -16,11 +16,13 @@ import {
 } from 'antd';
 
 // import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 // import AllGames from '../../Data/AllGames';
 import { useState, useEffect } from 'react';
 import Loader from '../Loader';
+import { fetchAllBoardgameList } from '../../actions/boardgames';
 
 const { Option } = Select;
 
@@ -35,7 +37,7 @@ function AddBoardgame() {
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
-  const [allGamesLoading, setAllGamesLoading] = useState(true);
+  // const [allGamesLoading, setAllGamesLoading] = useState(true);
   const [allGames, setAllGames] = useState([]);
 
   const [allCategoriesLoading, setAllCategoriesLoading] = useState(true);
@@ -45,29 +47,34 @@ function AddBoardgame() {
   const [disabled, setDisabled] = useState(true);
   // console.log(AllGames[0].results);
 
+  const dispatch = useDispatch();
+  const allBoardgameListLoaded = useSelector((state) => state.boardgames.allBoardgameListLoaded);
+
   // console.log(suggestions);
   useEffect(() => {
     // --------------------------GET ALL GAMES FOR PREFILL-------------------------
-    axios.get(
-    // URL
-      'http://127.0.0.1:8000/api/boardgames',
-      // données
-      {
-      },
-    )
-      .then((response) => {
-        // console.log('Recuperation des tous les jeux OK');
-        // console.log(response.data);
-        setAllGames(response.data.results);
+    dispatch(fetchAllBoardgameList());
 
-        setDisabled(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setAllGamesLoading(false);
-      });
+  //   axios.get(
+  //   // URL
+  //     'http://127.0.0.1:8000/api/boardgames',
+  //     // données
+  //     {
+  //     },
+  //   )
+  //     .then((response) => {
+  //       // console.log('Recuperation des tous les jeux OK');
+  //       // console.log(response.data);
+  //       setAllGames(response.data.results);
+
+  //       setDisabled(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  //     .finally(() => {
+  //       setAllGamesLoading(false);
+  //     });
   }, []);
 
   const navigate = useNavigate();
@@ -150,7 +157,7 @@ function AddBoardgame() {
   }, []);
 
   // return loading && <Loader />;
-  if (allGamesLoading || allCategoriesLoading) {
+  if (!allBoardgameListLoaded || allCategoriesLoading) {
     return <Loader />;
   }
   return (
@@ -293,7 +300,7 @@ function AddBoardgame() {
                 name="scoreType"
                 label="Type de scoring"
                 rules={[{ required: true }]}
-                style={{ minHeight:'100px' }}
+                style={{ minHeight: '100px' }}
               >
                 <Radio.Group>
                   <Radio value="Highest score">Le plus haut score gagne</Radio>
