@@ -15,6 +15,7 @@ export const initialState = {
   boardgameListLoaded: false,
   allBoardgameList: [],
   allBoardgameListLoaded: false,
+  existingBoardgamesDisabled: true,
   allCategories: [],
   allCategoriesLoaded: [],
   playedBoardgameList: [],
@@ -51,6 +52,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         allBoardgameList: action.allBoardgameList,
         allBoardgameListLoaded: true,
+        existingBoardgamesDisabled: false,
       };
 
     case SAVE_ALLCATEGORIES:

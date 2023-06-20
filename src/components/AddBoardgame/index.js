@@ -47,7 +47,6 @@ function AddBoardgame() {
   };
   // const [allGamesLoading, setAllGamesLoading] = useState(true);
   // const [allGames, setAllGames] = useState([]);
-
   // const [allCategoriesLoading, setAllCategoriesLoading] = useState(true);
   // const [categoryList, setCategoryList] = useState([]);
   // disabled : si la requete API pour récupérer la liste de tous les jeux n'aboutie pas,
@@ -57,6 +56,8 @@ function AddBoardgame() {
 
   const dispatch = useDispatch();
   const allBoardgameListLoaded = useSelector((state) => state.boardgames.allBoardgameListLoaded);
+  // eslint-disable-next-line max-len
+  const existingBoardgamesDisabled = useSelector((state) => state.boardgames.existingBoardgamesDisabled);
 
   // console.log(suggestions);
 
@@ -165,13 +166,15 @@ function AddBoardgame() {
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>
       {/* -----------------------------------SELECTION JEU EXISTANT--------------------------- */}
-      {/* {!disabled
-      && ( */}
+      {/* existingBoardgamesDisabled : si l'API qui récupère la liste des jeux existants
+      a un probleme, le form est disabled = n'apparait pas */}
+      {!existingBoardgamesDisabled
+      && (
       <div className="form-container">
         <section>
           <h3>Choisir un jeu existant</h3>
           <Form
-            // disabled={disabled}
+            disabled={existingBoardgamesDisabled}
             name="validate_existing_game"
             // {...formItemLayout}
             onFinish={onSubmitExisting}
@@ -231,7 +234,7 @@ function AddBoardgame() {
           </Form>
         </section>
       </div>
-      {/* )} */}
+      )}
 
       {/* ------------------------------------CREATION JEU-------------------------------------- */}
       <div className="form-container">
