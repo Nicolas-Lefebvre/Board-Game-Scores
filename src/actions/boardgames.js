@@ -8,11 +8,12 @@ export const FETCH_BOARDGAMELIST = 'FETCH_BOARDGAMELIST';
 export const SAVE_ALLBOARDGAMELIST = 'SAVE_ALLBOARDGAMELIST';
 export const FETCH_ALLBOARDGAMELIST = 'FETCH_ALLBOARDGAMELIST';
 
-export const ADD_EXISTINGBOARDGAME = 'ADD_EXISTINGBOARDGAME';
+// export const ADD_EXISTINGBOARDGAME = 'ADD_EXISTINGBOARDGAME';
+export const FETCH_ALLCATEGORIES = 'FETCH_ALLCATEGORIES';
+export const SAVE_ALLCATEGORIES = 'SAVE_ALLCATEGORIES';
 
 export const SAVE_PLAYEDBOARDGAMELIST = 'SAVE_PLAYEDBOARDGAMELIST';
 export const FETCH_PLAYEDBOARDGAMELIST = 'FETCH_PLAYEDBOARDGAMELIST';
-
 
 export const FETCH_BOARDGAMEINFOS = 'FETCH_BOARDGAMEINFOS';
 export const SAVE_BOARDGAMEINFOS = 'SAVE_BOARDGAMEINFOS';
@@ -46,16 +47,27 @@ export const saveAllBoardgameList = (allBoardgameList) => ({
   allBoardgameList: allBoardgameList,
 });
 
+export const fetchAllCategories = () => ({
+  type: FETCH_ALLCATEGORIES,
+  /* value: newValue, */
+});
+
+export const saveAllCategories = (allCategories) => ({
+  type: SAVE_ALLCATEGORIES,
+  /* value: newValue, */
+  allCategories: allCategories,
+});
+
 export const fetchAllBoardgameList = () => ({
   type: FETCH_ALLBOARDGAMELIST,
   /* value: newValue, */
 });
 
-export const addExistingBoardgame = (existingBoardgame) => ({
-  type: ADD_EXISTINGBOARDGAME,
-  /* value: newValue, */
-  existingBoardgame: existingBoardgame,
-});
+// export const addExistingBoardgame = (existingBoardgame) => ({
+//   type: ADD_EXISTINGBOARDGAME,
+//   /* value: newValue, */
+//   existingBoardgame: existingBoardgame,
+// });
 
 export const savePlayedBoardgameList = (playedBoardgameList) => ({
   type: SAVE_PLAYEDBOARDGAMELIST,

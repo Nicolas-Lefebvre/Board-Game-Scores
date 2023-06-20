@@ -20,9 +20,17 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 // import AllGames from '../../Data/AllGames';
-import { useState, useEffect } from 'react';
+import {
+  // useState,
+  useEffect,
+} from 'react';
+
 import Loader from '../Loader';
-import { addExistingBoardgame, fetchAllBoardgameList } from '../../actions/boardgames';
+import {
+  // addExistingBoardgame,
+  fetchAllBoardgameList,
+  fetchAllCategories,
+} from '../../actions/boardgames';
 
 const { Option } = Select;
 
@@ -38,13 +46,13 @@ function AddBoardgame() {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
   // const [allGamesLoading, setAllGamesLoading] = useState(true);
-  const [allGames, setAllGames] = useState([]);
+  // const [allGames, setAllGames] = useState([]);
 
-  const [allCategoriesLoading, setAllCategoriesLoading] = useState(true);
-  const [categoryList, setCategoryList] = useState([]);
+  // const [allCategoriesLoading, setAllCategoriesLoading] = useState(true);
+  // const [categoryList, setCategoryList] = useState([]);
   // disabled : si la requete API pour récupérer la liste de tous les jeux n'aboutie pas,
   // la partie pour ajouter un jeu existant n'apparait pas.
-  const [disabled, setDisabled] = useState(true);
+  // const [disabled, setDisabled] = useState(true);
   // console.log(AllGames[0].results);
 
   const dispatch = useDispatch();
@@ -62,30 +70,30 @@ function AddBoardgame() {
   // console.log(allBoardgameList);
 
   const navigate = useNavigate();
-  const [selectedBoardGameId, setSelectedBoardGameId] = useState('');
+  // const [selectedBoardGameId, setSelectedBoardGameId] = useState('');
 
   // ----------------------------VALIDATION OF EXISTING BOARDGAME FORM----------------------------
   const onSubmitExisting = (values) => {
-    dispatch(addExistingBoardgame(values.boardgame));
-    console.log(values);
-    // axios.post(
-    //   // URL
-    //   'http://127.0.0.1:8000/api/user/collection/boardgames/',
-    //   // données
-    //   {
-    //     boardGames: values.boardgame,
-    //   },
-    //   config,
-    // )
-    //   .then(() => {
-    //     console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {
-    //     navigate('/jeux');
-    //   });
+    // dispatch(addExistingBoardgame(values.boardgame));
+    // console.log(values);
+    axios.post(
+      // URL
+      'http://127.0.0.1:8000/api/user/collection/boardgames/',
+      // données
+      {
+        boardGames: values.boardgame,
+      },
+      config,
+    )
+      .then(() => {
+        // console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        navigate('/jeux');
+      });
   };
 
   // ----------------------------VALIDATION OF CREATE BOARDGAME FORM--------------------------------
@@ -123,26 +131,34 @@ function AddBoardgame() {
 
   // --------------------------------ALL CATEGORIES API REQUEST-----------------------------
   useEffect(() => {
-    axios.get(
-      // URL
-      'http://127.0.0.1:8000/api/category',
-      // données
-    )
-      .then((response) => {
-        console.log('Récupéraion catégories SUCCES :');
-        // console.log(response.data.results);
-        setCategoryList(response.data.results);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setAllCategoriesLoading(false);
-      });
+    dispatch(fetchAllCategories());
   }, []);
 
+  const allCategoriesLoaded = useSelector((state) => state.boardgames.allCategoriesLoaded);
+  const categoryList = useSelector((state) => state.boardgames.allCategories);
+
+  // CI-DESSOUS L'ANCIENNE RECUP DES CATEGORIES EN UTILISANT USESTATE()
+  // useEffect(() => {
+  //   axios.get(
+  //     // URL
+  //     'http://127.0.0.1:8000/api/category',
+  //     // données
+  //   )
+  //     .then((response) => {
+  //       console.log('Récupéraion catégories SUCCES :');
+  //       // console.log(response.data.results);
+  //       setCategoryList(response.data.results);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  //     .finally(() => {
+  //       setAllCategoriesLoading(false);
+  //     });
+  // }, []);
+
   // return loading && <Loader />;
-  if (!allBoardgameListLoaded || allCategoriesLoading) {
+  if (!allBoardgameListLoaded || !allCategoriesLoaded) {
     return <Loader />;
   }
   return (
@@ -261,7 +277,7 @@ function AddBoardgame() {
               </Form.Item>
             </Space>
             <Space>
-              <Form.Item name="categories">
+              <Form.Item label="Categories" name="categories">
                 <Checkbox.Group>
                   <div className="categories-wrapper">
                     {categoryList.map((category) => (
