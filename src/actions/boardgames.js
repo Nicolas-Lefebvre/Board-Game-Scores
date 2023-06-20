@@ -5,8 +5,11 @@ export const FETCH_TOP5GAMES = 'FETCH_TOP5GAMES';
 export const SAVE_BOARDGAMELIST = 'SAVE_BOARDGAMELIST';
 export const FETCH_BOARDGAMELIST = 'FETCH_BOARDGAMELIST';
 
-export const SAVE_ALLBOARDGAMELIST = 'SAVE_ALLBOARDGAMELIST';
 export const FETCH_ALLBOARDGAMELIST = 'FETCH_ALLBOARDGAMELIST';
+export const SAVE_ALLBOARDGAMELIST = 'SAVE_ALLBOARDGAMELIST';
+
+export const FETCH_USERSBOARDGAMELIST = 'FETCH_USERSBOARDGAMELIST';
+export const SAVE_USERSBOARDGAMELIST = 'SAVE_USERSBOARDGAMELIST';
 
 // export const ADD_EXISTINGBOARDGAME = 'ADD_EXISTINGBOARDGAME';
 export const FETCH_ALLCATEGORIES = 'FETCH_ALLCATEGORIES';
@@ -41,10 +44,24 @@ export const fetchBoardgameList = () => ({
   /* value: newValue, */
 });
 
+export const fetchAllBoardgameList = () => ({
+  type: FETCH_ALLBOARDGAMELIST,
+  /* value: newValue, */
+});
 export const saveAllBoardgameList = (allBoardgameList) => ({
   type: SAVE_ALLBOARDGAMELIST,
   /* value: newValue, */
   allBoardgameList: allBoardgameList,
+});
+
+export const fetchUsersBoardgameList = () => ({
+  type: FETCH_USERSBOARDGAMELIST,
+  /* value: newValue, */
+});
+export const saveUsersBoardgameList = (usersBoardgameList) => ({
+  type: SAVE_USERSBOARDGAMELIST,
+  /* value: newValue, */
+  usersBoardgameList: usersBoardgameList,
 });
 
 export const fetchAllCategories = () => ({
@@ -57,12 +74,6 @@ export const saveAllCategories = (allCategories) => ({
   /* value: newValue, */
   allCategories: allCategories,
 });
-
-export const fetchAllBoardgameList = () => ({
-  type: FETCH_ALLBOARDGAMELIST,
-  /* value: newValue, */
-});
-
 // export const addExistingBoardgame = (existingBoardgame) => ({
 //   type: ADD_EXISTINGBOARDGAME,
 //   /* value: newValue, */

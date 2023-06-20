@@ -58,9 +58,7 @@ function AddBoardgame() {
   const allBoardgameListLoaded = useSelector((state) => state.boardgames.allBoardgameListLoaded);
   // eslint-disable-next-line max-len
   const existingBoardgamesDisabled = useSelector((state) => state.boardgames.existingBoardgamesDisabled);
-
   // console.log(suggestions);
-
   // --------------------------GET ALL GAMES FOR PREFILL------------------------------------------
   useEffect(() => {
     dispatch(fetchAllBoardgameList());

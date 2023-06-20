@@ -20,9 +20,14 @@ import {
   Checkbox,
 } from 'antd';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import FormItem from 'antd/es/form/FormItem';
 import Loader from '../Loader';
+
+import {
+  fetchUsersBoardgameList,
+} from '../../actions/boardgames';
 
 const { Option } = Select;
 
@@ -62,23 +67,32 @@ function AddGame() {
   const [allBoardgamesloading, setAllBoardgamesloading] = useState(true);
 
   const navigate = useNavigate();
-  // ------------------ Recuperation de la liste de tous les jeux  --------------------------
+  const dispatch = useDispatch();
+
+  // ------------------ Recuperation de la liste des jeux du user --------------------------
   useEffect(() => {
-    axios.get(
-      // URL
-      'http://127.0.0.1:8000/api/user/collection',
-      // données
-      config,
-    )
-      .then((response) => {
-        console.log('Récupération des jeux OK');
-        setAllBoardGamess(response.data.results);
-        setAllBoardgamesloading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(fetchUsersBoardgameList());
   }, []);
+
+  const usersBoardgameListLoaded = useSelector((state) => state.boardgames.usersBoardgameListLoaded);
+  const usersBoardgameList = useSelector((state) => state.boardgames.usersBoardgameList);
+
+  // useEffect(() => {
+  //   axios.get(
+  //     // URL
+  //     'http://127.0.0.1:8000/api/user/collection',
+  //     // données
+  //     config,
+  //   )
+  //     .then((response) => {
+  //       console.log('Récupération des jeux OK');
+  //       setAllBoardGamess(response.data.results);
+  //       setAllBoardgamesloading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const [allPlayers, setAllPlayers] = useState([]);
   const [allPlayersloading, setPlayersloading] = useState(true);
@@ -161,7 +175,7 @@ function AddGame() {
       });
   };
 
-  if (allBoardgamesloading || allPlayersloading) {
+  if (!usersBoardgameListLoaded || allPlayersloading) {
     return <Loader />;
   }
   return (
@@ -198,7 +212,7 @@ function AddGame() {
                 rules={[{ required: true, message: 'Selectionnez un jeu' }]}
               >
                 <Select placeholder="Selectionner un jeu" style={{ minWidth: '200px' }}>
-                  {allBoardGames.map((boardgame) => (
+                  {usersBoardgameList.map((boardgame) => (
                     <Option
                       key={boardgame.id}
                       value={boardgame.id}

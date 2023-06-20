@@ -6,6 +6,7 @@ import {
   SAVE_TOP5GAMES,
   SAVE_BOARDGAMEINFOS,
   SAVE_ALLCATEGORIES,
+  SAVE_USERSBOARDGAMELIST,
 } from '../actions/boardgames';
 
 export const initialState = {
@@ -16,6 +17,7 @@ export const initialState = {
   allBoardgameList: [],
   allBoardgameListLoaded: false,
   existingBoardgamesDisabled: true,
+  usersBoardgameList: [],
   allCategories: [],
   allCategoriesLoaded: [],
   playedBoardgameList: [],
@@ -53,6 +55,13 @@ const reducer = (state = initialState, action = {}) => {
         allBoardgameList: action.allBoardgameList,
         allBoardgameListLoaded: true,
         existingBoardgamesDisabled: false,
+      };
+
+    case SAVE_USERSBOARDGAMELIST:
+      return {
+        ...state,
+        usersBoardgameList: action.usersBoardgameList,
+        usersBoardgameListLoaded: true,
       };
 
     case SAVE_ALLCATEGORIES:

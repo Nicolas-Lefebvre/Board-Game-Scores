@@ -4,14 +4,19 @@ import './gameList.scss';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 
 // import axios from 'axios';
-import { useState, useEffect } from 'react';
+import
+{
+  // useState,
+  useEffect,
+} from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 // import { ExclamationCircleFilled } from '@ant-design/icons';
 // import { MenuProps } from 'antd';
-import { Dropdown, Space, Modal } from 'antd';
+// import { Dropdown, Space, Modal } from 'antd';
 
 import { NavLink } from 'react-router-dom';
 import Loader from '../Loader';
@@ -112,11 +117,11 @@ function GameList() {
   //     },
   //   });
   // };
-  const [gameDetails, setgameDetails] = useState(false);
-  const onClick = () => {
-    // console.log('Click');
-    setgameDetails(!gameDetails);
-  };
+  // const [gameDetails, setgameDetails] = useState(false);
+  // const onClick = () => {
+  //   // console.log('Click');
+  //   setgameDetails(!gameDetails);
+  // };
 
   if (!gameListLoaded) {
     return <Loader />;

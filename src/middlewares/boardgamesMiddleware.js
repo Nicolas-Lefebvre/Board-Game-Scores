@@ -10,6 +10,8 @@ import {
   saveBoardgameList,
   FETCH_ALLBOARDGAMELIST,
   saveAllBoardgameList,
+  FETCH_USERSBOARDGAMELIST,
+  saveUsersBoardgameList,
   // ADD_EXISTINGBOARDGAME,
   FETCH_ALLCATEGORIES,
   saveAllCategories,
@@ -73,6 +75,26 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
 
           // on va enregistrer dans le state les infos de la réponse
           store.dispatch(saveAllBoardgameList(response.data.results));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+
+    case FETCH_USERSBOARDGAMELIST:
+      axios.get(
+        // URL
+        'http://127.0.0.1:8000/api/user/collection',
+        // options, notamment les headers
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+        },
+      )
+        .then((response) => {
+          // console.log(response);
+
+          // on va enregistrer dans le state les infos de la réponse
+          store.dispatch(saveUsersBoardgameList(response.data.results));
         })
         .catch((error) => {
           console.log(error);
