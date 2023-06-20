@@ -17,20 +17,24 @@ import { useNavigate } from 'react-router-dom';
 // ============================================ Composant===========================================
 function PlayerAdd() {
   const navigate = useNavigate();
-  const [messageApi, contextHolder] = message.useMessage();
-  const key = 'updatable';
-  const openMessage = () => {
-    messageApi.open({
-      key,
-      type: 'success',
-      content: 'Joueur bien ajouté!',
-      duration: 2,
-    });
-  };
+  const [
+    messageApi,
+    contextHolder,
+  ] = message.useMessage();
+  // const key = 'updatable';
+  // const openMessage = () => {
+  //   messageApi.open({
+  //     key,
+  //     type: 'success',
+  //     content: 'Joueur bien ajouté!',
+  //     duration: 2,
+  //   });
+  // };
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
+
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
     axios.post(
@@ -44,9 +48,7 @@ function PlayerAdd() {
     )
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
-
         // openMessage();
-
         navigate('/joueurs');
       })
       .catch((error) => {

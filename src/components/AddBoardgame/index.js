@@ -120,7 +120,7 @@ function AddBoardgame() {
       config,
     )
       .then(() => {
-        console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+        // console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
       })
       .catch((error) => {
         console.log(error);
