@@ -28,6 +28,11 @@ import Loader from '../Loader';
 import {
   fetchUsersBoardgameList,
 } from '../../actions/boardgames';
+import { fetchPlayerListNoStats } from '../../actions/players';
+
+// import {
+//   fetchUsersPlayerList,
+// } from '../../actions/players';
 
 const { Option } = Select;
 
@@ -63,8 +68,8 @@ function AddGame() {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
   const [isTeam, setIsTeam] = useState(false);
-  const [allBoardGames, setAllBoardGamess] = useState([]);
-  const [allBoardgamesloading, setAllBoardgamesloading] = useState(true);
+  // const [allBoardGames, setAllBoardGamess] = useState([]);
+  // const [allBoardgamesloading, setAllBoardgamesloading] = useState(true);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -77,6 +82,7 @@ function AddGame() {
   const usersBoardgameListLoaded = useSelector((state) => state.boardgames.usersBoardgameListLoaded);
   const usersBoardgameList = useSelector((state) => state.boardgames.usersBoardgameList);
 
+  // Ancienne méthode avec useState :
   // useEffect(() => {
   //   axios.get(
   //     // URL
@@ -94,30 +100,38 @@ function AddGame() {
   //     });
   // }, []);
 
-  const [allPlayers, setAllPlayers] = useState([]);
-  const [allPlayersloading, setPlayersloading] = useState(true);
-  // ------------------ Recuperation de la liste de tous les joueurs  --------------------------
+  // ------------------ Recuperation de la liste de tous les joueurs du user --------------------------
   useEffect(() => {
-    axios.get(
-      // URL
-      'http://127.0.0.1:8000/api/user/players',
-      // données
-      config,
-    )
-      .then((response) => {
-        console.log('Récupération des joueurs OK');
-        setAllPlayers(response.data.results);
-        setPlayersloading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        // navigate('/jeux');
-      });
+    dispatch(fetchPlayerListNoStats());
   }, []);
 
-  console.log(allPlayers);
+  const usersPlayerList = useSelector((state) => state.players.playerListNoStats);
+  const usersPlayerListLoaded = useSelector((state) => state.players.playerListNoStatsLoaded);
+
+  // Ancienne version avec useState :
+  // const [allPlayers, setAllPlayers] = useState([]);
+  // const [allPlayersloading, setPlayersloading] = useState(true);
+  // useEffect(() => {
+  //   axios.get(
+  //     // URL
+  //     'http://127.0.0.1:8000/api/user/players',
+  //     // données
+  //     config,
+  //   )
+  //     .then((response) => {
+  //       console.log('Récupération des joueurs OK');
+  //       setAllPlayers(response.data.results);
+  //       setPlayersloading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  //     .finally(() => {
+  //       // navigate('/jeux');
+  //     });
+  // }, []);
+
+  // console.log(allPlayers);
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -175,7 +189,7 @@ function AddGame() {
       });
   };
 
-  if (!usersBoardgameListLoaded || allPlayersloading) {
+  if (!usersBoardgameListLoaded || !usersPlayerListLoaded) {
     return <Loader />;
   }
   return (
@@ -289,7 +303,7 @@ function AddGame() {
                       >
                         {/* <Input placeholder="Nom Joueur" /> */}
                         <Select placeholder="Selectionner un joueur" style={{ minWidth: '200px' }}>
-                          {allPlayers.map((player) => (
+                          {usersPlayerList.map((player) => (
                             <Option
                               key={player.id}
                               value={Number(player.id)}
