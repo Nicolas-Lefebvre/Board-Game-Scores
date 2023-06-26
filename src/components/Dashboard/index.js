@@ -509,19 +509,25 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Recordman</th> */}
                       </tr>
                       {
-                      top5Games.map((game) => (
-                        <tr key={game.board_game_id}>
-                          <td><Link to={`/jeux/${game.board_game_id}?boardgame_id=${game.board_game_id}`}>{game.board_game_name}</Link>
-                          </td>
-                          <td>{game.game_number}</td>
-                          {/* <td>18</td>
-                          <td>5</td> */}
-                          <td className="desktop">Laura</td>
-                          <td className="desktop">2</td>
-                          <td className="desktop">Syham</td>
-                          <td className="desktop">12</td>
-                        </tr>
-                      ))
+                        top5Games.length === 0
+                          ? (
+                            <tr>
+                              <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune jeu renseignée : ajoutez votre première partie</td>
+                            </tr>
+                          )
+                          : top5Games.map((game) => (
+                            <tr key={game.board_game_id}>
+                              <td><Link to={`/jeux/${game.board_game_id}?boardgame_id=${game.board_game_id}`}>{game.board_game_name}</Link>
+                              </td>
+                              <td>{game.game_number}</td>
+                              {/* <td>18</td>
+                              <td>5</td> */}
+                              <td className="desktop">Laura</td>
+                              <td className="desktop">2</td>
+                              <td className="desktop">Syham</td>
+                              <td className="desktop">12</td>
+                            </tr>
+                          ))
                     }
                       {/* <tr>
                         <td><Link to={`/jeux/${top5Games[0].board_game_id}?boardgame_id=${top5Games[0].board_game_id}`}>{top5Games[0].board_game_name}</Link></td>
@@ -644,14 +650,20 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Défaites</th> */}
                       </tr>
                       {
-                      top5Categories.map((category) => (
-                        <tr key={category.category_id}>
-                          <td>{category.name}</td>
-                          <td>{category.Category_number}</td>
-                          {/* <td>18</td> */}
-                          {/* <td>5</td> */}
-                        </tr>
-                      ))
+                      top5Categories.length === 0
+                        ? (
+                          <tr>
+                            <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune catégorie renseignée</td>
+                          </tr>
+                        )
+                        : top5Categories.map((category) => (
+                          <tr key={category.category_id}>
+                            <td>{category.name}</td>
+                            <td>{category.Category_number}</td>
+                            {/* <td>18</td> */}
+                            {/* <td>5</td> */}
+                          </tr>
+                        ))
                     }
                       {/* <tr>
                         <td>{top5Categories[0].name}</td>
