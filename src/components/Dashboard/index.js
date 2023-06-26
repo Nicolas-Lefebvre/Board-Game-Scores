@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import './dashboard.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ResponsivePie } from '@nivo/pie';
@@ -13,6 +13,8 @@ import Loader from '../Loader';
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
 // import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
+import { setTokenValidity } from '../../actions/user';
+import { useDispatch } from 'react-redux';
 // import PlayersPieChart from './PieCharts/PlayersPieChart';
 // import AddBoardgame from '../AddBoardgame';
 
@@ -21,6 +23,9 @@ function Dashboard({ setUserInfos, userInfos }) {
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [loadingPlayerResults, setLoadingPlayerResults] = useState(true);
 
@@ -48,6 +53,11 @@ function Dashboard({ setUserInfos, userInfos }) {
       })
       .catch((error) => {
         console.log(error);
+        if (error.response && error.response.status === 401) {
+          console.log('Erreur 401 : Redirection vers GetConnected');
+          dispatch(setTokenValidity(false));
+          navigate('/connexion');
+        }
       })
       .finally(() => {
         setLoadingUserInfos(false);

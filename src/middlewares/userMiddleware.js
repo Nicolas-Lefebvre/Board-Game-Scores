@@ -40,9 +40,10 @@ const userMiddleware = (store) => (next) => (action) => {
         // console.log(decodedToken);
 
         const dateNow = new Date();
-        // console.log(dateNow.getTime());
+        console.log('date actuelle :', dateNow.getTime() / 1000);
+        console.log('date d`expiration token :', decodedToken.exp);
 
-        if (decodedToken.exp < dateNow.getTime()) {
+        if (decodedToken.exp > dateNow.getTime() / 1000) {
           store.dispatch(setTokenValidity(true));
           // console.log('TOKEN VALIDE');
           // localStorage.removeItem('BGStoken');
