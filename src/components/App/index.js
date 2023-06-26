@@ -33,7 +33,7 @@ import PlayerAdd from '../PlayerAdd';
 import PlayerEdit from '../PlayerEdit';
 import Page404 from '../Page404';
 import ProfilEdit from '../ProfilEdit';
-import { checkTokenValidity } from '../../actions/user';
+import { checkTokenValidity, setTokenValidity } from '../../actions/user';
 
 // == Composant
 function App() {
@@ -43,25 +43,44 @@ function App() {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   // const [isLogged, setIsLogged] = useState(false);
-  let isLogged = useSelector((state) => state.user.isLogged);
-
-  if (localStorage.getItem('BGStoken')) {
-    dispatch(checkTokenValidity());
-  }
-  else {
-    isLogged = false;
-  }
-  console.log('Validité du token :', isLogged);
+  const isLogged = useSelector((state) => state.user.isLogged);
 
   // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
-  // let isExpired;
-  // const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
-  // console.log(decodedToken);
-  // const dateNow = new Date();
+  useEffect(() => {
+    if (localStorage.getItem('BGStoken')) {
+      dispatch(checkTokenValidity());
+      console.log('Validité du token :', isLogged);
+    }
+    else {
+      dispatch(setTokenValidity(false));
+    }
+  });
 
-  // if (decodedToken.exp < dateNow.getTime()) {
-  //   isExpired = true;
+  // useEffect(() => {
+  //   if (localStorage.getItem('BGStoken')) {
+  //     dispatch(checkTokenValidity());
+  //   }
+  //   console.log('Validité du token :', isLogged);
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   console.log('Validité du token :', isLogged);
+  // }, [isLogged]);
+
+  // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
+  // const [isLogged, setIsLogged] = useState(false);
+  // const BGSToken = localStorage.getItem('BGStoken');
+
+  // if (BGSToken) {
+  //   const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
+  //   const dateNow = new Date();
+
+  //   if (decodedToken.exp > dateNow.getTime() / 1000) {
+  //     console.log('Token valide');
+  //     setIsLogged(true);
+  //   }
   // }
+
   // -----------------------------------------------------------------------------
 
   // eslint-disable-next-line no-unused-vars
