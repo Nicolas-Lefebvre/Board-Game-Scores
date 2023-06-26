@@ -332,7 +332,7 @@ function Dashboard({ setUserInfos, userInfos }) {
             aria-label="Default select example"
             onChange={onChange}
           >
-            {(playerList.slice(0, lossPlayerList.length+1)).map((player) => (
+            {(playerList.slice(0, lossPlayerList.length)).map((player) => (
               <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
             ))}
           </select>
