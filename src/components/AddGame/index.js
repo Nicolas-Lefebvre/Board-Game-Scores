@@ -45,13 +45,13 @@ const formItemLayout = {
 //     wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 12 }, lg: { span: 12 } }
 // };
 
-const normFile = (e) => {
-  console.log('Upload event:', e);
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e?.fileList;
-};
+// const normFile = (e) => {
+//   console.log('Upload event:', e);
+//   if (Array.isArray(e)) {
+//     return e;
+//   }
+//   return e?.fileList;
+// };
 
 const { TextArea } = Input;
 
@@ -249,6 +249,7 @@ function AddGame() {
               >
                 <Checkbox
                   defaultChecked={false}
+                  // disabled={!isTeam}
                   onChange={() => {
                     setIsTeam(!isTeam);
                   }}
@@ -313,6 +314,7 @@ function AddGame() {
                           ))}
                         </Select>
                       </Form.Item>
+                      {/* -------------------------Score-------------------------- */}
                       <Form.Item
                         {...restField}
                         name={[name, 'score']}
@@ -346,6 +348,7 @@ function AddGame() {
                         <Rate />
                       </Form.Item>
                       {/* ------------------------EQUIPE ----------------------- */}
+                      {isTeam && (
                       <Form.Item label="N° équipe">
                         <Form.Item name={[name, 'team']} noStyle>
                           <InputNumber min={1} max={10} style={{ width: '50px' }} />
@@ -354,6 +357,8 @@ function AddGame() {
                           n° Equipe
                         </span> */}
                       </Form.Item>
+                      )}
+                      {/* ------------------------------------------------------ */}
                       <MinusCircleOutlined onClick={() => remove(name)} />
                     </Space>
                   ))}
