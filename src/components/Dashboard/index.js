@@ -25,6 +25,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   const [loadingPlayerResults, setLoadingPlayerResults] = useState(true);
 
   const [playerList, setPlayerList] = useState([]);
+  const [numberOfPlayerWhoWon, setNumberOfPlayerWhoWon] = useState(0);
 
   const [loadingUserInfos, setLoadingUserInfos] = useState(true);
   // const [playerListSingle, setPlayerListSingle] = useState([]);
@@ -62,12 +63,13 @@ function Dashboard({ setUserInfos, userInfos }) {
       config,
     )
       .then((response) => {
-        // console.log('Recuperation de tous les joueurs OK');
-        // console.log(response.data);
+        console.log('Recuperation de tous les joueurs OK');
+        console.log(response.data);
         setPlayerList(response.data.results);
         setSelectedPlayerId(response.data.results[0].player_id);
         setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
         const numberOfPlayer = (response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0))).length;
+        setNumberOfPlayerWhoWon((response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 1)).length));
         // console.log('number of players :', numberOfPlayer);
 
         // On rempli le premier camembert avec les données du joueur en index zéro par défaut
@@ -132,7 +134,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   // Recuperation des top 5 jeux par joueur
   const [loadingTop5Games, setLoadingTop5Games] = useState(true);
   const [top5Games, setTop5Games] = useState([]);
-  const [numberOfGames, setNumberOfGames] = useState(0);
+  // const [numberOfGames, setNumberOfGames] = useState(0);
   const [top5GamesData, setTop5GamesData] = useState([]);
 
   // =====================================  RECUPERATION TOP 5 JEUX =============================
@@ -147,7 +149,7 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log('Recuperation des top 5 jeux OK');
         console.log(response.data);
         setTop5Games(response.data.results);
-        setNumberOfGames(response.data.results.length);
+        // setNumberOfGames(response.data.results.length);
 
         setLoadingTop5Games(false);
 
@@ -155,6 +157,7 @@ function Dashboard({ setUserInfos, userInfos }) {
         const top5GamesPieData = [];
 
         // Boucle pour remplir le tableau
+        // eslint-disable-next-line no-plusplus
         for (let i = 0; i < response.data.results.length; i++) {
           // Création de l'objet pour chaque jeu
           const game = {
@@ -218,41 +221,28 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log(response.data);
         setTop5Players(response.data.results);
 
-        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
-        setTop5PlayersData([
-          {
-            id: response.data.results[0].player_name,
-            label: response.data.results[0].player_name,
-            value: response.data.results[0].victory_number,
-            color: 'hsl(15, 70%, 50%)',
-          },
-          {
-            id: response.data.results[1].player_name,
-            label: response.data.results[1].player_name,
-            value: response.data.results[1].victory_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[2].player_name,
-            label: response.data.results[2].player_name,
-            value: response.data.results[2].victory_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[3].player_name,
-            label: response.data.results[3].player_name,
-            value: response.data.results[3].victory_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[4].player_name,
-            label: response.data.results[4].player_name,
-            value: response.data.results[4].victory_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-        ]);
-
         setLoadingTop5Players(false);
+
+        // Initialisation du tableau vide
+        const top5PlayersPieData = [];
+
+        // Boucle pour remplir le tableau
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < response.data.results.length; i++) {
+          // Création de l'objet pour chaque jeu
+          const player = {
+            id: response.data.results[i].player_name,
+            label: response.data.results[i].player_name,
+            value: response.data.results[i].victory_number,
+            color: `hsl(${i * 15}, 70%, 50%)`,
+          };
+
+          // Ajout de l'objet au tableau
+          top5PlayersPieData.push(player);
+        }
+
+        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
+        setTop5PlayersData(top5PlayersPieData);
       })
 
       .catch((error) => {
@@ -323,9 +313,15 @@ function Dashboard({ setUserInfos, userInfos }) {
             aria-label="Default select example"
             onChange={onChange}
           >
-            {(playerList.slice(0, lossPlayerList.length)).map((player) => (
-              <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
-            ))}
+            {
+              numberOfPlayerWhoWon > 1
+                ? (playerList.slice(0, lossPlayerList.length)).map((player) => (
+                  <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
+                ))
+                : (playerList.map((player) => (
+                  <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
+                )))
+            }
           </select>
 
           <div className="resultats-wrapper">
@@ -709,41 +705,41 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
                         <th><img src={lauriers} alt="laurier des records" /></th>
                       </tr>
-                      <tr>
+                      {
+                      top5Players.length === 0
+                        ? (
+                          <tr>
+                            <td style={{ fontStyle: 'italic' }} colSpan="2">Aucun joueur renseigné</td>
+                          </tr>
+                        )
+                        : top5Players.map((player) => (
+                          <tr key={player.player_id}>
+                            <td>
+                              <Link to={`/joueurs/id?player_id=${player.player_id}`}>
+                                {player.player_name}
+                              </Link>
+                            </td>
+                            <td>{player.victory_number}</td>
+                            <td>
+                              {
+                                lossPlayerList.find(p => p.player_id === player.player_id)
+                                  ? lossPlayerList.find(p => p.player_id === player.player_id).victory_number
+                                  : '0'
+                              }
+                            </td>
+                            <td>2</td>
+                            <td>1</td>
+                          </tr>
+                        ))
+                    }
+
+                      {/* <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[0].player_id}`}>{top5Players[0].player_name}</Link></td>
                         <td>{top5Players[0].victory_number}</td>
                         <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id))).victory_number) : '0' }</td>
                         <td>2</td>
                         <td>1</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/joueurs/id?player_id=${top5Players[1].player_id}`}>{top5Players[1].player_name}</Link></td>
-                        <td>{top5Players[1].victory_number}</td>
-                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id))).victory_number) : '0' }</td>
-                        <td>1</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/joueurs/id?player_id=${top5Players[2].player_id}`}>{top5Players[2].player_name}</Link></td>
-                        <td>{top5Players[2].victory_number}</td>
-                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id))).victory_number) : '0' }</td>
-                        <td>1</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/joueurs/id?player_id=${top5Players[3].player_id}`}>{top5Players[3].player_name}</Link></td>
-                        <td>{top5Players[3].victory_number}</td>
-                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id))).victory_number) : '0' }</td>
-                        <td>1</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/joueurs/id?player_id=${top5Players[4].player_id}`}>{top5Players[4].player_name}</Link></td>
-                        <td>{top5Players[4].victory_number}</td>
-                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id))).victory_number) : '0' }</td>
-                        <td>2</td>
-                        <td>1</td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>
