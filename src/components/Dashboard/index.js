@@ -643,36 +643,22 @@ function Dashboard({ setUserInfos, userInfos }) {
                         {/* <th>Victoires</th>
                         <th>Défaites</th> */}
                       </tr>
-                      <tr>
+                      {
+                      top5Categories.map((category) => (
+                        <tr key={category.category_id}>
+                          <td>{category.name}</td>
+                          <td>{category.Category_number}</td>
+                          {/* <td>18</td> */}
+                          {/* <td>5</td> */}
+                        </tr>
+                      ))
+                    }
+                      {/* <tr>
                         <td>{top5Categories[0].name}</td>
-                        <td>{top5Categories[0].Category_number}</td>
-                        {/* <td>18</td> */}
-                        {/* <td>5</td> */}
-                      </tr>
-                      <tr>
-                        <td>{top5Categories[1].name}</td>
-                        <td>{top5Categories[1].Category_number}</td>
-                        {/* <td>2</td> */}
-                        {/* <td>120</td> */}
-                      </tr>
-                      <tr>
-                        <td>{top5Categories[2].name}</td>
-                        <td>{top5Categories[2].Category_number}</td>
-                        {/* <td>12</td> */}
-                        {/* <td>3</td> */}
-                      </tr>
-                      <tr>
-                        <td>{top5Categories[3].name}</td>
-                        <td>{top5Categories[3].Category_number}</td>
-                        {/* <td>8</td> */}
-                        {/* <td>7</td> */}
-                      </tr>
-                      <tr>
-                        <td>{top5Categories[4].name}</td>
-                        <td>{top5Categories[4].Category_number}</td>
-                        {/* <td>12</td> */}
-                        {/* <td>3</td> */}
-                      </tr>
+                        <td>{top5Categories[0].Category_number}</td> */}
+                      {/* <td>18</td> */}
+                      {/* <td>5</td> */}
+                      {/* </tr> */}
                     </tbody>
                   </table>
                 </div>
