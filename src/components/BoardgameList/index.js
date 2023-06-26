@@ -2,7 +2,7 @@
 import './boardgameList.scss';
 
 import { useSelector, useDispatch } from 'react-redux';
-import jwtDecode from 'jwt-decode';
+// import jwtDecode from 'jwt-decode';
 
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -99,13 +99,13 @@ function BoardgameList() {
               <div className="text-container">
                 <h5 className="card-title">{boardgame.name}</h5>
                 {/* <p className="category">Jeu de gestion</p> */}
-                <ul className="">
+                <ul className="stats-container">
                   <li>
-                    Parties : 
+                    Parties :
                     {(playedBoardgameList.find((playedBoardgame) => (
                       playedBoardgame.board_game_id === boardgame.board_games_id)))
-                      ? ' ' + (playedBoardgameList.find((playedBoardgame) => (
-                        playedBoardgame.board_game_id === boardgame.board_games_id))).game_number
+                      ? ` ${(playedBoardgameList.find((playedBoardgame) => (
+                        playedBoardgame.board_game_id === boardgame.board_games_id))).game_number}`
                       : ' 0'}
                   </li>
                   {/* <li>Victoires : 15</li> */}

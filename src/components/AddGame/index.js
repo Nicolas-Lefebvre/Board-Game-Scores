@@ -17,6 +17,7 @@ import {
   Switch,
   Space,
   Input,
+  // eslint-disable-next-line no-unused-vars
   Checkbox,
 } from 'antd';
 import axios from 'axios';
@@ -67,6 +68,7 @@ function AddGame() {
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
+  // eslint-disable-next-line no-unused-vars
   const [isTeam, setIsTeam] = useState(false);
   // const [allBoardGames, setAllBoardGamess] = useState([]);
   // const [allBoardgamesloading, setAllBoardgamesloading] = useState(true);
