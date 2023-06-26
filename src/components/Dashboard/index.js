@@ -67,7 +67,8 @@ function Dashboard({ setUserInfos, userInfos }) {
         setPlayerList(response.data.results);
         setSelectedPlayerId(response.data.results[0].player_id);
         setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
-        const numberOfPlayer = lossPlayerList.length;
+        const numberOfPlayer = (response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0))).length;
+        console.log('number of players :', numberOfPlayer);
 
         // On rempli le premier camembert avec les données du joueur en index zéro par défaut
         setData(
