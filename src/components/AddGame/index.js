@@ -81,6 +81,7 @@ function AddGame() {
 
   const usersBoardgameListLoaded = useSelector((state) => state.boardgames.usersBoardgameListLoaded);
   const usersBoardgameList = useSelector((state) => state.boardgames.usersBoardgameList);
+  console.log(usersBoardgameList);
 
   // Ancienne méthode avec useState :
   // useEffect(() => {
@@ -242,7 +243,10 @@ function AddGame() {
               <Link to="/jeux/ajouter" style={{ color: 'blue' }}>Ajouter un jeu à ma collection <br /><i style={{ fontStyle: 'italic', color: 'black' }}>(ceci vous amènera sur une nouvelle page)</i></Link>
             </Space>
 
-            <Space style={{ display: 'flex', justifyContent: 'center' }}>
+            {/* Ce code est désactivé car le jeu en équipe n'est pas encore géré */}
+            {/* Quand ca sera le cas, nous pourrons décommenter cette partie : */}
+            {/* c'est une checkbox qui active le no d'équipe pour chaque joueur lignes 353 à 364 */}
+            {/* <Space style={{ display: 'flex', justifyContent: 'center' }}>
               <Form.Item
                 label="Jeu en équipes lors de cette partie ?"
                 valuePropName="checked"
@@ -255,7 +259,7 @@ function AddGame() {
                   }}
                 />
               </Form.Item>
-            </Space>
+            </Space> */}
 
           </section>
 
