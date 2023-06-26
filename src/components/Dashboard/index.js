@@ -42,7 +42,7 @@ function Dashboard({ setUserInfos, userInfos }) {
     )
       .then((response) => {
         console.log('Recuperation des infos du user OK');
-        console.log(response.data);
+        // console.log(response.data);
         setUserInfos(response.data.results);
       })
       .catch((error) => {
@@ -103,7 +103,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   const onChange = (event) => {
     console.log(event.target.value);
     const filteredPlayer = playerList.filter((player) => (
-      player.player_id == event.target.value
+      player.player_id === event.target.value
     ));
     console.log(filteredPlayer);
     const victoryNumber = filteredPlayer[0].victory_number;
@@ -132,6 +132,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   // Recuperation des top 5 jeux par joueur
   const [loadingTop5Games, setLoadingTop5Games] = useState(true);
   const [top5Games, setTop5Games] = useState([]);
+  const [numberOfGames, setNumberOfGames] = useState(0);
   const [top5GamesData, setTop5GamesData] = useState([]);
 
   // =====================================  RECUPERATION TOP 5 JEUX =============================
@@ -146,42 +147,28 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log('Recuperation des top 5 jeux OK');
         console.log(response.data);
         setTop5Games(response.data.results);
-
-        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
-        setTop5GamesData([
-          {
-            id: response.data.results[0].board_game_name,
-            label: response.data.results[0].board_game_name,
-            value: response.data.results[0].game_number,
-            color: 'hsl(15, 70%, 50%)',
-          },
-          {
-            id: response.data.results[1].board_game_name,
-            label: response.data.results[1].board_game_name,
-            value: response.data.results[1].game_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[2].board_game_name,
-            label: response.data.results[2].board_game_name,
-            value: response.data.results[2].game_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[3].board_game_name,
-            label: response.data.results[3].board_game_name,
-            value: response.data.results[3].game_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[4].board_game_name,
-            label: response.data.results[4].board_game_name,
-            value: response.data.results[4].game_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-        ]);
+        setNumberOfGames(response.data.results.length);
 
         setLoadingTop5Games(false);
+
+        // Initialisation du tableau vide
+        const top5GamesPieData = [];
+
+        // Boucle pour remplir le tableau
+        for (let i = 0; i < response.data.results.length; i++) {
+          // Création de l'objet pour chaque jeu
+          const game = {
+            id: response.data.results[i].board_game_name,
+            label: response.data.results[i].board_game_name,
+            value: response.data.results[i].game_number,
+            color: `hsl(${i * 15}, 70%, 50%)`,
+          };
+
+          // Ajout de l'objet au tableau
+          top5GamesPieData.push(game);
+        }
+        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
+        setTop5GamesData(top5GamesPieData);
       })
 
       .catch((error) => {
@@ -272,6 +259,9 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log(error);
       });
   }, []);
+
+  console.log('loadingTop5Categories :', loadingTop5Categories);
+  console.log('loadingTop5Games :', loadingTop5Games);
 
   if (loadingPlayerResults || loadingUserInfos) {
     return <Loader />;
@@ -413,8 +403,8 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Parties</td>
                     <td>
                       {
-                        Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number))
-                        + (((lossPlayerList.find((player) => (player.player_id == selectedPlayerId)))) ? Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number)) : 0)
+                        Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].victory_number))
+                        + (((lossPlayerList.find((player) => (player.player_id === selectedPlayerId)))) ? Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[1].victory_number)) : 0)
                       }
                     </td>
                   </tr>
@@ -422,7 +412,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Victoires</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id == selectedPlayerId))[0] ? playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number : '0'
+                        playerList.filter((player) => (player.player_id === selectedPlayerId))[0] ? playerList.filter((player) => (player.player_id === selectedPlayerId))[0].victory_number : '0'
                       }
                     </td>
                   </tr>
@@ -430,7 +420,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Défaites</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id == selectedPlayerId))[1] ? playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number : '0'
+                        playerList.filter((player) => (player.player_id === selectedPlayerId))[1] ? playerList.filter((player) => (player.player_id === selectedPlayerId))[1].victory_number : '0'
                       }
                     </td>
                   </tr>
@@ -518,56 +508,31 @@ function Dashboard({ setUserInfos, userInfos }) {
                         {/* <th>Champion</th>
                         <th>Recordman</th> */}
                       </tr>
-                      <tr>
+                      {
+                      top5Games.map((game) => (
+                        <tr key={game.board_game_id}>
+                          <td><Link to={`/jeux/${game.board_game_id}?boardgame_id=${game.board_game_id}`}>{game.board_game_name}</Link>
+                          </td>
+                          <td>{game.game_number}</td>
+                          {/* <td>18</td>
+                          <td>5</td> */}
+                          <td className="desktop">Laura</td>
+                          <td className="desktop">2</td>
+                          <td className="desktop">Syham</td>
+                          <td className="desktop">12</td>
+                        </tr>
+                      ))
+                    }
+                      {/* <tr>
                         <td><Link to={`/jeux/${top5Games[0].board_game_id}?boardgame_id=${top5Games[0].board_game_id}`}>{top5Games[0].board_game_name}</Link></td>
                         <td>{top5Games[0].game_number}</td>
                         {/* <td>18</td>
                         <td>5</td> */}
-                        <td className="desktop">Laura</td>
-                        <td className="desktop">2</td>
-                        <td className="desktop">Syham</td>
-                        <td className="desktop">12</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[1].board_game_id}?boardgame_id=${top5Games[1].board_game_id}`}>{top5Games[1].board_game_name}</Link></td>
-                        <td>{top5Games[1].game_number}</td>
-                        {/* <td>2</td>
-                        <td>120</td> */}
-                        <td className="desktop">Amar</td>
-                        <td className="desktop">3</td>
-                        <td className="desktop">Syham</td>
-                        <td className="desktop">24</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[2].board_game_id}?boardgame_id=${top5Games[2].board_game_id}`}>{top5Games[2].board_game_name}</Link></td>
-                        <td>{top5Games[2].game_number}</td>
-                        {/* <td>12</td>
-                        <td>3</td> */}
-                        <td className="desktop">Nico</td>
-                        <td className="desktop">2</td>
-                        <td className="desktop">Nico</td>
-                        <td className="desktop">32</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[3].board_game_id}?boardgame_id=${top5Games[3].board_game_id}`}>{top5Games[3].board_game_name}</Link></td>
-                        <td>{top5Games[3].game_number}</td>
-                        {/* <td>8</td>
-                        <td>7</td> */}
-                        <td className="desktop">Syham</td>
-                        <td className="desktop">5</td>
-                        <td className="desktop">Amar</td>
-                        <td className="desktop">23</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[4].board_game_id}?boardgame_id=${top5Games[4].board_game_id}`}>{top5Games[4].board_game_name}</Link></td>
-                        <td>{top5Games[4].game_number}</td>
-                        {/* <td>12</td>
-                        <td>3</td> */}
-                        <td className="desktop">Alexis</td>
-                        <td className="desktop">5</td>
-                        <td className="desktop">Syham</td>
-                        <td className="desktop">24</td>
-                      </tr>
+                      {/* <td className="desktop">Laura</td>
+                      <td className="desktop">2</td>
+                      <td className="desktop">Syham</td>
+                      <td className="desktop">12</td> */}
+                      {/* </tr> */}
                     </tbody>
                   </table>
                 </div>
@@ -592,31 +557,24 @@ function Dashboard({ setUserInfos, userInfos }) {
                         {/* <th>Champion</th>
                         <th>Recordman</th> */}
                       </tr>
-                      <tr>
+                      {
+                      top5Games.map((game) => (
+                        <tr key={game.board_game_id}>
+                          <td>
+                            <Link to={`/jeux/${game.board_game_id}`}>
+                              {game.board_game_name}
+                            </Link>
+                          </td>
+                          <td>{game.board_game_name}</td>
+                          <td>{game.game_number}</td>
+                        </tr>
+                      ))
+                    }
+                      {/* <tr>
                         <td><Link to={`/jeux/${top5Games[0].board_game_id}`}>{top5Games[0].board_game_name}</Link></td>
                         <td>Laura</td>
                         <td>18</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[1].board_game_id}`}>{top5Games[1].board_game_name}</Link></td>
-                        <td>Amar</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[2].board_game_id}`}>{top5Games[2].board_game_name}</Link></td>
-                        <td>Syham</td>
-                        <td>12</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[3].board_game_id}`}>{top5Games[3].board_game_name}</Link></td>
-                        <td>Nico</td>
-                        <td>8</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[4].board_game_id}`}>{top5Games[4].board_game_name}</Link></td>
-                        <td>Amar</td>
-                        <td>12</td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>
