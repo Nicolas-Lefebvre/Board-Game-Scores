@@ -60,15 +60,14 @@ function BoardgameList() {
   const playedBoardgameList = useSelector((state) => state.boardgames.playedBoardgameList);
 
   // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
-  let isExpired = false;
-  const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
-  console.log(decodedToken);
-  const dateNow = new Date();
+  // let isExpired = false;
+  // const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
+  // console.log(decodedToken);
+  // const dateNow = new Date();
 
-  if (decodedToken.exp < dateNow.getTime()) {
-    isExpired = true;
-  }
-
+  // if (decodedToken.exp < dateNow.getTime()) {
+  //   isExpired = true;
+  // }
   // ------------------------------------------------------------------------------
 
   if (!boardgameListLoaded || !playedBoardgameListLoaded) {

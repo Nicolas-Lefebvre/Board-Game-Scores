@@ -22,7 +22,7 @@ const reducer = (state = initialState, action = {}) => {
     case SET_TOKEN_VALIDITY:
       return {
         ...state,
-        isLogged: action.isLogged,
+        isLogged: action.isValid,
       };
 
     case DISCONNECT:

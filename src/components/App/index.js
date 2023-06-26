@@ -40,14 +40,29 @@ function App() {
   const [userInfos, setUserInfos] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   // const [isLogged, setIsLogged] = useState(false);
-  const isLogged = useSelector((state) => state.user.isLogged);
+  let isLogged = useSelector((state) => state.user.isLogged);
 
-  const dispatch = useDispatch();
   if (localStorage.getItem('BGStoken')) {
     dispatch(checkTokenValidity());
   }
+  else {
+    isLogged = false;
+  }
+  console.log('Validité du token :', isLogged);
+
+  // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
+  // let isExpired;
+  // const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
+  // console.log(decodedToken);
+  // const dateNow = new Date();
+
+  // if (decodedToken.exp < dateNow.getTime()) {
+  //   isExpired = true;
+  // }
+  // -----------------------------------------------------------------------------
 
   // eslint-disable-next-line no-unused-vars
   // const [nickname, setNickname] = useState('');
@@ -95,35 +110,35 @@ function App() {
         <Route path="/" element={(<Home />)} />
 
         {/* --------------------------------------- BOARDGAMES -------------------------------- */}
-        <Route path="/jeux" element={localStorage.getItem('BGStoken') ? <BoardgameList /> : <GetConnected />} />
+        <Route path="/jeux" element={isLogged ? <BoardgameList /> : <GetConnected />} />
         <Route
           path="/jeux/:boardgameId"
-          element={localStorage.getItem('BGStoken') ? (<BoardgameDetails />) : <GetConnected />}
+          element={isLogged ? (<BoardgameDetails />) : <GetConnected />}
         />
-        <Route path="/jeux/ajouter" element={localStorage.getItem('BGStoken') ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
+        <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
 
         {/* ------------------------------------- GAMES ---------------------------------------- */}
         <Route
           path="/parties/:gameId"
           element={
-            localStorage.getItem('BGStoken') ? (<GameDetails />) : <GetConnected />
+            isLogged ? (<GameDetails />) : <GetConnected />
         }
         />
         <Route
           path="/parties/modifier/:id"
-          element={localStorage.getItem('BGStoken') ? (<GameEdit />) : <GetConnected />}
+          element={isLogged ? (<GameEdit />) : <GetConnected />}
         />
-        <Route path="/parties" element={localStorage.getItem('BGStoken') ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
-        <Route path="/parties/ajouter" element={localStorage.getItem('BGStoken') ? <AddGame /> : <GetConnected />} />
+        <Route path="/parties" element={isLogged ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
+        <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
 
         {/* -------------------------------------------- PLAYERS ------------------------------- */}
-        <Route path="/joueurs" element={localStorage.getItem('BGStoken') ? <Players /> : <GetConnected />} />
-        <Route path="/joueurs/:id" element={localStorage.getItem('BGStoken') ? <PlayerDetails /> : <GetConnected />} />
-        <Route path="/joueurs/ajouter" element={localStorage.getItem('BGStoken') ? <PlayerAdd /> : <GetConnected />} />
-        <Route path="/joueurs/modifier" element={localStorage.getItem('BGStoken') ? <PlayerEdit /> : <GetConnected />} />
+        <Route path="/joueurs" element={isLogged ? <Players /> : <GetConnected />} />
+        <Route path="/joueurs/:id" element={isLogged ? <PlayerDetails /> : <GetConnected />} />
+        <Route path="/joueurs/ajouter" element={isLogged ? <PlayerAdd /> : <GetConnected />} />
+        <Route path="/joueurs/modifier" element={isLogged ? <PlayerEdit /> : <GetConnected />} />
 
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}
-        <Route path="/tableau-de-bord" element={localStorage.getItem('BGStoken') ? <Dashboard setUserInfos={setUserInfos} userInfos={userInfos} /> : <GetConnected />} />
+        <Route path="/tableau-de-bord" element={isLogged ? <Dashboard setUserInfos={setUserInfos} userInfos={userInfos} /> : <GetConnected />} />
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />

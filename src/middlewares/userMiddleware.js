@@ -42,10 +42,24 @@ const userMiddleware = (store) => (next) => (action) => {
         const dateNow = new Date();
         console.log(dateNow.getTime());
 
-        if (decodedToken.exp > dateNow.getTime()) {
-          store.dispatch(setTokenValidity(false));
-          localStorage.removeItem('BGStoken');
+        if (decodedToken.exp < dateNow.getTime()) {
+          store.dispatch(setTokenValidity(true));
+          console.log('TOKEN VALIDE');
+          // localStorage.removeItem('BGStoken');
         }
+        // else {
+        //   store.dispatch(setTokenValidity(false));
+        //   console.log('TOKEN NON VALIDE');
+        //   localStorage.removeItem('BGStoken');
+        // }
+        // if (decodedToken.exp < dateNow.getTime()) {
+        //   store.dispatch(setTokenValidity(false));
+        //   localStorage.removeItem('BGStoken');
+        // }
+      }
+      else {
+        store.dispatch(setTokenValidity(false));
+        console.log('PAS DE TOKEN');
       }
       // ------------------------------------------------------------------------------
       break;
