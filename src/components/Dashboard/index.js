@@ -8,13 +8,13 @@ import { ResponsivePie } from '@nivo/pie';
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 import lauriers from 'src/assets/images/laurier-records-2.png';
+import { useDispatch } from 'react-redux';
 
 import Loader from '../Loader';
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
 // import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
 import { setTokenValidity } from '../../actions/user';
-import { useDispatch } from 'react-redux';
 // import PlayersPieChart from './PieCharts/PlayersPieChart';
 // import AddBoardgame from '../AddBoardgame';
 
@@ -410,7 +410,8 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>
                       {
                         Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].victory_number))
-                        + (((lossPlayerList.find((player) => (player.player_id === selectedPlayerId)))) ? Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[1].victory_number)) : 0)
+                        + (((lossPlayerList.find((player) => player.player_id === selectedPlayerId)) && (playerList.filter((player) => player.player_id === selectedPlayerId))[1] !== undefined) ? Number((playerList.filter((player) => player.player_id === selectedPlayerId))[1].victory_number) : 0)
+
                       }
                     </td>
                   </tr>
@@ -418,7 +419,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Victoires</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id === selectedPlayerId))[0] ? playerList.filter((player) => (player.player_id === selectedPlayerId))[0].victory_number : '0'
+                        playerList.filter((player) => player.player_id === selectedPlayerId)[0] && playerList.filter((player) => player.player_id === selectedPlayerId)[1] !== undefined ? playerList.filter((player) => player.player_id === selectedPlayerId)[0].victory_number : playerList.filter((player) => player.player_id === selectedPlayerId)[0].is_winner
                       }
                     </td>
                   </tr>
@@ -426,7 +427,8 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Défaites</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id === selectedPlayerId))[1] ? playerList.filter((player) => (player.player_id === selectedPlayerId))[1].victory_number : '0'
+                        playerList.filter((player) => (player.player_id === selectedPlayerId))[1] && playerList.filter((player) => player.player_id === selectedPlayerId)[1] !== undefined ? playerList.filter((player) => (player.player_id === selectedPlayerId))[1].victory_number : (playerList.filter((player) => player.player_id === selectedPlayerId)[0].is_winner === '0' ? Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].victory_number))
+                        + (((lossPlayerList.find((player) => player.player_id === selectedPlayerId)) && (playerList.filter((player) => player.player_id === selectedPlayerId))[1] !== undefined) ? Number((playerList.filter((player) => player.player_id === selectedPlayerId))[1].victory_number) : 0) : '0')
                       }
                     </td>
                   </tr>

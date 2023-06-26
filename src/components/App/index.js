@@ -6,7 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useDispatch, useSelector } from 'react-redux';
-import jwtDecode from 'jwt-decode';
+// import jwtDecode from 'jwt-decode';
 
 import Navbar from '../Navbar/vanillaNavBar';
 import Footer from '../Footer';
