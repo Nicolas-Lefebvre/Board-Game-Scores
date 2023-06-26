@@ -62,13 +62,13 @@ function Dashboard({ setUserInfos, userInfos }) {
       config,
     )
       .then((response) => {
-        console.log('Recuperation de tous les joueurs OK');
-        console.log(response.data);
+        // console.log('Recuperation de tous les joueurs OK');
+        // console.log(response.data);
         setPlayerList(response.data.results);
         setSelectedPlayerId(response.data.results[0].player_id);
         setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
         const numberOfPlayer = (response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0))).length;
-        console.log('number of players :', numberOfPlayer);
+        // console.log('number of players :', numberOfPlayer);
 
         // On rempli le premier camembert avec les données du joueur en index zéro par défaut
         setData(

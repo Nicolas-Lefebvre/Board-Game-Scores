@@ -37,21 +37,21 @@ const userMiddleware = (store) => (next) => (action) => {
       // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
       if (localStorage.getItem('BGStoken')) {
         const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
-        console.log(decodedToken);
+        // console.log(decodedToken);
 
         const dateNow = new Date();
-        console.log(dateNow.getTime());
+        // console.log(dateNow.getTime());
 
         if (decodedToken.exp < dateNow.getTime()) {
           store.dispatch(setTokenValidity(true));
-          console.log('TOKEN VALIDE');
+          // console.log('TOKEN VALIDE');
           // localStorage.removeItem('BGStoken');
         }
-        // else {
-        //   store.dispatch(setTokenValidity(false));
-        //   console.log('TOKEN NON VALIDE');
-        //   localStorage.removeItem('BGStoken');
-        // }
+        else {
+          store.dispatch(setTokenValidity(false));
+          console.log('Token expiré');
+          localStorage.removeItem('BGStoken');
+        }
         // if (decodedToken.exp < dateNow.getTime()) {
         //   store.dispatch(setTokenValidity(false));
         //   localStorage.removeItem('BGStoken');
@@ -59,7 +59,7 @@ const userMiddleware = (store) => (next) => (action) => {
       }
       else {
         store.dispatch(setTokenValidity(false));
-        console.log('PAS DE TOKEN');
+        console.log('Token inexistant');
       }
       // ------------------------------------------------------------------------------
       break;
