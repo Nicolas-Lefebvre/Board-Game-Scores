@@ -78,7 +78,7 @@ function Dashboard({ setUserInfos, userInfos }) {
         setPlayerList(response.data.results);
         setSelectedPlayerId(response.data.results[0].player_id);
         setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
-        const numberOfPlayer = (response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0))).length;
+        // const numberOfPlayer = (response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0))).length;
         setNumberOfPlayerWhoWon((response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 1)).length));
         // console.log('number of players :', numberOfPlayer);
 
@@ -88,13 +88,13 @@ function Dashboard({ setUserInfos, userInfos }) {
             {
               id: 'victoires',
               label: 'victoires',
-              value: response.data.results[0].victory_number,
+              value: response.data.results[0].victories,
               color: 'hsl(15, 70%, 50%)',
             },
             {
               id: 'défaites',
               label: 'Défaites',
-              value: response.data.results[numberOfPlayer].victory_number,
+              value: response.data.results[0].defeats,
               color: 'hsl(30, 70%, 50%)',
             },
           ],
@@ -118,8 +118,8 @@ function Dashboard({ setUserInfos, userInfos }) {
       player.player_id === event.target.value
     ));
     console.log(filteredPlayer);
-    const victoryNumber = filteredPlayer[0].victory_number;
-    const lossNumber = (filteredPlayer[1] ? filteredPlayer[1].victory_number : '0');
+    const victoryNumber = filteredPlayer[0].victories;
+    const lossNumber = filteredPlayer[0].defeats;
 
     setSelectedPlayerId(event.target.value);
 
