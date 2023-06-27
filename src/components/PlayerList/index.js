@@ -30,13 +30,13 @@ function Players() {
 
   const playerListNoStats = useSelector((state) => state.players.playerListNoStats);
 
+  const playerList = useSelector((state) => state.players.playerList);
+  const lossPlayerList = useSelector((state) => state.players.lossPlayerList);
   // -------------- RECUPERATION LISTE JOUEURS AVEC STATS --------------------
   useEffect(() => {
     dispatch(fetchPlayerList());
   }, [playerListNoStats]);
-
-  const playerList = useSelector((state) => state.players.playerList);
-  const lossPlayerList = useSelector((state) => state.players.lossPlayerList);
+  console.log('liste joueurs :', playerList);
 
   const showDeleteConfirm = (deletePlayerId) => {
     confirm({
@@ -81,93 +81,43 @@ function Players() {
                 <th>Modifier/Supprimer</th>
               </tr>
               {/* { (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1))) } */}
-              {playerListNoStats.map((playerNoStat) => (
+              {playerList.map((playerNoStat) => (
                 <tr key={playerNoStat.id}>
-                  <td><Link to={`/joueurs/id?player_id=${playerNoStat.id}`}>{playerNoStat.name}</Link></td>
-
-                  {
-                    // On cherche dans la liste de tous les joueurs si on a une correspondance dans la liste des joueurs qui ont au moins une partie
-                    (playerList.find((filteredPlayer) => (filteredPlayer.player_id == playerNoStat.id)))
-                    // Si oui, on affiche les stats correspondantes
-                      ? (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner == 1 && filteredPlayer.player_id == playerNoStat.id))).map((player) => (
-                        <React.Fragment key={player.player_id}>
-                          <td>
-                            { Number((player.victory_number)) + Number((lossPlayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number))) }
-                          </td>
-                          <td>{player.victory_number}</td>
-                          <td>
-                            {/* -------------- on récupère le player concerné avec son id pour afficher cette fois le nombre de défaites */}
-                            { (lossPlayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).length > 0 ? (lossPlayerList.filter((filteredPlayer) => (filteredPlayer.player_id == player.player_id))).map((filteredPlayer) => (filteredPlayer.victory_number)) : '0' }
-                          </td>
-                          <td>
-                            <NavLink to={`/joueurs/modifier/?player_id=${player.player_id}&player_name=${player.player_name}`}>
-                              <FontAwesomeIcon
-                                icon={faPenToSquare}
-                                style={{
-                                  // marginRight: '.5rem',
-                                  marginTop: '.6rem',
-                                  color: '#0070ff',
-                                  fontSize: '1.7rem',
-                                }}
-                              />
-                            </NavLink>
-                            <span onClick={() => {
-                              // setDeletePlayerId(player.player_id)}
-                              showDeleteConfirm(player.player_id);
-                            }}
-                            >
-                              <FontAwesomeIcon
-                                className="delete-btn"
-                                icon={faTrashCan}
-                                style={{
-                                  // marginLeft: '.5rem',
-                                  color: 'red',
-                                  cursor: 'pointer',
-                                  fontSize: '1.7rem',
-                                }}
-                              />
-                            </span>
-                          </td>
-                        </React.Fragment>
-                      ))
-                      // Si non, on affiche 0 pour chaque colonne
-                      : (
-                        <React.Fragment key={playerNoStat.id}>
-                          <td>0</td>
-                          <td>0</td>
-                          <td>0</td>
-                          <td>
-                            <NavLink to={`/joueurs/modifier/?player_name=${playerNoStat.name}&player_id=${playerNoStat.id}`}>
-                              <FontAwesomeIcon
-                                icon={faPenToSquare}
-                                style={{
-                                  // marginRight: '.5rem',
-                                  marginTop: '.6rem',
-                                  color: '#0070ff',
-                                  fontSize: '1.7rem',
-                                }}
-                              />
-                            </NavLink>
-                            <span onClick={() => {
-                              // setDeletePlayerId(player.player_id)}
-                              showDeleteConfirm(playerNoStat.id);
-                            }}
-                            >
-                              <FontAwesomeIcon
-                                className="delete-btn"
-                                icon={faTrashCan}
-                                style={{
-                                  // marginLeft: '.5rem',
-                                  color: 'red',
-                                  cursor: 'pointer',
-                                  fontSize: '1.7rem',
-                                }}
-                              />
-                            </span>
-                          </td>
-                        </React.Fragment>
-                      )
-                  }
+                  <td><Link to={`/joueurs/id?player_id=${playerNoStat.id}`}>{playerNoStat.player_name}</Link></td>
+                  <React.Fragment key={playerNoStat.player_id}>
+                    <td>{playerNoStat.games_played}</td>
+                    <td>{playerNoStat.victories}</td>
+                    <td>{playerNoStat.defeats}</td>
+                    <td>
+                      <NavLink to={`/joueurs/modifier/?player_id=${playerNoStat.player_id}&player_name=${playerNoStat.player_name}`}>
+                        <FontAwesomeIcon
+                          icon={faPenToSquare}
+                          style={{
+                            // marginRight: '.5rem',
+                            marginTop: '.6rem',
+                            color: '#0070ff',
+                            fontSize: '1.7rem',
+                          }}
+                        />
+                      </NavLink>
+                      <span onClick={() => {
+                        // setDeletePlayerId(player.player_id)}
+                        showDeleteConfirm(playerNoStat.player_id);
+                      }}
+                      >
+                        <FontAwesomeIcon
+                          className="delete-btn"
+                          icon={faTrashCan}
+                          style={{
+                            // marginLeft: '.5rem',
+                            color: 'red',
+                            cursor: 'pointer',
+                            fontSize: '1.7rem',
+                          }}
+                        />
+                      </span>
+                    </td>
+                  </React.Fragment>
                 </tr>
               ))}
 
