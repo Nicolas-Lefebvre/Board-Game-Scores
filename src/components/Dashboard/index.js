@@ -77,9 +77,9 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log(response.data);
         setPlayerList(response.data.results);
         setSelectedPlayerId(response.data.results[0].player_id);
-        setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
+        // setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
         // const numberOfPlayer = (response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0))).length;
-        setNumberOfPlayerWhoWon((response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 1)).length));
+        // setNumberOfPlayerWhoWon((response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 1)).length));
         // console.log('number of players :', numberOfPlayer);
 
         // On rempli le premier camembert avec les données du joueur en index zéro par défaut
@@ -324,11 +324,7 @@ function Dashboard({ setUserInfos, userInfos }) {
             onChange={onChange}
           >
             {
-              numberOfPlayerWhoWon > 1
-                ? (playerList.slice(0, lossPlayerList.length)).map((player) => (
-                  <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
-                ))
-                : (playerList.map((player) => (
+                (playerList.map((player) => (
                   <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
                 )))
             }
@@ -409,9 +405,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Parties</td>
                     <td>
                       {
-                        Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].victory_number))
-                        + (((lossPlayerList.find((player) => player.player_id === selectedPlayerId)) && (playerList.filter((player) => player.player_id === selectedPlayerId))[1] !== undefined) ? Number((playerList.filter((player) => player.player_id === selectedPlayerId))[1].victory_number) : 0)
-
+                        Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].games_played))
                       }
                     </td>
                   </tr>
@@ -419,7 +413,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Victoires</td>
                     <td>
                       {
-                        playerList.filter((player) => player.player_id === selectedPlayerId)[0] && playerList.filter((player) => player.player_id === selectedPlayerId)[1] !== undefined ? playerList.filter((player) => player.player_id === selectedPlayerId)[0].victory_number : playerList.filter((player) => player.player_id === selectedPlayerId)[0].is_winner
+                        Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].victories))
                       }
                     </td>
                   </tr>
@@ -427,8 +421,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Défaites</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id === selectedPlayerId))[1] && playerList.filter((player) => player.player_id === selectedPlayerId)[1] !== undefined ? playerList.filter((player) => (player.player_id === selectedPlayerId))[1].victory_number : (playerList.filter((player) => player.player_id === selectedPlayerId)[0].is_winner === '0' ? Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].victory_number))
-                        + (((lossPlayerList.find((player) => player.player_id === selectedPlayerId)) && (playerList.filter((player) => player.player_id === selectedPlayerId))[1] !== undefined) ? Number((playerList.filter((player) => player.player_id === selectedPlayerId))[1].victory_number) : 0) : '0')
+                        Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].defeats))
                       }
                     </td>
                   </tr>
