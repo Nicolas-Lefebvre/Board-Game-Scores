@@ -523,10 +523,10 @@ function Dashboard({ setUserInfos, userInfos }) {
                               <td>{game.num_games_played}</td>
                               {/* <td>18</td>
                               <td>5</td> */}
-                              <td className="desktop">Laura</td>
-                              <td className="desktop">2</td>
-                              <td className="desktop">Syham</td>
-                              <td className="desktop">12</td>
+                              <td className="desktop">{game.champion}</td>
+                              <td className="desktop">{game.champion_victories}</td>
+                              <td className="desktop">{game.recordman}</td>
+                              <td className="desktop">{game.recordman_score}</td>
                             </tr>
                           ))
                     }
