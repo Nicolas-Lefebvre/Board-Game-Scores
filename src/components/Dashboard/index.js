@@ -147,7 +147,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   // const [numberOfGames, setNumberOfGames] = useState(0);
   const [top5GamesData, setTop5GamesData] = useState([]);
 
-  // =====================================  RECUPERATION TOP 5 JEUX =============================
+  // =====================================  RECUPERATION TOP JEUX JOUES =============================
   useEffect(() => {
     axios.get(
       // URL
@@ -171,9 +171,9 @@ function Dashboard({ setUserInfos, userInfos }) {
         for (let i = 0; i < response.data.results.length; i++) {
           // Création de l'objet pour chaque jeu
           const game = {
-            id: response.data.results[i].board_game_name,
-            label: response.data.results[i].board_game_name,
-            value: response.data.results[i].game_number,
+            id: response.data.results[i].name,
+            label: response.data.results[i].name,
+            value: response.data.results[i].num_games_played,
             color: `hsl(${i * 15}, 70%, 50%)`,
           };
 
@@ -517,10 +517,10 @@ function Dashboard({ setUserInfos, userInfos }) {
                             </tr>
                           )
                           : top5Games.map((game) => (
-                            <tr key={game.board_game_id}>
-                              <td><Link to={`/jeux/${game.board_game_id}?boardgame_id=${game.board_game_id}`}>{game.board_game_name}</Link>
+                            <tr key={game.id}>
+                              <td><Link to={`/jeux/${game.id}?boardgame_id=${game.id}`}>{game.name}</Link>
                               </td>
-                              <td>{game.game_number}</td>
+                              <td>{game.num_games_played}</td>
                               {/* <td>18</td>
                               <td>5</td> */}
                               <td className="desktop">Laura</td>

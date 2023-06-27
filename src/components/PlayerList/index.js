@@ -31,7 +31,7 @@ function Players() {
   const playerListNoStats = useSelector((state) => state.players.playerListNoStats);
 
   const playerList = useSelector((state) => state.players.playerList);
-  const lossPlayerList = useSelector((state) => state.players.lossPlayerList);
+  // const lossPlayerList = useSelector((state) => state.players.lossPlayerList);
   // -------------- RECUPERATION LISTE JOUEURS AVEC STATS --------------------
   useEffect(() => {
     dispatch(fetchPlayerList());
@@ -82,7 +82,7 @@ function Players() {
               </tr>
               {/* { (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1))) } */}
               {playerList.map((playerNoStat) => (
-                <tr key={playerNoStat.id}>
+                <tr key={playerNoStat.player_id}>
                   <td><Link to={`/joueurs/id?player_id=${playerNoStat.player_id}`}>{playerNoStat.player_name}</Link></td>
                   <React.Fragment key={playerNoStat.player_id}>
                     <td>{playerNoStat.games_played}</td>
