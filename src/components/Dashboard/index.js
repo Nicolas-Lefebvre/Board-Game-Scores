@@ -708,32 +708,26 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Victoires</th>
                         <th>Défaites</th>
                         <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
-                        <th><img src={lauriers} alt="laurier des records" /></th>
+                        {/* <th><img src={lauriers} alt="laurier des records" /></th> */}
                       </tr>
                       {
-                      top5Players.length === 0
+                      playerList.length === 0
                         ? (
                           <tr>
                             <td style={{ fontStyle: 'italic' }} colSpan="2">Aucun joueur renseigné</td>
                           </tr>
                         )
-                        : top5Players.map((player) => (
+                        : playerList.map((player) => (
                           <tr key={player.player_id}>
                             <td>
                               <Link to={`/joueurs/id?player_id=${player.player_id}`}>
                                 {player.player_name}
                               </Link>
                             </td>
-                            <td>{player.victory_number}</td>
-                            <td>
-                              {
-                                lossPlayerList.find(p => p.player_id === player.player_id)
-                                  ? lossPlayerList.find(p => p.player_id === player.player_id).victory_number
-                                  : '0'
-                              }
-                            </td>
-                            <td>2</td>
-                            <td>1</td>
+                            <td>{player.victories}</td>
+                            <td>{player.defeats}</td>
+                            <td>{player.champion_titles}</td>
+                            {/* <td>1</td> */}
                           </tr>
                         ))
                     }
