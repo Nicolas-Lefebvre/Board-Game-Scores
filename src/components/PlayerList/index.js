@@ -83,7 +83,7 @@ function Players() {
               {/* { (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1))) } */}
               {playerList.map((playerNoStat) => (
                 <tr key={playerNoStat.id}>
-                  <td><Link to={`/joueurs/id?player_id=${playerNoStat.id}`}>{playerNoStat.player_name}</Link></td>
+                  <td><Link to={`/joueurs/id?player_id=${playerNoStat.player_id}`}>{playerNoStat.player_name}</Link></td>
                   <React.Fragment key={playerNoStat.player_id}>
                     <td>{playerNoStat.games_played}</td>
                     <td>{playerNoStat.victories}</td>
