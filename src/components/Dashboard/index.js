@@ -65,6 +65,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   }, []);
 
   // =====================================  RECUPERATION STATS PAR JOUEUR =============================
+  const [topPlayersData, setTopPlayersData] = useState([]);
   useEffect(() => {
     axios.get(
       // URL
@@ -99,6 +100,27 @@ function Dashboard({ setUserInfos, userInfos }) {
             },
           ],
         );
+
+        // Initialisation du tableau vide
+        const topPlayersPieData = [];
+
+        // Boucle pour remplir le tableau
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < response.data.results.length; i++) {
+          // Création de l'objet pour chaque jeu
+          const player = {
+            id: response.data.results[i].player_name,
+            label: response.data.results[i].player_name,
+            value: response.data.results[i].victories,
+            color: `hsl(${i * 15}, 70%, 50%)`,
+          };
+
+          // Ajout de l'objet au tableau
+          topPlayersPieData.push(player);
+        }
+
+        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
+        setTopPlayersData(topPlayersPieData);
       })
       // .then(() => {
       //   console.log(playerList);
@@ -689,7 +711,7 @@ function Dashboard({ setUserInfos, userInfos }) {
               <div className="resultats-wrapper">
 
                 <div className="resultat-pieChart">
-                  <GamesPieChart data={top5PlayersData} />
+                  <GamesPieChart data={topPlayersData} />
                 </div>
               </div>
 
