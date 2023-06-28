@@ -212,9 +212,9 @@ function Dashboard({ setUserInfos, userInfos }) {
   }, []);
 
   const [loadingTop5Categories, setLoadingTop5Categories] = useState(true);
-  const [top5Categories, setTop5Categories] = useState([]);
+  const [topCategories, setTopCategories] = useState([]);
 
-  // =====================================  RECUPERATION TOP 5 CATEGORIES =============================
+  // =====================================  RECUPERATION TOP CATEGORIES =============================
   useEffect(() => {
     axios.get(
       // URL
@@ -225,7 +225,7 @@ function Dashboard({ setUserInfos, userInfos }) {
       .then((response) => {
         console.log('Recuperation des top 5 catégories OK');
         console.log(response.data);
-        setTop5Categories(response.data.results);
+        setTopCategories(response.data.results);
 
         setLoadingTop5Categories(false);
       })
@@ -659,31 +659,25 @@ function Dashboard({ setUserInfos, userInfos }) {
                       <tr>
                         <th>Catégorie</th>
                         <th>Parties</th>
-                        {/* <th>Victoires</th>
-                        <th>Défaites</th> */}
+                        <th>Champion</th>
+                        <th>nb victoire(s)</th>
                       </tr>
                       {
-                      top5Categories.length === 0
+                      topCategories.length === 0
                         ? (
                           <tr>
                             <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune catégorie renseignée</td>
                           </tr>
                         )
-                        : top5Categories.map((category) => (
+                        : topCategories.map((category) => (
                           <tr key={category.category_id}>
+                            <td>{category.category_name}</td>
+                            <td>{category.total_games}</td>
                             <td>{category.name}</td>
-                            <td>{category.Category_number}</td>
-                            {/* <td>18</td> */}
-                            {/* <td>5</td> */}
+                            <td>{category.max_wins}</td>
                           </tr>
                         ))
                     }
-                      {/* <tr>
-                        <td>{top5Categories[0].name}</td>
-                        <td>{top5Categories[0].Category_number}</td> */}
-                      {/* <td>18</td> */}
-                      {/* <td>5</td> */}
-                      {/* </tr> */}
                     </tbody>
                   </table>
                 </div>
