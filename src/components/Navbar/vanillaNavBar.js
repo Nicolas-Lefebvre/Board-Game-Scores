@@ -18,12 +18,15 @@ function Navbar({ token }) {
   const navBarRef = useRef(null);
 
   const closeDropdown = () => {
-    const dropdowns = navBarRef.current.getElementsByClassName('show');
-    // eslint-disable-next-line no-plusplus
-    for (let j = 0; j < dropdowns.length; j++) {
-      dropdowns[j].classList.remove('show');
+    // Ne fermez les menus déroulants que si la largeur de la fenêtre est supérieure à 992px
+    // (ce qui signifie que nous ne sommes pas en mode mobile)
+    if (window.innerWidth > 992) {
+      const dropdowns = navBarRef.current.getElementsByClassName('show');
+      for (let j = 0; j < dropdowns.length; j++) {
+        dropdowns[j].classList.remove('show');
+      }
     }
-  };
+};
 
   return (
     <div className="navbar">
@@ -39,13 +42,13 @@ function Navbar({ token }) {
           <div className="collapse navbar-collapse menu-wrapper" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/">Accueil</NavLink>
+                <NavLink className="nav-link" aria-current="page" to="/" onClick={closeDropdown}>Accueil</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/tableau-de-bord">Tableau de bord</NavLink>
+                <NavLink className="nav-link" to="/tableau-de-bord" onClick={closeDropdown}>Tableau de bord</NavLink>
               </li>
               <li className="nav-item dropdown">
-                <NavLink className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
+                <NavLink className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false" onClick={closeDropdown}>
                   Mes joueurs
                 </NavLink>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -54,14 +57,14 @@ function Navbar({ token }) {
                 </div>
               </li>
               <li className="nav-item dropdown">
-                <NavLink className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes jeux</NavLink>
+                <NavLink className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={closeDropdown}>Mes jeux</NavLink>
                 <ul className="dropdown-menu">
                   <li><NavLink className="dropdown-item" to="jeux" onClick={closeDropdown}>Liste des jeux</NavLink></li>
                   <li><NavLink className="dropdown-item" to="jeux/ajouter" onClick={closeDropdown}>Ajouter un jeu</NavLink></li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <NavLink className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
+                <NavLink className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false" onClick={closeDropdown}>
                   Mes parties
                 </NavLink>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -78,7 +81,7 @@ function Navbar({ token }) {
             </ul>
             <ul className="navbar-avatar">
               <li className="nav-item">
-                <Link className="nav-link connexion-wrapper" to="/connexion">
+                <Link className="nav-link connexion-wrapper" to="/connexion" onClick={closeDropdown}>
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
                   <div className="seConnecter">{localStorage.getItem('BGStoken') ? 'Se déconnecter' : 'Se connecter'}</div>
                 </Link>
