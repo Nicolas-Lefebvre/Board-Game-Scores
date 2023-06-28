@@ -14,6 +14,9 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 // ============================================ Composant===========================================
 function PlayerAdd() {
   const navigate = useNavigate();
@@ -39,7 +42,7 @@ function PlayerAdd() {
     console.log('Received values of form: ', values);
     axios.post(
       // URL
-      'http://127.0.0.1:8000/api/user/player',
+      `${baseUrl}/api/user/player`,
       // données
       {
         name: values.name,

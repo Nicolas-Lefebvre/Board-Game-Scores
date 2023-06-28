@@ -11,13 +11,16 @@ import {
   DELETE_PLAYER,
 } from '../actions/players';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../apiConfig';
+
 const playersMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_PLAYERLISTNOSTATS:
       // console.log('ici appel à lAPI');
       // traitement, par exemple requête API avec axios
       axios.get(
-        'http://127.0.0.1:8000/api/user/players',
+        `${baseUrl}/api/user/players`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
@@ -40,7 +43,7 @@ const playersMiddleware = (store) => (next) => (action) => {
       // console.log('ici appel à lAPI');
       // traitement, par exemple requête API avec axios
       axios.get(
-        'http://127.0.0.1:8000/api/user/players/stats',
+        `${baseUrl}/api/user/players/stats`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
@@ -88,7 +91,7 @@ const playersMiddleware = (store) => (next) => (action) => {
       // console.log('ici appel à lAPI');
       // traitement, par exemple requête API avec axios
       axios.delete(
-        `http://127.0.0.1:8000/api/player/${action.playerId}`,
+        `${baseUrl}/api/player/${action.playerId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
@@ -99,7 +102,7 @@ const playersMiddleware = (store) => (next) => (action) => {
         // console.log(response.data);
 
           axios.get(
-            'http://127.0.0.1:8000/api/user/players',
+            `${baseUrl}/api/user/players`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
@@ -116,7 +119,7 @@ const playersMiddleware = (store) => (next) => (action) => {
             });
 
           axios.get(
-            'http://127.0.0.1:8000/api/user/players/stats',
+            `${baseUrl}/api/user/players/stats`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,

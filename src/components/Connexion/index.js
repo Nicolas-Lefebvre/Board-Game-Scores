@@ -17,6 +17,9 @@ import {
   Input,
 } from 'antd';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 import {
   saveToken,
   // setIsLogged,
@@ -38,7 +41,7 @@ function Connexion() {
     // }
     axios.post(
       // URL
-      'http://127.0.0.1:8000/api/login_check',
+      `${baseUrl}/api/login_check`,
       // données
       {
         username: values.username,

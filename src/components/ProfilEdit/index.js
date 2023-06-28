@@ -13,6 +13,9 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 // ============================================ Composant===========================================
 function PlayerEdit({ setUserInfos, userInfos }) {
   const navigate = useNavigate();
@@ -25,7 +28,7 @@ function PlayerEdit({ setUserInfos, userInfos }) {
     console.log('Received values of form: ', values);
     axios.patch(
       // URL
-      'http://127.0.0.1:8000/api/user/infos',
+      `${baseUrl}/api/user/infos`,
       // données
       {
         nickname: values.nickname,

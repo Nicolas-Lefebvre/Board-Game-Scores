@@ -3,7 +3,7 @@ import './subscribe.scss';
 
 import axios from 'axios';
 // import Link from 'antd/es/typography/Link';
-import { EyeTwoTone } from '@ant-design/icons';
+// import { EyeTwoTone } from '@ant-design/icons';
 import {
   Button,
   Form,
@@ -14,6 +14,10 @@ import {
 // import { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 // import AllGames from '../../Data/AllGames';
 // import { useState, useEffect } from 'react';
 // import Loader from '../Loader';
@@ -27,14 +31,14 @@ import { useNavigate } from 'react-router-dom';
 function Subscribe() {
   // const navigate = useNavigate();
 
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
-  };
+  // const config = {
+  //   headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
+  // };
   const onFinish = (values, dateString) => {
     console.log('Received values of form: ', values, dateString);
     axios.post(
       // URL
-      'http://127.0.0.1:8000/api/user',
+      `${baseUrl}/api/user`,
       // données
       {
         nickname: values.nickname,

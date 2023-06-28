@@ -7,13 +7,16 @@ import {
   saveGameInfos,
 } from '../actions/games';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../apiConfig';
+
 const gamesMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_GAMELIST:
       // console.log('ici appel à lAPI');
       // traitement, par exemple requête API avec axios
       axios.get(
-        'http://127.0.0.1:8000/api/usergame',
+        `${baseUrl}/api/usergame`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('BGStoken')}`,
@@ -35,7 +38,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
     case FETCH_GAMEINFOS:
       axios.get(
         // URL
-        `http://127.0.0.1:8000/api/user/game/${action.gameId}`,
+        `${baseUrl}/api/user/game/${action.gameId}`,
         // options, notamment les headers
         {
           headers: {

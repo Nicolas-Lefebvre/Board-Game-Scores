@@ -24,6 +24,10 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import FormItem from 'antd/es/form/FormItem';
+
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 import Loader from '../Loader';
 
 import {
@@ -165,7 +169,7 @@ function AddGame() {
 
     axios.post(
       // URL
-      'http://127.0.0.1:8000/api/games',
+      `${baseUrl}/api/games`,
       // données
       {
         startDate: values.startDate,

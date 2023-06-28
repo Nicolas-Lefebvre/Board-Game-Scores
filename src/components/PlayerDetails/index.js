@@ -13,6 +13,9 @@ import { Button, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 const { confirm } = Modal;
 
 const PlayerDetails = () => {
@@ -28,7 +31,7 @@ const PlayerDetails = () => {
     const queryParameters = new URLSearchParams(window.location.search);
     const playerId = queryParameters.get('player_id');
     axios.get(
-      `http://127.0.0.1:8000/api/user/player/${playerId}/stats`,
+      `${baseUrl}/api/user/player/${playerId}/stats`,
       config,
     )
 
@@ -60,7 +63,7 @@ const PlayerDetails = () => {
         console.log('OK');
         axios.delete(
         // URL
-          `http://127.0.0.1:8000/api/player/${deletePlayerId}`,
+          `${baseUrl}/api/player/${deletePlayerId}`,
           // données
           config,
         )

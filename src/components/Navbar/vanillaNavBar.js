@@ -7,11 +7,13 @@ import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
 import jwtDecode from 'jwt-decode';
 
 import { NavLink, Link } from 'react-router-dom';
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
 
 // == Composant
 function Navbar({ token }) {
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
-  const url = new URL('http://127.0.0.1:8000/login');
+  const url = new URL(`${baseUrl}/login`);
 
   return (
     <div className="navbar">

@@ -10,13 +10,16 @@ import {
   SET_ISLOGGED,
 } from '../actions/user';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../apiConfig';
+
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case SUBMIT_LOGIN:
       // console.log('ici appel à lAPI');
       // traitement, par exemple requête API avec axios
       axios.post(
-        'http://127.0.0.1:8000/api/login_check',
+        `${baseUrl}/api/login_check`,
         {
           username: action.username,
           password: action.password,

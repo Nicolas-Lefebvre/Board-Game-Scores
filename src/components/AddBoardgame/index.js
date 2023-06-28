@@ -25,6 +25,9 @@ import {
   useEffect,
 } from 'react';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 import Loader from '../Loader';
 import {
   // addExistingBoardgame,
@@ -77,7 +80,7 @@ function AddBoardgame() {
     // console.log(values);
     axios.post(
       // URL
-      'http://127.0.0.1:8000/api/user/collection/boardgames/',
+      `${baseUrl}/api/user/collection/boardgames/`,
       // données
       {
         boardGames: values.boardgame,
@@ -100,7 +103,7 @@ function AddBoardgame() {
     // console.log('Received values of form: ', values, dateString);
     axios.post(
       // URL
-      'http://127.0.0.1:8000/api/boardgames',
+      `${baseUrl}/api/boardgames`,
       // données
       {
         name: values.name,

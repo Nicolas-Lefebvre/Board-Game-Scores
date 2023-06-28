@@ -13,6 +13,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../Loader';
 import { fetchGameInfos } from '../../actions/games';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 const { confirm } = Modal;
 
 const config = {
@@ -49,7 +52,7 @@ const GameDetails = () => {
         console.log('OK');
         axios.delete(
         // URL
-          `http://127.0.0.1:8000/api/game/${deleteGameId}`,
+          `${baseUrl}/api/game/${deleteGameId}`,
           // données
           config,
         )

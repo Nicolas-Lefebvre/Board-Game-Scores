@@ -21,13 +21,16 @@ import {
   saveBoardgameInfos,
 } from '../actions/boardgames';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../apiConfig';
+
 const boardgamesMiddleware = (store) => (next) => (action) => {
   // const navigate = useNavigate();
   switch (action.type) {
     case FETCH_TOP5GAMES:
       // console.log('ici appel à lAPI');
       // traitement, par exemple requête API avec axios
-      axios.get('http://127.0.0.1:8000/api/boardgames/top5')
+      axios.get(`${baseUrl}/api/boardgames/top5`)
 
         .then((response) => {
           // console.log(response.data);
@@ -43,7 +46,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_BOARDGAMELIST:
       axios.get(
         // URL
-        'http://127.0.0.1:8000/api/user/collection',
+        `${baseUrl}/api/user/collection`,
         // options, notamment les headers
         {
           headers: {
@@ -65,7 +68,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_ALLBOARDGAMELIST:
       axios.get(
         // URL
-        'http://127.0.0.1:8000/api/boardgames',
+        `${baseUrl}/api/boardgames`,
         // options, notamment les headers
         {
         },
@@ -84,7 +87,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_USERSBOARDGAMELIST:
       axios.get(
         // URL
-        'http://127.0.0.1:8000/api/user/collection',
+        `${baseUrl}/api/user/collection`,
         // options, notamment les headers
         {
           headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
@@ -105,7 +108,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_ALLCATEGORIES:
       axios.get(
         // URL
-        'http://127.0.0.1:8000/api/category',
+        `${baseUrl}/api/category`,
         // options, notamment les headers
       )
         .then((response) => {
@@ -149,7 +152,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_PLAYEDBOARDGAMELIST:
       axios.get(
         // URL
-        'http://127.0.0.1:8000/api/user/boardgames',
+        `${baseUrl}/api/user/boardgames`,
         // options, notamment les headers
         {
           headers: {
@@ -171,7 +174,7 @@ const boardgamesMiddleware = (store) => (next) => (action) => {
     case FETCH_BOARDGAMEINFOS:
       axios.get(
         // URL
-        `http://127.0.0.1:8000/api/user/boardgames/${action.boardgameId}`,
+        `${baseUrl}/api/user/boardgames/${action.boardgameId}`,
         // options, notamment les headers
         {
           headers: {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import image from '../../assets/images/amis-jouant-a-un-jeu-de-societe.jpg';
+// import image from '../../assets/images/amis-jouant-a-un-jeu-de-societe.jpg';
 // == Composant
 function Presentation() {
   return (

@@ -44,7 +44,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      `${baseUrl}/user`,
+      `${baseUrl}/api/user`,
       // données
       config,
     )
@@ -71,7 +71,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      `${baseUrl}/user/players/stats`,
+      `${baseUrl}/api/user/players/stats`,
       // données
       config,
     )
@@ -175,7 +175,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      `${baseUrl}/user/boardgames5`,
+      `${baseUrl}/api/user/boardgames5`,
       // données
       config,
     )
@@ -220,7 +220,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      `${baseUrl}/user/categories5`,
+      `${baseUrl}/api/user/categories5`,
       // données
       config,
     )
@@ -247,7 +247,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   // useEffect(() => {
   //   axios.get(
   //     // URL
-  //     `${baseUrl}/user/players5`,
+  //     `${baseUrl}/api/user/players5`,
   //     // données
   //     config,
   //   )

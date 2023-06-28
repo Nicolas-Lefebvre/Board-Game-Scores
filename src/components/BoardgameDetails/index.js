@@ -9,8 +9,9 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Button, Modal } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
 import { fetchBoardgameInfos } from '../../actions/boardgames';
-
 
 import Loader from '../Loader';
 
@@ -88,7 +89,7 @@ const BoardgameDetails = () => {
         console.log('OK');
         axios.delete(
         // URL
-          `http://127.0.0.1:8000/api/user/boardgame/${deleteGameId}/delete`,
+          `${baseUrl}/api/user/boardgame/${deleteGameId}/delete`,
           // données
           config,
         )
