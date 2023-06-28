@@ -5,9 +5,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink, Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
 
 function CollapsibleExample() {
+  const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
+  const url = new URL(`${baseUrl}/login`);
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
@@ -32,10 +37,14 @@ function CollapsibleExample() {
               <NavDropdown.Item as={Link} to="/joueurs">Joueurs</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/joueurs/ajouter">Ajouter un joueur</NavDropdown.Item>
             </NavDropdown>
+            {role === 'ROLE_ADMIN' ? (
+              <Nav.Link as={Link} to={`${url}`} className="nav-item">Back Office</Nav.Link>
+            )
+              : ''}
           </Nav>
 
           <Nav>
-            <Nav.Link href="#deets"><FontAwesomeIcon icon={faUserTie} className="icon" /> Se connecter</Nav.Link>
+            <Nav.Link as={Link} to="/connexion"><FontAwesomeIcon icon={faUserTie} className="icon" /> Se connecter</Nav.Link>
           </Nav>
 
         </Navbar.Collapse>

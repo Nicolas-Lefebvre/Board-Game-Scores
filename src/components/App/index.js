@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import jwtDecode from 'jwt-decode';
 
-import Navbar from '../Navbar/vanillaNavBar';
+import Navbar from '../Navbar';
 import Footer from '../Footer';
 import Home from '../Home';
 import Subscribe from '../Subscribe';
