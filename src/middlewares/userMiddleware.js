@@ -6,6 +6,8 @@ import {
   saveToken,
   CHECK_TOKEN_VALIDITY,
   setTokenValidity,
+  setIsLogged,
+  SET_ISLOGGED,
 } from '../actions/user';
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -30,6 +32,11 @@ const userMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.log(error);
         });
+
+      break;
+
+    case SET_ISLOGGED:
+      store.dispatch(setIsLogged(action.isLogged));
 
       break;
 

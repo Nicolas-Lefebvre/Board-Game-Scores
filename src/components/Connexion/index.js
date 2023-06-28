@@ -1,12 +1,15 @@
 /* eslint-disable react/jsx-indent */
 import './connexion.scss';
-// import { setToken, useState } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import {
+  // useSelector,
+  useDispatch,
+} from 'react-redux';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-// import jwtDecode from 'jwt-decode';
-// import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 import {
   Button,
   Space,
@@ -14,7 +17,11 @@ import {
   Input,
 } from 'antd';
 
-import { submitLogin } from '../../actions/user';
+import {
+  saveToken,
+  // setIsLogged,
+  // submitLogin,
+} from '../../actions/user';
 
 // == Composant
 function Connexion() {
@@ -23,55 +30,61 @@ function Connexion() {
 
   const onFinish = (values) => {
     console.log('Success:', values);
-    dispatch(submitLogin(values.username, values.password));
+    // dispatch(submitLogin(values.username, values.password));
 
     // const isLogged = useSelector((state) => state.user.isLogged);
     // if (isLogged) {
     //   navigate('/tableau-de-bord');
     // }
-    // axios.post(
-    //   // URL
-    //   'http://127.0.0.1:8000/api/login_check',
-    //   // données
-    //   {
-    //     username: values.username,
-    //     password: values.password,
-    //   },
-    // )
-    //   .then((response) => {
-    //     // console.log('LA REQUETE EST UN SUCCES');
-    //     console.log(response.data);
+    axios.post(
+      // URL
+      'http://127.0.0.1:8000/api/login_check',
+      // données
+      {
+        username: values.username,
+        password: values.password,
+      },
+    )
+      .then((response) => {
+        // console.log('LA REQUETE EST UN SUCCES');
+        console.log(response.data);
 
-    //     // response.data : {logged: true, pseudo: 'John', token: 'eyJhbG....JIUzI1'}
+        // response.data : {logged: true, pseudo: 'John', token: 'eyJhbG....JIUzI1'}
 
-    //     // on dispatch une action pour envoyer les infos de la réponse dans le state
-    //     // setNickname(response.data.pseudo);
-    //     // setToken(response.data.token);
-    //     setIsLogged(true);
-    //     setToken(response.data.token);
-    //     localStorage.setItem('BGStoken', response.data.token);
-    //     const decoded = jwtDecode(response.data.token);
-    //     console.log(decoded);
-    //     // setIsLogged(response.data.logged);
-    //     // store.dispatch(actionToDispatch);
-    //     // const navigate = useNavigate();
-    //     // navigate('/dashboard', { replace: true });
+        // on dispatch une action pour envoyer les infos de la réponse dans le state
+        // setNickname(response.data.pseudo);
+        // setIsLogged(true);
+        // dispatch(setIsLogged(true));
+        // setToken(response.data.token);
 
-    //     // on est authentifié, on a un JWT dans le state => on peut demander au serveur
-    //     // les recettes préférées de l'utilisateur connecté
-    //     // store.dispatch(fetchFavoriteRecipes());
-    //     navigate('/tableau-de-bord');
-    //   })
+        // On sauve le token dans le state (cette action met isLogged=true dans le state)
+        dispatch(saveToken(response.data.token));
 
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {
-    //     // const token2 = localStorage.getItem('BGStoken');
-    //     // console.log(token2);
-    //     // const decodedToken = jwtDecode(token2);
-    //     // console.log(decodedToken);
-    //   });
+        // On sauve le token dans le local storage
+        localStorage.setItem('BGStoken', response.data.token);
+
+        const decoded = jwtDecode(response.data.token);
+        console.log(decoded);
+        // setIsLogged(response.data.logged);
+        // store.dispatch(actionToDispatch);
+        // const navigate = useNavigate();
+        // navigate('/dashboard', { replace: true });
+
+        // on est authentifié, on a un JWT dans le state => on peut demander au serveur
+        // les recettes préférées de l'utilisateur connecté
+        // store.dispatch(fetchFavoriteRecipes());
+        navigate('/tableau-de-bord');
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        // const token2 = localStorage.getItem('BGStoken');
+        // console.log(token2);
+        // const decodedToken = jwtDecode(token2);
+        // console.log(decodedToken);
+      });
   };
 
   const onFinishFailed = (errorInfo) => {

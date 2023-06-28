@@ -523,10 +523,10 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Parties</th>
                         {/* <th>Victoires</th>
                         <th>Défaites</th> */}
-                        <th className="desktop">Champion</th>
-                        <th className="desktop">Max Victoires</th>
-                        <th className="desktop">Recordman</th>
-                        <th className="desktop">Record</th>
+                        <th className="desktop">Champion <img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                        <th className="desktop">Max Victoires <img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                        <th className="desktop">Recordman <img src={lauriers} alt="laurier des records" /></th>
+                        <th className="desktop">Record <img src={lauriers} alt="laurier des records" /></th>
                         {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
                         <th><img src={lauriers} alt="laurier des records" /></th> */}
                         {/* <th>Champion</th>
@@ -567,6 +567,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                   </table>
                 </div>
 
+                {/* ==============================================   AFFICHAGE MOBILE ONLY ============================================= */}
                 <div className="resultat-table mobile">
                   <table className="table table-striped">
                     <thead>
@@ -589,14 +590,14 @@ function Dashboard({ setUserInfos, userInfos }) {
                       </tr>
                       {
                       top5Games.map((game) => (
-                        <tr key={game.board_game_id}>
+                        <tr key={game.id}>
                           <td>
-                            <Link to={`/jeux/${game.board_game_id}`}>
-                              {game.board_game_name}
+                            <Link to={`/jeux/${game.id}`}>
+                              {game.name}
                             </Link>
                           </td>
-                          <td>{game.board_game_name}</td>
-                          <td>{game.game_number}</td>
+                          <td>{game.champion}</td>
+                          <td>{game.champion_victories}</td>
                         </tr>
                       ))
                     }
@@ -629,31 +630,19 @@ function Dashboard({ setUserInfos, userInfos }) {
                         {/* <th>Champion</th>
                         <th>Recordman</th> */}
                       </tr>
-                      <tr>
-                        <td>Catan</td>
-                        <td>Laura</td>
-                        <td>18</td>
-                      </tr>
-                      <tr>
-                        <td>Monopoly</td>
-                        <td>Amar</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td>Les aventuriers du rail</td>
-                        <td>Syham</td>
-                        <td>12</td>
-                      </tr>
-                      <tr>
-                        <td>Puerto Rico</td>
-                        <td>Nico</td>
-                        <td>8</td>
-                      </tr>
-                      <tr>
-                        <td>La Bonne paye</td>
-                        <td>Amar</td>
-                        <td>12</td>
-                      </tr>
+                      {
+                      top5Games.map((game) => (
+                        <tr key={game.id}>
+                          <td>
+                            <Link to={`/jeux/${game.id}`}>
+                              {game.name}
+                            </Link>
+                          </td>
+                          <td>{game.recordman}</td>
+                          <td>{game.recordman_score}</td>
+                        </tr>
+                      ))
+                    }
                     </tbody>
                   </table>
                 </div>
