@@ -30,11 +30,11 @@ function Dashboard({ setUserInfos, userInfos }) {
   const [loadingPlayerResults, setLoadingPlayerResults] = useState(true);
 
   const [playerList, setPlayerList] = useState([]);
-  const [numberOfPlayerWhoWon, setNumberOfPlayerWhoWon] = useState(0);
+  // const [numberOfPlayerWhoWon, setNumberOfPlayerWhoWon] = useState(0);
 
   const [loadingUserInfos, setLoadingUserInfos] = useState(true);
   // const [playerListSingle, setPlayerListSingle] = useState([]);
-  const [lossPlayerList, setLossPlayerList] = useState([]);
+  // const [lossPlayerList, setLossPlayerList] = useState([]);
   const [selectedPlayerId, setSelectedPlayerId] = useState('');
   const [data, setData] = useState([]);
 
@@ -236,51 +236,52 @@ function Dashboard({ setUserInfos, userInfos }) {
   }, []);
 
   // ----------------------Recuperation des top 5 JOUEURS -----------------------
-  const [loadingTop5Players, setLoadingTop5Players] = useState(true);
-  const [top5Players, setTop5Players] = useState([]);
-  const [top5PlayersData, setTop5PlayersData] = useState([]);
+  // const [loadingTop5Players, setLoadingTop5Players] = useState(true);
+  // const [top5Players, setTop5Players] = useState([]);
+  // const [top5PlayersData, setTop5PlayersData] = useState([]);
 
   // =====================================  RECUPERATION TOP 5 JOUEURS =============================
-  useEffect(() => {
-    axios.get(
-      // URL
-      'http://127.0.0.1:8000/api/user/players5',
-      // données
-      config,
-    )
-      .then((response) => {
-        console.log('Recuperation des top 5 joueurs OK');
-        console.log(response.data);
-        setTop5Players(response.data.results);
+  // CODE DESACTIVE CAR ON UTILISE LA MEME API QUE POUR LA LISTE DE TOUS LES JOUEURS
+  // useEffect(() => {
+  //   axios.get(
+  //     // URL
+  //     'http://127.0.0.1:8000/api/user/players5',
+  //     // données
+  //     config,
+  //   )
+  //     .then((response) => {
+  //       console.log('Recuperation des top 5 joueurs OK');
+  //       console.log(response.data);
+  //       setTop5Players(response.data.results);
 
-        setLoadingTop5Players(false);
+  //       setLoadingTop5Players(false);
 
-        // Initialisation du tableau vide
-        const top5PlayersPieData = [];
+  //       // Initialisation du tableau vide
+  //       const top5PlayersPieData = [];
 
-        // Boucle pour remplir le tableau
-        // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < response.data.results.length; i++) {
-          // Création de l'objet pour chaque jeu
-          const player = {
-            id: response.data.results[i].player_name,
-            label: response.data.results[i].player_name,
-            value: response.data.results[i].victory_number,
-            color: `hsl(${i * 15}, 70%, 50%)`,
-          };
+  //       // Boucle pour remplir le tableau
+  //       // eslint-disable-next-line no-plusplus
+  //       for (let i = 0; i < response.data.results.length; i++) {
+  //         // Création de l'objet pour chaque jeu
+  //         const player = {
+  //           id: response.data.results[i].player_name,
+  //           label: response.data.results[i].player_name,
+  //           value: response.data.results[i].victory_number,
+  //           color: `hsl(${i * 15}, 70%, 50%)`,
+  //         };
 
-          // Ajout de l'objet au tableau
-          top5PlayersPieData.push(player);
-        }
+  //         // Ajout de l'objet au tableau
+  //         top5PlayersPieData.push(player);
+  //       }
 
-        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
-        setTop5PlayersData(top5PlayersPieData);
-      })
+  //       // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
+  //       setTop5PlayersData(top5PlayersPieData);
+  //     })
 
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   console.log('loadingTop5Categories :', loadingTop5Categories);
   console.log('loadingTop5Games :', loadingTop5Games);
@@ -703,7 +704,7 @@ function Dashboard({ setUserInfos, userInfos }) {
 
         {/* ------------------------------ TOP PLAYERS CONTAINER-------------------------- */}
 
-        {loadingTop5Players ? (<Loader />)
+        {loadingPlayerResults ? (<Loader />)
           : (
             <section className="scores-container">
 
