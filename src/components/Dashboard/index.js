@@ -9,6 +9,8 @@ import avatarPic from 'src/assets/images/avatar-pic.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 import lauriers from 'src/assets/images/laurier-records-2.png';
 import { useDispatch } from 'react-redux';
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
 
 import Loader from '../Loader';
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
@@ -42,7 +44,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://127.0.0.1:8000/api/user',
+      `${baseUrl}/user`,
       // données
       config,
     )
@@ -69,7 +71,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://127.0.0.1:8000/api/user/players/stats',
+      `${baseUrl}/user/players/stats`,
       // données
       config,
     )
@@ -173,7 +175,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://127.0.0.1:8000/api/user/boardgames5',
+      `${baseUrl}/user/boardgames5`,
       // données
       config,
     )
@@ -218,7 +220,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://127.0.0.1:8000/api/user/categories5',
+      `${baseUrl}/user/categories5`,
       // données
       config,
     )
@@ -245,7 +247,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   // useEffect(() => {
   //   axios.get(
   //     // URL
-  //     'http://127.0.0.1:8000/api/user/players5',
+  //     `${baseUrl}/user/players5`,
   //     // données
   //     config,
   //   )
@@ -713,7 +715,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Nom</th>
                         <th>Victoires</th>
                         <th>Défaites</th>
-                        <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                        <th>Champion <img src={winnerMedal} alt="medaille des titres de champions" /></th>
                         {/* <th><img src={lauriers} alt="laurier des records" /></th> */}
                       </tr>
                       {
