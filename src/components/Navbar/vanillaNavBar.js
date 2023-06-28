@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { useRef } from 'react';
 import './navbar.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,18 +15,25 @@ import baseUrl from '../../apiConfig';
 function Navbar({ token }) {
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
   const url = new URL(`${baseUrl}/login`);
+  const navBarRef = useRef(null);
+
+  const closeDropdown = () => {
+    const dropdowns = navBarRef.current.getElementsByClassName('show');
+    // eslint-disable-next-line no-plusplus
+    for (let j = 0; j < dropdowns.length; j++) {
+      dropdowns[j].classList.remove('show');
+    }
+  };
 
   return (
     <div className="navbar">
-
-      <nav className="navbar navbar-expand-lg">
+      <nav className="navbar navbar-expand-lg" ref={navBarRef}>
         <div className="container-fluid">
-          <NavLink className="navbar-brand" to="/">
+          <NavLink className="navbar-brand" to="/" onClick={closeDropdown}>
             <FontAwesomeIcon icon={faDice} className="title-icon" />
             <h1>Board Game Scores</h1>
           </NavLink>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            {/* <span className="navbar-toggler-icon" /> */}
             <FontAwesomeIcon icon={faBars} className="burger-menu" color="white" />
           </button>
           <div className="collapse navbar-collapse menu-wrapper" id="navbarNavDropdown">
@@ -37,42 +45,29 @@ function Navbar({ token }) {
                 <NavLink className="nav-link" to="/tableau-de-bord">Tableau de bord</NavLink>
               </li>
               <li className="nav-item dropdown">
-                <NavLink to="/joueurs" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
+                <NavLink className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
                   Mes joueurs
                 </NavLink>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <NavLink className="dropdown-item" to="/joueurs">Liste des joueurs</NavLink>
-                  <NavLink className="dropdown-item" to="joueurs/ajouter">Ajouter un joueur</NavLink>
+                  <NavLink className="dropdown-item" to="/joueurs" onClick={closeDropdown}>Liste des joueurs</NavLink>
+                  <NavLink className="dropdown-item" to="joueurs/ajouter" onClick={closeDropdown}>Ajouter un joueur</NavLink>
                 </div>
-                {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
               <li className="nav-item dropdown">
-                <NavLink to="/jeux" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes jeux</NavLink>
+                <NavLink className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes jeux</NavLink>
                 <ul className="dropdown-menu">
-                  <li><NavLink className="dropdown-item" to="jeux">Liste des jeux</NavLink></li>
-                  <li><NavLink className="dropdown-item" to="jeux/ajouter">Ajouter un jeu</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="jeux" onClick={closeDropdown}>Liste des jeux</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="jeux/ajouter" onClick={closeDropdown}>Ajouter un jeu</NavLink></li>
                 </ul>
-                {/* <NavLink className="nav-link" to="/collection">Mes jeux</NavLink> */}
               </li>
-              {/* <li className="nav-item dropdown">
-            <NavLink className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </NavLink>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <NavLink className="dropdown-item" to="#">Action</NavLink>
-              <NavLink className="dropdown-item" to="#">Another action</NavLink>
-              <NavLink className="dropdown-item" to="#">Something else here</NavLink>
-            </div>
-          </li> */}
               <li className="nav-item dropdown">
-                <NavLink to="/parties" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
+                <NavLink className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
                   Mes parties
                 </NavLink>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <NavLink className="dropdown-item" to="parties">Liste des parties</NavLink>
-                  <NavLink className="dropdown-item" to="parties/ajouter">Ajouter une partie</NavLink>
+                  <NavLink className="dropdown-item" to="parties" onClick={closeDropdown}>Liste des parties</NavLink>
+                  <NavLink className="dropdown-item" to="parties/ajouter" onClick={closeDropdown}>Ajouter une partie</NavLink>
                 </div>
-                {/* <NavLink className="nav-link" to="/parties/liste">Mes parties</NavLink> */}
               </li>
               {role === 'ROLE_ADMIN' ? (
                 <li className="nav-item">
@@ -85,28 +80,13 @@ function Navbar({ token }) {
               <li className="nav-item">
                 <Link className="nav-link connexion-wrapper" to="/connexion">
                   <FontAwesomeIcon icon={faUserTie} className="icon" />
-                  {/* <FontAwesomeIcon icon="fa-solid fa-user-tie" /> */}
-                  {token ? '' : ''}
                   <div className="seConnecter">{localStorage.getItem('BGStoken') ? 'Se déconnecter' : 'Se connecter'}</div>
                 </Link>
               </li>
-
-              {/* <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#"
-                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown link
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li> */}
             </ul>
           </div>
         </div>
       </nav>
-
     </div>
   );
 }
