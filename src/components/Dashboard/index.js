@@ -106,17 +106,17 @@ function Dashboard({ setUserInfos, userInfos }) {
           ],
         );
 
+        // ====================  Remplisage données du camembert de l'encart TOP JOUEURS ================================
         // Initialisation du tableau vide
         const topPlayersPieData = [];
-
         // Boucle pour remplir le tableau
         // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < response.data.results.length; i++) {
+        for (let i = 0; i < response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0)).length; i++) {
           // Création de l'objet pour chaque jeu
           const player = {
-            id: response.data.results[i].player_name,
-            label: response.data.results[i].player_name,
-            value: response.data.results[i].victories,
+            id: response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0))[i].player_name,
+            label: response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0))[i].player_name,
+            value: response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0))[i].victories,
             color: `hsl(${i * 15}, 70%, 50%)`,
           };
 
@@ -126,6 +126,7 @@ function Dashboard({ setUserInfos, userInfos }) {
 
         // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
         setTopPlayersData(topPlayersPieData);
+        // =================================================================================================================
       })
       // .then(() => {
       //   console.log(playerList);
