@@ -14,17 +14,24 @@ import {
 import jwtDecode from 'jwt-decode';
 import { faUserTie, faDice } from '@fortawesome/free-solid-svg-icons';
 // Import de la valeur de baseUrl depuis le fichier apiConfig.js
-import baseUrl from '../../apiConfig';
+// import baseUrl from '../../apiConfig';
 
 function CollapsibleExample() {
   const isLogged = useSelector((state) => state.user.isLogged);
 
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
-  const url = new URL(`${baseUrl}`);
+  // const url = new URL(`${baseUrl}`);
   return (
     <Navbar collapseOnSelect expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand href="#home"><FontAwesomeIcon icon={faDice} className="title-icon" /><h1>Board Game Score</h1></Navbar.Brand>
+
+        <Navbar.Brand href="#home">
+          <Nav.Link as={Link} to="/">
+            <FontAwesomeIcon icon={faDice} className="title-icon" />
+            <h1>Board Game Score</h1>
+          </Nav.Link>
+        </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
         <Navbar.Collapse id="responsive-navbar-nav" className="central-container">
