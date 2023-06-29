@@ -4,6 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
+
 import {
   // NavLink,
   Link,
@@ -15,6 +17,8 @@ import { faUserTie, faDice } from '@fortawesome/free-solid-svg-icons';
 import baseUrl from '../../apiConfig';
 
 function CollapsibleExample() {
+  const isLogged = useSelector((state) => state.user.isLogged);
+
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
   const url = new URL(`${baseUrl}/login`);
   return (
@@ -48,7 +52,7 @@ function CollapsibleExample() {
           </Nav>
 
           <Nav className="navbar-avatar">
-            <Nav.Link as={Link} to="/connexion"><FontAwesomeIcon icon={faUserTie} className="icon" /> Se connecter</Nav.Link>
+            <Nav.Link as={Link} to="/connexion"><FontAwesomeIcon icon={faUserTie} className="icon" />{isLogged ? 'Se déconnecter' : 'Se connecter'}</Nav.Link>
           </Nav>
 
         </Navbar.Collapse>
