@@ -21,6 +21,10 @@
       display: flex;
       justify-content: center;
       // min-width: 66%;
+
+      .mobile-only{
+        display: none;
+      }
     }
     .nav-link {
       margin: auto .7rem ;
@@ -167,10 +171,15 @@
   .navbar-toggler-icon {
     color: white;
   }
+
 }
 
 
 @media (max-width: 992px){
+
+  .mobile-only{
+    display:block !important;
+  }
 
   .central-container{
     margin-top: 20px;
@@ -183,6 +192,11 @@
     .dropdown-item{
       text-align: left;
       padding-left: 2rem;
+    }
+
+    .navbar-avatar{
+      // position:static;
+      // right:50px;
     }
 
   }

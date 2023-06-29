@@ -49,6 +49,7 @@ function CollapsibleExample() {
               <Nav.Link as={Link} to={`${url}`} className="nav-item">Back Office</Nav.Link>
             )
               : ''}
+            <Nav.Link className="nav-item mobile-only" as={Link} to="/connexion">{isLogged ? 'Se déconnecter' : 'Se connecter'}</Nav.Link>
           </Nav>
 
           <Nav className="navbar-avatar">
