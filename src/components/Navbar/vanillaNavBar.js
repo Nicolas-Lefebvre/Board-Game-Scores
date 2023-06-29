@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import './navbar.scss';
+import './vanillaNavbar.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie, faDice, faBars } from '@fortawesome/free-solid-svg-icons';
