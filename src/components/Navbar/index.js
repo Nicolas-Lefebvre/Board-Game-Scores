@@ -20,7 +20,7 @@ function CollapsibleExample() {
   const isLogged = useSelector((state) => state.user.isLogged);
 
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
-  const url = new URL(`${baseUrl}/login`);
+  const url = new URL(`${baseUrl}`);
   return (
     <Navbar collapseOnSelect expand="lg" variant="dark">
       <Container>
@@ -46,7 +46,7 @@ function CollapsibleExample() {
               <NavDropdown.Item as={Link} to="/parties/ajouter">Ajouter une partie</NavDropdown.Item>
             </NavDropdown>
             {role === 'ROLE_ADMIN' ? (
-              <Nav.Link as={Link} to={`${url}`} className="nav-item">Back Office</Nav.Link>
+              <Nav.Link as={Link} to="/public/login" className="nav-item">Back Office</Nav.Link>
             )
               : ''}
             <Nav.Link className="nav-item mobile-only" as={Link} to="/connexion">{isLogged ? 'Se déconnecter' : 'Se connecter'}</Nav.Link>
