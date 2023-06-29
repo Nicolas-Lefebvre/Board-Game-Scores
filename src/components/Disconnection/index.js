@@ -29,7 +29,7 @@ function Disconnection({setIsLogged, isLogged, setToken }) {
       {/* <Space wrap> */}
       <Link to="/tableau-de-bord"><Button type="primary" onClick={handleClickOnDashboard}>Accéder à mon tableau de bord</Button></Link>
       <h3>Ou</h3>
-      <Button type="primary" onClick={handleClickOnDisconnection} danger>Déconnexion</Button>
+      <Button type="primary" onClick={handleClickOnDisconnection} danger style={{ backgroundColor: '#c31313 !important' }}>Déconnexion</Button>
       {/* </Space> */}
 
     </div>
