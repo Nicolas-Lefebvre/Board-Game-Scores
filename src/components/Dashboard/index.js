@@ -32,6 +32,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   const [loadingPlayerResults, setLoadingPlayerResults] = useState(true);
 
   const [playerList, setPlayerList] = useState([]);
+  const [playerListWithGames, setPlayerListWithGames] = useState([]);
   // const [numberOfPlayerWhoWon, setNumberOfPlayerWhoWon] = useState(0);
 
   const [loadingUserInfos, setLoadingUserInfos] = useState(true);
@@ -79,6 +80,8 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log('Recuperation de tous les joueurs OK');
         console.log(response.data);
         setPlayerList(response.data.results);
+        // On défini la variable playerListWithGames en filtrant les joueurs qui ont au moins une partie jouée :
+        setPlayerListWithGames(response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0)));
         setSelectedPlayerId(response.data.results[0].player_id);
         // setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
         // const numberOfPlayer = (response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0))).length;
@@ -713,25 +716,27 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <tbody>
                       <tr>
                         <th>Nom</th>
+                        <th>Parties</th>
                         <th>Victoires</th>
                         <th>Défaites</th>
                         <th>Champion <img src={winnerMedal} alt="medaille des titres de champions" /></th>
                         {/* <th><img src={lauriers} alt="laurier des records" /></th> */}
                       </tr>
                       {
-                      playerList.length === 0
+                      playerListWithGames.length === 0
                         ? (
                           <tr>
                             <td style={{ fontStyle: 'italic' }} colSpan="2">Aucun joueur renseigné</td>
                           </tr>
                         )
-                        : playerList.map((player) => (
+                        : playerListWithGames.map((player) => (
                           <tr key={player.player_id}>
                             <td>
                               <Link to={`/joueurs/id?player_id=${player.player_id}`}>
                                 {player.player_name}
                               </Link>
                             </td>
+                            <td>{player.games_played}</td>
                             <td>{player.victories}</td>
                             <td>{player.defeats}</td>
                             <td>{player.champion_titles}</td>

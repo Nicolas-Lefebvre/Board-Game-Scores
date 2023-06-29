@@ -53,7 +53,7 @@ function CollapsibleExample() {
               <NavDropdown.Item as={Link} to="/parties/ajouter">Ajouter une partie</NavDropdown.Item>
             </NavDropdown>
             {role === 'ROLE_ADMIN' ? (
-              <Nav.Link href="https://boardgamescores.fr/login" className="nav-item">Back Office</Nav.Link>
+              <Nav.Link href="https://boardgamescores.fr/login" target="_blank" className="nav-item">Back Office</Nav.Link>
             )
               : ''}
             <Nav.Link className="nav-item mobile-only" as={Link} to="/connexion">{isLogged ? 'Se déconnecter' : 'Se connecter'}</Nav.Link>
