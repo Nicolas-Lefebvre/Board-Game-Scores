@@ -171,7 +171,8 @@ function Dashboard({ setUserInfos, userInfos }) {
 
   // Recuperation des top 5 jeux par joueur
   const [loadingTop5Games, setLoadingTop5Games] = useState(true);
-  const [top5Games, setTop5Games] = useState([]);
+  const [topGames, setTopGames] = useState([]);
+  const [topPlayedGames, setTopPlayedGames] = useState([]);
   // const [numberOfGames, setNumberOfGames] = useState(0);
   const [top5GamesData, setTop5GamesData] = useState([]);
 
@@ -186,7 +187,8 @@ function Dashboard({ setUserInfos, userInfos }) {
       .then((response) => {
         console.log('Recuperation des top 5 jeux OK');
         console.log(response.data);
-        setTop5Games(response.data.results);
+        setTopGames(response.data.results);
+        setTopPlayedGames(response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0)));
         // setNumberOfGames(response.data.results.length);
 
         setLoadingTop5Games(false);
@@ -196,12 +198,12 @@ function Dashboard({ setUserInfos, userInfos }) {
 
         // Boucle pour remplir le tableau
         // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < response.data.results.length; i++) {
+        for (let i = 0; i < response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0)).length; i++) {
           // Création de l'objet pour chaque jeu
           const game = {
-            id: response.data.results[i].name,
-            label: response.data.results[i].name,
-            value: response.data.results[i].num_games_played,
+            id: response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].name,
+            label: response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].name,
+            value: response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].num_games_played,
             color: `hsl(${i * 15}, 70%, 50%)`,
           };
 
@@ -539,13 +541,13 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Recordman</th> */}
                       </tr>
                       {
-                        top5Games.length === 0
+                        topPlayedGames.length === 0
                           ? (
                             <tr>
                               <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune jeu renseignée : ajoutez votre première partie</td>
                             </tr>
                           )
-                          : top5Games.map((game) => (
+                          : topPlayedGames.map((game) => (
                             <tr key={game.id}>
                               <td><Link to={`/jeux/${game.id}?boardgame_id=${game.id}`}>{game.name}</Link>
                               </td>
@@ -595,7 +597,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Recordman</th> */}
                       </tr>
                       {
-                      top5Games.map((game) => (
+                      topGames.map((game) => (
                         <tr key={game.id}>
                           <td>
                             <Link to={`/jeux/${game.id}`}>
@@ -637,7 +639,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Recordman</th> */}
                       </tr>
                       {
-                      top5Games.map((game) => (
+                      topGames.map((game) => (
                         <tr key={game.id}>
                           <td>
                             <Link to={`/jeux/${game.id}`}>
