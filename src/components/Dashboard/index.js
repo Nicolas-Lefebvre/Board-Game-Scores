@@ -221,6 +221,7 @@ function Dashboard({ setUserInfos, userInfos }) {
 
   const [loadingTop5Categories, setLoadingTop5Categories] = useState(true);
   const [topCategories, setTopCategories] = useState([]);
+  const [topPlayedCategories, setTopPlayedCategories] = useState([]);
 
   // =====================================  RECUPERATION TOP CATEGORIES =============================
   useEffect(() => {
@@ -234,6 +235,7 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log('Recuperation des top 5 catégories OK');
         console.log(response.data);
         setTopCategories(response.data.results);
+        setTopPlayedCategories(response.data.results.filter((filteredCategory) => (filteredCategory.total_games > 0)));
 
         setLoadingTop5Categories(false);
       })
@@ -671,13 +673,13 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>nb victoire(s)</th>
                       </tr>
                       {
-                      topCategories.length === 0
+                      topPlayedCategories.length === 0
                         ? (
                           <tr>
                             <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune catégorie renseignée</td>
                           </tr>
                         )
-                        : topCategories.map((category) => (
+                        : topPlayedCategories.map((category) => (
                           <tr key={category.category_id}>
                             <td>{category.category_name}</td>
                             <td>{category.total_games}</td>
