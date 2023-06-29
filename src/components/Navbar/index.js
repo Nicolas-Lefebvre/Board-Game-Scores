@@ -18,7 +18,7 @@ function CollapsibleExample() {
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
   const url = new URL(`${baseUrl}/login`);
   return (
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar collapseOnSelect expand="lg" variant="dark">
       <Container>
         <Navbar.Brand href="#home"><FontAwesomeIcon icon={faDice} className="title-icon" /><h1>Board Game Score</h1></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

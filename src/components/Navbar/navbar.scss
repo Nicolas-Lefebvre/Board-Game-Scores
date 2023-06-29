@@ -105,7 +105,7 @@
   }
 
   .title-icon {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-right: 1rem;
     margin-bottom: 0.5rem;
 
@@ -114,8 +114,10 @@
 
   .navbar-brand {
     margin-top: -1.2rem;
+    margin-left: 1rem;
     margin-bottom: -1rem;
-    font-style: italic;
+    // font-style: italic;
+    font-size: 1.1rem;
 
     &:hover {
       color:white;
@@ -169,6 +171,7 @@
 
 
 @media (max-width: 992px){
+
   .central-container{
     margin-top: 20px;
   }
