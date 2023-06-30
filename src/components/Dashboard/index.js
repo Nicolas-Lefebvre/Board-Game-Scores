@@ -699,7 +699,7 @@ function Dashboard({ setUserInfos, userInfos }) {
 
         {loadingPlayerResults ? (<Loader />)
           : (
-            <section className="scores-container">
+            <section className="scores-container top-player-container">
 
               <h4>Top joueurs</h4>
               <div className="resultats-wrapper">
