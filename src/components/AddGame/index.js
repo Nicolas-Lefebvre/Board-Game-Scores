@@ -186,13 +186,12 @@ function AddGame() {
     )
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. partie bien ajoutée');
-        navigate('/parties');
       })
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
-        // navigate('/jeux');
+        navigate('/parties');
       });
   };
 
