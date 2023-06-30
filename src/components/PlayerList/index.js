@@ -61,7 +61,7 @@ function Players() {
     return <Loader />;
   }
   return (
-    <div className="tableau_mesjoueurs">
+    <section className="tableau_mesjoueurs">
 
       <h2>Mes Joueurs</h2>
 
@@ -129,7 +129,7 @@ function Players() {
         </div>
       </div>
 
-    </div>
+    </section>
   );
 }
 // == Export
