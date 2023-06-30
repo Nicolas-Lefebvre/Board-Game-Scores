@@ -4,18 +4,24 @@
 .home {
 
   .container {
-    border: 1px solid #ccc;
     border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    // box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 1rem auto;
     padding: 10px;
-    padding-bottom: 3rem;
-    border: 1px solid #ccc;
+    // padding-bottom: 3rem;
+    // border: 1px solid #ccc;
     margin-bottom: 20px;
     min-width: 80%;
+    max-width: 90%;
 
     p {
-      margin: 1.5rem;
-      text-align: center;
+      font-size: 1.05rem;
+      margin: 2rem 1rem;
+      text-align: center !important;
+
+      a{
+        text-decoration: underline;
+      }
     }
   }
   .header-image {
@@ -23,21 +29,14 @@
   }
 
   .presentation {
-    // section {
-    //   display: flex;
-
-    //   img {
-    //     min-width: 390px;
-    //   }
-      
-    //   p {
-    //     margin: 2rem;
-    //     font-size: 1.3rem;
-    //     text-align: justify;
-    //     line-height: 1.5rem;
-    //   }
-    // }
+  
+    .presentation-h2{
+      margin-top: 0 !important;
+      margin-bottom: 2.5rem;
+    }
   }
+  
+
 
 // ----------------------------- BLOCK CLASSEMENT--------------------------
   .classement {
@@ -103,16 +102,27 @@
 
   .HomeDashBoard {
     margin-bottom: 10rem;
+
+    .image{
+      margin: 0 !important;
+      min-width: 100%;
+      max-width: 100%;
+    }
   }
 
 
   
   @media (min-width: 750px) {
+
+    .container{
+      max-width: 70%;
+    }
     
     .container p {
+      line-height: 1.5rem;
+      font-size: 1.1rem;
       margin-right: 3rem;
       margin-left: 3rem;
-      text-align: left;
     }
     
     .classement .card {

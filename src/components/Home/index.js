@@ -36,9 +36,10 @@ function Home() {
     <div className="home">
 
       <Header />
+      {/* <img src={boardgamescoreImg}></img> */}
       <Presentation />
       {/* {top5Games.length === 0 ? '' : <Loader />} */}
-      {boardgamesLoaded ? (top5Games.length >= 5 ? <Classement /> : '') : <Loader />}
+      {/* {boardgamesLoaded ? (top5Games.length >= 5 ? <Classement /> : '') : <Loader />} */}
       <HomeDashboard />
 
     </div>

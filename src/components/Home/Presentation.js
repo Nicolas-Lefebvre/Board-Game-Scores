@@ -1,28 +1,41 @@
+/* eslint-disable max-len */
 import { Link } from 'react-router-dom';
 // import image from '../../assets/images/amis-jouant-a-un-jeu-de-societe.jpg';
+import boardgamescoreImg from '../../assets/images/boardgamescores-logo.png';
 // == Composant
 function Presentation() {
   return (
-    <div className="container presentation">
-      <h2>Présentation du site</h2>
-      <section>
+    <section className="container presentation">
+
+      <img src={boardgamescoreImg} alt="pion de jeu de société avec une couronne en or et une couronne de lauriers" />
+      <h2 className="presentation-h2">Présentation du site</h2>
+      <div>
         {/* <img src={image} alt="" /> */}
         <p>
-          Board Game Scores (BGS) est un site qui permet d'enregistrer les résultats
-          des parties de jeux de société faites au sein d’une communauté.Il permet
-          de conserver les résultats de toutes les parties jouées et de faire resso
-          rtir de nombreuses statistiques, objectifs, et également de sauvegarder une
-          partie en cours. BGS permet de se connecter à d’autres joueurs et de gérer
-          sa collection de jeux de société.
+          Boardgamescores est le site web ultime pour enregistrer et suivre les scores de tes parties de jeux de société préférés !
+          Que tu soies un joueur occasionnel ou un véritable passionné, Boardgamescores te permet de garder une trace de tes victoires
+          et de créer des profils personnalisés pour chaque joueur. Enregistre facilement les scores, consulte les classements, et
+          compare tes performances avec celles de tes amis !
         </p>
-      </section>
+        <p style={{ fontWeight: 'bold' }}>
+          <Link as={Link} to="/inscription">Inscris-toi dès maintenant et profite d'une expérience de jeu encore plus captivante !</Link>
+        </p>
+        <p>
+          Boardgamescores offre une interface conviviale et intuitive. Suis les tendances, les classements et les performances
+          de chaque joueur au fil du temps. Tu pourras ainsi découvrir qui est le champion incontesté de ton groupe d'amis !
+          Explore de nombreuses statistiques pour chaque jeu, telles que le pourcentage de victoires par joueur ou les records de chacun.
+          Utilise ces informations pour te perfectionner et te lancer de nouveaux défis !
+        </p>
 
-      { localStorage.getItem('BGStoken') ? '' :
-      (<div>
-        <Link style={{ marginBottom: '2rem' }} className="btn btn-primary" to="/inscription" role="button">Je m'inscris !</Link>
-      </div>)
-    }
-    </div>
+      </div>
+
+      { localStorage.getItem('BGStoken') ? ''
+        : (
+          <div>
+            <Link style={{ marginBottom: '2rem' }} className="btn btn-primary" to="/inscription" role="button">Je m'inscris !</Link>
+          </div>
+        )}
+    </section>
   );
 }
 

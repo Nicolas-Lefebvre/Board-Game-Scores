@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import boardgamescoreLogo from '../../assets/images/boardgamescores-logo.png';
 import { useSelector } from 'react-redux';
 
 import {
@@ -27,7 +28,8 @@ function CollapsibleExample() {
 
         <Navbar.Brand href="#home">
           <Nav.Link as={Link} to="/">
-            <FontAwesomeIcon icon={faDice} className="title-icon" />
+            {/* <FontAwesomeIcon icon={faDice} className="title-icon" /> */}
+            <img src={boardgamescoreLogo} alt="logo du site boardgamescores" style={{ height: '3rem' }} />
             <h1>Board Game Score</h1>
           </Nav.Link>
         </Navbar.Brand>

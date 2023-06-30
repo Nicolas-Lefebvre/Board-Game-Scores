@@ -49,7 +49,7 @@ function Classement() {
     );
   }
   return (
-    <div className="container classement">
+    <section className="container classement">
 
       <h2>Classement de la semaine</h2>
 
@@ -115,7 +115,7 @@ function Classement() {
 
           </div>
         )}
-    </div>
+    </section>
   );
 }
 
