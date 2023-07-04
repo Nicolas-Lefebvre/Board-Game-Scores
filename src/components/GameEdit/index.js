@@ -83,7 +83,6 @@ function GameEdit() {
   console.log('gameInfos', gameInfos);
   // const [boardgameId, setBoardgameId] = useState('');
 
-
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
@@ -92,16 +91,23 @@ function GameEdit() {
     console.log('Received values of form: ', values);
     axios.patch(
       // URL
-      `${baseUrl}/api/user/game/${gameId}`,
+      `${baseUrl}/api/games/${gameId}`,
       // données
       {
-        name: values.name,
+        startDate: values.startDate,
+        endDate: values.endDate,
+        playerNumber: values.players.length,
+        picture: null,
+        status: values.status,
+        comment: (values.comment ? values.comment : null),
+        boardGame: values.boardGame,
+        players: values.players,
       },
       config,
     )
       .then(() => {
-        console.log('LA REQUETE EST UN SUCCES. joueur bien ajouté');
-        navigate('/joueurs');
+        console.log('LA REQUETE EST UN SUCCES. partie bien ajouté');
+        navigate('/parties');
       })
       .catch((error) => {
         console.log(error);
@@ -133,9 +139,9 @@ function GameEdit() {
             rate: 3.5,
             boardGame: gameInfos[0].board_game_id,
             status: gameInfos[0].status,
-            startDate: "2023-07-04T14:29",
+            // startDate: "2023-07-04T14:29",
             // quand on valide une partie, la date remonte comme cela : "2023-07-04T14:29"
-            // endDate: gameInfos[0].end_date,
+            // endDate: "2023-07-04T14:30",
             comment: gameInfos[0].comment,
           }}
           style={{ maxWidth: 2000 }}
