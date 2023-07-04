@@ -61,7 +61,7 @@ function GameEdit() {
   }, []);
   const usersBoardgameListLoaded = useSelector((state) => state.boardgames.usersBoardgameListLoaded);
   const usersBoardgameList = useSelector((state) => state.boardgames.usersBoardgameList);
-  console.log(usersBoardgameList);
+  console.log('usersBoardgameList', usersBoardgameList);
 
   // ------------------ Recuperation de la liste de tous les joueurs du user --------------------------
   useEffect(() => {
@@ -69,6 +69,7 @@ function GameEdit() {
   }, []);
   const usersPlayerList = useSelector((state) => state.players.playerListNoStats);
   const usersPlayerListLoaded = useSelector((state) => state.players.playerListNoStatsLoaded);
+  console.log('usersPlayerList', usersPlayerList);
 
   // ------------------ Recuperation des infos de la partie -------------------------------------------
   useEffect(() => {
@@ -77,6 +78,11 @@ function GameEdit() {
     // console.log(gameId);
     dispatch(fetchGameInfos(gameId));
   }, []);
+  const gameInfosLoaded = useSelector((state) => state.games.gameInfosLoaded);
+  const gameInfos = useSelector((state) => state.games.gameInfos);
+  console.log('gameInfos', gameInfos);
+  // const [boardgameId, setBoardgameId] = useState('');
+
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
@@ -102,19 +108,32 @@ function GameEdit() {
       });
   };
 
-  if (!usersBoardgameListLoaded || !usersPlayerListLoaded) {
+  // const initialValues = {
+  //   'input-number': 3,
+  //   'checkbox-group': ['A', 'B'],
+  //   rate: 3.5,
+  //   boardGame: gameInfos[0].board_game_id,
+  // };
+  if (!usersBoardgameListLoaded || !usersPlayerListLoaded || !gameInfosLoaded) {
     return <Loader />;
   }
   return (
     <div className="container addGame-container">
-      <h2>Ajouter une partie</h2>
+      <h2>Modifier une partie</h2>
 
       <div>
         <Form
           name="validate_other"
           {...formItemLayout}
           onFinish={onFinish}
-          initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
+          // initialValues={initialValues}
+          initialValues={{
+            'input-number': 3,
+            'checkbox-group': ['A', 'B'],
+            rate: 3.5,
+            boardGame: gameInfos[0].board_game_id,
+            status: gameInfos[0].status,
+          }}
           style={{ maxWidth: 2000 }}
         >
 
@@ -124,8 +143,8 @@ function GameEdit() {
             <Space style={{ display: 'flex', justifyContent: 'center' }}>
               <Form.Item name="status" label="Statut partie">
                 <Radio.Group>
-                  <Radio value={true}>Partie terminée</Radio>
-                  <Radio value={false}>Partie en cours</Radio>
+                  <Radio value="1">Partie terminée</Radio>
+                  <Radio value="0">Partie en cours</Radio>
                 </Radio.Group>
               </Form.Item>
             </Space>
@@ -138,7 +157,13 @@ function GameEdit() {
                 hasFeedback
                 rules={[{ required: true, message: 'Selectionnez un jeu' }]}
               >
-                <Select placeholder="Selectionner un jeu" style={{ minWidth: '200px' }}>
+                <Select
+                  // value={gameInfos.board_game_id}
+                  placeholder="Selectionner un jeu"
+                  style={{ minWidth: '200px' }}
+                  disabled
+                  // options=
+                >
                   {usersBoardgameList.map((boardgame) => (
                     <Option
                       key={boardgame.id}
@@ -184,10 +209,10 @@ function GameEdit() {
               // style={{ display: 'flex', flexWrap: 'wrap', minWidth: "100px" }}
               initialValue={[
                 {
-                  player: null, score: null, fairplay: 5, isWinner: false, isTeam: isTeam, team: null,
+                  player: null, score: null, fairplay: 5, isWinner: false, isTeam: gameInfos.is_Team, team: null,
                 },
                 {
-                  player: null, score: null, fairplay: 5, isWinner: false, isTeam: isTeam, team: null,
+                  player: null, score: null, fairplay: 5, isWinner: false, isTeam: gameInfos.is_Team, team: null,
                 },
               ]}
             >
@@ -264,7 +289,7 @@ function GameEdit() {
                         <Rate />
                       </Form.Item>
                       {/* ------------------------EQUIPE ----------------------- */}
-                      {isTeam && (
+                      {gameInfos.is_Team && (
                       <Form.Item label="N° équipe">
                         <Form.Item name={[name, 'team']} noStyle>
                           <InputNumber min={1} max={10} style={{ width: '50px' }} />

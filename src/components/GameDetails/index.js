@@ -135,7 +135,7 @@ const GameDetails = () => {
         <Button
           variant="secondary"
           onClick={() => {
-            navigate(`/parties/modifier/?game_id=${gameInfos[0].game_id}`);
+            navigate(`/parties/modifier/${gameInfos[0].game_id}?game_id=${gameInfos[0].game_id}`);
           }}
         >
           Modifier
