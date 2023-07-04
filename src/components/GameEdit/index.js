@@ -337,7 +337,7 @@ function GameEdit() {
               <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
             </Form.Item> */}
             <Space>
-              <FormItem name="startDate">
+              <FormItem name="startDate" initialValue={gameInfos[0].start_date}>
                 <div className="form-group">
                   <label htmlFor="partieDate">Début partie :
                     <input type="datetime-local" id="partieDate" name="startDate" defaultValue={gameInfos[0].start_date} />
@@ -346,7 +346,7 @@ function GameEdit() {
               </FormItem>
             </Space>
             <Space>
-              <FormItem name="endDate">
+              <FormItem name="endDate" initialValue={gameInfos[0].end_date}>
                 <div className="form-group">
                   <label htmlFor="partieDate">Fin partie :
                     <input type="datetime-local" id="partieDate" name="endDate" defaultValue={gameInfos[0].end_date} />
