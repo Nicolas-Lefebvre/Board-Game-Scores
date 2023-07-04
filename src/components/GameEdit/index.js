@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// import './playerAdd.scss';
+// import './gameAdd.scss';
 
 import axios from 'axios';
 // import Link from 'antd/es/typography/Link';
@@ -17,23 +17,23 @@ import { useNavigate } from 'react-router-dom';
 import baseUrl from '../../apiConfig';
 
 // ============================================ Composant===========================================
-function PlayerEdit() {
+function GameEdit() {
   const navigate = useNavigate();
 
   const queryParameters = new URLSearchParams(window.location.search);
-  const playerId = queryParameters.get('player_id');
-  const playerName = queryParameters.get('player_name');
+  const gameId = queryParameters.get('game_id');
+  const gameName = queryParameters.get('game_name');
 
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
-  console.log(playerId);
+  console.log(gameId);
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    console.log(playerName);
+    console.log(gameName);
     axios.patch(
       // URL
-      `${baseUrl}/api/user/player/${playerId}`,
+      `${baseUrl}/api/user/game/${gameId}`,
       // données
       {
         name: values.name,
@@ -53,10 +53,10 @@ function PlayerEdit() {
     <div className="container addGame-container">
       <div className="form-container">
         <section>
-          <h2>Modifier un joueur</h2>
+          <h2>Modifier une partie</h2>
           {/* <h3>Ajouter un nouveau joueur</h3> */}
           <Form
-            name="validate_new_player"
+            name="validate_new_game"
             // {...formItemLayout}
             onFinish={onFinish}
             // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
@@ -66,7 +66,7 @@ function PlayerEdit() {
               <Form.Item label="Nom du joueur" name="name">
                 <Input
                   type="text"
-                  defaultValue={playerName}
+                  defaultValue={gameName}
                   className="existing-game-input"
                   name="name"
                 />
@@ -88,4 +88,4 @@ function PlayerEdit() {
 }
 
 // == Export
-export default PlayerEdit;
+export default GameEdit;
