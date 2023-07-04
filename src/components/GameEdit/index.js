@@ -133,6 +133,9 @@ function GameEdit() {
             rate: 3.5,
             boardGame: gameInfos[0].board_game_id,
             status: gameInfos[0].status,
+            // startDate: Date.parse(gameInfos[0].start_date),
+            // endDate: gameInfos[0].end_date,
+            comment: gameInfos[0].comment,
           }}
           style={{ maxWidth: 2000 }}
         >
@@ -176,10 +179,6 @@ function GameEdit() {
               </Form.Item>
             </Space>
 
-            <Space style={{ display: 'flex', justifyContent: 'center' }}>
-              <Link to="/jeux/ajouter" style={{ color: 'blue' }}>Ajouter un jeu à ma collection <br /><i style={{ fontStyle: 'italic', color: 'black' }}>(ceci vous amènera sur une nouvelle page)</i></Link>
-            </Space>
-
             {/* Ce code est désactivé car le jeu en équipe n'est pas encore géré */}
             {/* Quand ca sera le cas, nous pourrons décommenter cette partie : */}
             {/* c'est une checkbox qui active le no d'équipe pour chaque joueur lignes 353 à 364 */}
@@ -207,14 +206,15 @@ function GameEdit() {
               name="players"
               className="players-wrapper"
               // style={{ display: 'flex', flexWrap: 'wrap', minWidth: "100px" }}
-              initialValue={[
-                {
-                  player: null, score: null, fairplay: 5, isWinner: false, isTeam: gameInfos.is_Team, team: null,
-                },
-                {
-                  player: null, score: null, fairplay: 5, isWinner: false, isTeam: gameInfos.is_Team, team: null,
-                },
-              ]}
+              initialValue={gameInfos.map((game) => ({
+                player: game.player_name,
+                score: game.score,
+                fairplay: game.fairplay,
+                // eslint-disable-next-line no-unneeded-ternary
+                isWinner: game.is_winner === '1' ? true : false,
+                isTeam: game.is_Team,
+                team: null,
+              }))}
             >
               {(fields, { add, remove }) => (
                 <>
