@@ -133,7 +133,8 @@ function GameEdit() {
             rate: 3.5,
             boardGame: gameInfos[0].board_game_id,
             status: gameInfos[0].status,
-            // startDate: Date.parse(gameInfos[0].start_date),
+            startDate: "2023-07-04T14:29",
+            // quand on valide une partie, la date remonte comme cela : "2023-07-04T14:29"
             // endDate: gameInfos[0].end_date,
             comment: gameInfos[0].comment,
           }}
@@ -333,7 +334,7 @@ function GameEdit() {
               <FormItem name="startDate">
                 <div className="form-group">
                   <label htmlFor="partieDate">Début partie :
-                    <input type="datetime-local" id="partieDate" name="startDate" />
+                    <input type="datetime-local" id="partieDate" name="startDate" defaultValue={gameInfos[0].start_date} />
                   </label>
                 </div>
               </FormItem>
@@ -342,7 +343,7 @@ function GameEdit() {
               <FormItem name="endDate">
                 <div className="form-group">
                   <label htmlFor="partieDate">Fin partie :
-                    <input type="datetime-local" id="partieDate" name="endDate" />
+                    <input type="datetime-local" id="partieDate" name="endDate" defaultValue={gameInfos[0].end_date} />
                   </label>
                 </div>
               </FormItem>
