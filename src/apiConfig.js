@@ -1,6 +1,6 @@
 // apiConfig.js
 
-const baseUrl = 'https://boardgamescores.fr/public';
+const baseUrl = 'http://127.0.0.1:8000';
 
 // si en local : http://127.0.0.1:8000
 // Back office : http://127.0.0.1:8000/login

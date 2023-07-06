@@ -39,6 +39,20 @@ import { fetchPlayerListNoStats } from '../../actions/players';
 //   fetchUsersPlayerList,
 // } from '../../actions/players';
 
+// Fonction de comparaison pour trier par ordre alphabétique
+function compareNames(a, b) {
+  const nameA = a.name.toUpperCase(); // Convertir en majuscules pour ignorer la casse
+  const nameB = b.name.toUpperCase();
+
+  if (nameA < nameB) {
+    return -1; // a vient avant b
+  }
+  if (nameA > nameB) {
+    return 1; // a vient après b
+  }
+  return 0; // a et b sont égaux
+}
+
 const { Option } = Select;
 
 const formItemLayout = {
@@ -86,7 +100,8 @@ function AddGame() {
   }, []);
 
   const usersBoardgameListLoaded = useSelector((state) => state.boardgames.usersBoardgameListLoaded);
-  const usersBoardgameList = useSelector((state) => state.boardgames.usersBoardgameList);
+  // On récupére la liste des jeux et on les classe par ordre alphabétique
+  const usersBoardgameList = useSelector((state) => state.boardgames.usersBoardgameList.sort(compareNames));
   console.log(usersBoardgameList);
 
   // Ancienne méthode avec useState :
