@@ -201,9 +201,13 @@ function AddGame() {
     )
       .then(() => {
         console.log('LA REQUETE EST UN SUCCES. partie bien ajoutée');
+        navigate('/parties');
       })
       .catch((error) => {
         console.log(error);
+        if (error.response && error.response.status === 500) {
+          navigate('/parties');
+        }
       })
       .finally(() => {
         // navigate('/parties');
