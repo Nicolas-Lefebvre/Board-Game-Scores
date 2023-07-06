@@ -420,7 +420,7 @@ function AddGame() {
               <FormItem name="startDate">
                 <div className="form-group">
                   <label htmlFor="partieDate">Début partie :
-                    <input type="datetime-local" id="partieDate" name="startDate" />
+                    <input type="datetime-local" id="partieDate" name="startDate" required />
                   </label>
                 </div>
               </FormItem>
