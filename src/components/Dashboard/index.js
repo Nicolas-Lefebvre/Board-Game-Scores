@@ -187,8 +187,11 @@ function Dashboard({ setUserInfos, userInfos }) {
       .then((response) => {
         console.log('Recuperation des top 5 jeux OK');
         console.log(response.data);
-        setTopGames(response.data.results);
-        setTopPlayedGames(response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0)));
+        // On supprime les doublons (lorsqu'un user ajoute un jeu déjà existant à sa collection, celui-ci s'affiche en double)
+        const boardgameNoDoubles = response.data.results.filter((value, index, self) => index === self.findIndex((t) => (t.id === value.id)));
+        console.log('sans doublons', boardgameNoDoubles);
+        setTopGames(boardgameNoDoubles);
+        setTopPlayedGames(boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0)));
         // setNumberOfGames(response.data.results.length);
 
         setLoadingTop5Games(false);
@@ -198,12 +201,12 @@ function Dashboard({ setUserInfos, userInfos }) {
 
         // Boucle pour remplir le tableau
         // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0)).length; i++) {
+        for (let i = 0; i < boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0)).length; i++) {
           // Création de l'objet pour chaque jeu
           const game = {
-            id: response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].name,
-            label: response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].name,
-            value: response.data.results.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].num_games_played,
+            id: boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].name,
+            label: boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].name,
+            value: boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].num_games_played,
             color: `hsl(${i * 15}, 70%, 50%)`,
           };
 
