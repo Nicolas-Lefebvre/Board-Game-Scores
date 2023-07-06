@@ -206,7 +206,7 @@ function AddGame() {
         console.log(error);
       })
       .finally(() => {
-        navigate('/parties');
+        // navigate('/parties');
       });
   };
 
@@ -230,7 +230,7 @@ function AddGame() {
           <section style={{ display: 'flex', flexDirection: 'column' }}>
             <h3>Jeu</h3>
             <Space style={{ display: 'flex', justifyContent: 'center' }}>
-              <Form.Item name="status" label="Statut partie">
+              <Form.Item name="status" label="Statut partie" required>
                 <Radio.Group>
                   <Radio value={true}>Partie terminée</Radio>
                   <Radio value={false}>Partie en cours</Radio>

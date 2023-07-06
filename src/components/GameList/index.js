@@ -148,7 +148,7 @@ function GameList() {
                 <img src={game.picture} alt="" className="image" />
               </div>
               <div className="text-container">
-                <h5 className="card-title">{game.start_date.substr(0, 10)}</h5>
+                <h5 className="card-title">{game.start_date ? game.start_date.substr(0, 10) : 'Aucune date indiquée'}</h5>
                 {/* <p className="category">Jeu de gestion</p> */}
                 <ul className="">
                   <li><strong>{game.board_game_name}</strong></li>
