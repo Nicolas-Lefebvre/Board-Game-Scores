@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-spaces */
 /* eslint-disable max-len */
 import './dashboard.scss';
 import { Link, useNavigate } from 'react-router-dom';
@@ -379,7 +380,10 @@ function Dashboard({ setUserInfos, userInfos }) {
                 }}
                 valueFormat=" ^-~f"
                 activeOuterRadiusOffset={8}
-                colors={['green', 'rgb(228, 26, 28)']}
+                colors={[
+                  'rgb(205, 92, 92)',     // Rouge indien (rouge boisé)
+                  'rgb(107, 142, 35)',    // Goldenrod (jaune boisé)
+                ]}
                 colorsBy="index"
                 borderWidth={1}
                 borderColor={{
