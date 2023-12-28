@@ -1,0 +1,39 @@
+
+@use 'src/styles/vars';
+
+.addGame-container {
+  .form-container {
+    // display: flex;
+    // justify-content: flex-start;
+
+    .existing-game-input {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .ant-space {
+    margin: 1rem 1rem !important;
+    overflow-x: hidden !important;
+  }
+
+  .categories-wrapper {
+    label {
+      margin: 1rem;
+    }
+  }
+}
+
+.ant-form-item {
+  overflow-x: hidden !important;
+
+}
+
+button {
+  background-color: vars.$main-color !important;
+  color: white;
+
+  span {
+    color: white;
+    font-weight: bold;
+  }
+}

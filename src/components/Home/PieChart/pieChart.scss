@@ -1,0 +1,22 @@
+
+.pieChart-container {
+  display: flex;
+}
+
+
+
+.pieChart-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+
+  .dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin: .5rem 0 .5rem -4rem;
+  }
+}

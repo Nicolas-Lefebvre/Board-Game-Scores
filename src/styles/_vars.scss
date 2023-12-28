@@ -1,0 +1,23 @@
+
+$main-color: #2f71af;
+$main-color-dark: #2f71af;
+$main-color-clear: #2f71af2d;
+
+$body-y-margins: 3rem;
+
+
+$body-x-margins: 6rem;
+
+$secondary-color: green;
+
+.red-btn {
+  background-color: #c31313!important;
+}
+
+label {
+  font-size: 25px;
+}
+
+:where(.css-dev-only-do-not-override-1i9hnpv).ant-form-item .ant-form-item-label >label {
+  font-size: 18px;
+}

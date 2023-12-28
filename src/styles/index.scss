@@ -1,0 +1,61 @@
+@use 'reset';
+@use 'vars';
+
+.app {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+}
+
+
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 2rem auto;
+  color: vars.$main-color;
+}
+
+h3 {
+  margin: 1rem auto;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+h4 {
+  margin: .7rem auto;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+p {
+  line-height: 1.4rem;
+  font-size: 1.2rem;
+}
+
+
+.btn-primary { 
+  --bs-btn-bg: #2f71af;
+  --bs-btn-border-color:#2f71af;
+}
+
+.container {
+  margin-top: 4rem;
+}
+
+strong {
+  font-weight: bold;
+}
+/* 
+  // or you can import your own font
+  @font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto-Regular.ttf');
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+*/

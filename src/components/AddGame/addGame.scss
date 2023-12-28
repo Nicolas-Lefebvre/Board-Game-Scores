@@ -1,0 +1,62 @@
+@use 'src/styles/vars';
+
+label span {
+  font-size: 1.2rem !important;
+}
+label p {
+  font-size: 1.2rem !important;
+}
+
+input {
+  font-size: 1.2rem !important;
+
+}
+
+h3 {
+  margin-bottom: 3rem;
+  // margin-top: 1rem;
+  
+}
+
+.comment-form-item label {
+  color: white !important;
+}
+
+@media (max-width: 1200px){
+  .add-player-container {
+    // flex-direction: column;
+    border-bottom: 1px solid rgb(190, 188, 188);
+  }
+}
+
+.ant-space-item {
+  margin: 1rem 0rem !important;
+}
+
+.ant-switch {
+  background-color: grey !important;
+}
+.ant-switch-checked {
+  background-color: green !important;
+}
+
+.players-wrapper {
+  justify-content: center;
+}
+
+.addGame-container {
+
+  section {
+    width:100%;
+    margin: 4rem auto;
+    // border: 3px outset vars.$main-color-dark;
+    // border-radius: 10px;
+    // box-shadow: 1px 1px 4px 0px black;
+    border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    // padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+}

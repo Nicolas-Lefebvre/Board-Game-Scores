@@ -1,0 +1,230 @@
+@use 'src/styles/vars';
+
+.boardgame-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    // width: 100vw;
+    text-align: center;
+    // margin-left: 5rem;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+
+  p {
+    margin: 1rem;
+  }
+
+  .description {
+    max-width: 1200px;
+  }
+  
+  .boardgame-card__image {
+  min-width: 300px;
+  height: auto;
+  margin-right: 20px;
+}
+
+:where(.css-dev-only-do-not-override-1i9hnpv).ant-btn-primary.ant-btn-dangerous {
+  background-color: #c31313!important;
+}
+
+.red-btn {
+  background-color: #c31313!important;
+}
+
+.boardgame-card__info {
+  width: 60%;
+  padding: 10px;
+  flex: 1;
+}
+
+.boardgame-card__name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.boardgame-card__price {
+  font-size: 1.2em;
+  color: #ff5722;
+  margin-bottom: 10px;
+}
+
+.boardgame-card__description {
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.boardgame-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.boardgame-card__players,
+.boardgame-card__playtime {
+  margin-right: 20px;
+}
+
+.boardgame-card__button {
+  padding: 10px 20px;
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.boardgame-card__button:hover {
+  background-color: #f44336;
+}
+
+.boardgame-card__stats {
+  margin-top:10px;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.boardgame-card__played,
+.boardgame-card__champion,
+.boardgame-card__recordman {
+  margin-top:5px;
+}
+
+.resultat-table {
+  // width: 70%;
+  margin: 2rem auto !important;
+  min-width: 300px !important;
+  max-width: 1200px;
+  // text-align-last: left;
+  // border: 3px solid vars.$main-color-dark;
+  // border-radius: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  
+  
+  .table {
+    margin-bottom: 0px;
+    line-height: 2rem;
+    
+    thead {
+      
+      th {
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: vars.$main-color;
+      }
+    }
+    
+    tbody {
+      
+      th {
+        text-align: center;
+        vertical-align: middle;
+        font-weight: bold;
+        // display:table-cell;
+        &.desktop {
+          display: none;
+        }
+        
+        img {
+          vertical-align: middle;
+          max-height: 1.2rem;
+        }
+      }
+      
+      tr {
+        
+        td {
+          vertical-align: middle;
+          &.desktop {
+            display: none;
+          }
+        }
+      }
+      
+    }
+  }
+}
+
+table.boardgame-card__stats {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-left: 5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 45vw;
+}
+
+table.boardgame-card__stats th,
+table.boardgame-card__stats td {
+  // border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+table.boardgame-card__stats th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+table.boardgame-card__stats tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+}
+@media only screen and (min-width: 600px) {
+
+  .boardgame-card { 
+
+    .boardgame-card__image {
+      width: 150px;
+      margin-right: 10px;
+    }
+    
+    h3 {
+      // width: 100vw;
+      text-align: left !important;
+      margin-left: 1rem !important;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    p {
+      margin: 1rem;
+    }
+    
+    .resultat-table {
+      // width: 70%;
+      margin: 2rem 1rem !important;
+      min-width: 300px !important;
+      max-width: 1200px;
+      // text-align-last: left;
+      // border: 3px solid vars.$main-color-dark;
+      // border-radius: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    // .boardgame-info {
+      //   max-width: 90%;
+      // }
+    }
+}
+  

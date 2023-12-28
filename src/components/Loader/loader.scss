@@ -1,0 +1,33 @@
+.loader {
+  margin-top: 20vh;
+  
+}
+
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  // height: 100vh;
+  margin-top: 20vh;
+}
+
+.spinner img {
+  animation: spin 1s linear infinite;
+  max-height: 50px;
+  margin-bottom: 10px;
+}
+
+i {
+  font-style: italic;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

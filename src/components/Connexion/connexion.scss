@@ -1,0 +1,56 @@
+@use 'src/styles/vars';
+
+.btn-primary {
+
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+}
+
+.form-control {
+  width: 15rem;
+  margin: auto;
+}
+
+.form-container {
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 100%;
+
+  section {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 80px;
+    padding-bottom: 3rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.forgetPassword {
+  font-size: 1rem;
+}
+
+@media (min-width: 750px) {
+  .form-container {
+    flex-direction: row;
+
+    section {
+      // min-width: 700px;
+    }
+  }
+}
+
+@media (min-width: 1430px) {
+  .form-container {
+
+    section {
+      min-width: 700px;
+    }
+  }
+}

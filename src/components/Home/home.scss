@@ -1,0 +1,152 @@
+@use 'src/styles/vars';
+@use './PieChart/pieChart.scss';
+
+.home {
+
+  .container {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    padding-bottom: 3rem;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    min-width: 80%;
+
+    p {
+      margin: 1.5rem;
+      text-align: center;
+    }
+  }
+  .header-image {
+    display: none;
+  }
+
+  .presentation {
+    // section {
+    //   display: flex;
+
+    //   img {
+    //     min-width: 390px;
+    //   }
+      
+    //   p {
+    //     margin: 2rem;
+    //     font-size: 1.3rem;
+    //     text-align: justify;
+    //     line-height: 1.5rem;
+    //   }
+    // }
+  }
+
+// ----------------------------- BLOCK CLASSEMENT--------------------------
+  .classement {
+    // max-height: 500px;
+
+    .card-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    img {
+      margin:0;
+    } 
+
+    .card {
+      margin: auto;
+      width: 32%;
+      flex: wrap;
+      min-width: 300px;
+    }
+
+    .card-body h4 {
+      margin-top: 0.8rem;
+      margin-bottom: 0.8rem;
+      padding-top: 0;
+      text-align: left;;
+      font-size: 1.5rem;
+      color: vars.$secondary-color;
+    }
+
+    .game-category {
+      color: vars.$secondary-color;
+    }
+
+    .card-body p {
+      padding-bottom: .5rem;
+    }
+
+    .card-body ul, p {
+      text-align: left;
+    }
+
+    .card-body strong {
+      font-weight: bold;
+      font-size: 1.4rem;
+      padding: 1.5rem 0;
+    }
+
+    .card-body li {
+      line-height: 2rem;
+    }
+
+    .chart-card {
+      display: flex;
+      justify-content: center;
+    }
+
+    
+    
+  }
+
+  .HomeDashBoard {
+    margin-bottom: 10rem;
+  }
+
+
+  
+  @media (min-width: 750px) {
+    
+    .container p {
+      margin-right: 3rem;
+      margin-left: 3rem;
+      text-align: left;
+    }
+    
+    .classement .card {
+      min-width: 415px;
+    }
+    
+    .chart-card {
+      display: flex;
+      justify-content: center;
+      margin: 5rem;
+    }
+    
+    .classement-pie {
+      margin: auto;
+    }
+    
+    .header-image {
+      display: block;
+      background-image:url(../../../src/assets/images/pexels-ylanite-koppens-776654\ \(1\).jpg);
+      background-position:center;
+      width: 99.1vw;
+      height: 300px;
+      background-size:cover;
+    }
+    
+  }
+  
+  
+}
+
+@media (min-width: 1500px) {
+  .classement {
+    max-height: 500px;
+  }
+}
+
+

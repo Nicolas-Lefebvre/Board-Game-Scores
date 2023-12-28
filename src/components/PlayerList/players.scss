@@ -1,0 +1,122 @@
+@use 'src/styles/vars';
+
+.tableau_mesjoueurs {
+
+  button span {
+    color: black !important;
+  }
+
+  .wrapper {
+    overflow-x: scroll;
+  }
+.resultat-table {
+  margin: 1rem;
+  border: 3px solid vars.$main-color-dark;
+  border-radius: 10px;
+  min-width: 500px;
+  // overflow-x: scroll;
+}
+
+.table {
+  margin-bottom: 0px;
+  line-height: 2rem;
+  overflow: visible;
+
+  
+  // .resultat-table {
+  //   margin: 1rem;
+  //   border: 3px solid vars.$main-color-dark;
+  //   border-radius: 10px;
+    
+  // }
+  
+  .table {
+    margin-bottom: 0px;
+    line-height: 2rem;
+    
+  }
+  
+  tbody {
+    th {
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: underline;
+    // display:table-cell;
+    &.desktop {
+      display: none;
+    }
+    
+    img {
+      vertical-align: middle;
+    max-height: 5rem;
+  }
+}
+
+  tr {
+    
+    td {
+      vertical-align: middle;
+      
+      a {
+        font-size: 1.2rem !important;
+      }
+      // .add-player-btn {
+      //       position: sticky;
+      //       /* top: 10px; */
+      //       /* bottom: 5rem; */
+      //       left: 8rem;
+      //       right: 8rem;
+      //   }
+
+    }
+  }
+  
+}
+
+tr :first-child{
+  font-size: 1.5rem;
+}
+
+tr :last-child {
+  font-size: 0.8rem;
+  font-style: italic;
+  text-decoration: none;
+  text-align: center;
+  
+}
+
+td :last-child {
+  // background-color: rgb(17, 151, 247);
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  // font-size: 1.7rem;
+  vertical-align: middle;
+
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+  background-color: vars.$main-color-clear;
+}  
+}
+}
+
+:where(.css-dev-only-do-not-override-1i9hnpv).ant-btn-default {
+  // background-color: #ffffff00 !important;
+  border-color: #d9d9d900;
+  box-shadow: 0 2px 0rgba(0, 0, 0, 0.02);
+  border: none;
+}
+
+.delete-btn {
+  margin: .3rem 0 0 1rem;
+}
+
+@media (min-width: '700px') {
+  .resultat-table {
+    margin: 5rem;
+    border: 3px solid vars.$main-color-dark;
+    border-radius: 10px;
+  }
+}
