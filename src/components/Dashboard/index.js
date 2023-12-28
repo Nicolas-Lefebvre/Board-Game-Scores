@@ -1,6 +1,7 @@
+/* eslint-disable no-multi-spaces */
 /* eslint-disable max-len */
 import './dashboard.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ResponsivePie } from '@nivo/pie';
@@ -8,11 +9,15 @@ import { ResponsivePie } from '@nivo/pie';
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 import lauriers from 'src/assets/images/laurier-records-2.png';
+import { useDispatch } from 'react-redux';
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
 
 import Loader from '../Loader';
 // import ResultatPieChart from './PieCharts/ResultatPieChart';
 // import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
+import { setTokenValidity } from '../../actions/user';
 // import PlayersPieChart from './PieCharts/PlayersPieChart';
 // import AddBoardgame from '../AddBoardgame';
 
@@ -22,13 +27,18 @@ function Dashboard({ setUserInfos, userInfos }) {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [loadingPlayerResults, setLoadingPlayerResults] = useState(true);
 
   const [playerList, setPlayerList] = useState([]);
+  const [playerListWithGames, setPlayerListWithGames] = useState([]);
+  // const [numberOfPlayerWhoWon, setNumberOfPlayerWhoWon] = useState(0);
 
   const [loadingUserInfos, setLoadingUserInfos] = useState(true);
   // const [playerListSingle, setPlayerListSingle] = useState([]);
-  const [lossPlayerList, setLossPlayerList] = useState([]);
+  // const [lossPlayerList, setLossPlayerList] = useState([]);
   const [selectedPlayerId, setSelectedPlayerId] = useState('');
   const [data, setData] = useState([]);
 
@@ -36,17 +46,22 @@ function Dashboard({ setUserInfos, userInfos }) {
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user',
+      `${baseUrl}/api/user`,
       // données
       config,
     )
       .then((response) => {
         console.log('Recuperation des infos du user OK');
-        console.log(response.data);
+        // console.log(response.data);
         setUserInfos(response.data.results);
       })
       .catch((error) => {
         console.log(error);
+        if (error.response && error.response.status === 401) {
+          console.log('Erreur 401 : Redirection vers GetConnected');
+          dispatch(setTokenValidity(false));
+          navigate('/connexion');
+        }
       })
       .finally(() => {
         setLoadingUserInfos(false);
@@ -54,10 +69,11 @@ function Dashboard({ setUserInfos, userInfos }) {
   }, []);
 
   // =====================================  RECUPERATION STATS PAR JOUEUR =============================
+  const [topPlayersData, setTopPlayersData] = useState([]);
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players/stats',
+      `${baseUrl}/api/user/players/stats`,
       // données
       config,
     )
@@ -65,9 +81,13 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log('Recuperation de tous les joueurs OK');
         console.log(response.data);
         setPlayerList(response.data.results);
+        // On défini la variable playerListWithGames en filtrant les joueurs qui ont au moins une partie jouée :
+        setPlayerListWithGames(response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0)));
         setSelectedPlayerId(response.data.results[0].player_id);
-        setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
-        const numberOfPlayer = lossPlayerList.length;
+        // setLossPlayerList(response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0)));
+        // const numberOfPlayer = (response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 0))).length;
+        // setNumberOfPlayerWhoWon((response.data.results.filter((filteredPlayer) => (Number(filteredPlayer.is_winner) === 1)).length));
+        // console.log('number of players :', numberOfPlayer);
 
         // On rempli le premier camembert avec les données du joueur en index zéro par défaut
         setData(
@@ -75,17 +95,39 @@ function Dashboard({ setUserInfos, userInfos }) {
             {
               id: 'victoires',
               label: 'victoires',
-              value: response.data.results[0].victory_number,
+              value: response.data.results[0].victories,
               color: 'hsl(15, 70%, 50%)',
             },
             {
               id: 'défaites',
               label: 'Défaites',
-              value: response.data.results[numberOfPlayer].victory_number,
+              value: response.data.results[0].defeats,
               color: 'hsl(30, 70%, 50%)',
             },
           ],
         );
+
+        // ====================  Remplisage données du camembert de l'encart TOP JOUEURS ================================
+        // Initialisation du tableau vide
+        const topPlayersPieData = [];
+        // Boucle pour remplir le tableau
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0)).length; i++) {
+          // Création de l'objet pour chaque jeu
+          const player = {
+            id: response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0))[i].player_name,
+            label: response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0))[i].player_name,
+            value: response.data.results.filter((filteredPlayer) => (filteredPlayer.games_played > 0))[i].victories,
+            color: `hsl(${i * 15}, 70%, 50%)`,
+          };
+
+          // Ajout de l'objet au tableau
+          topPlayersPieData.push(player);
+        }
+
+        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
+        setTopPlayersData(topPlayersPieData);
+        // =================================================================================================================
       })
       // .then(() => {
       //   console.log(playerList);
@@ -102,11 +144,11 @@ function Dashboard({ setUserInfos, userInfos }) {
   const onChange = (event) => {
     console.log(event.target.value);
     const filteredPlayer = playerList.filter((player) => (
-      player.player_id == event.target.value
+      player.player_id === event.target.value
     ));
     console.log(filteredPlayer);
-    const victoryNumber = filteredPlayer[0].victory_number;
-    const lossNumber = (filteredPlayer[1] ? filteredPlayer[1].victory_number : '0');
+    const victoryNumber = filteredPlayer[0].victories;
+    const lossNumber = filteredPlayer[0].defeats;
 
     setSelectedPlayerId(event.target.value);
 
@@ -130,57 +172,50 @@ function Dashboard({ setUserInfos, userInfos }) {
 
   // Recuperation des top 5 jeux par joueur
   const [loadingTop5Games, setLoadingTop5Games] = useState(true);
-  const [top5Games, setTop5Games] = useState([]);
+  const [topGames, setTopGames] = useState([]);
+  const [topPlayedGames, setTopPlayedGames] = useState([]);
+  // const [numberOfGames, setNumberOfGames] = useState(0);
   const [top5GamesData, setTop5GamesData] = useState([]);
 
-  // =====================================  RECUPERATION TOP 5 JEUX =============================
+  // =====================================  RECUPERATION TOP JEUX JOUES =============================
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/boardgames5',
+      `${baseUrl}/api/user/boardgames5`,
       // données
       config,
     )
       .then((response) => {
         console.log('Recuperation des top 5 jeux OK');
         console.log(response.data);
-        setTop5Games(response.data.results);
-
-        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
-        setTop5GamesData([
-          {
-            id: response.data.results[0].board_game_name,
-            label: response.data.results[0].board_game_name,
-            value: response.data.results[0].game_number,
-            color: 'hsl(15, 70%, 50%)',
-          },
-          {
-            id: response.data.results[1].board_game_name,
-            label: response.data.results[1].board_game_name,
-            value: response.data.results[1].game_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[2].board_game_name,
-            label: response.data.results[2].board_game_name,
-            value: response.data.results[2].game_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[3].board_game_name,
-            label: response.data.results[3].board_game_name,
-            value: response.data.results[3].game_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[4].board_game_name,
-            label: response.data.results[4].board_game_name,
-            value: response.data.results[4].game_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-        ]);
+        // On supprime les doublons (lorsqu'un user ajoute un jeu déjà existant à sa collection, celui-ci s'affiche en double)
+        const boardgameNoDoubles = response.data.results.filter((value, index, self) => index === self.findIndex((t) => (t.id === value.id)));
+        console.log('sans doublons', boardgameNoDoubles);
+        setTopGames(boardgameNoDoubles);
+        setTopPlayedGames(boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0)));
+        // setNumberOfGames(response.data.results.length);
 
         setLoadingTop5Games(false);
+
+        // Initialisation du tableau vide
+        const top5GamesPieData = [];
+
+        // Boucle pour remplir le tableau
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0)).length; i++) {
+          // Création de l'objet pour chaque jeu
+          const game = {
+            id: boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].name,
+            label: boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].name,
+            value: boardgameNoDoubles.filter((filteredGame) => (filteredGame.num_games_played > 0))[i].num_games_played,
+            color: `hsl(${i * 15}, 70%, 50%)`,
+          };
+
+          // Ajout de l'objet au tableau
+          top5GamesPieData.push(game);
+        }
+        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
+        setTop5GamesData(top5GamesPieData);
       })
 
       .catch((error) => {
@@ -189,20 +224,22 @@ function Dashboard({ setUserInfos, userInfos }) {
   }, []);
 
   const [loadingTop5Categories, setLoadingTop5Categories] = useState(true);
-  const [top5Categories, setTop5Categories] = useState([]);
+  const [topCategories, setTopCategories] = useState([]);
+  const [topPlayedCategories, setTopPlayedCategories] = useState([]);
 
-  // =====================================  RECUPERATION TOP 5 CATEGORIES =============================
+  // =====================================  RECUPERATION TOP CATEGORIES =============================
   useEffect(() => {
     axios.get(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/categories5',
+      `${baseUrl}/api/user/categories5`,
       // données
       config,
     )
       .then((response) => {
         console.log('Recuperation des top 5 catégories OK');
         console.log(response.data);
-        setTop5Categories(response.data.results);
+        setTopCategories(response.data.results);
+        setTopPlayedCategories(response.data.results.filter((filteredCategory) => (filteredCategory.total_games > 0)));
 
         setLoadingTop5Categories(false);
       })
@@ -213,64 +250,55 @@ function Dashboard({ setUserInfos, userInfos }) {
   }, []);
 
   // ----------------------Recuperation des top 5 JOUEURS -----------------------
-  const [loadingTop5Players, setLoadingTop5Players] = useState(true);
-  const [top5Players, setTop5Players] = useState([]);
-  const [top5PlayersData, setTop5PlayersData] = useState([]);
+  // const [loadingTop5Players, setLoadingTop5Players] = useState(true);
+  // const [top5Players, setTop5Players] = useState([]);
+  // const [top5PlayersData, setTop5PlayersData] = useState([]);
 
   // =====================================  RECUPERATION TOP 5 JOUEURS =============================
-  useEffect(() => {
-    axios.get(
-      // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/players5',
-      // données
-      config,
-    )
-      .then((response) => {
-        console.log('Recuperation des top 5 joueurs OK');
-        console.log(response.data);
-        setTop5Players(response.data.results);
+  // CODE DESACTIVE CAR ON UTILISE LA MEME API QUE POUR LA LISTE DE TOUS LES JOUEURS
+  // useEffect(() => {
+  //   axios.get(
+  //     // URL
+  //     `${baseUrl}/api/user/players5`,
+  //     // données
+  //     config,
+  //   )
+  //     .then((response) => {
+  //       console.log('Recuperation des top 5 joueurs OK');
+  //       console.log(response.data);
+  //       setTop5Players(response.data.results);
 
-        // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
-        setTop5PlayersData([
-          {
-            id: response.data.results[0].player_name,
-            label: response.data.results[0].player_name,
-            value: response.data.results[0].victory_number,
-            color: 'hsl(15, 70%, 50%)',
-          },
-          {
-            id: response.data.results[1].player_name,
-            label: response.data.results[1].player_name,
-            value: response.data.results[1].victory_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[2].player_name,
-            label: response.data.results[2].player_name,
-            value: response.data.results[2].victory_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[3].player_name,
-            label: response.data.results[3].player_name,
-            value: response.data.results[3].victory_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-          {
-            id: response.data.results[4].player_name,
-            label: response.data.results[4].player_name,
-            value: response.data.results[4].victory_number,
-            color: 'hsl(30, 70%, 50%)',
-          },
-        ]);
+  //       setLoadingTop5Players(false);
 
-        setLoadingTop5Players(false);
-      })
+  //       // Initialisation du tableau vide
+  //       const top5PlayersPieData = [];
 
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  //       // Boucle pour remplir le tableau
+  //       // eslint-disable-next-line no-plusplus
+  //       for (let i = 0; i < response.data.results.length; i++) {
+  //         // Création de l'objet pour chaque jeu
+  //         const player = {
+  //           id: response.data.results[i].player_name,
+  //           label: response.data.results[i].player_name,
+  //           value: response.data.results[i].victory_number,
+  //           color: `hsl(${i * 15}, 70%, 50%)`,
+  //         };
+
+  //         // Ajout de l'objet au tableau
+  //         top5PlayersPieData.push(player);
+  //       }
+
+  //       // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
+  //       setTop5PlayersData(top5PlayersPieData);
+  //     })
+
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
+  console.log('loadingTop5Categories :', loadingTop5Categories);
+  console.log('loadingTop5Games :', loadingTop5Games);
 
   if (loadingPlayerResults || loadingUserInfos) {
     return <Loader />;
@@ -332,9 +360,11 @@ function Dashboard({ setUserInfos, userInfos }) {
             aria-label="Default select example"
             onChange={onChange}
           >
-            {(playerList.slice(0, lossPlayerList.length+1)).map((player) => (
-              <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
-            ))}
+            {
+                (playerList.map((player) => (
+                  <option key={player.player_id} value={player.player_id}>{player.player_name}</option>
+                )))
+            }
           </select>
 
           <div className="resultats-wrapper">
@@ -350,7 +380,10 @@ function Dashboard({ setUserInfos, userInfos }) {
                 }}
                 valueFormat=" ^-~f"
                 activeOuterRadiusOffset={8}
-                colors={['green', 'rgb(228, 26, 28)']}
+                colors={[
+                  'rgb(205, 92, 92)',     // Rouge indien (rouge boisé)
+                  'rgb(107, 142, 35)',    // Goldenrod (jaune boisé)
+                ]}
                 colorsBy="index"
                 borderWidth={1}
                 borderColor={{
@@ -412,8 +445,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Parties</td>
                     <td>
                       {
-                        Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number))
-                        + (((lossPlayerList.find((player) => (player.player_id == selectedPlayerId)))) ? Number((playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number)) : 0)
+                        Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].games_played))
                       }
                     </td>
                   </tr>
@@ -421,7 +453,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Victoires</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id == selectedPlayerId))[0] ? playerList.filter((player) => (player.player_id == selectedPlayerId))[0].victory_number : '0'
+                        Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].victories))
                       }
                     </td>
                   </tr>
@@ -429,7 +461,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <td>Défaites</td>
                     <td>
                       {
-                        playerList.filter((player) => (player.player_id == selectedPlayerId))[1] ? playerList.filter((player) => (player.player_id == selectedPlayerId))[1].victory_number : '0'
+                        Number((playerList.filter((player) => (player.player_id === selectedPlayerId))[0].defeats))
                       }
                     </td>
                   </tr>
@@ -508,69 +540,51 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Parties</th>
                         {/* <th>Victoires</th>
                         <th>Défaites</th> */}
-                        <th className="desktop">Champion</th>
-                        <th className="desktop">Max Victoires</th>
-                        <th className="desktop">Recordman</th>
-                        <th className="desktop">Record</th>
+                        <th className="desktop">Champion <img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                        <th className="desktop">Max Victoires <img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                        <th className="desktop">Recordman <img src={lauriers} alt="laurier des records" /></th>
+                        <th className="desktop">Record <img src={lauriers} alt="laurier des records" /></th>
                         {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
                         <th><img src={lauriers} alt="laurier des records" /></th> */}
                         {/* <th>Champion</th>
                         <th>Recordman</th> */}
                       </tr>
-                      <tr>
+                      {
+                        topPlayedGames.length === 0
+                          ? (
+                            <tr>
+                              <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune jeu renseignée : ajoutez votre première partie</td>
+                            </tr>
+                          )
+                          : topPlayedGames.map((game) => (
+                            <tr key={game.id}>
+                              <td><Link to={`/jeux/${game.id}?boardgame_id=${game.id}`}>{game.name}</Link>
+                              </td>
+                              <td>{game.num_games_played}</td>
+                              {/* <td>18</td>
+                              <td>5</td> */}
+                              <td className="desktop">{game.champion}</td>
+                              <td className="desktop">{game.champion_victories}</td>
+                              <td className="desktop">{game.recordman}</td>
+                              <td className="desktop">{game.recordman_score}</td>
+                            </tr>
+                          ))
+                    }
+                      {/* <tr>
                         <td><Link to={`/jeux/${top5Games[0].board_game_id}?boardgame_id=${top5Games[0].board_game_id}`}>{top5Games[0].board_game_name}</Link></td>
                         <td>{top5Games[0].game_number}</td>
                         {/* <td>18</td>
                         <td>5</td> */}
-                        <td className="desktop">Laura</td>
-                        <td className="desktop">2</td>
-                        <td className="desktop">Syham</td>
-                        <td className="desktop">12</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[1].board_game_id}?boardgame_id=${top5Games[1].board_game_id}`}>{top5Games[1].board_game_name}</Link></td>
-                        <td>{top5Games[1].game_number}</td>
-                        {/* <td>2</td>
-                        <td>120</td> */}
-                        <td className="desktop">Amar</td>
-                        <td className="desktop">3</td>
-                        <td className="desktop">Syham</td>
-                        <td className="desktop">24</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[2].board_game_id}?boardgame_id=${top5Games[2].board_game_id}`}>{top5Games[2].board_game_name}</Link></td>
-                        <td>{top5Games[2].game_number}</td>
-                        {/* <td>12</td>
-                        <td>3</td> */}
-                        <td className="desktop">Nico</td>
-                        <td className="desktop">2</td>
-                        <td className="desktop">Nico</td>
-                        <td className="desktop">32</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[3].board_game_id}?boardgame_id=${top5Games[3].board_game_id}`}>{top5Games[3].board_game_name}</Link></td>
-                        <td>{top5Games[3].game_number}</td>
-                        {/* <td>8</td>
-                        <td>7</td> */}
-                        <td className="desktop">Syham</td>
-                        <td className="desktop">5</td>
-                        <td className="desktop">Amar</td>
-                        <td className="desktop">23</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[4].board_game_id}?boardgame_id=${top5Games[4].board_game_id}`}>{top5Games[4].board_game_name}</Link></td>
-                        <td>{top5Games[4].game_number}</td>
-                        {/* <td>12</td>
-                        <td>3</td> */}
-                        <td className="desktop">Alexis</td>
-                        <td className="desktop">5</td>
-                        <td className="desktop">Syham</td>
-                        <td className="desktop">24</td>
-                      </tr>
+                      {/* <td className="desktop">Laura</td>
+                      <td className="desktop">2</td>
+                      <td className="desktop">Syham</td>
+                      <td className="desktop">12</td> */}
+                      {/* </tr> */}
                     </tbody>
                   </table>
                 </div>
 
+                {/* ==============================================   AFFICHAGE MOBILE ONLY ============================================= */}
                 <div className="resultat-table mobile">
                   <table className="table table-striped">
                     <thead>
@@ -591,31 +605,24 @@ function Dashboard({ setUserInfos, userInfos }) {
                         {/* <th>Champion</th>
                         <th>Recordman</th> */}
                       </tr>
-                      <tr>
+                      {
+                      topGames.map((game) => (
+                        <tr key={game.id}>
+                          <td>
+                            <Link to={`/jeux/${game.id}`}>
+                              {game.name}
+                            </Link>
+                          </td>
+                          <td>{game.champion}</td>
+                          <td>{game.champion_victories}</td>
+                        </tr>
+                      ))
+                    }
+                      {/* <tr>
                         <td><Link to={`/jeux/${top5Games[0].board_game_id}`}>{top5Games[0].board_game_name}</Link></td>
                         <td>Laura</td>
                         <td>18</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[1].board_game_id}`}>{top5Games[1].board_game_name}</Link></td>
-                        <td>Amar</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[2].board_game_id}`}>{top5Games[2].board_game_name}</Link></td>
-                        <td>Syham</td>
-                        <td>12</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[3].board_game_id}`}>{top5Games[3].board_game_name}</Link></td>
-                        <td>Nico</td>
-                        <td>8</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/jeux/${top5Games[4].board_game_id}`}>{top5Games[4].board_game_name}</Link></td>
-                        <td>Amar</td>
-                        <td>12</td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>
@@ -640,31 +647,19 @@ function Dashboard({ setUserInfos, userInfos }) {
                         {/* <th>Champion</th>
                         <th>Recordman</th> */}
                       </tr>
-                      <tr>
-                        <td>Catan</td>
-                        <td>Laura</td>
-                        <td>18</td>
-                      </tr>
-                      <tr>
-                        <td>Monopoly</td>
-                        <td>Amar</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td>Les aventuriers du rail</td>
-                        <td>Syham</td>
-                        <td>12</td>
-                      </tr>
-                      <tr>
-                        <td>Puerto Rico</td>
-                        <td>Nico</td>
-                        <td>8</td>
-                      </tr>
-                      <tr>
-                        <td>La Bonne paye</td>
-                        <td>Amar</td>
-                        <td>12</td>
-                      </tr>
+                      {
+                      topGames.map((game) => (
+                        <tr key={game.id}>
+                          <td>
+                            <Link to={`/jeux/${game.id}`}>
+                              {game.name}
+                            </Link>
+                          </td>
+                          <td>{game.recordman}</td>
+                          <td>{game.recordman_score}</td>
+                        </tr>
+                      ))
+                    }
                     </tbody>
                   </table>
                 </div>
@@ -681,39 +676,25 @@ function Dashboard({ setUserInfos, userInfos }) {
                       <tr>
                         <th>Catégorie</th>
                         <th>Parties</th>
-                        {/* <th>Victoires</th>
-                        <th>Défaites</th> */}
+                        <th>Champion</th>
+                        <th>nb victoire(s)</th>
                       </tr>
-                      <tr>
-                        <td>{top5Categories[0].name}</td>
-                        <td>{top5Categories[0].Category_number}</td>
-                        {/* <td>18</td> */}
-                        {/* <td>5</td> */}
-                      </tr>
-                      <tr>
-                        <td>{top5Categories[1].name}</td>
-                        <td>{top5Categories[1].Category_number}</td>
-                        {/* <td>2</td> */}
-                        {/* <td>120</td> */}
-                      </tr>
-                      <tr>
-                        <td>{top5Categories[2].name}</td>
-                        <td>{top5Categories[2].Category_number}</td>
-                        {/* <td>12</td> */}
-                        {/* <td>3</td> */}
-                      </tr>
-                      <tr>
-                        <td>{top5Categories[3].name}</td>
-                        <td>{top5Categories[3].Category_number}</td>
-                        {/* <td>8</td> */}
-                        {/* <td>7</td> */}
-                      </tr>
-                      <tr>
-                        <td>{top5Categories[4].name}</td>
-                        <td>{top5Categories[4].Category_number}</td>
-                        {/* <td>12</td> */}
-                        {/* <td>3</td> */}
-                      </tr>
+                      {
+                      topPlayedCategories.length === 0
+                        ? (
+                          <tr>
+                            <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune catégorie renseignée</td>
+                          </tr>
+                        )
+                        : topPlayedCategories.map((category) => (
+                          <tr key={category.category_id}>
+                            <td>{category.category_name}</td>
+                            <td>{category.total_games}</td>
+                            <td>{category.name}</td>
+                            <td>{category.max_wins}</td>
+                          </tr>
+                        ))
+                    }
                     </tbody>
                   </table>
                 </div>
@@ -723,15 +704,15 @@ function Dashboard({ setUserInfos, userInfos }) {
 
         {/* ------------------------------ TOP PLAYERS CONTAINER-------------------------- */}
 
-        {loadingTop5Players ? (<Loader />)
+        {loadingPlayerResults ? (<Loader />)
           : (
-            <section className="scores-container">
+            <section className="scores-container top-player-container">
 
               <h4>Top joueurs</h4>
               <div className="resultats-wrapper">
 
                 <div className="resultat-pieChart">
-                  <GamesPieChart data={top5PlayersData} />
+                  <GamesPieChart data={topPlayersData} />
                 </div>
               </div>
 
@@ -747,46 +728,42 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <tbody>
                       <tr>
                         <th>Nom</th>
+                        <th>Parties</th>
                         <th>Victoires</th>
                         <th>Défaites</th>
-                        <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
-                        <th><img src={lauriers} alt="laurier des records" /></th>
+                        <th>Champion <img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                        {/* <th><img src={lauriers} alt="laurier des records" /></th> */}
                       </tr>
-                      <tr>
+                      {
+                      playerListWithGames.length === 0
+                        ? (
+                          <tr>
+                            <td style={{ fontStyle: 'italic' }} colSpan="2">Aucun joueur renseigné</td>
+                          </tr>
+                        )
+                        : playerListWithGames.map((player) => (
+                          <tr key={player.player_id}>
+                            <td>
+                              <Link to={`/joueurs/id?player_id=${player.player_id}`}>
+                                {player.player_name}
+                              </Link>
+                            </td>
+                            <td>{player.games_played}</td>
+                            <td>{player.victories}</td>
+                            <td>{player.defeats}</td>
+                            <td>{player.champion_titles}</td>
+                            {/* <td>1</td> */}
+                          </tr>
+                        ))
+                    }
+
+                      {/* <tr>
                         <td><Link to={`/joueurs/id?player_id=${top5Players[0].player_id}`}>{top5Players[0].player_name}</Link></td>
                         <td>{top5Players[0].victory_number}</td>
                         <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[0].player_id))).victory_number) : '0' }</td>
                         <td>2</td>
                         <td>1</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/joueurs/id?player_id=${top5Players[1].player_id}`}>{top5Players[1].player_name}</Link></td>
-                        <td>{top5Players[1].victory_number}</td>
-                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[1].player_id))).victory_number) : '0' }</td>
-                        <td>1</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/joueurs/id?player_id=${top5Players[2].player_id}`}>{top5Players[2].player_name}</Link></td>
-                        <td>{top5Players[2].victory_number}</td>
-                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[2].player_id))).victory_number) : '0' }</td>
-                        <td>1</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/joueurs/id?player_id=${top5Players[3].player_id}`}>{top5Players[3].player_name}</Link></td>
-                        <td>{top5Players[3].victory_number}</td>
-                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[3].player_id))).victory_number) : '0' }</td>
-                        <td>1</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><Link to={`/joueurs/id?player_id=${top5Players[4].player_id}`}>{top5Players[4].player_name}</Link></td>
-                        <td>{top5Players[4].victory_number}</td>
-                        <td>{ ((lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id)))) ? ((lossPlayerList.find((player) => (player.player_id == top5Players[4].player_id))).victory_number) : '0' }</td>
-                        <td>2</td>
-                        <td>1</td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>

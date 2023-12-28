@@ -16,11 +16,24 @@ import {
 } from 'antd';
 
 // import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 // import AllGames from '../../Data/AllGames';
-import { useState, useEffect } from 'react';
+import {
+  // useState,
+  useEffect,
+} from 'react';
+
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 import Loader from '../Loader';
+import {
+  // addExistingBoardgame,
+  fetchAllBoardgameList,
+  fetchAllCategories,
+} from '../../actions/boardgames';
 
 const { Option } = Select;
 
@@ -35,50 +48,39 @@ function AddBoardgame() {
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
   };
-  const [allGamesLoading, setAllGamesLoading] = useState(true);
-  const [allGames, setAllGames] = useState([]);
-
-  const [allCategoriesLoading, setAllCategoriesLoading] = useState(true);
-  const [categoryList, setCategoryList] = useState([]);
+  // const [allGamesLoading, setAllGamesLoading] = useState(true);
+  // const [allGames, setAllGames] = useState([]);
+  // const [allCategoriesLoading, setAllCategoriesLoading] = useState(true);
+  // const [categoryList, setCategoryList] = useState([]);
   // disabled : si la requete API pour récupérer la liste de tous les jeux n'aboutie pas,
   // la partie pour ajouter un jeu existant n'apparait pas.
-  const [disabled, setDisabled] = useState(true);
+  // const [disabled, setDisabled] = useState(true);
   // console.log(AllGames[0].results);
 
+  const dispatch = useDispatch();
+  const allBoardgameListLoaded = useSelector((state) => state.boardgames.allBoardgameListLoaded);
+  // eslint-disable-next-line max-len
+  const existingBoardgamesDisabled = useSelector((state) => state.boardgames.existingBoardgamesDisabled);
   // console.log(suggestions);
+  // --------------------------GET ALL GAMES FOR PREFILL------------------------------------------
   useEffect(() => {
-    // --------------------------GET ALL GAMES FOR PREFILL-------------------------
-    axios.get(
-    // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames',
-      // données
-      {
-      },
-    )
-      .then((response) => {
-        // console.log('Recuperation des tous les jeux OK');
-        // console.log(response.data);
-        setAllGames(response.data.results);
-
-        setDisabled(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setAllGamesLoading(false);
-      });
+    dispatch(fetchAllBoardgameList());
   }, []);
 
+  // Récupération liste des jeux complète (tous jeux confondus) dans le state
+  const allBoardgameList = useSelector((state) => state.boardgames.allBoardgameList);
+  // console.log(allBoardgameList);
+
   const navigate = useNavigate();
-  const [selectedBoardGameId, setSelectedBoardGameId] = useState('');
+  // const [selectedBoardGameId, setSelectedBoardGameId] = useState('');
 
   // ----------------------------VALIDATION OF EXISTING BOARDGAME FORM----------------------------
   const onSubmitExisting = (values) => {
-    console.log(values);
+    // dispatch(addExistingBoardgame(values.boardgame));
+    // console.log(values);
     axios.post(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/user/collection/boardgames/',
+      `${baseUrl}/api/user/collection/boardgames/`,
       // données
       {
         boardGames: values.boardgame,
@@ -86,7 +88,7 @@ function AddBoardgame() {
       config,
     )
       .then(() => {
-        console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+        // console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
       })
       .catch((error) => {
         console.log(error);
@@ -101,7 +103,7 @@ function AddBoardgame() {
     // console.log('Received values of form: ', values, dateString);
     axios.post(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames',
+      `${baseUrl}/api/boardgames`,
       // données
       {
         name: values.name,
@@ -119,7 +121,7 @@ function AddBoardgame() {
       config,
     )
       .then(() => {
-        console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
+        // console.log('LA REQUETE EST UN SUCCES. Jeu bien ajouté');
       })
       .catch((error) => {
         console.log(error);
@@ -131,39 +133,49 @@ function AddBoardgame() {
 
   // --------------------------------ALL CATEGORIES API REQUEST-----------------------------
   useEffect(() => {
-    axios.get(
-      // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/category',
-      // données
-    )
-      .then((response) => {
-        console.log('Récupéraion catégories SUCCES :');
-        // console.log(response.data.results);
-        setCategoryList(response.data.results);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setAllCategoriesLoading(false);
-      });
+    dispatch(fetchAllCategories());
   }, []);
 
+  const allCategoriesLoaded = useSelector((state) => state.boardgames.allCategoriesLoaded);
+  const categoryList = useSelector((state) => state.boardgames.allCategories);
+
+  // CI-DESSOUS L'ANCIENNE RECUP DES CATEGORIES EN UTILISANT USESTATE()
+  // useEffect(() => {
+  //   axios.get(
+  //     // URL
+  //     'http://127.0.0.1:8000/api/category',
+  //     // données
+  //   )
+  //     .then((response) => {
+  //       console.log('Récupéraion catégories SUCCES :');
+  //       // console.log(response.data.results);
+  //       setCategoryList(response.data.results);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  //     .finally(() => {
+  //       setAllCategoriesLoading(false);
+  //     });
+  // }, []);
+
   // return loading && <Loader />;
-  if (allGamesLoading || allCategoriesLoading) {
+  if (!allBoardgameListLoaded || !allCategoriesLoaded) {
     return <Loader />;
   }
   return (
     <div className="container addGame-container">
       <h2>Ajouter un jeu</h2>
       {/* -----------------------------------SELECTION JEU EXISTANT--------------------------- */}
-      {!disabled
+      {/* existingBoardgamesDisabled : si l'API qui récupère la liste des jeux existants
+      a un probleme, le form est disabled = n'apparait pas */}
+      {!existingBoardgamesDisabled
       && (
       <div className="form-container">
         <section>
           <h3>Choisir un jeu existant</h3>
           <Form
-            disabled={disabled}
+            disabled={existingBoardgamesDisabled}
             name="validate_existing_game"
             // {...formItemLayout}
             onFinish={onSubmitExisting}
@@ -183,7 +195,7 @@ function AddBoardgame() {
             >
               {/* <Input placeholder="Nom Joueur" /> */}
               <Select placeholder="Selectionner un jeu" style={{ minWidth: '100px' }}>
-                {allGames.map((game) => (
+                {allBoardgameList.map((game) => (
                   <Option
                     key={game.id}
                     value={Number(game.id)}
@@ -269,7 +281,7 @@ function AddBoardgame() {
               </Form.Item>
             </Space>
             <Space>
-              <Form.Item name="categories">
+              <Form.Item label="Categories" name="categories">
                 <Checkbox.Group>
                   <div className="categories-wrapper">
                     {categoryList.map((category) => (
@@ -293,7 +305,7 @@ function AddBoardgame() {
                 name="scoreType"
                 label="Type de scoring"
                 rules={[{ required: true }]}
-                style={{ minHeight:'100px' }}
+                style={{ minHeight: '100px' }}
               >
                 <Radio.Group>
                   <Radio value="Highest score">Le plus haut score gagne</Radio>

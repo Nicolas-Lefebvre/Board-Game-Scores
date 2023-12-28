@@ -2,17 +2,21 @@
 /* eslint-disable arrow-body-style */
 import './GameDetails.scss';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Modal } from 'antd';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../Loader';
+import { fetchGameInfos } from '../../actions/games';
+
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
 
 const { confirm } = Modal;
-let gameInfos = [];
 
 const config = {
   headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
@@ -20,33 +24,20 @@ const config = {
 
 const GameDetails = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+
+  const { gameId } = useParams();
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const queryParameters = new URLSearchParams(window.location.search);
-    const gameId = queryParameters.get('game_id');
-    console.log(gameId);
+    // const queryParameters = new URLSearchParams(window.location.search);
+    // const gameId = queryParameters.get('game_id');
+    // console.log(gameId);
 
-    axios.get(
-      `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/game/${gameId}`,
-      config,
-    )
-      .then((response) => {
-        console.log(response);
-        gameInfos = response.data.results;
-        console.log(gameInfos);
-
-        // console.log(response.data.results[0].name);
-      })
-
-      .catch((error) => {
-        console.log(error);
-      })
-
-      .finally(() => {
-        // traitement exécuté dans tous les cas, après then ou après catch
-        setLoading(false);
-      });
+    dispatch(fetchGameInfos(gameId));
   }, []);
+
+  const gameInfos = useSelector((state) => state.games.gameInfos);
+  const gameInfosLoaded = useSelector((state) => state.games.gameInfosLoaded);
 
   const showDeleteConfirm = (deleteGameId) => {
     confirm({
@@ -61,7 +52,7 @@ const GameDetails = () => {
         console.log('OK');
         axios.delete(
         // URL
-          `http://nicolas-lefebvre.vpnuser.lan:8000/api/game/${deleteGameId}`,
+          `${baseUrl}/api/game/${deleteGameId}`,
           // données
           config,
         )
@@ -82,7 +73,7 @@ const GameDetails = () => {
     });
   };
 
-  if (loading) {
+  if (!gameInfosLoaded) {
     return <Loader />;
   }
   return (
@@ -123,7 +114,7 @@ const GameDetails = () => {
                 <td>
                   {gameInfos.map((game) => {
                     if (game.is_winner == 1) {
-                      return <div>{game.player_name} - {game.score} points</div>;
+                      return <div key={game.game_id}>{game.player_name} - {game.score} points</div>;
                     }
                   })}
                 </td>
@@ -134,7 +125,7 @@ const GameDetails = () => {
                 <td>
                   {gameInfos.map((game) => {
                     // eslint-disable-next-line max-len
-                    return <div><strong>{game.player_name}</strong> - {game.score} points - fairplay : {game.fairplay ? game.fairplay : <i>Non renseigné</i> }</div>;
+                    return <div key={game.id}><strong>{game.player_name}</strong> - {game.score} points - fairplay : {game.fairplay ? game.fairplay : <i>Non renseigné</i> }</div>;
                   })}
                 </td>
               </tr>
@@ -143,9 +134,9 @@ const GameDetails = () => {
         </div>
         <Button
           variant="secondary"
-          // onClick={() => {
-          //   navigate(`/parties/modifier/${gameInfos[0].game_id}`);
-          // }}
+          onClick={() => {
+            navigate(`/parties/modifier/${gameInfos[0].game_id}?game_id=${gameInfos[0].game_id}`);
+          }}
         >
           Modifier
         </Button>{' '}

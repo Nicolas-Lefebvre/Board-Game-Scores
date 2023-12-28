@@ -1,16 +1,15 @@
 // == Import
 import './styles.scss';
 
-import axios from 'axios';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useDispatch, useSelector } from 'react-redux';
+// import jwtDecode from 'jwt-decode';
 
-import Navbar from '../Navbar/vanillaNavBar';
+import Navbar from '../Navbar';
 import Footer from '../Footer';
-
-// import Data from '../../Data/Top5Games';
-
 import Home from '../Home';
 import Subscribe from '../Subscribe';
 import Connexion from '../Connexion';
@@ -34,48 +33,90 @@ import PlayerAdd from '../PlayerAdd';
 import PlayerEdit from '../PlayerEdit';
 import Page404 from '../Page404';
 import ProfilEdit from '../ProfilEdit';
+import { checkTokenValidity, setTokenValidity } from '../../actions/user';
 
 // == Composant
 function App() {
   const [userInfos, setUserInfos] = useState([]);
-  const [top5Games, setTop5Games] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
-  const [isLogged, setIsLogged] = useState(false);
+  // const [isLogged, setIsLogged] = useState(false);
+  const isLogged = useSelector((state) => state.user.isLogged);
+
+  // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
+  useEffect(() => {
+    if (localStorage.getItem('BGStoken')) {
+      dispatch(checkTokenValidity());
+      console.log('Validité du token :', isLogged);
+    }
+    else {
+      dispatch(setTokenValidity(false));
+    }
+  });
+
+  // useEffect(() => {
+  //   if (localStorage.getItem('BGStoken')) {
+  //     dispatch(checkTokenValidity());
+  //   }
+  //   console.log('Validité du token :', isLogged);
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   console.log('Validité du token :', isLogged);
+  // }, [isLogged]);
+
+  // -------------------------- VERIFICATION DU JWT TOKEN -------------------------
+  // const [isLogged, setIsLogged] = useState(false);
+  // const BGSToken = localStorage.getItem('BGStoken');
+
+  // if (BGSToken) {
+  //   const decodedToken = jwtDecode(localStorage.getItem('BGStoken'));
+  //   const dateNow = new Date();
+
+  //   if (decodedToken.exp > dateNow.getTime() / 1000) {
+  //     console.log('Token valide');
+  //     setIsLogged(true);
+  //   }
+  // }
+
+  // -----------------------------------------------------------------------------
+
   // eslint-disable-next-line no-unused-vars
   // const [nickname, setNickname] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useState('');
+  // const [token, setToken] = useState('');
+  const token = useSelector((state) => state.user.token);
 
-  useEffect(() => {
-    if (localStorage.getItem('BGStoken')) {
-      setToken(localStorage.getItem('BGStoken'));
-    }
-    // else {
-    //   setToken(localStorage.getItem(''));
-    // }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem('BGStoken')) {
+  //     setToken(localStorage.getItem('BGStoken'));
+  //   }
+  //   // else {
+  //   //   setToken(localStorage.getItem(''));
+  //   // }
+  // }, []);
 
-  useEffect(() => {
-    axios.get('http://nicolas-lefebvre.vpnuser.lan:8000/api/boardgames/top5')
+  // useEffect(() => {
+  //   axios.get('http://127.0.0.1:8000/api/boardgames/top5')
 
-      .then((response) => {
-        console.log(response);
-        // console.log(response.data.results);
-        setTop5Games(response.data.results);
-        // console.log(response.data.results[0].name);
-      })
+  //     .then((response) => {
+  //       console.log(response);
+  //       // console.log(response.data.results);
+  //       setTop5Games(response.data.results);
+  //       // console.log(response.data.results[0].name);
+  //     })
 
-      .catch((error) => {
-        console.log(error);
-      })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
 
-      .finally(() => {
-        // traitement exécuté dans tous les cas, après then ou après catch
-        setLoading(false);
-      });
-  }, []);
+  //     .finally(() => {
+  //       // traitement exécuté dans tous les cas, après then ou après catch
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   // console.log(localStorage.getItem('BGStoken'));
 
@@ -85,80 +126,42 @@ function App() {
       <Navbar token={token} />
 
       <Routes>
-        <Route
-          path="/"
-          element={(<Home top5Games={top5Games} loading={loading} />)}
-        />
+        <Route path="/" element={(<Home />)} />
 
         {/* --------------------------------------- BOARDGAMES -------------------------------- */}
-        <Route path="/jeux" element={localStorage.getItem('BGStoken') ? <BoardgameList /> : <GetConnected />} />
+        <Route path="/jeux" element={isLogged ? <BoardgameList /> : <GetConnected />} />
         <Route
-          path="/jeux/:gameId"
-          element={
-            localStorage.getItem('BGStoken')
-              ? (
-                <BoardgameDetails
-                  name="Catan"
-                  image="https://example.com/catan.jpg"
-                  editor="Super Meeple"
-                  author="Eric marks"
-                  description="Explorez l'île de Catane et utilisez vos ressources pour construire villes et routes. Contrôlez le plus grand territoire et remportez la partie. Catan est un jeu mêlant la gestion et la négociation."
-                  players="3-4"
-                  playtime="90"
-                  stats="90"
-                />
-              )
-              : <GetConnected />
-          }
+          path="/jeux/:boardgameId"
+          element={isLogged ? (<BoardgameDetails />) : <GetConnected />}
         />
-        <Route path="/jeux/ajouter" element={localStorage.getItem('BGStoken') ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
+        <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
 
         {/* ------------------------------------- GAMES ---------------------------------------- */}
         <Route
           path="/parties/:gameId"
           element={
-            localStorage.getItem('BGStoken') ? (
-              <GameDetails
-                loading={loading}
-                setLoading={setLoading}
-                date="2023/02/01"
-                name="Catan"
-                image="https://example.com/catan.jpg"
-                editor="Super Meeple"
-                author="Eric marks"
-                remarks="Une partie très sympa même si Syham a triché pour gagner, mais on a fait semblant de ne rien voir pour lui faire plaisir."
-                players="Amar, Syham, Laura, Nico"
-                playtime="90"
-                stats="90"
-                startDate="29/01/23"
-                endDate="01/02/23"
-              />
-            ) : <GetConnected />
+            isLogged ? (<GameDetails />) : <GetConnected />
         }
         />
         <Route
           path="/parties/modifier/:id"
-          element={
-            localStorage.getItem('BGStoken') ? (
-              <GameEdit />
-            ) : <GetConnected />
-        }
+          element={isLogged ? (<GameEdit />) : <GetConnected />}
         />
-        <Route path="/parties" element={localStorage.getItem('BGStoken') ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
-        <Route path="/parties/ajouter" element={localStorage.getItem('BGStoken') ? <AddGame /> : <GetConnected />} />
+        <Route path="/parties" element={isLogged ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
+        <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
 
         {/* -------------------------------------------- PLAYERS ------------------------------- */}
-        <Route path="/joueurs" element={localStorage.getItem('BGStoken') ? <Players /> : <GetConnected />} />
-        <Route path="/joueurs/:id" element={localStorage.getItem('BGStoken') ? <PlayerDetails /> : <GetConnected />} />
-        <Route path="/joueurs/ajouter" element={localStorage.getItem('BGStoken') ? <PlayerAdd /> : <GetConnected />} />
-        <Route path="/joueurs/modifier" element={localStorage.getItem('BGStoken') ? <PlayerEdit /> : <GetConnected />} />
+        <Route path="/joueurs" element={isLogged ? <Players /> : <GetConnected />} />
+        <Route path="/joueurs/:id" element={isLogged ? <PlayerDetails /> : <GetConnected />} />
+        <Route path="/joueurs/ajouter" element={isLogged ? <PlayerAdd /> : <GetConnected />} />
+        <Route path="/joueurs/modifier" element={isLogged ? <PlayerEdit /> : <GetConnected />} />
 
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}
-        <Route path="/tableau-de-bord" element={localStorage.getItem('BGStoken') ? <Dashboard setUserInfos={setUserInfos} userInfos={userInfos} /> : <GetConnected />} />
+        <Route path="/tableau-de-bord" element={isLogged ? <Dashboard setUserInfos={setUserInfos} userInfos={userInfos} /> : <GetConnected />} />
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />
-        <Route path="/connexion" element={token ? <Disconnection token={token} isLogged={isLogged} setIsLogged={setIsLogged} setToken={setToken} /> : <Connexion setIsLogged={setIsLogged} setToken={setToken} />} />
+        <Route path="/connexion" element={isLogged ? <Disconnection /> : <Connexion />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cgu" element={<Cgu />} />

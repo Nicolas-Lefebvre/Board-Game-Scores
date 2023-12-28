@@ -61,6 +61,7 @@
 
 // --------------------------SCORES CONTAINER--------------------
 
+
   .scores-container {
     border-bottom: 1px solid;
     border: 1px solid #ccc;
@@ -110,6 +111,7 @@
       .table {
         margin-bottom: 0px;
         line-height: 2rem;
+        // overflow: visible;
 
         thead {
 
@@ -157,6 +159,21 @@
     background-color: vars.$main-color-clear;
   }  
 
+}
+
+.top-player-container{
+
+  .tables-wrapper{
+    overflow-x: scroll;
+
+    .resultat-table{
+      min-width: 500px;
+    }
+  
+    .table{
+      overflow: visible;
+    }
+  }
 }
 
 @media (min-width: '791px'){

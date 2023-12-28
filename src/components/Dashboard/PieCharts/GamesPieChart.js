@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-spaces */
 // install (please make sure versions match peerDependencies)
 // yarn add @nivo/core @nivo/pie
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -53,7 +54,19 @@ const GamesPieChart = ({ data }) => (
     }}
     valueFormat=" ^-~f"
     activeOuterRadiusOffset={8}
-    colors={{ scheme: 'set1' }}
+    colors={[
+      'rgb(205, 92, 92)',     // Rouge indien (rouge boisé)
+      'rgb(218, 165, 32)',    // Goldenrod (jaune boisé)
+      'rgb(70, 130, 180)',    // Bleu acier (bleu boisé)
+      'rgb(255, 182, 193)',   // Rose clair (rose boisé)
+      'rgb(147, 112, 219)',   // Pourpre moyen (violet boisé)
+      'rgb(107, 142, 35)',    // Olive terne (vert boisé)
+      'rgb(160, 82, 45)',     // Sienna (brun boisé)
+      'rgb(255, 127, 80)',    // Corail (orange boisé)
+      'rgb(112, 128, 144)',   // Gris ardoise (gris boisé)
+      'rgb(189, 183, 107)',   // Kaki foncé (kaki boisé)
+      'rgb(176, 196, 222)',   // Bleu acier clair (bleu clair boisé)
+    ]}
     // colorsBy="index"
     borderWidth={1}
     borderColor={{

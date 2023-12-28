@@ -3,63 +3,71 @@ import './gameList.scss';
 
 import winnerMedal from 'src/assets/images/winner-medal.png';
 
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+// import axios from 'axios';
+import
+{
+  // useState,
+  useEffect,
+} from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { ExclamationCircleFilled } from '@ant-design/icons';
+import { useSelector, useDispatch } from 'react-redux';
+
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+// import { ExclamationCircleFilled } from '@ant-design/icons';
 // import { MenuProps } from 'antd';
-import { Dropdown, Space, Modal, } from 'antd';
+// import { Dropdown, Space, Modal } from 'antd';
 
 import { NavLink } from 'react-router-dom';
 import Loader from '../Loader';
+import { fetchGameList } from '../../actions/games';
 
+// const { confirm } = Modal;
 
-const { confirm } = Modal;
-
-let gameList = [];
-let uniqueGameList = [];
+// let uniqueGameList = [];
 
 // == Composant
 function GameList() {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
+  const gameListLoaded = useSelector((state) => state.games.gameListLoaded);
+  // console.log(gameListLoaded);
 
-  // ---------------------- Get token from local storage---------------------
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get(
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/usergame',
-      config,
-    )
+    dispatch(fetchGameList());
+    // axios.get(
+    //   'http://127.0.0.1:8000/api/usergame',
+    //   config,
+    // )
 
-      .then((response) => {
-        console.log('Liste des parties du user bien récupérée');
-        console.log(response);
-        // -------------Tableau contenant toutes les parties (un object par gagnants)----------
-        gameList = response.data.results;
-        // -------------Tableau contenant toutes les parties (un object par partie)----------
-        uniqueGameList = [...new Map(gameList.map((game) => [game.game_id, game])).values()];
-        console.log(gameList);
-        console.log(uniqueGameList);
+    //   .then((response) => {
+    //     console.log('Liste des parties du user bien récupérée');
+    //     console.log(response);
+    //     // -------------Tableau contenant toutes les parties (un object par gagnants)----------
+    //     gameList = response.data.results;
+    //     // -------------Tableau contenant toutes les parties (un object par partie)----------
+    //     uniqueGameList = [...new Map(gameList.map((game) => [game.game_id, game])).values()];
+    //     console.log(gameList);
+    //     console.log(uniqueGameList);
 
-        // const concatGameList = gameList.concat();
-        // console.log(concatGameList);
-        // console.log(response.data.results[0].name);
-      })
+    //     // const concatGameList = gameList.concat();
+    //     // console.log(concatGameList);
+    //     // console.log(response.data.results[0].name);
+    //   })
 
-      .catch((error) => {
-        console.log(error);
-      })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
 
-      .finally(() => {
-        // traitement exécuté dans tous les cas, après then ou après catch
-        setLoading(false);
-      });
+    //   .finally(() => {
+    //     // traitement exécuté dans tous les cas, après then ou après catch
+    //     setLoading(false);
+    //   });
   }, []);
+  const gameList = useSelector((state) => state.games.gameList);
+  console.log(gameList);
+  const uniqueGameList = [...new Map(gameList.map((game) => [game.game_id, game])).values()];
 
   // --------------------- CLICK ON GAME DELETE ----------------------------
   // const showDeleteConfirm = (deleteGameId) => {
@@ -75,7 +83,7 @@ function GameList() {
   //       console.log('OK');
   //       axios.delete(
   //       // URL
-  //         `http://nicolas-lefebvre.vpnuser.lan:8000/api/game/${deleteGameId}`,
+  //         `http://127.0.0.1:8000/api/game/${deleteGameId}`,
   //         // données
   //         config,
   //       )
@@ -85,7 +93,7 @@ function GameList() {
   //           // On refait appel à l'API pour mettre à jour la liste des joueurs et re-render le composant
   //           axios.get(
   //             // URL
-  //             'http://nicolas-lefebvre.vpnuser.lan:8000/api/usergame',
+  //             'http://127.0.0.1:8000/api/usergame',
   //             // données
   //             config,
   //           )
@@ -109,14 +117,21 @@ function GameList() {
   //     },
   //   });
   // };
-  const [gameDetails, setgameDetails] = useState(false);
-  const onClick = () => {
-    // console.log('Click');
-    setgameDetails(!gameDetails);
-  };
+  // const [gameDetails, setgameDetails] = useState(false);
+  // const onClick = () => {
+  //   // console.log('Click');
+  //   setgameDetails(!gameDetails);
+  // };
 
-  if (loading) {
+  if (!gameListLoaded) {
     return <Loader />;
+  }
+  if (gameListLoaded && gameList.length === 0) {
+    return (
+      <div className="container">
+        <h2 style={{ marginTop: '20vh', color: 'grey', fontStyle: 'italic' }}>Vous n'avez encore aucune donnée : ajoutez votre première partie</h2>
+      </div>
+    );
   }
   return (
     <div className="container gameList">
@@ -126,14 +141,14 @@ function GameList() {
       <div className="main">
 
         {uniqueGameList.map((game) => (
-          <NavLink className="card" to={`/parties/id?game_id=${game.game_id}`} key={game.game_id}>
+          <NavLink className="card" to={`/parties/${game.game_id}?game_id=${game.game_id}`} key={game.game_id}>
             {/* <div className="card"> */}
             <div className="game-card">
               <div className="img-container">
                 <img src={game.picture} alt="" className="image" />
               </div>
               <div className="text-container">
-                <h5 className="card-title">{game.start_date.substr(0, 10)}</h5>
+                <h5 className="card-title">{game.start_date ? game.start_date.substr(0, 10) : 'Aucune date indiquée'}</h5>
                 {/* <p className="category">Jeu de gestion</p> */}
                 <ul className="">
                   <li><strong>{game.board_game_name}</strong></li>

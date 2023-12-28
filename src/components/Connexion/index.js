@@ -1,7 +1,12 @@
 /* eslint-disable react/jsx-indent */
 import './connexion.scss';
-// import { setToken, useState } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  // useSelector,
+  useDispatch,
+} from 'react-redux';
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
@@ -12,14 +17,31 @@ import {
   Input,
 } from 'antd';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
+import {
+  saveToken,
+  // setIsLogged,
+  // submitLogin,
+} from '../../actions/user';
+
 // == Composant
-function Connexion({setIsLogged, setToken, token}) {
+function Connexion() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const onFinish = (values) => {
     console.log('Success:', values);
+    // dispatch(submitLogin(values.username, values.password));
+
+    // const isLogged = useSelector((state) => state.user.isLogged);
+    // if (isLogged) {
+    //   navigate('/tableau-de-bord');
+    // }
     axios.post(
       // URL
-      'http://nicolas-lefebvre.vpnuser.lan:8000/api/login_check',
+      `${baseUrl}/api/login_check`,
       // données
       {
         username: values.username,
@@ -34,10 +56,18 @@ function Connexion({setIsLogged, setToken, token}) {
 
         // on dispatch une action pour envoyer les infos de la réponse dans le state
         // setNickname(response.data.pseudo);
+        // setIsLogged(true);
+        // dispatch(setIsLogged(true));
         // setToken(response.data.token);
-        setIsLogged(true);
-        setToken(response.data.token);
+
+        // On sauve le token dans le state (cette action met isLogged=true dans le state)
+        dispatch(saveToken(response.data.token));
+
+        // On sauve le token dans le local storage
         localStorage.setItem('BGStoken', response.data.token);
+
+        const decoded = jwtDecode(response.data.token);
+        console.log(decoded);
         // setIsLogged(response.data.logged);
         // store.dispatch(actionToDispatch);
         // const navigate = useNavigate();

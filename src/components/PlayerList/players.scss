@@ -30,12 +30,6 @@
     
   // }
   
-  .table {
-    margin-bottom: 0px;
-    line-height: 2rem;
-    
-  }
-  
   tbody {
     th {
     text-align: center;
@@ -50,7 +44,7 @@
     
     img {
       vertical-align: middle;
-    max-height: 5rem;
+      max-height: 5rem;
   }
 }
 
@@ -61,6 +55,7 @@
       
       a {
         font-size: 1.2rem !important;
+        font-style: none !important;
       }
       // .add-player-btn {
       //       position: sticky;
@@ -81,7 +76,7 @@ tr :first-child{
 
 tr :last-child {
   font-size: 0.8rem;
-  font-style: italic;
+  // font-style: italic;
   text-decoration: none;
   text-align: center;
   

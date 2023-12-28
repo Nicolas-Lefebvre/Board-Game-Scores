@@ -2,10 +2,13 @@ import './disconnection.scss';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { disconnect } from '../../actions/user';
 
 // == Composant
-function Disconnection({ setIsLogged, isLogged, setToken }) {
+function Disconnection({setIsLogged, isLogged, setToken }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClickOnDashboard = () => {
     console.log('Go to Dashboard');
@@ -13,8 +16,8 @@ function Disconnection({ setIsLogged, isLogged, setToken }) {
   };
   const handleClickOnDisconnection = () => {
     console.log('Deconnexion :');
-    setIsLogged(false);
-    setToken('');
+    dispatch(disconnect());
+    // setToken('');
     localStorage.removeItem('BGStoken');
     navigate('/connexion');
   };
@@ -26,7 +29,7 @@ function Disconnection({ setIsLogged, isLogged, setToken }) {
       {/* <Space wrap> */}
       <Link to="/tableau-de-bord"><Button type="primary" onClick={handleClickOnDashboard}>Accéder à mon tableau de bord</Button></Link>
       <h3>Ou</h3>
-      <Button type="primary" onClick={handleClickOnDisconnection} danger>Déconnexion</Button>
+      <Button type="primary" onClick={handleClickOnDisconnection} danger style={{ backgroundColor: '#c31313 !important' }}>Déconnexion</Button>
       {/* </Space> */}
 
     </div>

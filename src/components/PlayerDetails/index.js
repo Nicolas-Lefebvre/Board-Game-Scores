@@ -13,6 +13,9 @@ import { Button, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
 
+// Import de la valeur de baseUrl depuis le fichier apiConfig.js
+import baseUrl from '../../apiConfig';
+
 const { confirm } = Modal;
 
 const PlayerDetails = () => {
@@ -28,12 +31,12 @@ const PlayerDetails = () => {
     const queryParameters = new URLSearchParams(window.location.search);
     const playerId = queryParameters.get('player_id');
     axios.get(
-      `http://nicolas-lefebvre.vpnuser.lan:8000/api/user/player/${playerId}/stats`,
+      `${baseUrl}/api/user/player/${playerId}/stats`,
       config,
     )
 
       .then((response) => {
-        console.log(response);
+        console.log('détails joueur :', response.data.results);
         setplayerInfos(response.data.results);
       })
 
@@ -60,7 +63,7 @@ const PlayerDetails = () => {
         console.log('OK');
         axios.delete(
         // URL
-          `http://nicolas-lefebvre.vpnuser.lan:8000/api/player/${deletePlayerId}`,
+          `${baseUrl}/api/player/${deletePlayerId}`,
           // données
           config,
         )
@@ -98,11 +101,19 @@ const PlayerDetails = () => {
         {/* <img className="gameDetails-card__image" src={playerInfos.image} alt={playerInfos.name} /> */}
         <div className="gameDetails-card__info">
           <h3>{playerInfos[0].player_name}</h3>
-          <p><strong>Nombre de parties :</strong> {(Number(playerInfos[0].victory_number)) + (Number(playerInfos[1].victory_number)) }</p>
-          <p><strong>Nombre de victoires :</strong> {playerInfos[0].victory_number}</p>
-          <p><strong>Nombre de défaites :</strong> {playerInfos[1].victory_number}</p>
+          <p><strong>Nombre de parties :</strong> {(Number(playerInfos[0].games_played))}</p>
+          <p><strong>Nombre de victoires :</strong> {playerInfos[0].victories}</p>
+          <p><strong>Nombre de défaites :</strong> {playerInfos[0].defeats}</p>
         </div>
       </div>
+      <div className="gameDetails-card">
+        {/* <img className="gameDetails-card__image" src={playerInfos.image} alt={playerInfos.name} /> */}
+        <div className="gameDetails-card__info">
+          <p><strong>Nombre de titres de champion :</strong> {(playerInfos[0].champion_titles)}</p>
+          <p><strong>Jeux champion :</strong> {playerInfos[0].champion_games}</p>
+        </div>
+      </div>
+
       <div>
         <Button
           variant="secondary"
