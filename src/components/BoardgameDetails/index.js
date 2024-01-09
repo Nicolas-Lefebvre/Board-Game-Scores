@@ -152,14 +152,15 @@ const BoardgameDetails = () => {
             </tbody>
           </table>
         </div>
-        <Button
-          variant="secondary"
-          // onClick={() => {
-          //   navigate(`/parties/modifier/${gameInfos[0].game_id}`);
-          // }}
-        >
-          Modifier
-        </Button>{' '}
+        { //<Button
+        //   variant="secondary"
+        //   onClick={() => {
+        //     navigate(`/parties/modifier/${gameInfos[0].game_id}`);
+        //   }}
+        // >
+          // Modifier
+        // </Button>}
+        }
         <Button
           className="red-btn"
           variant="danger"
