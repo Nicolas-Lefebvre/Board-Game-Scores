@@ -2,6 +2,7 @@
 import './connexion.scss';
 // import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import {
   // useSelector,
   useDispatch,
@@ -11,7 +12,7 @@ import {
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, Alert, Space } from 'antd';
 
 // Import de la valeur de baseUrl depuis le fichier apiConfig.js
 import baseUrl from '../../apiConfig';
@@ -26,6 +27,9 @@ import {
 function Connexion() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+    // Ajout d'un état pour le message d'erreur
+    const [errorMessage, setErrorMessage] = useState('');
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -76,6 +80,9 @@ function Connexion() {
       })
 
       .catch((error) => {
+        // Mise à jour de l'état avec le message d'erreur
+        if(error.response.status === 401){setErrorMessage('Échec de la connexion. Veuillez vérifier vos identifiants.')}
+        else{setErrorMessage('Échec de la connexion. Veuillez réessayer plus tard.')}
         console.log(error);
       })
       .finally(() => {
@@ -142,9 +149,12 @@ function Connexion() {
             <Button type="primary" htmlType="submit" className="login-form-button">
               Connexion
             </Button>
+            {/* Affichage du message d'erreur */}
+            
+
             <span style={{marginRight:'1rem'}}>Pas encore inscrit ?</span>  
             <a 
-              class Name="mdp-oublie"
+              className="mdp-oublie"
               style={{textDecoration:'underline'}}
               onClick={() => {
               navigate('/inscription');
@@ -153,7 +163,14 @@ function Connexion() {
             </a>
           </Form.Item>
         </Form>
+
       </section>
+
+      {errorMessage && 
+        <Space direction="vertical" className='message-erreur'>
+          <Alert message={errorMessage} type="error" />
+        </Space>
+      }
 
       {/* <section>
         <h2 style={{ marginTop: '2rem' }}>Vous n'êtes pas encore inscrit?</h2>

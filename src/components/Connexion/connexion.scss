@@ -26,18 +26,23 @@
         
       }
     }
+
+    .message-erreur{
+      max-width: 90%;
+    }
   }
 }
 
 
 .form-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
   background: linear-gradient(to right, #6DD5FA, #FF758C); // Example gradient
   height: calc(100vh - 85px);
-  width: 100vw;
+  width: 100%;
 
 
 
@@ -114,5 +119,9 @@
       }
 
     }
+  }
+
+  .message-erreur{
+    width: 400px;
   }
 }
