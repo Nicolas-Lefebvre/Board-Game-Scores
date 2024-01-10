@@ -150,22 +150,43 @@
       background-size:cover;
       position: relative;
 
-      h1{
-        position: relative;
-        font-size: 3rem;
-        margin-bottom: 2rem;
-        margin-top: -2rem;
-        color: white;
-        text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+      .header-image__content{
         z-index: 2;
-      }
 
-      p{
-        position: relative;
-        font-size: 1.5rem;
-        color: white;
-        text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-        z-index: 2;
+        h1{
+          position: relative;
+          font-size: 3rem;
+          margin-bottom: 2rem;
+          margin-top: -2rem;
+          color: white;
+          text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        p{
+          position: relative;
+          font-size: 1.5rem;
+          color: white;
+          text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-image__content__button{
+          padding: 10px 20px;
+          background-color: #007BFF;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          margin: 2rem 2px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover{
+            background-color: #0056b3;
+          }
+        }
       }
     }
 
