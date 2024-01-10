@@ -6,6 +6,9 @@
   background-color: vars.$main-color !important;
   color: white;
   min-height: 80px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
   .container {
     margin: auto 0;
