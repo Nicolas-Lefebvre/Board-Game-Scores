@@ -66,17 +66,17 @@
         flex-direction: column;
       }
 
-      label {
-        font-size: 1rem;
-      }
+      // label {
+      //   font-size: 1rem;
+      // }
 
       .ant-form-item {
         margin-bottom: 15px;
       }
 
-      Input, .ant-input-password {
+      .ant-input-password {
         border-radius: 5px;
-        padding: 10px;
+        // padding: 10px;
         border: 1px solid #ccc;
 
         &:focus {

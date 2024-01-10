@@ -107,7 +107,7 @@ function Connexion() {
             rules={[
               {
                 required: true,
-                message: 'Please input your Username!',
+                message: 'Veuillez indiquer votre identifiant !',
               },
             ]}
           >
@@ -118,7 +118,7 @@ function Connexion() {
             rules={[
               {
                 required: true,
-                message: 'Please input your Password!',
+                message: 'Veuillez indiquer votre mot de passe !',
               },
             ]}
           >

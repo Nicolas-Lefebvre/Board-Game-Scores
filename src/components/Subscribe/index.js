@@ -7,8 +7,8 @@ import axios from 'axios';
 import {
   Button,
   Form,
-  Space,
   Input,
+  DatePicker,
 } from 'antd';
 
 import {
@@ -38,10 +38,33 @@ import {
 //   wrapperCol: { span: 24 },
 // };
 
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 16,
+    },
+  },
+};
+
+
+
 // ============================================ Composant===========================================
 function Subscribe() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [form] = Form.useForm();
 
   // const config = {
   //   headers: { Authorization: `Bearer ${localStorage.getItem('BGStoken')}` },
@@ -118,45 +141,79 @@ function Subscribe() {
   };
 
   return (
-    <div className="container addGame-container">
+    <div className="form-container subscribe-form-container">
       {/* <h2>Inscription</h2> */}
 
-      {/* ------------------------------------CREATION JEU-------------------------------------- */}
-      <div className="form-container">
+      {/* ------------------------------------INSCRIPTION-------------------------------------- */}
+      <section className='subscribe-section'>
         <Form
           name="validate_other"
-          // {...formItemLayout}
+          {...formItemLayout}
           onFinish={onFinish}
           // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
           // style={{ maxWidth: 2000 }}
         >
 
-          <section>
-            <h3>Inscription</h3>
-            <Space>
+            <h2>Inscription</h2>
+          
               <Form.Item label="Pseudo" name="nickname">
                 <Input name="pseudo" placeholder="Pseudo" required />
               </Form.Item>
-            </Space>
-            <Space>
+            
+          
               <Form.Item label="Email" name="email">
                 <Input name="email" placeholder="Email" required />
               </Form.Item>
-            </Space>
-            <Space>
-              <Form.Item label="Mot de passe" name="password">
+            
+          
+              <Form.Item
+                label="Mot de passe"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                ]}
+                hasFeedback>
                 <Input.Password placeholder="Mot de passe" />
               </Form.Item>
-            </Space>
-            <Space>
-              <Form.Item name="birthday">
+
+              <Form.Item
+                name="confirm"
+                label="Confirm Password"
+                dependencies={['password']}
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: 'Confirmez votre mot de passe',
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error('Le mot de passe ne correspond pas'));
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+            
+          
+              {/* <Form.Item name="birthday">
                 <div className="form-group">
-                  <label htmlFor="birthdate">Date de naissance :
+                  <label htmlFor="birthdate" className='birthday-label'>Date de naissance :
                     <input type="date" id="birthdate" name="birthdate" className="birthDate" required />
                   </label>
                 </div>
-              </Form.Item>
-            </Space>
+              </Form.Item>  */}
+
+              <Form.Item label="Date de naissance" name="birthday" className='birthday-container'required>
+                <DatePicker />
+              </Form.Item>           
 
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
               <Button type="primary" htmlType="submit">
@@ -164,9 +221,8 @@ function Subscribe() {
               </Button>
 
             </Form.Item>
-          </section>
         </Form>
-      </div>
+      </section>
 
     </div>
   );
