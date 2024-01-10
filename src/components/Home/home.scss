@@ -170,21 +170,24 @@
         }
 
         .header-image__content__button{
-          padding: 10px 20px;
-          background-color: #007BFF;
+          padding: 12px 25px; /* Plus de padding pour un bouton plus grand */
+          background-color: var(main-color) !important; /* Une couleur vive pour attirer l'attention */
           color: white;
-          border: none;
-          border-radius: 5px;
-          font-size: 16px;
+          border: 2px solid transparent; /* Ajout d'une bordure pour le style */
+          border-radius: 8px; /* Des coins plus arrondis */
+          font-size: 16px; /* Police plus grande pour plus de visibilité */
+          font-weight: 600; /* Police en gras */
           text-align: center;
           text-decoration: none;
           display: inline-block;
           margin: 2rem 2px;
           cursor: pointer;
-          transition: background-color 0.3s;
+          transition: all 0.3s ease-in-out; /* Transition plus fluide */
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Ombre pour plus de profondeur */
 
           &:hover{
-            background-color: #0056b3;
+            background-color: var(main-color-dark) !important; /* Changement de couleur au survol */
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3); /* Ombre plus grande au survol */
           }
         }
       }

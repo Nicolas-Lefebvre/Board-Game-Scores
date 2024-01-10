@@ -29,7 +29,7 @@ function CollapsibleExample() {
         <Navbar.Brand href="#home">
           <Nav.Link as={Link} to="/">
             {/* <FontAwesomeIcon icon={faDice} className="title-icon" /> */}
-            <img src={boardgamescoreLogo} alt="logo du site boardgamescores" style={{ height: '3rem' }} />
+            <img src={boardgamescoreLogo} alt="logo du site boardgamescores" style={{ height: '2.5rem' }} />
             <h1>Board Game Score</h1>
           </Nav.Link>
         </Navbar.Brand>
