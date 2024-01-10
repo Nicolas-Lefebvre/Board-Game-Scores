@@ -130,7 +130,7 @@ function Connexion() {
           </Form.Item>
           <Form.Item>
             <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Se souvenir de moi</Checkbox>
+              <Checkbox className='remember-me'>Se souvenir de moi</Checkbox>
             </Form.Item>
 
             <a className="login-form-forgot" href="">
@@ -155,9 +155,8 @@ function Connexion() {
         </Form>
       </section>
 
-      <section>
+      {/* <section>
         <h2 style={{ marginTop: '2rem' }}>Vous n'êtes pas encore inscrit?</h2>
-        {/* <Link className="btn btn-primary" to="/inscription" role="button"> */}
           <Button
             type="primary"
             htmlType="submit"
@@ -167,8 +166,7 @@ function Connexion() {
           >
             Inscrivez vous !
           </Button>
-        {/* </Link> */}
-      </section>
+      </section> */}
 
     </div>
   );

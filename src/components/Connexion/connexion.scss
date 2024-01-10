@@ -11,16 +11,24 @@
 @media (max-width: 1025px) {
   .form-container {
     height: 400px;
-    width: 500px;
+    width: 100%;
     flex-direction: column;
 
     section{
       height: 100%;
-      width: 100%;
+      // width: 80%;
       margin: 0;
+      max-width: 90% !important;
+      align-items: center;
+
+      .remember-me {
+        font-size: 12px;
+        
+      }
     }
   }
 }
+
 
 .form-container {
   display: flex;
@@ -57,8 +65,7 @@
 
       .login-form-forgot{
         float: right;
-        top: 6px;
-        position: relative;
+        font-size: 12px;
       }
 
       .ant-space-item{
@@ -84,6 +91,9 @@
           outline: 0;
           box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
         }
+      }
+      .remember-me{
+        float: left;
       }
 
       Button {
