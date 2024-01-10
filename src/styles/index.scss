@@ -37,6 +37,20 @@ p {
   font-size: 1.2rem;
 }
 
+button {
+  background-color: vars.$main-color !important;
+  color: white;
+
+  &:hover{
+    background-color: #3988d3 !important;
+  }
+
+  // span {
+  //   color: white;
+  //   font-weight: bold;
+  // }
+}
+
 
 .btn-primary { 
   --bs-btn-bg: #2f71af;
