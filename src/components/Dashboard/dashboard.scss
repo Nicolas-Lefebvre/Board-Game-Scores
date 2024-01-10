@@ -5,6 +5,8 @@
 
   section {
     padding-bottom: 1rem;
+    background-color: white;
+    margin-bottom: 2rem;
   }
 
   h4 {
@@ -14,15 +16,20 @@
 
 // --------------------------PROFIL CONTAINER--------------------
   .profil-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
     display: flex;
-    margin: auto;
-    // border-bottom: 1px solid rgba(128, 128, 128, 0.637);
-    padding-bottom: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     .avatar-img {
-      width: 30%;
-      margin-left: 1rem;
-      margin-right: 1rem;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--primary-color);
 
       img {
         width:100%;
@@ -31,7 +38,18 @@
 
     .profil-text {
       // text-align-last: left;
-      width: 70%;
+      // width: 70%;
+      // text-align: center;
+      display: flex;
+      flex-direction: column;
+
+      h3{
+        margin-bottom: 1rem;
+      }
+      
+      p{
+        margin-bottom: .5rem;
+      }
 
       .pseudo {
         text-align: left;
@@ -46,12 +64,14 @@
         text-align: center;
         color: white;
         margin-top: .6rem;
+        float: right;
         
         .profil-edit-link {
           background-color: vars.$main-color;
           border: 1px solid;
           border-radius: 10px;
           padding: .2rem .5rem;
+          font-size: .8rem;
         }
       }
     }
