@@ -26,7 +26,7 @@ function CollapsibleExample() {
     <Navbar collapseOnSelect expand="lg" variant="dark">
       <Container>
 
-        <Navbar.Brand href="#home">
+        <Navbar.Brand>
           <Nav.Link as={Link} to="/">
             {/* <FontAwesomeIcon icon={faDice} className="title-icon" /> */}
             <img src={boardgamescoreLogo} alt="logo du site boardgamescores" style={{ height: '2.5rem' }} />
