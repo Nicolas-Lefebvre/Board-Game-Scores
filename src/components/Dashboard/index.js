@@ -381,8 +381,8 @@ function Dashboard({ setUserInfos, userInfos }) {
                 valueFormat=" ^-~f"
                 activeOuterRadiusOffset={8}
                 colors={[
-                  'rgb(205, 92, 92)',     // Rouge indien (rouge boisé)
                   'rgb(107, 142, 35)',    // Goldenrod (jaune boisé)
+                  'rgb(205, 92, 92)',     // Rouge indien (rouge boisé)
                 ]}
                 colorsBy="index"
                 borderWidth={1}

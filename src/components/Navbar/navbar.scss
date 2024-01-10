@@ -42,6 +42,15 @@
 
   a {
     color: white;
+    display: inline-block;
+    // transition: transform 0.3s;
+    // transform-origin: center bottom; // cela garantit que l'élément s'agrandit vers le haut et le bas de manière égale
+
+    &:hover{
+      // color: rgb(110, 38, 38);
+      text-decoration: underline;
+    text-underline-offset: 10px;
+    }
   }
 
   .navbar-toggler-icon {
@@ -72,26 +81,8 @@
     }
   }
 
-  // li {
-  //   display: flex;
-  //   align-items: center;
-  //   font-weight: bold;
-  // }
-
-  // .navbar-nav li {
-  //     margin: auto .8rem;
-  //     display: flex;
-  //     flex-direction: column;
-  // }
-
-  // & a {
-  //   color: white;
-  // }
-
   a:hover {
-    color: rgb(255, 255, 255);
-    text-decoration: underline;
-    text-underline-offset: 8px;
+    
     // border-bottom: 1px solid white;
     // transition:border-bottom .5s;
     // background-color: white;
@@ -157,7 +148,7 @@
   .icon {
     margin-right: 0.5rem;
     padding: .5rem;
-    font-size: 1.5rem;
+    // font-size: 1.5rem;
     border: solid 1px;
     border-radius: 20px;
   }
