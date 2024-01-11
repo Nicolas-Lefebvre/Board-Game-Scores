@@ -78,7 +78,7 @@ function Players() {
                 <th>Défaites</th>
                 {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th> */}
                 {/* <th><img src={lauriers} alt="laurier des records" /></th> */}
-                <th>Modifier/Supprimer</th>
+                <th>Modifier / Supprimer</th>
               </tr>
               {/* { (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1))) } */}
               {playerList.map((playerNoStat) => (
@@ -96,7 +96,7 @@ function Players() {
                             // marginRight: '.5rem',
                             marginTop: '.6rem',
                             color: '#0070ff',
-                            fontSize: '1.7rem',
+                            fontSize: '1rem',
                           }}
                         />
                       </NavLink>
@@ -112,7 +112,7 @@ function Players() {
                             // marginLeft: '.5rem',
                             color: 'red',
                             cursor: 'pointer',
-                            fontSize: '1.7rem',
+                            fontSize: '1rem',
                           }}
                         />
                       </span>
@@ -122,7 +122,7 @@ function Players() {
               ))}
 
               <tr>
-                <td colSpan="6"><Link className="btn btn-primary add-player-btn" to="/joueurs/ajouter" role="button">Ajouter un joueur</Link></td>
+                <td colSpan="5"><Link className="btn btn-primary add-player-btn" to="/joueurs/ajouter" role="button">Ajouter un joueur</Link></td>
               </tr>
             </tbody>
           </table>

@@ -1,117 +1,165 @@
 @use 'src/styles/vars';
 
 .tableau_mesjoueurs {
+  // overflow-x: scroll;
+
+  h2 {
+    margin: 3rem auto 2rem auto;
+    color: vars.$main-color;
+    text-shadow: 1px 1px 1px rgb(255, 255, 255); /* Ajoute une ombre textuelle */
+  }
+  
 
   button span {
     color: black !important;
   }
 
   .wrapper {
-    overflow-x: scroll;
+    // overflow-x: scroll;
   }
-.resultat-table {
-  margin: 1rem;
-  border: 3px solid vars.$main-color-dark;
-  border-radius: 10px;
-  min-width: 500px;
-  // overflow-x: scroll;
-}
 
-.table {
-  margin-bottom: 0px;
-  line-height: 2rem;
-  overflow: visible;
 
-  
-  // .resultat-table {
-  //   margin: 1rem;
-  //   border: 3px solid vars.$main-color-dark;
-  //   border-radius: 10px;
-    
-  // }
-  
-  tbody {
-    th {
-    text-align: center;
-    vertical-align: middle;
-    font-weight: bold;
-    font-size: 1rem;
-    text-decoration: underline;
-    // display:table-cell;
-    &.desktop {
-      display: none;
-    }
-    
-    img {
-      vertical-align: middle;
-      max-height: 5rem;
-  }
-}
-
-  tr {
-    
-    td {
-      vertical-align: middle;
-      
-      a {
-        font-size: 1.2rem !important;
-        font-style: none !important;
-      }
-      // .add-player-btn {
-      //       position: sticky;
-      //       /* top: 10px; */
-      //       /* bottom: 5rem; */
-      //       left: 8rem;
-      //       right: 8rem;
-      //   }
-
-    }
-  }
-  
-}
-
-tr :first-child{
-  font-size: 1.5rem;
-}
-
-tr :last-child {
-  font-size: 0.8rem;
-  // font-style: italic;
-  text-decoration: none;
-  text-align: center;
-  
-}
-
-td :last-child {
-  // background-color: rgb(17, 151, 247);
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
-  // font-size: 1.7rem;
-  vertical-align: middle;
-
-}
-
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-  background-color: vars.$main-color-clear;
-}  
-}
-}
-
-:where(.css-dev-only-do-not-override-1i9hnpv).ant-btn-default {
-  // background-color: #ffffff00 !important;
-  border-color: #d9d9d900;
-  box-shadow: 0 2px 0rgba(0, 0, 0, 0.02);
-  border: none;
-}
-
-.delete-btn {
-  margin: .3rem 0 0 1rem;
-}
-
-@media (min-width: '700px') {
   .resultat-table {
-    margin: 5rem;
+    margin: 3rem auto 4rem auto;
     border: 3px solid vars.$main-color-dark;
     border-radius: 10px;
+    width: fit-content;
+    background-color: white;
+    // overflow-x: scroll;
+
+    .table {
+      margin: auto;
+      margin-bottom: 0px;
+      line-height: 1.5rem;
+      overflow: visible;
+      min-width: 600px;
+      max-width: 800px;
+      table-layout: fixed;
+      // width: 500px;
+      
+      // .resultat-table {
+      //   margin: 1rem;
+      //   border: 3px solid vars.$main-color-dark;
+      //   border-radius: 10px;
+        
+      // }
+      
+      tbody {
+        th {
+        text-align: center;
+        vertical-align: middle;
+        font-weight: bold;
+        font-size: 1rem;
+        line-height: 2rem;
+        // text-decoration: underline;
+        // display:table-cell;
+
+        &.desktop {
+          display: none;
+        }
+        
+        img {
+          vertical-align: middle;
+          max-height: 5rem;
+      }
+    }
+    
+      tr {
+        
+        td {
+          vertical-align: middle;
+          
+          a {
+            font-size: 1.2rem !important;
+            font-style: none !important;
+          }
+          // .add-player-btn {
+          //       position: sticky;
+          //       /* top: 10px; */
+          //       /* bottom: 5rem; */
+          //       left: 8rem;
+          //       right: 8rem;
+          //   }
+    
+        }
+      }
+      
+    }
+    
+    tr :first-child{
+      font-size: 1.2rem;
+    }
+    
+    tr :last-child {
+      font-size: 0.8rem;
+      // font-style: italic;
+      text-decoration: none;
+      text-align: center;
+      
+    }
+    
+    td :last-child {
+      // background-color: rgb(17, 151, 247);
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+      // font-size: 1.7rem;
+      vertical-align: middle;
+    
+    }
+    
+    .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+      background-color: vars.$main-color-clear;
+    }  
+    
+    :where(.css-dev-only-do-not-override-1i9hnpv).ant-btn-default {
+      // background-color: #ffffff00 !important;
+      border-color: #d9d9d900;
+      box-shadow: 0 2px 0rgba(0, 0, 0, 0.02);
+      border: none;
+    }
+
+    
+    .delete-btn {
+      font-size: 1rem;
+      margin: .3rem 0 0 1rem;
+    }
+    
+    .add-player-btn{
+      font-size: 1rem !important;
+      padding: 4px 8px;
+      
+    }
+  }
+}
+}
+  
+
+
+
+@media (max-width: '767px') {
+
+  .tableau_mesjoueurs{
+      overflow-x: scroll;
+
+    .resultat-table {
+      margin: 2rem;
+      border: 3px solid vars.$main-color-dark;
+      border-radius: 10px;
+      // overflow-x: scroll;
+
+      .table{
+        overflow-x: scroll;
+        // margin: 1rem;
+        // overflow: hidden;
+
+        tbody{
+          th{
+            line-height: 1.2rem;
+          }
+        }
+      }
+
+    }
   }
 }

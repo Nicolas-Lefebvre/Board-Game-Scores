@@ -17,7 +17,7 @@ import { faUserTie, faDice } from '@fortawesome/free-solid-svg-icons';
 // Import de la valeur de baseUrl depuis le fichier apiConfig.js
 // import baseUrl from '../../apiConfig';
 
-function CollapsibleExample() {
+function CollapsibleNavbar() {
   const isLogged = useSelector((state) => state.user.isLogged);
 
   const role = localStorage.getItem('BGStoken') ? (jwtDecode(localStorage.getItem('BGStoken')).roles[0]) : '';
@@ -71,4 +71,4 @@ function CollapsibleExample() {
     </Navbar>
   );
 }
-export default CollapsibleExample;
+export default CollapsibleNavbar;
