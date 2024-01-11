@@ -73,12 +73,12 @@ function Players() {
             <tbody>
               <tr>
                 <th>Nom</th>
-                <th>Nb Total de parties</th>
+                <th>Parties jouées</th>
                 <th>Victoires</th>
                 <th>Défaites</th>
                 {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th> */}
                 {/* <th><img src={lauriers} alt="laurier des records" /></th> */}
-                <th>Modifier / Supprimer</th>
+                <th></th>
               </tr>
               {/* { (playerList.filter((filteredPlayer) => (filteredPlayer.is_winner === 1))) } */}
               {playerList.map((playerNoStat) => (

@@ -70,7 +70,7 @@
           vertical-align: middle;
           
           a {
-            font-size: 1.2rem !important;
+            font-size: 1.2rem;
             font-style: none !important;
           }
           // .add-player-btn {
@@ -87,11 +87,11 @@
     }
     
     tr :first-child{
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
     
     tr :last-child {
-      font-size: 0.8rem;
+      font-size: 1rem;
       // font-style: italic;
       text-decoration: none;
       text-align: center;
@@ -126,9 +126,14 @@
     }
     
     .add-player-btn{
+      background-color: vars.$main-color;
       font-size: 1rem !important;
       padding: 4px 8px;
-      
+
+      &hover{
+        background-color: #3988d3 !important;
+        border: none !important;
+      }
     }
   }
 }

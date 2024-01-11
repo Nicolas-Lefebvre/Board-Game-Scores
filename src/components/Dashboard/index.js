@@ -229,25 +229,22 @@ function Dashboard({ setUserInfos, userInfos }) {
 
   // =====================================  RECUPERATION TOP CATEGORIES =============================
   useEffect(() => {
-    axios.get(
-      // URL
-      `${baseUrl}/api/user/categories5`,
-      // données
-      config,
-    )
+    // Vérifie si les catégories sont déjà chargées, si oui, ne fait rien
+    if (topCategories.length > 0 && topPlayedCategories.length > 0) {
+      return;
+    }
+  
+    axios.get(`${baseUrl}/api/user/categories5`, config)
       .then((response) => {
         console.log('Recuperation des top 5 catégories OK');
-        console.log(response.data);
         setTopCategories(response.data.results);
-        setTopPlayedCategories(response.data.results.filter((filteredCategory) => (filteredCategory.total_games > 0)));
-
+        setTopPlayedCategories(response.data.results.filter((category) => category.total_games > 0));
         setLoadingTop5Categories(false);
       })
-
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, []); // tableau de dépendances vide pour s'exécuter une seule fois au montage du composant
 
   // ----------------------Recuperation des top 5 JOUEURS -----------------------
   // const [loadingTop5Players, setLoadingTop5Players] = useState(true);

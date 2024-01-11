@@ -118,8 +118,15 @@
     // font-style: italic;
     font-size: 1.1rem;
 
-    &:hover {
+    .nav-link{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    a:hover {
       color:white;
+      text-decoration: none !important;
     }
   }
 

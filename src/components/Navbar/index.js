@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import boardgamescoreLogo from '../../assets/images/boardgamescores-logo.png';
+import boardgamescoreLogo from '../../assets/images/logo-bgs.png';
 import { useSelector } from 'react-redux';
 
 import {
@@ -29,7 +29,7 @@ function CollapsibleNavbar() {
         <Navbar.Brand>
           <Nav.Link as={Link} to="/">
             {/* <FontAwesomeIcon icon={faDice} className="title-icon" /> */}
-            <img src={boardgamescoreLogo} alt="logo du site boardgamescores" style={{ height: '2.5rem' }} />
+            <img src={boardgamescoreLogo} alt="boardgamescores, enregistrer les scores de vos parties de jeu de société" style={{ height: '4rem' }} />
             <h1>Board Game Score</h1>
           </Nav.Link>
         </Navbar.Brand>
