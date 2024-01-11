@@ -3,13 +3,15 @@
 .subscribe-form-container{
 
   .subscribe-section{
-    height: 500px;
-    width: 600px;
-    margin: 0;
+    height: fit-content;
+    width: fit-content;
+    max-width: none;
+    // margin: 0;
 
     form{
       padding-right: 2.5rem;
-      padding-left: 1rem;
+      padding-left: 2.5rem;
+      // width: 700px;
 
       label{
         font-family: 'Nunito', sans-serif;
@@ -39,6 +41,20 @@
   .birthday-container{
     .ant-form-item-control-input-content{
       text-align: left;
+    }
+  }
+
+  .ant-col.ant-col-12.ant-col-offset-6.ant-form-item-control.css-dev-only-do-not-override-gzal6t{
+    margin: auto;
+  }
+
+  .subscribe-btn{
+    margin-top: 1rem;
+    text-align: center;
+    
+
+    &:hover{
+      background-color: #3988d3 !important;
     }
   }
 }

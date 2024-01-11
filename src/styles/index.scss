@@ -14,10 +14,15 @@
 
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: bold;
   margin: 2rem auto;
   color: vars.$main-color;
+}
+@media(max-width: 767px){
+  h2{
+    font-size: 1.5rem;
+  }
 }
 
 h3 {
@@ -58,7 +63,7 @@ button {
 }
 
 .container {
-  margin-top: 4rem;
+  // margin-top: 4rem;
 }
 
 strong {
@@ -75,3 +80,4 @@ strong {
     font-family: 'Roboto', sans-serif;
   }
 */
+

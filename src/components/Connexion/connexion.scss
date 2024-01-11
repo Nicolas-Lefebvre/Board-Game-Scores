@@ -15,7 +15,7 @@
     flex-direction: column;
 
     section{
-      height: 100%;
+      height: fit-content;
       // width: 80%;
       margin: 0;
       max-width: 90% !important;
@@ -40,15 +40,15 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(to right, #6DD5FA, #FF758C); // Example gradient
+  // background: linear-gradient(to right, #6DD5FA, #FF758C); // Example gradient
   height: calc(100vh - 85px);
-  width: 100%;
+  // width: 100%;
 
 
 
   section {
-    height: 350px;
-    width: 400px;
+    height: fit-content;
+    width: fit-content;
     background: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -60,13 +60,14 @@
     flex-direction: column;
 
     h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
+      // font-size: 2rem;
+      // margin-bottom: 20px;
     }
 
     Form {
       display: flex;
       flex-direction: column;
+      width: fit-content;
 
       .login-form-forgot{
         float: right;

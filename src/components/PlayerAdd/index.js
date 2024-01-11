@@ -60,7 +60,7 @@ function PlayerAdd() {
   };
 
   return (
-    <div className="container addGame-container">
+    <div className="container">
       <div className="form-container">
         <section>
           <h2>Ajouter un joueur</h2>

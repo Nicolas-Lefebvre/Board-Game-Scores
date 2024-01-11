@@ -50,7 +50,7 @@ function PlayerEdit() {
   };
 
   return (
-    <div className="container addGame-container">
+    <div className="container addPlayer-container">
       <div className="form-container">
         <section>
           <h2>Modifier un joueur</h2>

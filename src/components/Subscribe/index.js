@@ -44,7 +44,7 @@ const formItemLayout = {
       span: 24,
     },
     sm: {
-      span: 8,
+      span: 24,
     },
   },
   wrapperCol: {
@@ -52,7 +52,7 @@ const formItemLayout = {
       span: 24,
     },
     sm: {
-      span: 16,
+      span: 24,
     },
   },
 };
@@ -149,6 +149,7 @@ function Subscribe() {
         <Form
           name="validate_other"
           {...formItemLayout}
+          layout='vertical'
           onFinish={onFinish}
           // initialValues={{ 'input-number': 3, 'checkbox-group': ['A', 'B'], rate: 3.5 }}
           // style={{ maxWidth: 2000 }}
@@ -181,7 +182,7 @@ function Subscribe() {
 
               <Form.Item
                 name="confirm"
-                label="Confirm Password"
+                label="Confirmer le mot de passe"
                 dependencies={['password']}
                 hasFeedback
                 rules={[
@@ -216,7 +217,7 @@ function Subscribe() {
               </Form.Item>           
 
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" className='subscribe-btn'>
                 Valider
               </Button>
 
