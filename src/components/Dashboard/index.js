@@ -429,7 +429,7 @@ function Dashboard({ setUserInfos, userInfos }) {
           </div>
 
           <div className="tables-wrapper">
-            <div className="resultat-table" style={{ maxWidth: '360px' }}>
+            <div className="resultat-table">
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -512,7 +512,7 @@ function Dashboard({ setUserInfos, userInfos }) {
 
         {loadingTop5Games || loadingTop5Categories ? (<Loader />)
           : (
-            <section className="scores-container">
+            <section className="topGames-container">
 
               <h4>Top jeux</h4>
               <div className="resultats-wrapper">
@@ -703,7 +703,7 @@ function Dashboard({ setUserInfos, userInfos }) {
 
         {loadingPlayerResults ? (<Loader />)
           : (
-            <section className="scores-container top-player-container">
+            <section className="top-player-container">
 
               <h4>Top joueurs</h4>
               <div className="resultats-wrapper">

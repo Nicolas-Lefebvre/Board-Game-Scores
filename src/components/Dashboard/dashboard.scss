@@ -3,195 +3,219 @@
 .dashboard {
   margin-top: 0;
 
-  section {
-    padding-bottom: 1rem;
-    background-color: white;
-    margin-bottom: 2rem;
-  }
+  .main{
+    // display: grid;
+    gap: 20px;
 
-  h4 {
-    margin-top: 2rem;
-    font-size: 1.8rem;
-  }
-
-// --------------------------PROFIL CONTAINER--------------------
-  .profil-container {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .avatar-img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid var(--primary-color);
-
-      img {
-        width:100%;
-      }
-    }
-
-    .profil-text {
-      // text-align-last: left;
-      // width: 70%;
-      // text-align: center;
+    section {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
-
-      h3{
-        margin-bottom: 1rem;
-      }
-      
-      p{
-        margin-bottom: .5rem;
-      }
-
-      .pseudo {
-        text-align: left;
-        margin-bottom: .5rem;
-      }
-
-      .email {
-        text-align: left;
-      }
-
-      .profil-edit-btn {
-        text-align: center;
-        color: white;
-        margin-top: .6rem;
-        float: right;
-        
-        .profil-edit-link {
-          background-color: vars.$main-color;
-          border: 1px solid;
-          border-radius: 10px;
-          padding: .2rem .5rem;
-          font-size: .8rem;
-        }
-      }
-    }
-
-  }
-  // ----------------------END PROFIL CONTAINER--------------------------
-
-// --------------------------SCORES CONTAINER--------------------
-
-
-  .scores-container {
-    border-bottom: 1px solid;
-    border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
-
-    select {
-      max-width: 150px;
-      margin: auto;
-    }
-    .resultats-wrapper {
-      display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: flex-start;
-      width: 100%;
-
-
-      .resultat-pieChart {
-        display: flex;
-        min-width: 300px;
-        max-width: 400px;
-        margin: auto;
-        // max-width: 80%;
-        height: 200px;
-        width: 80%;
-
-        // .pieChart-wrapper {
-        //   max-width: 100px;
-        // }
-      }
-
+      padding: 32px;
+      margin: 20px;
     }
-    .resultat-table {
-      // width: 70%;
-      margin: 2rem auto;
-      min-width: 200px;
-      max-width: 360px;
-      // text-align-last: left;
-      // border: 3px solid vars.$main-color-dark;
-      // border-radius: 10px;
-      border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-      
 
-      .table {
-        margin-bottom: 0px;
-        line-height: 2rem;
-        // overflow: visible;
-
-        thead {
-
-          th {
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: vars.$main-color;
-          }
-        }
-
-        tbody {
-
-          th {
-            text-align: center;
-            vertical-align: middle;
-            font-weight: bold;
-            // display:table-cell;
-            &.desktop {
-              display: none;
-            }
-
-            img {
-            vertical-align: middle;
-            max-height: 1.2rem;
-            }
-          }
-
-          tr {
-
-            td {
-              vertical-align: middle;
-              &.desktop {
-                display: none;
-              }
-            }
-          }
-
-        }
-      }
-
+    h4 {
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
     }
-  }
-  .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-    background-color: vars.$main-color-clear;
-  }  
-
-}
-
-.top-player-container{
-
-  .tables-wrapper{
-    overflow-x: scroll;
 
     .resultat-table{
-      min-width: 500px;
+      margin: 2rem auto;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      // min-width: 300px;
+      // max-width: fit-content;
+      // width: fit-content;
+      // text-align-last: left;
     }
-  
-    .table{
-      overflow: visible;
+
+    // --------------------------PROFIL CONTAINER--------------------
+    section.profil-container {
+      width: 400px;
+      height: 300px;
+
+      .avatar-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid var(--primary-color);
+
+        img {
+          width:100%;
+        }
+      }
+
+      .profil-text {
+        // text-align-last: left;
+        // width: 70%;
+        // text-align: center;
+        display: flex;
+        flex-direction: column;
+
+        h3{
+          margin-bottom: 1rem;
+        }
+        
+        p{
+          margin-bottom: .5rem;
+        }
+
+        .pseudo {
+          text-align: left;
+          margin-bottom: .5rem;
+        }
+
+        .email {
+          text-align: left;
+        }
+
+        .profil-edit-btn {
+          text-align: center;
+          color: white;
+          margin-top: .6rem;
+          float: right;
+          
+          .profil-edit-link {
+            background-color: vars.$main-color;
+            border: 1px solid;
+            border-radius: 10px;
+            padding: .2rem .5rem;
+            font-size: .8rem;
+          }
+        }
+      }
+
+    }
+    // ----------------------END PROFIL CONTAINER--------------------------
+
+    // --------------------------SCORES CONTAINER--------------------
+
+
+    section.scores-container {
+      width: 500px;
+      height: fit-content;
+
+      select {
+        max-width: 150px;
+        margin: auto;
+      }
+      
+      .resultats-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+
+
+        .resultat-pieChart {
+          display: flex;
+          min-width: 300px;
+          max-width: 400px;
+          margin: auto;
+          // max-width: 80%;
+          height: 200px;
+          width: 80%;
+
+          // .pieChart-wrapper {
+          //   max-width: 100px;
+          // }
+        }
+
+      }
+
+      .tables-wrapper{
+        width: 100%;
+
+        .resultat-table {
+          width: 100%;
+          // margin: 2rem auto;
+          // // min-width: 300px;
+          // max-width: fit-content;
+          // width: fit-content;
+          // text-align-last: left;
+          // // border: 3px solid vars.$main-color-dark;
+          // // border-radius: 10px;
+          // border: 1px solid #ccc;
+          // border-radius: 10px;
+          // box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+          
+
+          .table {
+            width: 100%;
+            margin-bottom: 0px;
+            line-height: 2rem;
+            // min-width: 200px;
+            // max-width: 200px;
+            // overflow: visible;
+
+            thead {
+
+              th {
+                text-align: center;
+                font-weight: bold;
+                font-size: 1.2rem;
+                color: vars.$main-color;
+              }
+            }
+
+            tbody {
+
+              th {
+                text-align: center;
+                vertical-align: middle;
+                font-weight: bold;
+                // display:table-cell;
+                &.desktop {
+                  display: none;
+                }
+
+                img {
+                vertical-align: middle;
+                max-height: 1.2rem;
+                }
+              }
+
+              tr {
+
+                td {
+                  vertical-align: middle;
+                  &.desktop {
+                    display: none;
+                  }
+                }
+              }
+
+            }
+          }
+
+        }
+      }
+        .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+          background-color: vars.$main-color-clear;
+        } 
+    } 
+
+  }
+  // }
+
+  .top-player-container{
+
+    .tables-wrapper{
+      overflow-x: scroll;
+
+      .resultat-table{
+        // min-width: 500px;
+      }
+    
+      .table{
+        overflow: visible;
+      }
     }
   }
 }
@@ -199,10 +223,10 @@
 @media (min-width: '791px'){
 
   .dashboard .scores-container .resultat-table {
-    min-width: 503px;
+    // min-width: 503px;
   }
   table {
-    min-width: 500px;
+    // min-width: 500px;
   }
 
   .dashboard .scores-container .resultats-wrapper .resultat-pieChart {
@@ -217,16 +241,16 @@
   }
 
   .dashboard .scores-container .resultat-table {
-    min-width: 603px;
+    // min-width: 603px;
     margin: 3rem auto;
   }
   table {
-    min-width: 600px;
+    // min-width: 600px;
   }
 
 }
 
-@media (min-width: '1200px'){
+@media (min-width: '1025px'){
   .tables-wrapper {
     // display: flex;
     // justify-content: space-around;
@@ -239,8 +263,9 @@
     display: none;
   }
 
-  .dashboard .scores-container .resultat-table {
-    max-width: 800px;
+  .dashboard .resultat-table {
+    // width: 70%;
+          
   }
 
   .dashboard .scores-container .resultat-table .table tbody th.desktop {
