@@ -2,12 +2,6 @@
 
 .tableau_mesjoueurs {
   // overflow-x: scroll;
-
-  h2 {
-    margin: 3rem auto 2rem auto;
-    color: vars.$main-color;
-    text-shadow: 1px 1px 1px rgb(255, 255, 255); /* Ajoute une ombre textuelle */
-  }
   
 
   button span {
@@ -21,7 +15,8 @@
 
   .resultat-table {
     margin: 3rem auto 4rem auto;
-    border: 3px solid vars.$main-color-dark;
+    // border: 3px solid vars.$main-color-dark;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     width: fit-content;
     background-color: white;

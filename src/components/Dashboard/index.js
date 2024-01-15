@@ -9,6 +9,7 @@ import { ResponsivePie } from '@nivo/pie';
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 import lauriers from 'src/assets/images/laurier-records-2.png';
+
 import { useDispatch } from 'react-redux';
 // Import de la valeur de baseUrl depuis le fichier apiConfig.js
 import baseUrl from '../../apiConfig';

@@ -12,11 +12,17 @@
 }
 
 h2 {
-  font-size: 1.7rem;
-  font-weight: bold;
-  margin: 3rem auto 3rem auto;
-  color: vars.$main-color;
-  text-shadow: 1px 1px 1px rgb(255, 255, 255); /* Ajoute une ombre textuelle */
+  // font-size: 1.7rem;
+  // font-weight: bold;
+  // margin: 3rem auto 3rem auto;
+  // color: white;
+  // text-shadow: 2px 2px 1px (vars.$main-color); /* Ajoute une ombre textuelle */
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 3rem auto;
+  color: #fff; /* ou une autre couleur pour un meilleur contraste */
+  text-shadow: 2px 2px 1px rgba(47, 113, 175, 0.7);
+  /* Ajouter un dégradé sur le texte si nécessaire */
 }
 
 @media(max-width: 767px){
