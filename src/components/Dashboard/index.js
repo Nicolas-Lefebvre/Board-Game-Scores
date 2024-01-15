@@ -14,12 +14,43 @@ import { useDispatch } from 'react-redux';
 import baseUrl from '../../apiConfig';
 
 import Loader from '../Loader';
-// import ResultatPieChart from './PieCharts/ResultatPieChart';
-// import ResultPieChart from './PieCharts/ResultPieChart';
 import GamesPieChart from './PieCharts/GamesPieChart';
 import { setTokenValidity } from '../../actions/user';
-// import PlayersPieChart from './PieCharts/PlayersPieChart';
-// import AddBoardgame from '../AddBoardgame';
+
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
+
+// ================== Configuration du side menu ==================
+function getItem(label, key, icon, children, type, url) {
+  return {
+    key,
+    icon,
+    children,
+    label: url ? <Link to={url}>{label}</Link> : label,
+    type,
+  };
+}
+const items = [
+  getItem('Joueurs', 'sub1', <MailOutlined />, [
+    getItem('Liste des joueurs', '1', null, null, null, '/joueurs'),
+    getItem('Ajouter un joueur', '2', null, null, null, '/joueurs/ajouter'),
+  ]),
+  getItem('Jeux', 'sub2', <AppstoreOutlined />, [
+    getItem('Liste des jeux', '3', null, null, null, '/jeux'),
+    getItem('Ajouter un jeux', '4', null, null, null, '/jeux/ajouter'),
+    // getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
+  ]),
+  getItem('Parties', 'sub3', <SettingOutlined />, [
+    getItem('Liste des parties', '5', null, null, null, '/parties'),
+    getItem('Ajouter une partie', '6', null, null, null, '/parties/ajouter'),
+  ]),
+];
+
+// submenu keys of first level
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
+
+// ================== FIN Configuration du side menu ==================
+
 
 // == Composant
 function Dashboard({ setUserInfos, userInfos }) {
@@ -29,6 +60,19 @@ function Dashboard({ setUserInfos, userInfos }) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+
+  // ================== Configuration du side menu ======================
+  const [openKeys, setOpenKeys] = useState(['']);
+  const onOpenChange = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    if (latestOpenKey && rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
+  // ================== FIN Configuration du side menu ==================
 
   const [loadingPlayerResults, setLoadingPlayerResults] = useState(true);
 
@@ -344,6 +388,19 @@ function Dashboard({ setUserInfos, userInfos }) {
             <p className="email">Né le : {userInfos.birthday.substr(0, 10)}</p>
             <p className="profil-edit-btn"><Link className="profil-edit-link" to="/profil/modifier">Modifier</Link></p>
           </div>
+        </section>
+
+        {/* ----------------------------------------MENU CONTAINER--------------------------- */}  
+        <section className="side-menu-container">
+        <Menu
+          mode="inline"
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
+          style={{
+            // width: 256,
+          }}
+          items={items}
+        />
         </section>
 
         {/* ----------------------------------------RESULTS CONTAINER--------------------------- */}

@@ -11,14 +11,14 @@
   min-height: 100vh;
 }
 
-
-
 h2 {
   font-size: 1.7rem;
   font-weight: bold;
-  margin: 2rem auto;
+  margin: 3rem auto 3rem auto;
   color: vars.$main-color;
+  text-shadow: 1px 1px 1px rgb(255, 255, 255); /* Ajoute une ombre textuelle */
 }
+
 @media(max-width: 767px){
   h2{
     font-size: 1.5rem;
