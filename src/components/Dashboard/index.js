@@ -9,6 +9,9 @@ import { ResponsivePie } from '@nivo/pie';
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
 import lauriers from 'src/assets/images/laurier-records-2.png';
+import playersIcon from 'src/assets/images/travail-en-equipe.png';
+import gamesIcon from 'src/assets/images/icone-joueurs.png';
+import boardgamesIcon from 'src/assets/images/jeux-de-societe.png';
 
 import { useDispatch } from 'react-redux';
 // Import de la valeur de baseUrl depuis le fichier apiConfig.js
@@ -22,33 +25,49 @@ import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/ico
 import { Menu } from 'antd';
 
 // ================== Configuration du side menu ==================
+const ListeIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2f71af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-list">
+    {/* Contenu SVG ici */}
+    <line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/>
+  </svg>
+);
+const PlusIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2f71af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus">
+    {/* Contenu SVG ici */}
+    <path d="M5 12h14"/><path d="M12 5v14"/>
+  </svg>
+);
+
 function getItem(label, key, icon, children, type, url) {
   return {
     key,
-    icon,
+    icon : icon ? icon : null,
     children,
     label: url ? <Link to={url}>{label}</Link> : label,
     type,
   };
 }
 const items = [
-  getItem('Joueurs', 'sub1', <MailOutlined />, [
-    getItem('Liste des joueurs', '1', null, null, null, '/joueurs'),
-    getItem('Ajouter un joueur', '2', null, null, null, '/joueurs/ajouter'),
+  getItem('Joueurs', 'sub1', <img src={playersIcon} style={{ width: '24px' }} alt="" />,
+  [
+    getItem('Liste des joueurs', '1', <ListeIcon />, null, null, '/joueurs'),
+    getItem( 'Ajouter un joueur', '2', <PlusIcon />, null, null, '/joueurs/ajouter'),
   ]),
-  getItem('Jeux', 'sub2', <AppstoreOutlined />, [
-    getItem('Liste des jeux', '3', null, null, null, '/jeux'),
-    getItem('Ajouter un jeux', '4', null, null, null, '/jeux/ajouter'),
+  getItem('Jeux', 'sub2', <img src={boardgamesIcon} style={{ width: '24px' }} alt="" />,
+  [
+    getItem('Liste des jeux', '3', <ListeIcon />, null, null, '/jeux'),
+    getItem('Ajouter un jeux', '4', <PlusIcon />, null, null, '/jeux/ajouter'),
     // getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
   ]),
-  getItem('Parties', 'sub3', <SettingOutlined />, [
-    getItem('Liste des parties', '5', null, null, null, '/parties'),
-    getItem('Ajouter une partie', '6', null, null, null, '/parties/ajouter'),
+  getItem('Parties', 'sub3', <img src={gamesIcon} style={{ width: '24px' }} alt="" />,
+  [
+    getItem('Liste des parties', '5', <ListeIcon />, null, null, '/parties'),
+    getItem('Ajouter une partie', '6', <PlusIcon />, null, null, '/parties/ajouter'),
   ]),
 ];
 
 // submenu keys of first level
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
 
 // ================== FIN Configuration du side menu ==================
 
@@ -398,7 +417,8 @@ function Dashboard({ setUserInfos, userInfos }) {
           openKeys={openKeys}
           onOpenChange={onOpenChange}
           style={{
-            // width: 256,
+            width: 256,
+            // height: '250px',
           }}
           items={items}
         />

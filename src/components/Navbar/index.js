@@ -29,7 +29,7 @@ function CollapsibleNavbar() {
         <Navbar.Brand>
           <Nav.Link as={Link} to="/">
             {/* <FontAwesomeIcon icon={faDice} className="title-icon" /> */}
-            <img src={boardgamescoreLogo} alt="boardgamescores, enregistrer les scores de vos parties de jeu de société" style={{ height: '4rem' }} />
+            {/* <img src={boardgamescoreLogo} alt="boardgamescores, enregistrer les scores de vos parties de jeu de société" style={{ height: '4rem' }} /> */}
             <h1>Board Game Score</h1>
           </Nav.Link>
         </Navbar.Brand>

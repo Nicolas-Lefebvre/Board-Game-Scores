@@ -10,7 +10,7 @@ function Header() {
     <div className="header-image">
 
       <div className="header-image__content">
-        <h1 className="header-image__content__title">Boardgame scores</h1>
+        <h2 className="header-image__content__title">Boardgame scores</h2>
         <p className="header-image__content__text">Le site qui pimente vos parties !</p>
         <button
           className='header-image__content__button'
