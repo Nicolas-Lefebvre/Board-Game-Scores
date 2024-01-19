@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ResponsivePie } from '@nivo/pie';
+import { ResponsiveRadar } from '@nivo/radar'
 
 import avatarPic from 'src/assets/images/avatar-pic.jpg';
 import winnerMedal from 'src/assets/images/winner-medal.png';
@@ -745,6 +746,78 @@ function Dashboard({ setUserInfos, userInfos }) {
         {/* ------------------------------ TOP CATEGORIES CONTAINER-------------------------- */}
 
             <section className="topCategories-container">
+            <div className="resultat-pieChart">
+              <ResponsiveRadar
+                className="radar-chart"
+                data={
+                  [
+                    {
+                      taste: 'fruity',
+                      chardonay: 100,
+                      carmenere: 110,
+                      syrah: 80
+                    },
+                    {
+                      taste: 'bitter',
+                      chardonay: 110,
+                      carmenere: 90,
+                      syrah: 60
+                    },
+                    {
+                      taste: 'heavy',
+                      chardonay: 60,
+                      carmenere: 120,
+                      syrah: 120
+                    },
+                    {
+                      taste: 'strong',
+                      chardonay: 90,
+                      carmenere: 70,
+                      syrah: 110
+                    },
+                    {
+                      taste: 'sunny',
+                      chardonay: 110,
+                      carmenere: 70,
+                      syrah: 110
+                    }
+                  ]
+                }
+                keys={['chardonay', 'carmenere', 'syrah']}
+                indexBy="taste"
+                valueFormat=" >-.2f"
+                margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+                borderColor={{ from: 'color' }}
+                gridLabelOffset={36}
+                dotSize={10}
+                dotColor={{ theme: 'background' }}
+                dotBorderWidth={2}
+                colors={{ scheme: 'paired' }}
+                blendMode="multiply"
+                motionConfig="wobbly"
+                legends={[
+                  {
+                    anchor: 'top-left',
+                    direction: 'column',
+                    translateX: -50,
+                    translateY: -40,
+                    itemWidth: 80,
+                    itemHeight: 20,
+                    itemTextColor: '#999',
+                    symbolSize: 12,
+                    symbolShape: 'circle',
+                    effects: [
+                      {
+                        on: 'hover',
+                        style: {
+                          itemTextColor: '#000'
+                        }
+                      }
+                    ]
+                  }
+                ]}
+              />
+              </div>
                 <div className="resultat-table">
                   <table className="table table-striped">
                     <thead>

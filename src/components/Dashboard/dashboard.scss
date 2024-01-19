@@ -255,9 +255,37 @@
     }
   }
 
+  // --------------------------TOP CATEGORIES CONTAINER--------------------
+
   section.topCategories-container{
     grid-area: categories;
     // justify-content: flex-start;
+
+    .resultat-pieChart {
+      display: flex;
+      // min-width: 500px;
+      // min-height: 500px;
+      // max-width: 400px;
+      margin: auto;
+      // max-width: 80%;
+      height: 300px;
+      width: 100%;
+
+      // .pieChart-wrapper {
+      //   max-width: 100px;
+      // }
+      
+      .radar-chart{
+        display: flex;
+        min-width: 100%;
+        min-height: 100%;
+        max-width: 400px;
+        margin: auto;
+        // max-width: 80%;
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 
   section.top-player-container{
