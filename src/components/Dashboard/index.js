@@ -291,6 +291,7 @@ function Dashboard({ setUserInfos, userInfos }) {
   const [loadingTop5Categories, setLoadingTop5Categories] = useState(true);
   const [topCategories, setTopCategories] = useState([]);
   const [topPlayedCategories, setTopPlayedCategories] = useState([]);
+  const [top5PlayedCategories, setTop5PlayedCategories] = useState([]);
 
   // =====================================  RECUPERATION TOP CATEGORIES =============================
   useEffect(() => {
@@ -302,9 +303,13 @@ function Dashboard({ setUserInfos, userInfos }) {
     axios.get(`${baseUrl}/api/user/categories5`, config)
       .then((response) => {
         console.log('Recuperation des top 5 catégories OK');
+        console.log('response.data', response.data.results.filter((category) => category.total_games > 0));
         setTopCategories(response.data.results);
         setTopPlayedCategories(response.data.results.filter((category) => category.total_games > 0));
         setLoadingTop5Categories(false);
+        setTop5PlayedCategories(response.data.results.filter((category) => category.total_games > 0).slice(0, 5));
+
+        
       })
       .catch((error) => {
         console.log(error);
@@ -594,6 +599,15 @@ function Dashboard({ setUserInfos, userInfos }) {
             <section className="topGames-container">
 
               <h4>Top jeux</h4>
+
+              {topPlayedGames[2] &&
+                <div className="podium resultat-wrapper">
+                  <img src={topPlayedGames[1].picture} alt={topPlayedGames[1].name} style={{width: '20%', maxWidth: '600px'}} />
+                  <img src={topPlayedGames[0].picture} alt={topPlayedGames[0].name} style={{width: '30%', maxWidth: '600px'}} />
+                  <img src={topPlayedGames[2].picture} alt={topPlayedGames[2].name} style={{width: '15%', maxWidth: '600px'}} />
+                </div>
+              }
+
               <div className="resultats-wrapper">
 
                 <div className="resultat-pieChart">
@@ -746,45 +760,20 @@ function Dashboard({ setUserInfos, userInfos }) {
         {/* ------------------------------ TOP CATEGORIES CONTAINER-------------------------- */}
 
             <section className="topCategories-container">
+
             <div className="resultat-pieChart">
+              {/* Affichage radar si au moins 5 parties jouées */}
+              {top5PlayedCategories &&
               <ResponsiveRadar
                 className="radar-chart"
                 data={
-                  [
-                    {
-                      taste: 'fruity',
-                      chardonay: 100,
-                      carmenere: 110,
-                      syrah: 80
-                    },
-                    {
-                      taste: 'bitter',
-                      chardonay: 110,
-                      carmenere: 90,
-                      syrah: 60
-                    },
-                    {
-                      taste: 'heavy',
-                      chardonay: 60,
-                      carmenere: 120,
-                      syrah: 120
-                    },
-                    {
-                      taste: 'strong',
-                      chardonay: 90,
-                      carmenere: 70,
-                      syrah: 110
-                    },
-                    {
-                      taste: 'sunny',
-                      chardonay: 110,
-                      carmenere: 70,
-                      syrah: 110
-                    }
-                  ]
+                  top5PlayedCategories.map(cat => ({
+                    "categorie": cat.category_name,
+                    "parties": parseInt(cat.total_games)
+                }))
                 }
-                keys={['chardonay', 'carmenere', 'syrah']}
-                indexBy="taste"
+              keys={[ 'parties' ]}
+              indexBy="categorie"
                 valueFormat=" >-.2f"
                 margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
                 borderColor={{ from: 'color' }}
@@ -816,7 +805,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     ]
                   }
                 ]}
-              />
+              />}
               </div>
                 <div className="resultat-table">
                   <table className="table table-striped">
