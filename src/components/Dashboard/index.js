@@ -586,7 +586,7 @@ function Dashboard({ setUserInfos, userInfos }) {
 
         </section>
 
-        {/* ------------------------------ TOP GAMES CONTAINER-------------------------- */}
+        {/* ------------------------------ TOP BOARDGAMES CONTAINER-------------------------- */}
 
         {loadingTop5Games || loadingTop5Categories ? (<Loader />)
           : (
@@ -606,7 +606,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     <thead>
                       <tr>
                         <th colSpan="8">Top jeux</th>
-                        {/* <th scope="col">245</th> */}
+  
                       </tr>
                     </thead>
                     <tbody>
@@ -615,10 +615,10 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Parties</th>
                         {/* <th>Victoires</th>
                         <th>Défaites</th> */}
-                        <th className="desktop">Champion <img src={winnerMedal} alt="medaille des titres de champions" /></th>
-                        <th className="desktop">Max Victoires <img src={winnerMedal} alt="medaille des titres de champions" /></th>
-                        <th className="desktop">Recordman <img src={lauriers} alt="laurier des records" /></th>
-                        <th className="desktop">Record <img src={lauriers} alt="laurier des records" /></th>
+                        <th className="desktop"><img src={winnerMedal} alt="medaille des titres de champions" /><br/>Champion</th>
+                        <th className="desktop"><img src={winnerMedal} alt="medaille des titres de champions" /><br/>Max Victoires</th>
+                        <th className="desktop"><img src={lauriers} alt="laurier des records" /><br/>Recordman</th>
+                        <th className="desktop"><img src={lauriers} alt="laurier des records" /><br/>Record</th>
                         {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
                         <th><img src={lauriers} alt="laurier des records" /></th> */}
                         {/* <th>Champion</th>
@@ -738,7 +738,13 @@ function Dashboard({ setUserInfos, userInfos }) {
                     </tbody>
                   </table>
                 </div>
+              </div>
+            </section>
+          )}
 
+        {/* ------------------------------ TOP CATEGORIES CONTAINER-------------------------- */}
+
+            <section className="topCategories-container">
                 <div className="resultat-table">
                   <table className="table table-striped">
                     <thead>
@@ -773,9 +779,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     </tbody>
                   </table>
                 </div>
-              </div>
-            </section>
-          )}
+              </section>
 
         {/* ------------------------------ TOP PLAYERS CONTAINER-------------------------- */}
 

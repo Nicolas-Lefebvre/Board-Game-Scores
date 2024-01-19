@@ -1,3 +1,5 @@
+@use 'src/styles/vars';
+
 // .login-form {
 //   max-width: 300px;
 // }
@@ -7,6 +9,107 @@
 // .ant-col-rtl .login-form-forgot {
 //   float: left;
 // }
+
+.connexion{
+  h2{
+    color: vars.$main-color;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
+  }
+}
+
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  // background: linear-gradient(to right, #6DD5FA, #FF758C); // Example gradient
+  height: calc(100vh - 85px);
+  // width: 100%;
+  
+  
+  
+  section {
+    height: fit-content;
+    width: fit-content;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    
+    h2 {
+      // font-size: 2rem;
+      // margin-bottom: 20px;
+    }
+    
+    Form {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      
+      .login-form-forgot{
+        float: right;
+        font-size: 12px;
+      }
+      
+      .ant-space-item{
+        display: flex;
+        flex-direction: column;
+      }
+      
+      // label {
+        //   font-size: 1rem;
+        // }
+        
+        .ant-form-item {
+        margin-bottom: 15px;
+      }
+      
+      .ant-input-password {
+        border-radius: 5px;
+        // padding: 10px;
+        border: 1px solid #ccc;
+        
+        &:focus {
+          border-color: #80bdff;
+          outline: 0;
+          box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+      }
+      .remember-me{
+        float: left;
+      }
+      
+      Button {
+        // background-color: #007bff;
+        // border-color: #007bff;
+        color: white;
+        // padding: 10px 15px;
+        border-radius: 5px;
+        // font-size: 1rem;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        margin-bottom: .5rem;
+        
+        &:hover {
+          background-color: #0056b3;
+          // border-color: #0056b3;
+        }
+      }
+      
+    }
+  }
+
+  .message-erreur{
+    width: 400px;
+  }
+}
 
 @media (max-width: 1025px) {
   .form-container {
@@ -30,99 +133,5 @@
     .message-erreur{
       max-width: 90%;
     }
-  }
-}
-
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  // background: linear-gradient(to right, #6DD5FA, #FF758C); // Example gradient
-  height: calc(100vh - 85px);
-  // width: 100%;
-
-
-
-  section {
-    height: fit-content;
-    width: fit-content;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-
-    h2 {
-      // font-size: 2rem;
-      // margin-bottom: 20px;
-    }
-
-    Form {
-      display: flex;
-      flex-direction: column;
-      width: fit-content;
-
-      .login-form-forgot{
-        float: right;
-        font-size: 12px;
-      }
-
-      .ant-space-item{
-        display: flex;
-        flex-direction: column;
-      }
-
-      // label {
-      //   font-size: 1rem;
-      // }
-
-      .ant-form-item {
-        margin-bottom: 15px;
-      }
-
-      .ant-input-password {
-        border-radius: 5px;
-        // padding: 10px;
-        border: 1px solid #ccc;
-
-        &:focus {
-          border-color: #80bdff;
-          outline: 0;
-          box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-        }
-      }
-      .remember-me{
-        float: left;
-      }
-
-      Button {
-        // background-color: #007bff;
-        // border-color: #007bff;
-        color: white;
-        // padding: 10px 15px;
-        border-radius: 5px;
-        // font-size: 1rem;
-        transition: background-color 0.3s ease;
-        width: 100%;
-        margin-bottom: .5rem;
-
-        &:hover {
-          background-color: #0056b3;
-          // border-color: #0056b3;
-        }
-      }
-
-    }
-  }
-
-  .message-erreur{
-    width: 400px;
   }
 }

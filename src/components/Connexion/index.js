@@ -98,7 +98,7 @@ function Connexion() {
   };
 
   return (
-    <div className="form-container">
+    <div className="form-container connexion">
       <section>
         <h2>Connexion</h2>
         <Form
