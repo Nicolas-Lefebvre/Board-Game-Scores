@@ -8,10 +8,10 @@
     grid-template-areas: 
       "profil results results "
       "listes results results"
-      "jeux jeux joueurs"
-      "jeux jeux joueurs"
-      "categories categories rien"
-      "categories categories rien"
+      "jeux jeux jeux"
+      "jeux jeux jeux"
+      "categories categories joueurs"
+      "categories categories joueurs"
     ;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 32px;
@@ -184,6 +184,7 @@
       span.ant-menu-title-content {
         color: vars.$main-color;
       }
+      
     }
 
     // --------------------------SCORES CONTAINER--------------------
@@ -263,6 +264,7 @@
 
   section.topCategories-container{
     grid-area: categories;
+    align-items: normal;
     // justify-content: flex-start;
 
     .resultat-pieChart {
@@ -294,7 +296,7 @@
 
   section.top-player-container{
     grid-area: joueurs;
-    // justify-content: flex-start;
+    justify-content: flex-start;
 
     .tables-wrapper{
       // overflow-x: scroll;

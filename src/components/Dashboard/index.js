@@ -424,6 +424,7 @@ function Dashboard({ setUserInfos, userInfos }) {
           onOpenChange={onOpenChange}
           style={{
             width: 256,
+            border: 'none',
             // height: '250px',
           }}
           items={items}
@@ -602,9 +603,9 @@ function Dashboard({ setUserInfos, userInfos }) {
 
               {topPlayedGames[2] &&
                 <div className="podium resultat-wrapper">
-                  <img src={topPlayedGames[1].picture} alt={topPlayedGames[1].name} style={{width: '20%', maxWidth: '600px'}} />
-                  <img src={topPlayedGames[0].picture} alt={topPlayedGames[0].name} style={{width: '30%', maxWidth: '600px'}} />
-                  <img src={topPlayedGames[2].picture} alt={topPlayedGames[2].name} style={{width: '15%', maxWidth: '600px'}} />
+                  <img src={topPlayedGames[1].picture} alt={topPlayedGames[1].name} style={{width: '20%', maxWidth: '200px'}} />
+                  <img src={topPlayedGames[0].picture} alt={topPlayedGames[0].name} style={{width: '30%', maxWidth: '200px'}} />
+                  <img src={topPlayedGames[2].picture} alt={topPlayedGames[2].name} style={{width: '15%', maxWidth: '200px'}} />
                 </div>
               }
 
@@ -760,6 +761,8 @@ function Dashboard({ setUserInfos, userInfos }) {
         {/* ------------------------------ TOP CATEGORIES CONTAINER-------------------------- */}
 
             <section className="topCategories-container">
+
+            <h4>Top catégories</h4>
 
             <div className="resultat-pieChart">
               {/* Affichage radar si au moins 5 parties jouées */}
