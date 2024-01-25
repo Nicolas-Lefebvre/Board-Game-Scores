@@ -288,7 +288,7 @@ function Dashboard({ setUserInfos, userInfos }) {
       });
   }, []);
   
-  // Gestion de la pagination du TOP BGAMES
+  // -------------------- Gestion de la pagination du TOP BGAMES----------------------
   const [currentBoardgamePage, setCurrentBoardgamePage] = useState(1);
   const boardgamePageSize = 5; // Nombre de jeux par page
   // Calculez le nombre total de jeux
@@ -297,12 +297,11 @@ function Dashboard({ setUserInfos, userInfos }) {
   const handleChangeBoardgamePage = (page) => {
     setCurrentBoardgamePage(page);
   };
-
   // Obtenez les jeux pour la page actuelle
   const indexOfLastGame = currentBoardgamePage * boardgamePageSize;
   const indexOfFirstGame = indexOfLastGame - boardgamePageSize;
   const currentBoardgames = topPlayedGames.slice(indexOfFirstGame, indexOfLastGame);
-  
+  // --------------------- Fin gestion de la pagination du TOP BGAMES------------------
   
   // =====================================  RECUPERATION TOP CATEGORIES =============================
   const [loadingTop5Categories, setLoadingTop5Categories] = useState(true);
@@ -332,53 +331,22 @@ function Dashboard({ setUserInfos, userInfos }) {
       });
   }, []); // tableau de dépendances vide pour s'exécuter une seule fois au montage du composant
 
-  // ----------------------Recuperation des top 5 JOUEURS -----------------------
-  // const [loadingTop5Players, setLoadingTop5Players] = useState(true);
-  // const [top5Players, setTop5Players] = useState([]);
-  // const [top5PlayersData, setTop5PlayersData] = useState([]);
+    // -------------------- Gestion de la pagination du TOP CATEGORIES ----------------------
+    const [currentCategoryPage, setCurrentCategoryPage] = useState(1);
+    const categoryPageSize = 10; // Nombre de jeux par page
+    // Calculez le nombre total de jeux
+    const totalCategories = topPlayedCategories.length;
+    // Fonction pour changer de page
+    const handleChangeCategoryPage = (page) => {
+      setCurrentCategoryPage(page);
+    };
+    // Obtenez les jeux pour la page actuelle
+    const indexOfLastCategory = currentCategoryPage * categoryPageSize;
+    const indexOfFirstCategory = indexOfLastCategory - categoryPageSize;
+    const currentCategories = topPlayedCategories.slice(indexOfFirstCategory, indexOfLastCategory);
+    // --------------------- Fin gestion de la pagination du TOP CATEGORIES ------------------
 
-  // =====================================  RECUPERATION TOP 5 JOUEURS =============================
-  // CODE DESACTIVE CAR ON UTILISE LA MEME API QUE POUR LA LISTE DE TOUS LES JOUEURS
-  // useEffect(() => {
-  //   axios.get(
-  //     // URL
-  //     `${baseUrl}/api/user/players5`,
-  //     // données
-  //     config,
-  //   )
-  //     .then((response) => {
-  //       console.log('Recuperation des top 5 joueurs OK');
-  //       console.log(response.data);
-  //       setTop5Players(response.data.results);
 
-  //       setLoadingTop5Players(false);
-
-  //       // Initialisation du tableau vide
-  //       const top5PlayersPieData = [];
-
-  //       // Boucle pour remplir le tableau
-  //       // eslint-disable-next-line no-plusplus
-  //       for (let i = 0; i < response.data.results.length; i++) {
-  //         // Création de l'objet pour chaque jeu
-  //         const player = {
-  //           id: response.data.results[i].player_name,
-  //           label: response.data.results[i].player_name,
-  //           value: response.data.results[i].victory_number,
-  //           color: `hsl(${i * 15}, 70%, 50%)`,
-  //         };
-
-  //         // Ajout de l'objet au tableau
-  //         top5PlayersPieData.push(player);
-  //       }
-
-  //       // On rempli le 2nd camembert avec les données du joueur en index zéro par défaut
-  //       setTop5PlayersData(top5PlayersPieData);
-  //     })
-
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
 
   console.log('loadingTop5Categories :', loadingTop5Categories);
   console.log('loadingTop5Games :', loadingTop5Games);
@@ -858,7 +826,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                             <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune catégorie renseignée</td>
                           </tr>
                         )
-                        : topPlayedCategories.map((category, index) => (
+                        : currentCategories.map((category, index) => (
                           <tr key={category.category_id}>
                             <td>{index + 1}.</td>
                             <td>{category.category_name}</td>
@@ -871,6 +839,13 @@ function Dashboard({ setUserInfos, userInfos }) {
                     </tbody>
                   </table>
                 </div>
+                <Pagination
+                    defaultCurrent={1}
+                    current={currentCategoryPage}
+                    onChange={handleChangeCategoryPage}
+                    total={totalCategories}
+                    pageSize={categoryPageSize}
+                  />
               </section>
 
         {/* ------------------------------ TOP PLAYERS CONTAINER-------------------------- */}
