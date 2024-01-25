@@ -23,7 +23,7 @@ import GamesPieChart from './PieCharts/GamesPieChart';
 import { setTokenValidity } from '../../actions/user';
 
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { Menu } from 'antd';
+import { Menu, Pagination } from 'antd';
 
 // ================== Configuration du side menu ==================
 const ListeIcon = () => (
@@ -287,13 +287,29 @@ function Dashboard({ setUserInfos, userInfos }) {
         console.log(error);
       });
   }, []);
+  
+  // Gestion de la pagination du TOP BGAMES
+  const [currentBoardgamePage, setCurrentBoardgamePage] = useState(1);
+  const boardgamePageSize = 5; // Nombre de jeux par page
+  // Calculez le nombre total de jeux
+  const totalBoardgames = topPlayedGames.length;
+  // Fonction pour changer de page
+  const handleChangeBoardgamePage = (page) => {
+    setCurrentBoardgamePage(page);
+  };
 
+  // Obtenez les jeux pour la page actuelle
+  const indexOfLastGame = currentBoardgamePage * boardgamePageSize;
+  const indexOfFirstGame = indexOfLastGame - boardgamePageSize;
+  const currentBoardgames = topPlayedGames.slice(indexOfFirstGame, indexOfLastGame);
+  
+  
+  // =====================================  RECUPERATION TOP CATEGORIES =============================
   const [loadingTop5Categories, setLoadingTop5Categories] = useState(true);
   const [topCategories, setTopCategories] = useState([]);
   const [topPlayedCategories, setTopPlayedCategories] = useState([]);
   const [top5PlayedCategories, setTop5PlayedCategories] = useState([]);
 
-  // =====================================  RECUPERATION TOP CATEGORIES =============================
   useEffect(() => {
     // Vérifie si les catégories sont déjà chargées, si oui, ne fait rien
     if (topCategories.length > 0 && topPlayedCategories.length > 0) {
@@ -646,7 +662,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                               <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune jeu renseignée : ajoutez votre première partie</td>
                             </tr>
                           )
-                          : topPlayedGames.map((game, index) => (
+                          : currentBoardgames.map((game, index) => (
                             <tr key={game.id}>
                               <td>{index + 1}.</td>
                               <td><Link to={`/jeux/${game.id}?boardgame_id=${game.id}`}>{game.name}</Link>
@@ -674,6 +690,13 @@ function Dashboard({ setUserInfos, userInfos }) {
                     </tbody>
                   </table>
                 </div>
+                  <Pagination
+                    defaultCurrent={1}
+                    current={currentBoardgamePage}
+                    onChange={handleChangeBoardgamePage}
+                    total={totalBoardgames}
+                    pageSize={boardgamePageSize}
+                  />
 
                 {/* ==============================================   AFFICHAGE MOBILE ONLY ============================================= */}
                 <div className="resultat-table mobile">

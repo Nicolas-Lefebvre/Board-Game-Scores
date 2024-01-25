@@ -115,6 +115,15 @@
       } 
     }
 
+    .ant-pagination-item-link{
+      color: black;
+      background-color: white !important;
+    }
+
+    .ant-pagination-item-active{
+      color: vars.$main-color;
+    }
+
     // --------------------------PROFIL CONTAINER--------------------
     section.profil-container {
       grid-area: profil;
