@@ -8,22 +8,9 @@ import { ResponsivePie } from '@nivo/pie';
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-function MyResponsivePie() {
-  const data = [
-    {
-      id: 'victoires',
-      label: 'victoires',
-      value: 447,
-      color: 'hsl(15, 70%, 50%)',
-    },
-    {
-      id: 'défaites',
-      label: 'Défaites',
-      value: 269,
-      color: 'hsl(30, 70%, 50%)',
-    },
-  ];
-  // <div style={{ height: '200px' }}>
+const ResultPieChart = ({ data }) => {
+
+  return (
     <ResponsivePie
       data={data}
       margin={{
@@ -34,7 +21,10 @@ function MyResponsivePie() {
       }}
       valueFormat=" ^-~f"
       activeOuterRadiusOffset={8}
-      colors={['green', 'red']}
+      colors={[
+        'rgb(107, 142, 35)',    // Goldenrod (jaune boisé)
+        'rgb(205, 92, 92)',     // Rouge indien (rouge boisé)
+      ]}
       colorsBy="index"
       borderWidth={1}
       borderColor={{
@@ -78,8 +68,9 @@ function MyResponsivePie() {
           ],
         },
       ]}
-    />;
+    />
+  );
   // </div>
 }
 
-export default MyResponsivePie;
+export default ResultPieChart;

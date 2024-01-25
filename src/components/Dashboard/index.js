@@ -450,7 +450,6 @@ function Dashboard({ setUserInfos, userInfos }) {
           </select>
 
           <div className="resultats-wrapper">
-
             <div className="resultat-pieChart">
               <ResponsivePie
                 data={data}
@@ -609,12 +608,11 @@ function Dashboard({ setUserInfos, userInfos }) {
                 </div>
               }
 
-              <div className="resultats-wrapper">
-
+              {/* <div className="resultats-wrapper">
                 <div className="resultat-pieChart">
                   <GamesPieChart data={top5GamesData} />
                 </div>
-              </div>
+              </div> */}
 
               <div className="tables-wrapper">
                 <div className="resultat-table">
@@ -627,6 +625,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     </thead>
                     <tbody>
                       <tr>
+                        <th>#</th>
                         <th>Jeu</th>
                         <th>Parties</th>
                         {/* <th>Victoires</th>
@@ -647,8 +646,9 @@ function Dashboard({ setUserInfos, userInfos }) {
                               <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune jeu renseignée : ajoutez votre première partie</td>
                             </tr>
                           )
-                          : topPlayedGames.map((game) => (
+                          : topPlayedGames.map((game, index) => (
                             <tr key={game.id}>
+                              <td>{index + 1}.</td>
                               <td><Link to={`/jeux/${game.id}?boardgame_id=${game.id}`}>{game.name}</Link>
                               </td>
                               <td>{game.num_games_played}</td>
@@ -686,6 +686,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                     </thead>
                     <tbody>
                       <tr>
+                        <th>#</th>
                         <th>Jeu</th>
                         <th>Champion <img src={winnerMedal} alt="medaille des titres de champions" /></th>
                         <th>Victoires <img src={winnerMedal} alt="medaille des titres de champions" /></th>
@@ -697,8 +698,9 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Recordman</th> */}
                       </tr>
                       {
-                      topGames.map((game) => (
+                      topGames.map((game, index) => (
                         <tr key={game.id}>
+                          <td>{index + 1}.</td>
                           <td>
                             <Link to={`/jeux/${game.id}`}>
                               {game.name}
@@ -814,12 +816,13 @@ function Dashboard({ setUserInfos, userInfos }) {
                   <table className="table table-striped">
                     <thead>
                       <tr>
-                        <th colSpan="4">Top catégories</th>
+                        <th colSpan="5">Top catégories</th>
                         {/* <th scope="col">245</th> */}
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
+                        <th>#</th>
                         <th>Catégorie</th>
                         <th>Parties</th>
                         <th>Champion</th>
@@ -832,8 +835,9 @@ function Dashboard({ setUserInfos, userInfos }) {
                             <td style={{ fontStyle: 'italic' }} colSpan="2">Aucune catégorie renseignée</td>
                           </tr>
                         )
-                        : topPlayedCategories.map((category) => (
+                        : topPlayedCategories.map((category, index) => (
                           <tr key={category.category_id}>
+                            <td>{index + 1}.</td>
                             <td>{category.category_name}</td>
                             <td>{category.total_games}</td>
                             <td>{category.name}</td>
@@ -853,6 +857,7 @@ function Dashboard({ setUserInfos, userInfos }) {
             <section className="top-player-container">
 
               <h4>Top joueurs</h4>
+              
               <div className="resultats-wrapper">
 
                 <div className="resultat-pieChart">
@@ -865,17 +870,18 @@ function Dashboard({ setUserInfos, userInfos }) {
                   <table className="table table-striped">
                     <thead>
                       <tr>
-                        <th colSpan="5">Top joueurs</th>
+                        <th colSpan="6">Top joueurs</th>
                         {/* <th scope="col">245</th> */}
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
+                        <th>#</th>
                         <th>Nom</th>
                         <th>Parties</th>
                         <th>Victoires</th>
                         <th>Défaites</th>
-                        <th>Champion <img src={winnerMedal} alt="medaille des titres de champions" /></th>
+                        <th><img src={winnerMedal} alt="medaille des titres de champions" /><br />Champion</th>
                         {/* <th><img src={lauriers} alt="laurier des records" /></th> */}
                       </tr>
                       {
@@ -885,8 +891,9 @@ function Dashboard({ setUserInfos, userInfos }) {
                             <td style={{ fontStyle: 'italic' }} colSpan="2">Aucun joueur renseigné</td>
                           </tr>
                         )
-                        : playerListWithGames.map((player) => (
+                        : playerListWithGames.map((player, index) => (
                           <tr key={player.player_id}>
+                            <td>{index + 1}.</td>
                             <td>
                               <Link to={`/joueurs/id?player_id=${player.player_id}`}>
                                 {player.player_name}

@@ -294,9 +294,33 @@
     }
   }
 
+    // --------------------------TOP PLAYERS CONTAINER--------------------
+
   section.top-player-container{
     grid-area: joueurs;
     justify-content: flex-start;
+    
+    .resultats-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      // width: 100%;
+
+      .resultat-pieChart {
+        display: flex;
+        min-width: 300px;
+        max-width: 400px;
+        margin: auto;
+        // max-width: 80%;
+        height: 200px;
+        width: 80%;
+
+        // .pieChart-wrapper {
+        //   max-width: 100px;
+        // }
+      }
+
+    }
 
     .tables-wrapper{
       // overflow-x: scroll;
