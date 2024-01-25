@@ -235,6 +235,22 @@ function Dashboard({ setUserInfos, userInfos }) {
     );
   };
 
+      // -------------------- Gestion de la pagination du TOP JOUEURS ----------------------
+      const [currentPlayerPage, setCurrentPlayerPage] = useState(1);
+      const playerPageSize = 10; // Nombre de jeux par page
+      // Calculez le nombre total de jeux
+      const totalPlayers = playerListWithGames.length;
+      // Fonction pour changer de page
+      const handleChangePlayerPage = (page) => {
+        setCurrentPlayerPage(page);
+      };
+      // Obtenez les jeux pour la page actuelle
+      const indexOfLastPlayer = currentPlayerPage * playerPageSize;
+      const indexOfFirstPlayer = indexOfLastPlayer - playerPageSize;
+      const currentPlayers = playerListWithGames.slice(indexOfFirstPlayer, indexOfLastPlayer);
+      // --------------------- Fin gestion de la pagination du TOP JOUEURS ------------------
+  
+  // =====================================  RECUPERATION TOP JEUX JOUES =============================
   // Recuperation des top 5 jeux par joueur
   const [loadingTop5Games, setLoadingTop5Games] = useState(true);
   const [topGames, setTopGames] = useState([]);
@@ -242,7 +258,6 @@ function Dashboard({ setUserInfos, userInfos }) {
   // const [numberOfGames, setNumberOfGames] = useState(0);
   const [top5GamesData, setTop5GamesData] = useState([]);
 
-  // =====================================  RECUPERATION TOP JEUX JOUES =============================
   useEffect(() => {
     axios.get(
       // URL
@@ -840,12 +855,12 @@ function Dashboard({ setUserInfos, userInfos }) {
                   </table>
                 </div>
                 <Pagination
-                    defaultCurrent={1}
-                    current={currentCategoryPage}
-                    onChange={handleChangeCategoryPage}
-                    total={totalCategories}
-                    pageSize={categoryPageSize}
-                  />
+                  defaultCurrent={1}
+                  current={currentCategoryPage}
+                  onChange={handleChangeCategoryPage}
+                  total={totalCategories}
+                  pageSize={categoryPageSize}
+                />
               </section>
 
         {/* ------------------------------ TOP PLAYERS CONTAINER-------------------------- */}
@@ -889,7 +904,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                             <td style={{ fontStyle: 'italic' }} colSpan="2">Aucun joueur renseigné</td>
                           </tr>
                         )
-                        : playerListWithGames.map((player, index) => (
+                        : currentPlayers.map((player, index) => (
                           <tr key={player.player_id}>
                             <td>{index + 1}.</td>
                             <td>
@@ -918,6 +933,13 @@ function Dashboard({ setUserInfos, userInfos }) {
                 </div>
 
               </div>
+              <Pagination
+                  defaultCurrent={1}
+                  current={currentPlayerPage}
+                  onChange={handleChangePlayerPage}
+                  total={totalPlayers}
+                  pageSize={playerPageSize}
+                />
             </section>
           )}
 
