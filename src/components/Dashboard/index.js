@@ -832,7 +832,7 @@ function Dashboard({ setUserInfos, userInfos }) {
                         <th>Catégorie</th>
                         <th>Parties</th>
                         <th>Champion</th>
-                        <th>nb victoire(s)</th>
+                        {/* <th>nb victoire(s)</th> */}
                       </tr>
                       {
                       topPlayedCategories.length === 0
@@ -846,8 +846,8 @@ function Dashboard({ setUserInfos, userInfos }) {
                             <td>{index + 1}.</td>
                             <td>{category.category_name}</td>
                             <td>{category.total_games}</td>
-                            <td>{category.name}</td>
-                            <td>{category.max_wins}</td>
+                            <td>{category.name} <span className='font-italic'>({category.max_wins} victoires)</span></td>
+                            {/* <td>{category.max_wins}</td> */}
                           </tr>
                         ))
                     }

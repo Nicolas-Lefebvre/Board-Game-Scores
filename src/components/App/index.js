@@ -21,7 +21,6 @@ import GameDetails from '../GameDetails';
 import GameEdit from '../GameEdit';
 import Dashboard from '../Dashboard';
 import AddGame from '../AddGame';
-import GetConnected from '../GetConnected';
 import Disconnection from '../Disconnection';
 import Contact from '../Contact';
 import Cgu from '../Cgu';
@@ -129,35 +128,35 @@ function App() {
         <Route path="/" element={(<Home />)} />
 
         {/* --------------------------------------- BOARDGAMES -------------------------------- */}
-        <Route path="/jeux" element={isLogged ? <BoardgameList /> : <GetConnected />} />
+        <Route path="/jeux" element={isLogged ? <BoardgameList /> : <Connexion />} />
         <Route
           path="/jeux/:boardgameId"
-          element={isLogged ? (<BoardgameDetails />) : <GetConnected />}
+          element={isLogged ? (<BoardgameDetails />) : <Connexion />}
         />
-        <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <GetConnected />} />
+        <Route path="/jeux/ajouter" element={isLogged ? <AddBoardgame loading={loading} setLoading={setLoading} /> : <Connexion />} />
 
         {/* ------------------------------------- GAMES ---------------------------------------- */}
         <Route
           path="/parties/:gameId"
           element={
-            isLogged ? (<GameDetails />) : <GetConnected />
+            isLogged ? (<GameDetails />) : <Connexion />
         }
         />
         <Route
           path="/parties/modifier/:id"
-          element={isLogged ? (<GameEdit />) : <GetConnected />}
+          element={isLogged ? (<GameEdit />) : <Connexion />}
         />
-        <Route path="/parties" element={isLogged ? <GameList loading={loading} setLoading={setLoading} /> : <GetConnected />} />
-        <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <GetConnected />} />
+        <Route path="/parties" element={isLogged ? <GameList loading={loading} setLoading={setLoading} /> : <Connexion />} />
+        <Route path="/parties/ajouter" element={isLogged ? <AddGame /> : <Connexion />} />
 
         {/* -------------------------------------------- PLAYERS ------------------------------- */}
-        <Route path="/joueurs" element={isLogged ? <Players /> : <GetConnected />} />
-        <Route path="/joueurs/:id" element={isLogged ? <PlayerDetails /> : <GetConnected />} />
-        <Route path="/joueurs/ajouter" element={isLogged ? <PlayerAdd /> : <GetConnected />} />
-        <Route path="/joueurs/modifier" element={isLogged ? <PlayerEdit /> : <GetConnected />} />
+        <Route path="/joueurs" element={isLogged ? <Players /> : <Connexion />} />
+        <Route path="/joueurs/:id" element={isLogged ? <PlayerDetails /> : <Connexion />} />
+        <Route path="/joueurs/ajouter" element={isLogged ? <PlayerAdd /> : <Connexion />} />
+        <Route path="/joueurs/modifier" element={isLogged ? <PlayerEdit /> : <Connexion />} />
 
         {/* -------------------------------------------------- DASHBOARD ----------------------- */}
-        <Route path="/tableau-de-bord" element={isLogged ? <Dashboard setUserInfos={setUserInfos} userInfos={userInfos} /> : <GetConnected />} />
+        <Route path="/tableau-de-bord" element={isLogged ? <Dashboard setUserInfos={setUserInfos} userInfos={userInfos} /> : <Connexion />} />
 
         {/* ---------------------------------------------------- OTHERS------------------------- */}
         <Route path="/inscription" element={<Subscribe />} />
