@@ -764,29 +764,29 @@ function Dashboard({ setUserInfos, userInfos }) {
                       {/* <th>Victoires</th>
                         <th>Défaites</th> */}
                       <th className="desktop">
-                        <img
+                        {/* <img
                           src={winnerMedal}
                           alt="medaille des titres de champions"
                         />
-                        <br />
+                        <br /> */}
                         Champion
                       </th>
                       <th className="desktop">
-                        <img
+                        {/* <img
                           src={winnerMedal}
                           alt="medaille des titres de champions"
                         />
-                        <br />
+                        <br /> */}
                         Max Victoires
                       </th>
                       <th className="desktop">
-                        <img src={lauriers} alt="laurier des records" />
-                        <br />
+                        {/* <img src={lauriers} alt="laurier des records" />
+                        <br /> */}
                         Recordman
                       </th>
                       <th className="desktop">
-                        <img src={lauriers} alt="laurier des records" />
-                        <br />
+                        {/* <img src={lauriers} alt="laurier des records" />
+                        <br /> */}
                         Record
                       </th>
                       {/* <th><img src={winnerMedal} alt="medaille des titres de champions" /></th>
@@ -857,17 +857,17 @@ function Dashboard({ setUserInfos, userInfos }) {
                       <th>Jeu</th>
                       <th>
                         Champion{' '}
-                        <img
+                        {/* <img
                           src={winnerMedal}
                           alt="medaille des titres de champions"
-                        />
+                        /> */}
                       </th>
                       <th>
                         Victoires{' '}
-                        <img
+                        {/* <img
                           src={winnerMedal}
                           alt="medaille des titres de champions"
-                        />
+                        /> */}
                       </th>
                       {/* <th>Recordman</th>
                         <th>Défaites</th> */}
@@ -908,10 +908,11 @@ function Dashboard({ setUserInfos, userInfos }) {
                       <th>Jeu</th>
                       <th>
                         Recordman{' '}
-                        <img src={lauriers} alt="laurier des records" />
+                        {/* <img src={lauriers} alt="laurier des records" /> */}
                       </th>
                       <th>
-                        Record <img src={lauriers} alt="laurier des records" />
+                        Record
+                        {/* <img src={lauriers} alt="laurier des records" /> */}
                       </th>
                       {/* <th>Recordman</th>
                         <th>Défaites</th> */}
@@ -1066,14 +1067,14 @@ function Dashboard({ setUserInfos, userInfos }) {
                       <th>#</th>
                       <th>Nom</th>
                       <th>Parties</th>
-                      <th>V<span className='desktop'>ictoires</span></th>
-                      <th>D<span className='desktop'>éfaites</span></th>
+                      <th>V<span className="desktop">ictoires</span></th>
+                      <th>D<span className="desktop">éfaites</span></th>
                       <th>
-                        <img
+                        {/* <img
                           src={winnerMedal}
                           alt="medaille des titres de champions"
                         />
-                        <br />
+                        <br /> */}
                         Champion
                       </th>
                       {/* <th><img src={lauriers} alt="laurier des records" /></th> */}
