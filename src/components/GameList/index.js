@@ -10,6 +10,7 @@ import
   useEffect,
 } from 'react';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { useSelector, useDispatch } from 'react-redux';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -148,10 +149,10 @@ function GameList() {
                 <img src={game.picture} alt="" className="image" />
               </div>
               <div className="text-container">
-                <h5 className="card-title">{game.start_date ? game.start_date.substr(0, 10) : 'Aucune date indiquée'}</h5>
+                <h5 className="card-title">{game.board_game_name}</h5>
                 {/* <p className="category">Jeu de gestion</p> */}
                 <ul className="">
-                  <li><strong>{game.board_game_name}</strong></li>
+                  <li><strong>{game.start_date ? game.start_date.substr(0, 10) : 'Aucune date indiquée'}</strong></li>
                   <li className="winner-block">
                     <div className="nb-participants">{game.player_number} participants</div>
                     <img style={{ marginLeft: '1rem' }} src={winnerMedal} alt="medaille du gagnant" className="winner-img" />
